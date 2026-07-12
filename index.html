@@ -33,7 +33,9 @@
     .badge { align-self:flex-start; color:var(--red); background:#fdeae6; padding:5px 8px; border-radius:999px; font-size:.72rem; font-weight:800; margin-top:12px; }
     .product-name { font:700 1.04rem/1.2 Georgia,serif; margin:9px 0 4px; }
     .meta { color:var(--muted); font-size:.83rem; margin:0 0 14px; }
-    .add { width:100%; margin-top:auto; padding:11px; border:0; border-radius:10px; color:white; background:var(--ink); font-weight:750; transition:background .15s,transform .15s; }.add:hover { background:var(--red); }.add:active { transform:scale(.98); }
+    .add { width:100%; margin-top:auto; padding:11px; border:0; border-radius:10px; color:white; background:var(--ink); font-weight:750; transition:background .15s,transform .15s; }
+    .add:hover { background:var(--red); }
+    .add:active { transform:scale(.98); }
     .empty { grid-column:1/-1; text-align:center; padding:46px 12px; color:var(--muted); }
     .drawer { position:fixed; inset:0; background:rgba(20,16,12,.48); opacity:0; pointer-events:none; transition:.2s; z-index:10; }
     .drawer.open { opacity:1; pointer-events:auto; }
@@ -45,48 +47,217 @@
     .items { overflow:auto; flex:1; }
     .item { display:grid; grid-template-columns:58px 1fr auto; gap:11px; align-items:center; padding:15px 0; border-bottom:1px solid var(--line); }
     .item img { width:58px; height:58px; object-fit:cover; border-radius:8px; }
-    .item-name { font-weight:750; font-size:.92rem; margin:0 0 3px; }.item-code { color:var(--muted); font-size:.8rem; }
-    .quantity { display:flex; align-items:center; gap:7px; }.quantity button { width:26px; height:26px; border:1px solid var(--line); border-radius:50%; background:white; }
-    .whatsapp { display:block; background:#25d366; color:#102c18; text-align:center; text-decoration:none; border-radius:12px; font-weight:850; padding:15px; margin-top:18px; }
-    .small { color:var(--muted); text-align:center; font-size:.78rem; margin:10px 0 0; }
-    @media (max-width:560px) { .shell { padding-left:14px; padding-right:14px; }.hero { padding:34px 24px; border-radius:18px; }.grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.card { min-height:310px; padding:9px; }.product-image { height:145px; }.product-name { font-size:.95rem; }.badge { font-size:.66rem; }.add { padding:10px 6px; font-size:.83rem; } }
+    .item-name { font-weight:700; margin:0 0 3px; }
+    .item-meta { color:var(--muted); font-size:.82rem; margin:0; }
+    .remove { background:none; border:0; color:var(--red); font-size:1.2rem; padding:4px 8px; }
+    .panel-foot { border-top:1px solid var(--line); padding-top:17px; margin-top:12px; }
+    .whatsapp { display:block; width:100%; padding:14px; border:0; border-radius:12px; color:white; background:#25D366; font-weight:800; font-size:1rem; text-align:center; text-decoration:none; box-shadow:0 8px 20px rgba(37,211,102,.25); }
+    .whatsapp:hover { background:#1da851; }
+    .count { display:inline-block; background:var(--red); color:white; border-radius:999px; padding:2px 8px; font-size:.78rem; margin-left:6px; font-weight:800; }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <header><div class="brand"><img class="brand-logo" src="assets/redclub-logo.png" alt="Logo RedClub" />RedClub</div><button class="list-button" id="open-list">La tua lista <span id="count">0</span></button></header>
-    <section class="hero"><div class="eyebrow">Profumi selezionati</div><h1>Trova il tuo prossimo profumo.</h1><p>Aggiungi i prodotti alla lista e ricevi informazioni e prezzo direttamente su WhatsApp.</p></section>
-    <section class="toolbar"><input class="search" id="search" type="search" placeholder="Cerca per profumo o marchio" /><div class="filters" id="filters"></div></section>
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <img src="assets/redclub-logo.png" alt="RedClub" class="brand-logo" />
+        <span>RedClub</span>
+      </div>
+      <button class="list-button" onclick="toggleDrawer()">
+        Lista <span class="count" id="count">0</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">Profumi selezionati</div>
+      <h1>Trova il tuo prossimo profumo.</h1>
+      <p>Aggiungi i prodotti alla lista e ricevi informazioni e prezzo direttamente su WhatsApp.</p>
+    </section>
+
+    <div class="toolbar">
+      <input class="search" id="search" type="text" placeholder="Cerca profumo, marca..." oninput="render()" />
+      <div class="filters" id="filters"></div>
+    </div>
     <p class="notice">Tutti i prodotti sono disponibili. Prezzo su richiesta.</p>
-    <section class="grid" id="catalog"></section>
-  </main>
-  <aside class="drawer" id="drawer" aria-hidden="true"><section class="panel"><div class="panel-head"><h2>La tua lista</h2><button class="close" id="close-list" aria-label="Chiudi">×</button></div><div class="items" id="items"></div><a class="whatsapp" id="whatsapp" target="_blank" rel="noreferrer">Continua su WhatsApp</a><p class="small">Nel messaggio troverai nome, quantità e codice di riferimento.</p></section></aside>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div class="drawer" id="drawer" onclick="if(event.target===this)toggleDrawer()">
+    <div class="panel">
+      <div class="panel-head">
+        <h2>La tua lista</h2>
+        <button class="close" onclick="toggleDrawer()">×</button>
+      </div>
+      <div class="items" id="items"></div>
+      <div class="panel-foot">
+        <a class="whatsapp" id="whatsapp" href="#" onclick="sendWhatsApp(event)">Invia su WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const phone = '4915511780179';
-    const products = [
-      { id:'001', brand:'Carolina Herrera', name:'Good Girl Eau de Parfum', size:'80 ml', image:'assets/001.jpg' },
-      { id:'002', brand:'Carolina Herrera', name:'Good Girl Eau de Parfum', size:'80 ml', image:'assets/002.jpg' },
-      { id:'006', brand:'Carolina Herrera', name:'Good Girl Blush', size:'80 ml', image:'assets/006.jpg' },
-      { id:'614', brand:'Azzaro', name:'The Most Wanted', size:'100 ml', image:'assets/614.jpg' },
-      { id:'616', brand:'Azzaro', name:'Wanted Eau de Toilette', size:'100 ml', image:'assets/616.jpg' },
-      { id:'619', brand:'Lattafa', name:'Yara', size:'100 ml', image:'assets/619.jpg' },
-      { id:'620', brand:'Lattafa', name:'Asad', size:'100 ml', image:'assets/620.jpg' }
+    const PRODUCTS = [
+      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", price: "$11.85"},
+      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", price: "$12.85"},
+      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", price: "$9.68"},
+      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", price: "$11.85"},
+      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", price: "$11.85"},
+      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", price: "$11.85"},
+      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", price: "$9.68"},
+      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", price: "$10.85"},
+      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", price: "$9.68"},
+      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", price: "$9.68"},
+      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", price: "$9.68"},
+      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", price: "$9.68"},
+      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", price: "$9.68"},
+      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", price: "$9.68"},
+      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", price: "$9.68"},
+      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", price: "$9.68"},
+      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", price: "$11.99"},
+      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", price: "$10.00"},
+      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", price: "$12.00"},
+      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", price: "$10.00"},
+      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", price: "$11.00"},
+      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", price: "$9.68"},
+      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", price: "$9.68"},
+      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", price: "$12.85"},
+      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", price: "$12.85"},
+      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", price: "$12.85"},
+      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", price: "$12.86"},
+      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", price: "$12.50"},
+      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", price: "$9.68"},
+      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", price: "$11.85"},
+      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", price: "$10.85"},
+      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", price: "$9.68"},
+      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", price: "$9.68"},
+      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", price: "$9.68"},
+      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", price: "$9.00"},
+      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", price: "$9.68"},
+      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", price: "$11.00"},
+      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", price: "$11.00"},
+      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", price: "$11.00"},
+      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", price: "$10.00"},
+      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", price: "$12.85"},
+      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", price: "$12.50"},
+      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", price: "$12.50"},
+      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", price: "$9.00"},
+      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", price: "$9.68"},
+      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", price: "$10.68"},
+      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", price: "$9.68"},
+      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", price: "$9.68"},
+      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", price: "$11.85"},
+      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", price: "$10.28"},
+      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", price: "$10.28"},
+      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", price: "$11.68"},
+      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", price: "$10.68"},
+      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", price: "$10.68"},
+      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", price: "$10.68"},
+      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", price: "$11.85"},
+      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", price: "$12.28"},
+      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", price: "$9.80"},
+      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", price: "$10.85"},
+      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", price: "$10.85"},
+      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", price: "$10.85"},
+      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", price: "$11.99"},
+      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", price: "$11.28"},
+      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", price: "$11.25"},
+      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", price: "$11.95"},
+      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", price: "$13.25"},
+      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", price: "$15.00"},
+      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", price: "$11.98"},
+      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", price: "$11.98"},
+      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", price: "$9.86"},
+      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", price: "$10.68"},
+      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", price: "$10.28"},
+      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", price: "$10.28"},
+      {id: 250, name: "Yara EDP", brand: "Lattafa", size: "100ML", price: "$9.68"},
+      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", price: "$12.50"},
     ];
-    const state = { filter:'Tutti', query:'', list: JSON.parse(localStorage.getItem('redclub-list') || '{}') };
-    const catalog = document.querySelector('#catalog'), filters = document.querySelector('#filters'), count = document.querySelector('#count'), items = document.querySelector('#items'), drawer = document.querySelector('#drawer');
-    const brands = ['Tutti', ...new Set(products.map(product => product.brand))];
-    const persist = () => localStorage.setItem('redclub-list', JSON.stringify(state.list));
-    const visibleProducts = () => products.filter(product => (state.filter === 'Tutti' || product.brand === state.filter) && `${product.brand} ${product.name}`.toLowerCase().includes(state.query));
-    function renderFilters() { filters.innerHTML = brands.map(brand => `<button class="filter ${brand === state.filter ? 'active' : ''}" data-brand="${brand}">${brand}</button>`).join(''); }
-    function renderCatalog() { const visible = visibleProducts(); catalog.innerHTML = visible.length ? visible.map(product => `<article class="card"><img class="product-image" src="${product.image}" alt="${product.name}" /><span class="badge">Prezzo su richiesta</span><h2 class="product-name">${product.name}</h2><p class="meta">${product.brand} · ${product.size}<br>Codice: ${product.id}</p><button class="add" data-add="${product.id}">${state.list[product.id] ? 'Aggiungi ancora' : 'Aggiungi alla lista'}</button></article>`).join('') : '<p class="empty">Nessun prodotto trovato.</p>'; }
-    function changeQuantity(id, amount) { state.list[id] = (state.list[id] || 0) + amount; if (state.list[id] <= 0) delete state.list[id]; persist(); render(); }
-    function renderList() { const selected = products.filter(product => state.list[product.id]); count.textContent = selected.reduce((total, product) => total + state.list[product.id], 0); items.innerHTML = selected.length ? selected.map(product => `<article class="item"><img src="${product.image}" alt="" /><div><p class="item-name">${product.name}</p><span class="item-code">Codice: ${product.id}</span></div><div class="quantity"><button data-quantity="${product.id}" data-amount="-1">−</button><b>${state.list[product.id]}</b><button data-quantity="${product.id}" data-amount="1">+</button></div></article>`).join('') : '<p class="empty">La tua lista è vuota.</p>'; const lines = selected.map(product => `- ${product.name} (${product.brand}) — Codice: ${product.id} — Quantità: ${state.list[product.id]}`); const message = `Ciao RedClub! Vorrei informazioni e prezzo per:%0A%0A${encodeURIComponent(lines.join('\n'))}`; document.querySelector('#whatsapp').href = selected.length ? `https://wa.me/${phone}?text=${message}` : '#'; }
-    function render() { renderFilters(); renderCatalog(); renderList(); }
-    document.addEventListener('click', event => { const add = event.target.closest('[data-add]'); const filter = event.target.closest('[data-brand]'); const quantity = event.target.closest('[data-quantity]'); if (add) changeQuantity(add.dataset.add, 1); if (filter) { state.filter = filter.dataset.brand; render(); } if (quantity) changeQuantity(quantity.dataset.quantity, Number(quantity.dataset.amount)); });
-    document.querySelector('#search').addEventListener('input', event => { state.query = event.target.value.trim().toLowerCase(); renderCatalog(); });
-    document.querySelector('#open-list').addEventListener('click', () => { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); });
-    document.querySelector('#close-list').addEventListener('click', () => { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); });
-    drawer.addEventListener('click', event => { if (event.target === drawer) document.querySelector('#close-list').click(); });
+
+    const WHATSAPP_NUMBER = "491551780179"; // ⚠️ CAMBIA CON IL TUO NUMERO WHATSAPP
+    let list = JSON.parse(localStorage.getItem("list") || "[]");
+    let activeFilter = "Tutti";
+
+    function render() {
+      const search = document.getElementById("search").value.toLowerCase();
+      const brands = ["Tutti", ...new Set(PRODUCTS.map(p => p.brand))].sort();
+      
+      document.getElementById("filters").innerHTML = brands.map(b => 
+        `<button class="filter ${b === activeFilter ? 'active' : ''}" onclick="setFilter('${b}')">${b}</button>`
+      ).join("");
+      
+      const filtered = PRODUCTS.filter(p => 
+        (activeFilter === "Tutti" || p.brand === activeFilter) &&
+        (p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search))
+      );
+      
+      document.getElementById("grid").innerHTML = filtered.length ? filtered.map(p => `
+        <div class="card">
+          <img src="assets/${p.id}.jpg" alt="${p.name}" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23eee9e1%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2214%22%3EImmagine%3C/text%3E%3C/svg%3E'" />
+          <div class="badge">${p.brand}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="meta">${p.size} • ${p.price}</div>
+          <button class="add" onclick="addToList(${p.id})">Aggiungi alla lista</button>
+        </div>
+      `).join("") : '<div class="empty">Nessun prodotto trovato</div>';
+      
+      updateCount();
+    }
+
+    function setFilter(brand) {
+      activeFilter = brand;
+      render();
+    }
+
+    function addToList(id) {
+      if (!list.includes(id)) {
+        list.push(id);
+        localStorage.setItem("list", JSON.stringify(list));
+        updateCount();
+        renderPanel();
+      }
+    }
+
+    function removeFromList(id) {
+      list = list.filter(i => i !== id);
+      localStorage.setItem("list", JSON.stringify(list));
+      updateCount();
+      renderPanel();
+    }
+
+    function updateCount() {
+      document.getElementById("count").textContent = list.length;
+    }
+
+    function toggleDrawer() {
+      document.getElementById("drawer").classList.toggle("open");
+      renderPanel();
+    }
+
+    function renderPanel() {
+      const items = list.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+      document.getElementById("items").innerHTML = items.length ? items.map(p => `
+        <div class="item">
+          <img src="assets/${p.id}.jpg" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23eee9e1%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'" />
+          <div>
+            <div class="item-name">${p.name}</div>
+            <div class="item-meta">${p.brand} • ${p.size}</div>
+          </div>
+          <button class="remove" onclick="removeFromList(${p.id})">×</button>
+        </div>
+      `).join("") : '<div class="empty">La tua lista è vuota</div>';
+    }
+
+    function sendWhatsApp(e) {
+      e.preventDefault();
+      if (!list.length) return alert("Aggiungi prima qualche prodotto!");
+      const items = list.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+      const message = "Ciao! Mi interessano questi profumi:\n\n" + 
+        items.map(p => `• ${p.name} (${p.brand}, ${p.size})`).join("\n") +
+        "\n\nPotete darmi maggiori informazioni e il prezzo?";
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+    }
+
     render();
   </script>
 </body>
