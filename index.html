@@ -8,15 +8,15 @@
   <style>
     :root { --ink:#191512; --cream:#f8f4ed; --paper:#fffdfa; --red:#c22b26; --line:#e7dfd4; --muted:#726a62; }
     * { box-sizing:border-box; }
-    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:var(--cream); }
+    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:radial-gradient(circle at 92% 0%,#f0ddd6 0,transparent 26rem),var(--cream); }
     button { font:inherit; cursor:pointer; }
     .shell { max-width:1180px; margin:auto; padding:0 20px 110px; }
-    header { display:flex; align-items:center; justify-content:space-between; padding:24px 0; }
-    .brand { display:flex; align-items:center; gap:10px; font-family:Georgia,serif; font-size:1.5rem; font-weight:700; letter-spacing:-.04em; }
-    .brand-mark { width:28px; height:28px; border-radius:50%; background:var(--red); display:grid; place-items:center; color:white; font-family:Arial,sans-serif; font-size:.9rem; }
-    .list-button { border:1px solid var(--ink); border-radius:999px; background:transparent; padding:10px 15px; font-weight:700; }
-    .hero { background:var(--ink); color:white; border-radius:24px; padding:42px clamp(24px,6vw,72px); margin-bottom:30px; overflow:hidden; position:relative; }
-    .hero::after { content:""; width:270px; height:270px; border:50px solid rgba(194,43,38,.85); border-radius:50%; position:absolute; right:-90px; top:-115px; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:18px 0; position:sticky; top:0; z-index:5; background:rgba(248,244,237,.78); backdrop-filter:blur(16px); }
+    .brand { display:flex; align-items:center; gap:10px; font-family:Georgia,serif; font-size:1.3rem; font-weight:700; letter-spacing:-.04em; }
+    .brand-logo { width:45px; height:45px; border-radius:12px; object-fit:cover; object-position:50% 12%; box-shadow:0 5px 14px rgba(0,0,0,.18); }
+    .list-button { border:1px solid var(--ink); border-radius:999px; background:var(--ink); color:white; padding:11px 16px; font-weight:750; box-shadow:0 6px 15px rgba(25,21,18,.15); }
+    .hero { background:linear-gradient(110deg,rgba(16,13,11,.98),rgba(16,13,11,.78)),url('assets/redclub-logo.png') center 42%/cover; color:white; border-radius:28px; padding:52px clamp(24px,6vw,72px); margin-bottom:30px; overflow:hidden; position:relative; box-shadow:0 18px 40px rgba(29,20,15,.2); }
+    .hero::after { content:""; width:270px; height:270px; border:1px solid rgba(255,255,255,.3); border-radius:50%; position:absolute; right:-90px; top:-115px; }
     .eyebrow { color:#f19a86; font-size:.78rem; text-transform:uppercase; letter-spacing:.16em; font-weight:800; }
     h1 { max-width:620px; font:700 clamp(2.35rem,6vw,4.8rem)/.96 Georgia,serif; letter-spacing:-.055em; margin:14px 0; position:relative; z-index:1; }
     .hero p { color:#e0d9cf; max-width:530px; margin:0; line-height:1.55; position:relative; z-index:1; }
@@ -27,12 +27,13 @@
     .filter.active { color:white; background:var(--ink); border-color:var(--ink); }
     .notice { color:var(--muted); margin:0 0 18px; font-size:.92rem; }
     .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:16px; }
-    .card { background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:12px; display:flex; flex-direction:column; min-height:340px; }
+    .card { background:rgba(255,253,250,.9); border:1px solid rgba(231,223,212,.88); border-radius:18px; padding:12px; display:flex; flex-direction:column; min-height:340px; box-shadow:0 8px 24px rgba(41,29,20,.05); transition:transform .18s,box-shadow .18s; }
+    .card:hover { transform:translateY(-4px); box-shadow:0 16px 30px rgba(41,29,20,.12); }
     .product-image { width:100%; height:190px; object-fit:cover; border-radius:10px; background:#eee9e1; }
     .badge { align-self:flex-start; color:var(--red); background:#fdeae6; padding:5px 8px; border-radius:999px; font-size:.72rem; font-weight:800; margin-top:12px; }
     .product-name { font:700 1.04rem/1.2 Georgia,serif; margin:9px 0 4px; }
     .meta { color:var(--muted); font-size:.83rem; margin:0 0 14px; }
-    .add { width:100%; margin-top:auto; padding:11px; border:0; border-radius:10px; color:white; background:var(--ink); font-weight:750; }
+    .add { width:100%; margin-top:auto; padding:11px; border:0; border-radius:10px; color:white; background:var(--ink); font-weight:750; transition:background .15s,transform .15s; }.add:hover { background:var(--red); }.add:active { transform:scale(.98); }
     .empty { grid-column:1/-1; text-align:center; padding:46px 12px; color:var(--muted); }
     .drawer { position:fixed; inset:0; background:rgba(20,16,12,.48); opacity:0; pointer-events:none; transition:.2s; z-index:10; }
     .drawer.open { opacity:1; pointer-events:auto; }
@@ -53,7 +54,7 @@
 </head>
 <body>
   <main class="shell">
-    <header><div class="brand"><span class="brand-mark">R</span>RedClub</div><button class="list-button" id="open-list">La tua lista <span id="count">0</span></button></header>
+    <header><div class="brand"><img class="brand-logo" src="assets/redclub-logo.png" alt="Logo RedClub" />RedClub</div><button class="list-button" id="open-list">La tua lista <span id="count">0</span></button></header>
     <section class="hero"><div class="eyebrow">Profumi selezionati</div><h1>Trova il tuo prossimo profumo.</h1><p>Aggiungi i prodotti alla lista e ricevi informazioni e prezzo direttamente su WhatsApp.</p></section>
     <section class="toolbar"><input class="search" id="search" type="search" placeholder="Cerca per profumo o marchio" /><div class="filters" id="filters"></div></section>
     <p class="notice">Tutti i prodotti sono disponibili. Prezzo su richiesta.</p>
