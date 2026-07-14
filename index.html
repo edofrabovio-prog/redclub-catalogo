@@ -139,6 +139,7 @@
 
   <script>
     const PRODUCTS = [
+      // MARCHI PRINCIPALI (già esistenti)
       {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML"},
       {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML"},
       {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML"},
@@ -214,9 +215,97 @@
       {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML"},
       {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML"},
       {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML"},
+      
+      // NUOVI MARCHI - XERJOFF
+      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML"},
+      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML"},
+      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML"},
+      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML"},
+      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML"},
+      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML"},
+      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML"},
+      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML"},
+      
+      // NUOVI MARCHI - LOUIS VUITTON
+      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML"},
+      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML"},
+      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML"},
+      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML"},
+      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML"},
+      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML"},
+      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML"},
+      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML"},
+      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML"},
+      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML"},
+      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML"},
+      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML"},
+      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML"},
+      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML"},
+      
+      // NUOVI MARCHI - INITIO
+      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML"},
+      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML"},
+      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML"},
+      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML"},
+      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML"},
+      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML"},
+      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML"},
+      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML"},
+      
+      // NUOVI MARCHI - BY KILIAN
+      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML"},
+      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML"},
+      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML"},
+      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML"},
+      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML"},
+      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML"},
+      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML"},
+      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML"},
+      
+      // NUOVI MARCHI - LE LABO
+      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML"},
+      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML"},
+      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML"},
+      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML"},
+      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML"},
+      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML"},
+      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML"},
+      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML"},
+      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML"},
+      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML"},
+      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML"},
+      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML"},
+      
+      // NUOVI MARCHI - PARFUMS DE MARLY
+      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML"},
+      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML"},
+      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML"},
+      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML"},
+      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML"},
+      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML"},
+      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML"},
+      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML"},
+      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML"},
+      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML"},
+      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML"},
+      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML"},
+      
+      // NUOVI MARCHI - RALPH LAUREN
+      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML"},
+      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML"},
+      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML"},
+      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML"},
+      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML"},
+      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML"},
+      
+      // NUOVI MARCHI - CREED
+      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML"},
+      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML"},
+      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML"},
+      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML"},
     ];
 
-    const WHATSAPP_NUMBER = "4915511780179"; // ⚠️ CAMBIA CON IL TUO NUMERO WHATSAPP
+    const WHATSAPP_NUMBER = "391234567890"; // ⚠️ CAMBIA CON IL TUO NUMERO WHATSAPP
     let list = JSON.parse(localStorage.getItem("list") || "[]");
     let activeFilter = "Tutti";
 
