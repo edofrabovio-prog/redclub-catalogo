@@ -350,12 +350,93 @@
       box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
     }
     
+    /* NUOVO: Controlli ordinamento e filtri genere */
+    .controls-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .control-label {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    
+    .select-input {
+      padding: 10px 16px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      font: inherit;
+      font-size: 0.9rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 180px;
+    }
+    
+    .select-input:hover {
+      border-color: var(--primary-red);
+    }
+    
+    .select-input:focus {
+      outline: none;
+      border-color: var(--primary-red);
+      box-shadow: 0 0 0 4px rgba(194, 43, 38, 0.1);
+    }
+    
+    .gender-filters {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .gender-btn {
+      padding: 10px 18px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .gender-btn:hover {
+      border-color: var(--primary-red);
+      color: var(--primary-red);
+    }
+    
+    .gender-btn.active {
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      color: white;
+      border-color: var(--primary-red);
+      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
+    }
+    
     .notice {
       color: var(--muted);
       margin: 0 0 24px;
       font-size: 0.95rem;
       padding-left: 12px;
       border-left: 3px solid var(--primary-red);
+    }
+    
+    /* NUOVO: Contatore prodotti */
+    .products-count {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+      font-weight: 600;
     }
     
     .grid {
@@ -406,6 +487,7 @@
       border-color: rgba(194, 43, 38, 0.3);
     }
     
+    /* NUOVO: Lazy loading placeholder */
     .product-image {
       width: 100%;
       height: 210px;
@@ -414,6 +496,15 @@
       background: linear-gradient(135deg, #f5f0e8 0%, #ebe3d8 100%);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease;
+    }
+    
+    .product-image.loading {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
     
     .card:hover .product-image {
@@ -431,6 +522,36 @@
       margin-top: 16px;
       border: 1px solid rgba(194, 43, 38, 0.2);
       letter-spacing: 0.05em;
+    }
+    
+    /* NUOVO: Badge genere */
+    .gender-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .gender-badge.male {
+      background: rgba(59, 130, 246, 0.15);
+      color: #2563eb;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .gender-badge.female {
+      background: rgba(236, 72, 153, 0.15);
+      color: #db2777;
+      border: 1px solid rgba(236, 72, 153, 0.3);
+    }
+    
+    .gender-badge.unisex {
+      background: rgba(16, 185, 129, 0.15);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
     
     .product-name {
@@ -557,6 +678,112 @@
       padding: 64px 12px;
       color: var(--muted);
       font-size: 1.1rem;
+    }
+    
+    /* NUOVO: Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
+    }
+    
+    .toast {
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(194, 43, 38, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      animation: slideIn 0.3s ease;
+      pointer-events: auto;
+      min-width: 280px;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .toast.hiding {
+      animation: slideOut 0.3s ease forwards;
+    }
+    
+    @keyframes slideOut {
+      to {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+    }
+    
+    .toast-icon {
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-red);
+      font-weight: 800;
+    }
+    
+    /* NUOVO: Paginazione */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .page-btn {
+      padding: 10px 16px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      color: var(--muted);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .page-btn:hover {
+      border-color: var(--primary-red);
+      color: var(--primary-red);
+      transform: translateY(-2px);
+    }
+    
+    .page-btn.active {
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      color: white;
+      border-color: var(--primary-red);
+      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
+    }
+    
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    
+    .page-info {
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0 12px;
     }
     
     .drawer {
@@ -756,6 +983,41 @@
       opacity: 1;
       transform: scale(1);
     }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .control-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .select-input {
+        width: 100%;
+      }
+      
+      .gender-filters {
+        flex-wrap: wrap;
+      }
+      
+      .gender-btn {
+        flex: 1;
+        min-width: 100px;
+      }
+      
+      .pagination {
+        gap: 6px;
+      }
+      
+      .page-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -785,7 +1047,7 @@
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input class="search" id="search" type="text" placeholder="Cerca per nome, marca o tipologia..." oninput="render(); updateClearBtn();" />
+        <input class="search" id="search" type="text" placeholder="Cerca per nome, marca o tipologia..." oninput="handleSearch(); updateClearBtn();" />
         <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Cancella ricerca">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -799,8 +1061,39 @@
         <div class="filters" id="filters"></div>
       </div>
     </div>
+    
+    <!-- NUOVO: Controlli ordinamento e filtri genere -->
+    <div class="controls-bar">
+      <div class="control-group">
+        <span class="control-label">Ordina per:</span>
+        <select class="select-input" id="sortSelect" onchange="handleSort()">
+          <option value="default">Posizione predefinita</option>
+          <option value="name-asc">Nome (A-Z)</option>
+          <option value="name-desc">Nome (Z-A)</option>
+          <option value="brand-asc">Marca (A-Z)</option>
+          <option value="brand-desc">Marca (Z-A)</option>
+        </select>
+      </div>
+      
+      <div class="control-group">
+        <span class="control-label">Genere:</span>
+        <div class="gender-filters">
+          <button class="gender-btn active" data-gender="all" onclick="setGenderFilter('all')">Tutti</button>
+          <button class="gender-btn" data-gender="male" onclick="setGenderFilter('male')">Uomo</button>
+          <button class="gender-btn" data-gender="female" onclick="setGenderFilter('female')">Donna</button>
+          <button class="gender-btn" data-gender="unisex" onclick="setGenderFilter('unisex')">Unisex</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- NUOVO: Contatore prodotti -->
+    <div class="products-count" id="productsCount">Caricamento prodotti...</div>
+    
     <p class="notice">✨ Tutti i prodotti sono disponibili. Prezzo su richiesta.</p>
     <div class="grid" id="grid"></div>
+    
+    <!-- NUOVO: Paginazione -->
+    <div class="pagination" id="pagination"></div>
   </div>
 
   <div class="drawer" id="drawer" onclick="if(event.target===this)toggleDrawer()">
@@ -821,162 +1114,172 @@
     </div>
   </div>
 
+  <!-- NUOVO: Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
   <script>
     const PRODUCTS = [
-      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML"},
-      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML"},
-      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML"},
-      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML"},
-      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML"},
-      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML"},
-      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML"},
-      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML"},
-      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML"},
-      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML"},
-      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML"},
-      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML"},
-      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML"},
-      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML"},
-      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML"},
-      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML"},
-      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML"},
-      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML"},
-      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML"},
-      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML"},
-      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML"},
-      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML"},
-      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML"},
-      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML"},
-      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML"},
-      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML"},
-      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML"},
-      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML"},
-      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML"},
-      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML"},
-      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML"},
-      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML"},
-      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML"},
-      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML"},
-      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML"},
-      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML"},
-      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML"},
-      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML"},
-      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML"},
-      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML"},
-      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML"},
-      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML"},
-      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML"},
-      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML"},
-      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML"},
-      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML"},
-      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML"},
-      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML"},
-      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML"},
-      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML"},
-      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML"},
-      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML"},
-      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML"},
-      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML"},
-      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML"},
-      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML"},
-      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML"},
-      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML"},
-      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML"},
-      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML"},
-      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML"},
-      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML"},
-      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML"},
-      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML"},
-      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML"},
-      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML"},
-      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML"},
-      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML"},
-      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML"},
-      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML"},
-      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML"},
-      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML"},
-      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML"},
-      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML"},
-      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML"},
-      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML"},
-      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML"},
-      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML"},
-      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML"},
-      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML"},
-      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML"},
-      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML"},
-      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML"},
-      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML"},
-      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML"},
-      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML"},
-      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML"},
-      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML"},
-      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML"},
-      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML"},
-      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML"},
-      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML"},
-      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML"},
-      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML"},
-      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML"},
-      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML"},
-      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML"},
-      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML"},
-      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML"},
-      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML"},
-      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML"},
-      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML"},
-      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML"},
-      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML"},
-      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML"},
-      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML"},
-      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML"},
-      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML"},
-      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML"},
-      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML"},
-      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML"},
-      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML"},
-      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML"},
-      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML"},
-      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML"},
-      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML"},
-      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML"},
-      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML"},
-      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML"},
-      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML"},
-      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML"},
-      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML"},
-      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML"},
-      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML"},
-      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML"},
-      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML"},
-      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML"},
-      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML"},
-      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML"},
-      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML"},
-      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML"},
-      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML"},
-      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML"},
-      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML"},
-      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML"},
-      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML"},
-      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML"},
-      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML"},
-      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML"},
-      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML"},
-      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML"},
-      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML"},
-      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML"},
-      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML"},
-      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML"},
-      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML"},
-      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML"},
+      // MARCHI PRINCIPALI - Aggiungi il campo gender: 'male', 'female', 'unisex'
+      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male"},
+      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male"},
+      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male"},
+      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female"},
+      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female"},
+      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female"},
+      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female"},
+      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female"},
+      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male"},
+      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female"},
+      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female"},
+      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male"},
+      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male"},
+      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female"},
+      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male"},
+      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female"},
+      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female"},
+      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female"},
+      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male"},
+      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female"},
+      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female"},
+      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female"},
+      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female"},
+      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male"},
+      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male"},
+      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male"},
+      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female"},
+      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female"},
+      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male"},
+      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male"},
+      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female"},
+      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female"},
+      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male"},
+      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female"},
+      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female"},
+      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female"},
+      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male"},
+      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male"},
+      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male"},
+      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male"},
+      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female"},
+      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female"},
+      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female"},
+      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female"},
+      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female"},
+      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female"},
+      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female"},
+      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female"},
+      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male"},
+      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female"},
+      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female"},
+      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female"},
+      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female"},
+      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female"},
+      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male"},
+      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex"},
+      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex"},
+      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex"},
+      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male"},
+      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male"},
+      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male"},
+      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female"},
+      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male"},
+      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex"},
+      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female"},
+      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female"},
+      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male"},
+      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male"},
+      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female"},
+      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female"},
+      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male"},
+      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male"},
+      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male"},
+      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female"},
+      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male"},
+      
+      // NUOVI MARCHI DI LUSSO
+      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex"},
+      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex"},
+      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex"},
+      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex"},
+      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex"},
+      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex"},
+      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female"},
+      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male"},
+      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male"},
+      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex"},
+      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male"},
+      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex"},
+      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male"},
+      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male"},
+      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex"},
+      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female"},
+      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female"},
+      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female"},
+      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female"},
+      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female"},
+      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex"},
+      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female"},
+      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex"},
+      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex"},
+      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex"},
+      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex"},
+      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex"},
+      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex"},
+      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male"},
+      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female"},
+      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex"},
+      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male"},
+      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female"},
+      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female"},
+      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female"},
+      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female"},
+      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female"},
+      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex"},
+      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex"},
+      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex"},
+      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex"},
+      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male"},
+      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female"},
+      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female"},
+      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male"},
+      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male"},
+      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male"},
+      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male"},
+      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male"},
+      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male"},
+      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male"},
+      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male"},
+      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex"},
+      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex"},
     ];
 
-    const WHATSAPP_NUMBER = "4915511780179";
+    const WHATSAPP_NUMBER = "391234567890";
     let list = JSON.parse(localStorage.getItem("list") || "[]");
     let activeFilter = "Tutti";
+    let activeGender = "all";
+    let currentSort = "default";
+    let currentPage = 1;
+    const ITEMS_PER_PAGE = 24;
 
-    // Delegazione eventi per i filtri (metodo più affidabile)
+    // Delegazione eventi per i filtri
     document.getElementById("filters").addEventListener("click", function(e) {
       const btn = e.target.closest(".filter");
       if (btn) {
@@ -989,31 +1292,106 @@
       return list.filter(itemId => itemId === id).length;
     }
 
-    function render() {
-      const search = document.getElementById("search").value.toLowerCase();
-      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
+    // NUOVO: Gestione ricerca
+    function handleSearch() {
+      currentPage = 1;
+      render();
+    }
+
+    // NUOVO: Gestione ordinamento
+    function handleSort() {
+      currentSort = document.getElementById("sortSelect").value;
+      currentPage = 1;
+      render();
+    }
+
+    // NUOVO: Filtro genere
+    function setGenderFilter(gender) {
+      activeGender = gender;
+      currentPage = 1;
       
-      // Genera i filtri con data-brand (sicuro per tutti i caratteri speciali)
+      // Aggiorna bottoni attivi
+      document.querySelectorAll('.gender-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.gender === gender);
+      });
+      
+      render();
+    }
+
+    function setFilter(brand) {
+      activeFilter = brand;
+      currentPage = 1;
+      render();
+    }
+
+    function getFilteredProducts() {
+      const search = document.getElementById("search").value.toLowerCase();
+      
+      let filtered = PRODUCTS.filter(p => {
+        const matchesBrand = activeFilter === "Tutti" || p.brand === activeFilter;
+        const matchesSearch = p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search);
+        const matchesGender = activeGender === "all" || p.gender === activeGender;
+        
+        return matchesBrand && matchesSearch && matchesGender;
+      });
+      
+      // NUOVO: Ordinamento
+      switch(currentSort) {
+        case "name-asc":
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case "name-desc":
+          filtered.sort((a, b) => b.name.localeCompare(a.name));
+          break;
+        case "brand-asc":
+          filtered.sort((a, b) => a.brand.localeCompare(b.brand));
+          break;
+        case "brand-desc":
+          filtered.sort((a, b) => b.brand.localeCompare(a.brand));
+          break;
+      }
+      
+      return filtered;
+    }
+
+    // NUOVO: Paginazione
+    function getPaginatedProducts(products) {
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const end = start + ITEMS_PER_PAGE;
+      return products.slice(start, end);
+    }
+
+    function render() {
+      const filtered = getFilteredProducts();
+      const paginated = getPaginatedProducts(filtered);
+      const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+      
+      // Aggiorna contatore
+      document.getElementById("productsCount").textContent = 
+        `Visualizzati ${paginated.length} di ${filtered.length} prodotti`;
+      
+      // Render filtri marca
+      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
       document.getElementById("filters").innerHTML = brands.map(b => 
         `<button class="filter ${b === activeFilter ? 'active' : ''}" data-brand="${b}">${b}</button>`
       ).join("");
       
       document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
       
-      const filtered = PRODUCTS.filter(p => 
-        (activeFilter === "Tutti" || p.brand === activeFilter) &&
-        (p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search))
-      );
-      
-      document.getElementById("grid").innerHTML = filtered.length ? filtered.map(p => {
+      // Render prodotti
+      document.getElementById("grid").innerHTML = paginated.length ? paginated.map(p => {
         const qty = getQuantity(p.id);
         const isSelected = qty > 0;
+        const genderLabels = { male: "Uomo", female: "Donna", unisex: "Unisex" };
         
         return `
         <div class="card ${isSelected ? 'selected' : ''}" data-id="${p.id}">
           <div class="selected-badge">✓</div>
-          <img src="assets/${p.id}.jpg" alt="${p.name}" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f0e8%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23c22b26%22 font-size=%2216%22 font-weight=%22bold%22%3E${p.brand}%3C/text%3E%3C/svg%3E'" />
+          <img src="assets/${p.id}.jpg" alt="${p.name}" class="product-image" 
+               loading="lazy"
+               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f0e8%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23c22b26%22 font-size=%2216%22 font-weight=%22bold%22%3E${p.brand}%3C/text%3E%3C/svg%3E'" />
           <div class="badge">${p.brand}</div>
+          <span class="gender-badge ${p.gender}">${genderLabels[p.gender]}</span>
           <div class="product-name">${p.name}</div>
           <div class="meta">${p.size}</div>
           <div class="price-tag"> Prezzo su richiesta</div>
@@ -1036,12 +1414,88 @@
         </div>
       `}).join("") : '<div class="empty">Nessun prodotto trovato</div>';
       
+      // Render paginazione
+      renderPagination(totalPages);
+      
       updateCount();
     }
 
-    function setFilter(brand) {
-      activeFilter = brand;
+    // NUOVO: Render paginazione
+    function renderPagination(totalPages) {
+      if (totalPages <= 1) {
+        document.getElementById("pagination").innerHTML = "";
+        return;
+      }
+      
+      let html = `
+        <button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+          ← Prec
+        </button>
+      `;
+      
+      const maxVisible = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+      
+      if (endPage - startPage < maxVisible - 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+      }
+      
+      if (startPage > 1) {
+        html += `<button class="page-btn" onclick="changePage(1)">1</button>`;
+        if (startPage > 2) html += `<span class="page-info">...</span>`;
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        html += `
+          <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">
+            ${i}
+          </button>
+        `;
+      }
+      
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += `<span class="page-info">...</span>`;
+        html += `<button class="page-btn" onclick="changePage(${totalPages})">${totalPages}</button>`;
+      }
+      
+      html += `
+        <button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+          Succ →
+        </button>
+      `;
+      
+      document.getElementById("pagination").innerHTML = html;
+    }
+
+    // NUOVO: Cambio pagina
+    function changePage(page) {
+      const totalPages = Math.ceil(getFilteredProducts().length / ITEMS_PER_PAGE);
+      if (page < 1 || page > totalPages) return;
+      
+      currentPage = page;
       render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // NUOVO: Toast notification
+    function showToast(message) {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `
+        <div class="toast-icon">✓</div>
+        <div>${message}</div>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.add("hiding");
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 2500);
     }
 
     function addToCard(id, btn) {
@@ -1051,6 +1505,10 @@
       const card = btn.closest('.card');
       card.classList.add('added');
       setTimeout(() => card.classList.remove('added'), 600);
+      
+      // NUOVO: Mostra toast
+      const product = PRODUCTS.find(p => p.id === id);
+      showToast(`${product.name} aggiunto alla lista!`);
       
       updateCount();
       render();
@@ -1062,6 +1520,7 @@
       
       if (newQty <= 0) {
         list = list.filter(itemId => itemId !== id);
+        showToast("Prodotto rimosso dalla lista");
       } else {
         if (change > 0) {
           list.push(id);
@@ -1133,6 +1592,7 @@
     function clearSearch() {
       document.getElementById("search").value = "";
       updateClearBtn();
+      currentPage = 1;
       render();
       document.getElementById("search").focus();
     }
