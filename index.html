@@ -1624,43 +1624,212 @@
 
   <script>
     const PRODUCTS = [
+  // DIOR
   {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh"},
   {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental"},
+  {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh"},
+  
+  // CHANEL
   {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral"},
+  {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral"},
+  
+  // YVES SAINT LAURENT
   {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral"},
+  {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral"},
+  {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh"},
   {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental"},
+  {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental"},
+  {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental"},
+  {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral"},
+  
+  // JEAN PAUL GAULTIER
   {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh"},
+  {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral"},
+  
+  // VERSACE
   {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral"},
+  
+  // ARMANI
   {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh"},
   {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral"},
+  {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral"},
+  
+  // PACO RABANNE
   {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh"},
   {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental"},
+  {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental"},
+  {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental"},
+  
+  // CAROLINA HERRERA
   {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental"},
+  {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental"},
+  {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental"},
+  
+  // GUCCI
   {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral"},
+  {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral"},
+  
+  // PRADA
   {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral"},
+  {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral"},
+  {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh"},
+  
+  // LANCÔME
   {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral"},
+  
+  // GIVENCHY
   {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral"},
+  {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral"},
+  {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody"},
+  
+  // TOM FORD
   {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental"},
   {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental"},
+  
+  // HUGO BOSS
   {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody"},
+  {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody"},
+  {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental"},
+  
+  // VALENTINO
   {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody"},
+  
+  // DOLCE & GABBANA
   {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus"},
+  {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral"},
+  
+  // BVLGARI
   {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental"},
+  
+  // VIKTOR&ROLF
   {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental"},
   {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral"},
+  
+  // BURBERRY
   {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral"},
-  {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental"},
+  {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh"},
+  
+  // AZZARO
+  {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody"},
+  {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental"},
+  
+  // LATTAFA
   {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental"},
+  
+  // XERJOFF
   {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental"},
+  {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus"},
+  {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental"},
+  {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental"},
+  {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral"},
+  {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral"},
+  {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody"},
+  
+  // LOUIS VUITTON
   {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus"},
+  {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus"},
+  {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh"},
+  {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental"},
+  {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
+  
+  // INITIO
   {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
+  {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental"},
+  {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental"},
+  {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
+  {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
+  {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
+  {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody"},
+  {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral"},
+  
+  // BY KILIAN
   {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental"},
+  {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody"},
+  {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral"},
+  {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral"},
+  {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral"},
+  {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental"},
+  
+  // LE LABO
+  {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
   {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
+  {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
+  {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
+  {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
+  {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
+  {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
+  {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
+  
+  // PARFUMS DE MARLY
+  {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody"},
+  {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental"},
+  {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody"},
   {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody"},
+  {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
+  {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral"},
+  {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral"},
+  
+  // RALPH LAUREN
   {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
-  {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "woody"}
+  {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
+  {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody"},
+  {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
+  {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
+  {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody"},
+  
+  // CREED
+  {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh"},
+  {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh"},
+  {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus"}
 ];
-    const WHATSAPP_NUMBER = "391234567890";
+    const WHATSAPP_NUMBER = "4915511780179";
     let list = JSON.parse(localStorage.getItem("list") || "[]");
     let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     let recentSearches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
