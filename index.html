@@ -1044,6 +1044,7 @@
     }
 
    /* NUOVO: Quick View Modal - Ottimizzato per mobile */
+/* Quick View Modal - Desktop centrato */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1054,9 +1055,9 @@
   transition: opacity 0.3s ease;
   z-index: 300;
   display: flex;
-  align-items: flex-end; /* Allineato in basso su mobile */
+  align-items: center; /* Centrato verticalmente su desktop */
   justify-content: center;
-  padding: 0;
+  padding: 20px;
 }
 
 .modal-overlay.open {
@@ -1066,22 +1067,21 @@
 
 .modal {
   background: var(--paper);
-  border-radius: 28px 28px 0 0; /* Arrotondato solo sopra su mobile */
+  border-radius: 28px;
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
-  height: auto;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  transform: translateY(100%); /* Parte da sotto */
+  grid-template-columns: 1fr 1fr; /* 2 colonne su desktop */
+  transform: scale(0.9);
   transition: transform 0.3s ease;
-  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   margin: 0;
 }
 
 .modal-overlay.open .modal {
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .modal-image-wrapper {
@@ -1107,12 +1107,11 @@ body.dark .modal-image-wrapper {
 }
 
 .modal-content {
-  padding: 24px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Scroll interno */
-  max-height: 50vh;
-  -webkit-overflow-scrolling: touch; /* Scroll fluido su iOS */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-close {
@@ -1214,30 +1213,36 @@ body.dark .modal-image-wrapper {
 }
 
 /* Responsive ottimizzato per mobile */
+/* Mobile: bottom sheet */
 @media (max-width: 768px) {
   .modal-overlay {
-    align-items: flex-end; /* Bottom sheet style */
+    align-items: flex-end; /* Bottom sheet solo su mobile */
     padding: 0;
   }
   
   .modal {
     grid-template-columns: 1fr;
-    max-height: 85vh; /* Tiene conto delle barre del browser */
+    max-height: 85vh;
     height: auto;
     border-radius: 24px 24px 0 0;
-    margin-bottom: env(safe-area-inset-bottom); /* Compensa notch/home bar */
+    transform: translateY(100%); /* Parte da sotto */
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .modal-overlay.open .modal {
+    transform: translateY(0);
   }
   
   .modal-image-wrapper {
     padding: 24px;
-    max-height: 35vh; /* Immagine più piccola su mobile */
+    max-height: 35vh;
     border-radius: 0;
   }
   
   .modal-content {
     padding: 24px;
     max-height: 50vh;
-    padding-bottom: calc(24px + env(safe-area-inset-bottom)); /* Spazio per home bar */
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
   }
   
   .modal-name {
@@ -1252,7 +1257,7 @@ body.dark .modal-image-wrapper {
   }
 }
 
-/* Per schermi molto piccoli (iPhone SE, etc.) */
+/* Schermi molto piccoli */
 @media (max-height: 600px) {
   .modal {
     max-height: 95vh;
@@ -1272,7 +1277,6 @@ body.dark .modal-image-wrapper {
     font-size: 1.3rem;
   }
 }
-
     @media (max-width: 768px) {
       .modal {
         grid-template-columns: 1fr;
