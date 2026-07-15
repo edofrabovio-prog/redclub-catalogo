@@ -51,7 +51,6 @@
       padding: 0 24px 120px;
     }
     
-    /* Header avanzato */
     header {
       display: flex;
       align-items: center;
@@ -110,13 +109,8 @@
       box-shadow: 0 6px 20px rgba(194, 43, 38, 0.4);
     }
     
-    .list-button:active {
-      transform: translateY(0);
-    }
-    
-    /* Hero section con logo */
     .hero {
-      background: linear-gradient(135deg, rgba(139, 31, 27, 0.95) 0%, rgba(194, 43, 38, 0.92) 100%);
+      background: linear-gradient(135deg, rgba(139, 31, 27, 0.92) 0%, rgba(194, 43, 38, 0.88) 100%);
       color: white;
       border-radius: 32px;
       padding: 64px clamp(28px, 6vw, 80px);
@@ -132,11 +126,12 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
+      width: 420px;
+      height: 420px;
       background: url('assets/redclub-logo.png') center/contain no-repeat;
-      opacity: 0.15;
+      opacity: 0.18;
       z-index: 0;
+      pointer-events: none;
     }
     
     .hero::after {
@@ -180,7 +175,6 @@
       font-size: 1.1rem;
     }
     
-    /* Toolbar avanzata */
     .toolbar {
       display: flex;
       gap: 16px;
@@ -189,7 +183,6 @@
       align-items: stretch;
     }
     
-    /* Barra di ricerca premium */
     .search-wrapper {
       flex: 1 1 360px;
       min-width: 0;
@@ -269,7 +262,6 @@
       display: flex;
     }
     
-    /* Filtri premium */
     .filters-wrapper {
       display: flex;
       align-items: center;
@@ -300,7 +292,6 @@
     
     .filter-all.active {
       background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
-      box-shadow: 0 4px 16px rgba(194, 43, 38, 0.4);
     }
     
     .filters-divider {
@@ -367,7 +358,6 @@
       border-left: 3px solid var(--primary-red);
     }
     
-    /* Griglia prodotti migliorata */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -467,7 +457,6 @@
       border-left: 3px solid var(--primary-red);
     }
     
-    /* Quantity selector sulla card */
     .quantity-selector {
       display: flex;
       align-items: center;
@@ -521,7 +510,6 @@
       text-align: center;
     }
     
-    /* Pulsante Aggiungi */
     .add {
       width: 100%;
       margin-top: 12px;
@@ -554,7 +542,6 @@
       transform: scale(0.98);
     }
     
-    /* Animazione aggiunta */
     @keyframes pulse-red {
       0%, 100% { box-shadow: 0 0 0 0 rgba(194, 43, 38, 0.4); }
       50% { box-shadow: 0 0 0 12px rgba(194, 43, 38, 0); }
@@ -572,7 +559,6 @@
       font-size: 1.1rem;
     }
     
-    /* Drawer migliorato */
     .drawer {
       position: fixed;
       inset: 0;
@@ -745,7 +731,6 @@
       box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
     }
     
-    /* Selected badge sulla card */
     .selected-badge {
       position: absolute;
       top: 12px;
@@ -838,7 +823,6 @@
 
   <script>
     const PRODUCTS = [
-      // MARCHI PRINCIPALI
       {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML"},
       {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML"},
       {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML"},
@@ -914,8 +898,6 @@
       {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML"},
       {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML"},
       {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML"},
-      
-      // NUOVI MARCHI DI LUSSO
       {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML"},
       {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML"},
       {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML"},
@@ -990,50 +972,31 @@
       {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML"},
     ];
 
-    const WHATSAPP_NUMBER = "4915511780179";
+    const WHATSAPP_NUMBER = "391234567890";
     let list = JSON.parse(localStorage.getItem("list") || "[]");
     let activeFilter = "Tutti";
 
-    // Calcola quantità per prodotto
+    // Delegazione eventi per i filtri (metodo più affidabile)
+    document.getElementById("filters").addEventListener("click", function(e) {
+      const btn = e.target.closest(".filter");
+      if (btn) {
+        const brand = btn.getAttribute("data-brand");
+        setFilter(brand);
+      }
+    });
+
     function getQuantity(id) {
       return list.filter(itemId => itemId === id).length;
     }
-    function handleFilterClick(encodedBrand) {
-  const brand = decodeURIComponent(encodedBrand);
-  setFilter(brand);
-}
 
-function setFilter(brand) {
-  activeFilter = brand;
-  render();
-}
     function render() {
-  const search = document.getElementById("search").value.toLowerCase();
-  const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
-  
-  // Crea i bottoni dei filtri SENZA event listener inline
-  const filtersHTML = brands.map(b => {
-    const isActive = b === activeFilter;
-    return `<button class="filter ${isActive ? 'active' : ''}" 
-             data-brand="${encodeURIComponent(b)}" 
-             onclick="handleFilterClick('${encodeURIComponent(b)}')">
-             ${b}
-             </button>`;
-  }).join("");
-  
-  document.getElementById("filters").innerHTML = filtersHTML;
-  
-  // Aggiorna stato pulsante "Tutti"
-  document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
-  
-  // Filtra prodotti
-  const filtered = PRODUCTS.filter(p => 
-    (activeFilter === "Tutti" || p.brand === activeFilter) &&
-    (p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search))
-  );
-  
-  // ... resto del rendering delle card ...
-}
+      const search = document.getElementById("search").value.toLowerCase();
+      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
+      
+      // Genera i filtri con data-brand (sicuro per tutti i caratteri speciali)
+      document.getElementById("filters").innerHTML = brands.map(b => 
+        `<button class="filter ${b === activeFilter ? 'active' : ''}" data-brand="${b}">${b}</button>`
+      ).join("");
       
       document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
       
@@ -1076,11 +1039,15 @@ function setFilter(brand) {
       updateCount();
     }
 
+    function setFilter(brand) {
+      activeFilter = brand;
+      render();
+    }
+
     function addToCard(id, btn) {
       list.push(id);
       localStorage.setItem("list", JSON.stringify(list));
       
-      // Animazione
       const card = btn.closest('.card');
       card.classList.add('added');
       setTimeout(() => card.classList.remove('added'), 600);
@@ -1094,14 +1061,11 @@ function setFilter(brand) {
       const newQty = currentQty + change;
       
       if (newQty <= 0) {
-        // Rimuovi tutte le occorrenze
         list = list.filter(itemId => itemId !== id);
       } else {
-        // Aggiungi o rimuovi per raggiungere la quantità desiderata
         if (change > 0) {
           list.push(id);
         } else {
-          // Rimuovi una occorrenza
           const index = list.indexOf(id);
           if (index > -1) list.splice(index, 1);
         }
@@ -1117,7 +1081,7 @@ function setFilter(brand) {
       localStorage.setItem("list", JSON.stringify(list));
       updateCount();
       renderPanel();
-      render(); // Aggiorna anche le card
+      render();
     }
 
     function updateCount() {
