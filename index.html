@@ -998,25 +998,41 @@
     function getQuantity(id) {
       return list.filter(itemId => itemId === id).length;
     }
+    function handleFilterClick(encodedBrand) {
+  const brand = decodeURIComponent(encodedBrand);
+  setFilter(brand);
+}
 
+function setFilter(brand) {
+  activeFilter = brand;
+  render();
+}
     function render() {
   const search = document.getElementById("search").value.toLowerCase();
   const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
   
-  // Crea i bottoni dei filtri
-  document.getElementById("filters").innerHTML = brands.map(b => 
-    `<button class="filter ${b === activeFilter ? 'active' : ''}" data-brand="${encodeURIComponent(b)}">${b}</button>`
-  ).join("");
+  // Crea i bottoni dei filtri SENZA event listener inline
+  const filtersHTML = brands.map(b => {
+    const isActive = b === activeFilter;
+    return `<button class="filter ${isActive ? 'active' : ''}" 
+             data-brand="${encodeURIComponent(b)}" 
+             onclick="handleFilterClick('${encodeURIComponent(b)}')">
+             ${b}
+             </button>`;
+  }).join("");
   
-  // Aggiungi event listeners ai filtri ← QUELLO CERCHIATO
-  document.querySelectorAll('.filter').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const brand = decodeURIComponent(this.getAttribute('data-brand'));
-      setFilter(brand);
-    });
-  });
+  document.getElementById("filters").innerHTML = filtersHTML;
   
-  // ... resto del codice
+  // Aggiorna stato pulsante "Tutti"
+  document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
+  
+  // Filtra prodotti
+  const filtered = PRODUCTS.filter(p => 
+    (activeFilter === "Tutti" || p.brand === activeFilter) &&
+    (p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search))
+  );
+  
+  // ... resto del rendering delle card ...
 }
       
       document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
