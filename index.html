@@ -1000,12 +1000,24 @@
     }
 
     function render() {
-      const search = document.getElementById("search").value.toLowerCase();
-      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
-      
-      document.getElementById("filters").innerHTML = brands.map(b => 
-        `<button class="filter ${b === activeFilter ? 'active' : ''}" onclick="setFilter('${b.replace(/'/g, "\\'")}')">${b}</button>`
-      ).join("");
+  const search = document.getElementById("search").value.toLowerCase();
+  const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
+  
+  // Crea i bottoni dei filtri
+  document.getElementById("filters").innerHTML = brands.map(b => 
+    `<button class="filter ${b === activeFilter ? 'active' : ''}" data-brand="${encodeURIComponent(b)}">${b}</button>`
+  ).join("");
+  
+  // Aggiungi event listeners ai filtri ← QUELLO CERCHIATO
+  document.querySelectorAll('.filter').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const brand = decodeURIComponent(this.getAttribute('data-brand'));
+      setFilter(brand);
+    });
+  });
+  
+  // ... resto del codice
+}
       
       document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
       
