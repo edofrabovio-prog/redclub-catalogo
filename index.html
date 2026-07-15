@@ -114,9 +114,9 @@
       transform: translateY(0);
     }
     
-    /* Hero section migliorata */
+    /* Hero section con logo */
     .hero {
-      background: linear-gradient(135deg, rgba(139, 31, 27, 0.98) 0%, rgba(194, 43, 38, 0.95) 100%);
+      background: linear-gradient(135deg, rgba(139, 31, 27, 0.95) 0%, rgba(194, 43, 38, 0.92) 100%);
       color: white;
       border-radius: 32px;
       padding: 64px clamp(28px, 6vw, 80px);
@@ -129,22 +129,24 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      background: url('assets/redclub-logo.png') center/contain no-repeat;
+      opacity: 0.15;
+      z-index: 0;
     }
     
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -30%;
-      left: -5%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       border-radius: 50%;
     }
     
@@ -368,7 +370,7 @@
     /* Griglia prodotti migliorata */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 24px;
     }
     
@@ -379,7 +381,7 @@
       padding: 16px;
       display: flex;
       flex-direction: column;
-      min-height: 380px;
+      min-height: 420px;
       box-shadow: var(--shadow-sm);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
@@ -398,14 +400,20 @@
       transition: opacity 0.3s ease;
     }
     
+    .card.selected {
+      border-color: var(--primary-red);
+      box-shadow: 0 8px 28px rgba(194, 43, 38, 0.2);
+      background: linear-gradient(145deg, rgba(253, 242, 240, 0.98) 0%, rgba(250, 245, 242, 0.95) 100%);
+    }
+    
+    .card.selected::before {
+      opacity: 1;
+    }
+    
     .card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
       border-color: rgba(194, 43, 38, 0.3);
-    }
-    
-    .card:hover::before {
-      opacity: 1;
     }
     
     .product-image {
@@ -459,9 +467,64 @@
       border-left: 3px solid var(--primary-red);
     }
     
+    /* Quantity selector sulla card */
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: auto;
+      padding: 12px;
+      background: linear-gradient(135deg, rgba(194, 43, 38, 0.05) 0%, rgba(194, 43, 38, 0.02) 100%);
+      border-radius: 14px;
+      border: 2px solid rgba(194, 43, 38, 0.15);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .card.selected .quantity-selector {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .qty-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(194, 43, 38, 0.25);
+    }
+    
+    .qty-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.35);
+    }
+    
+    .qty-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .qty-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary-red);
+      min-width: 32px;
+      text-align: center;
+    }
+    
+    /* Pulsante Aggiungi */
     .add {
       width: 100%;
-      margin-top: auto;
+      margin-top: 12px;
       padding: 14px;
       border: 0;
       border-radius: 14px;
@@ -471,6 +534,14 @@
       font-size: 0.95rem;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(194, 43, 38, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .card.selected .add {
+      display: none;
     }
     
     .add:hover {
@@ -481,6 +552,16 @@
     
     .add:active {
       transform: scale(0.98);
+    }
+    
+    /* Animazione aggiunta */
+    @keyframes pulse-red {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(194, 43, 38, 0.4); }
+      50% { box-shadow: 0 0 0 12px rgba(194, 43, 38, 0); }
+    }
+    
+    .card.added {
+      animation: pulse-red 0.6s ease;
     }
     
     .empty {
@@ -662,6 +743,33 @@
       margin-left: 8px;
       font-weight: 800;
       box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+    
+    /* Selected badge sulla card */
+    .selected-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 8px rgba(194, 43, 38, 0.3);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+    
+    .card.selected .selected-badge {
+      opacity: 1;
+      transform: scale(1);
     }
   </style>
 </head>
@@ -882,9 +990,14 @@
       {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML"},
     ];
 
-    const WHATSAPP_NUMBER = "391234567890";
+    const WHATSAPP_NUMBER = "4915511780179";
     let list = JSON.parse(localStorage.getItem("list") || "[]");
     let activeFilter = "Tutti";
+
+    // Calcola quantità per prodotto
+    function getQuantity(id) {
+      return list.filter(itemId => itemId === id).length;
+    }
 
     function render() {
       const search = document.getElementById("search").value.toLowerCase();
@@ -901,40 +1014,74 @@
         (p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search))
       );
       
-      document.getElementById("grid").innerHTML = filtered.length ? filtered.map(p => `
-        <div class="card">
+      document.getElementById("grid").innerHTML = filtered.length ? filtered.map(p => {
+        const qty = getQuantity(p.id);
+        const isSelected = qty > 0;
+        
+        return `
+        <div class="card ${isSelected ? 'selected' : ''}" data-id="${p.id}">
+          <div class="selected-badge">✓</div>
           <img src="assets/${p.id}.jpg" alt="${p.name}" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f0e8%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23c22b26%22 font-size=%2216%22 font-weight=%22bold%22%3E${p.brand}%3C/text%3E%3C/svg%3E'" />
           <div class="badge">${p.brand}</div>
           <div class="product-name">${p.name}</div>
           <div class="meta">${p.size}</div>
           <div class="price-tag"> Prezzo su richiesta</div>
-          <button class="add" onclick="addToList(${p.id})">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            Aggiungi alla lista
-          </button>
+          
+          ${isSelected ? `
+            <div class="quantity-selector">
+              <button class="qty-btn" onclick="updateQuantity(${p.id}, -1)">−</button>
+              <span class="qty-value">${qty}</span>
+              <button class="qty-btn" onclick="updateQuantity(${p.id}, 1)">+</button>
+            </div>
+          ` : `
+            <button class="add" onclick="addToCard(${p.id}, this)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Aggiungi alla lista
+            </button>
+          `}
         </div>
-      `).join("") : '<div class="empty">Nessun prodotto trovato</div>';
+      `}).join("") : '<div class="empty">Nessun prodotto trovato</div>';
       
       updateCount();
     }
 
-    function setFilter(brand) {
-      activeFilter = brand;
-      render();
-      if (brand !== "Tutti") {
-        const activeBtn = document.querySelector('.filter.active');
-        if (activeBtn) activeBtn.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center'});
-      }
-    }
-
-    function addToList(id) {
+    function addToCard(id, btn) {
       list.push(id);
       localStorage.setItem("list", JSON.stringify(list));
+      
+      // Animazione
+      const card = btn.closest('.card');
+      card.classList.add('added');
+      setTimeout(() => card.classList.remove('added'), 600);
+      
       updateCount();
-      renderPanel();
+      render();
+    }
+
+    function updateQuantity(id, change) {
+      const currentQty = getQuantity(id);
+      const newQty = currentQty + change;
+      
+      if (newQty <= 0) {
+        // Rimuovi tutte le occorrenze
+        list = list.filter(itemId => itemId !== id);
+      } else {
+        // Aggiungi o rimuovi per raggiungere la quantità desiderata
+        if (change > 0) {
+          list.push(id);
+        } else {
+          // Rimuovi una occorrenza
+          const index = list.indexOf(id);
+          if (index > -1) list.splice(index, 1);
+        }
+      }
+      
+      localStorage.setItem("list", JSON.stringify(list));
+      updateCount();
+      render();
     }
 
     function removeFromList(index) {
@@ -942,6 +1089,7 @@
       localStorage.setItem("list", JSON.stringify(list));
       updateCount();
       renderPanel();
+      render(); // Aggiorna anche le card
     }
 
     function updateCount() {
