@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#c22b26" />
   <title>RedClub | Profumi selezionati</title>
   <style>
@@ -28,23 +28,7 @@
       --text-secondary: var(--muted);
     }
 
-    body.dark {
-      --ink: #f5f0e8;
-      --cream: #1a1512;
-      --paper: #241e1a;
-      --line: #3a322c;
-      --muted: #a89f94;
-      --bg-gradient: linear-gradient(135deg, #1a1512 0%, #0f0c0a 100%);
-      --card-bg: linear-gradient(145deg, #2a2320 0%, #1f1a17 100%);
-      --card-border: rgba(194, 43, 38, 0.2);
-      --header-bg: rgba(26, 21, 18, 0.95);
-      --panel-bg: linear-gradient(180deg, #241e1a 0%, #1a1512 100%);
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
       margin: 0;
@@ -52,7 +36,8 @@
       color: var(--text-primary);
       background: var(--bg-gradient);
       position: relative;
-      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     body::before {
@@ -72,14 +57,15 @@
     .shell {
       max-width: 1280px;
       margin: auto;
-      padding: 0 24px 120px;
+      padding: 0 16px 120px;
+      width: 100%;
     }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 0;
+      padding: 16px 0;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -87,7 +73,6 @@
       backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 2px solid rgba(194, 43, 38, 0.1);
       box-shadow: var(--shadow-sm);
-      transition: background 0.4s ease;
     }
 
     .brand {
@@ -102,12 +87,13 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      flex-shrink: 0;
     }
 
     .brand-logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
       object-fit: cover;
       object-position: 50% 12%;
       box-shadow: 0 4px 12px rgba(194, 43, 38, 0.25);
@@ -117,12 +103,12 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .theme-toggle, .favorites-toggle {
-      width: 44px;
-      height: 44px;
+    .favorites-toggle {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       border: 2px solid var(--line);
       background: var(--paper);
@@ -133,15 +119,14 @@
       transition: all 0.3s ease;
       box-shadow: var(--shadow-sm);
       position: relative;
+      flex-shrink: 0;
     }
 
-    .theme-toggle:hover, .favorites-toggle:hover {
-      border-color: var(--primary-red);
-      color: var(--primary-red);
-      transform: rotate(15deg) scale(1.05);
+    .favorites-toggle:active {
+      transform: scale(0.95);
     }
 
-    .theme-toggle svg, .favorites-toggle svg {
+    .favorites-toggle svg {
       width: 20px;
       height: 20px;
     }
@@ -152,10 +137,10 @@
       right: -4px;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       color: white;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -175,27 +160,28 @@
       border-radius: 999px;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       color: white;
-      padding: 12px 20px;
+      padding: 10px 16px;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .list-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.4);
+    .list-button:active {
+      transform: scale(0.96);
     }
 
     .hero {
       background: linear-gradient(135deg, rgba(139, 31, 27, 0.92) 0%, rgba(194, 43, 38, 0.88) 100%);
       color: white;
-      border-radius: 32px;
-      padding: 64px clamp(28px, 6vw, 80px);
-      margin-bottom: 40px;
+      border-radius: 24px;
+      padding: 40px 20px;
+      margin-bottom: 24px;
       overflow: hidden;
       position: relative;
       box-shadow: var(--shadow-lg);
@@ -207,10 +193,10 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 420px;
-      height: 420px;
+      width: 300px;
+      height: 300px;
       background: url('assets/redclub-logo.png') center/contain no-repeat;
-      opacity: 0.18;
+      opacity: 0.15;
       z-index: 0;
       pointer-events: none;
     }
@@ -220,15 +206,15 @@
       position: absolute;
       top: -50%;
       right: -10%;
-      width: 600px;
-      height: 600px;
+      width: 400px;
+      height: 400px;
       background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       border-radius: 50%;
     }
 
     .eyebrow {
       color: var(--gold);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       font-weight: 800;
@@ -237,10 +223,10 @@
     }
 
     h1 {
-      max-width: 680px;
-      font: 800 clamp(2.5rem, 6vw, 5rem)/1 Georgia, serif;
+      max-width: 100%;
+      font: 800 clamp(1.8rem, 5vw, 3rem)/1.1 Georgia, serif;
       letter-spacing: -0.03em;
-      margin: 16px 0;
+      margin: 12px 0;
       position: relative;
       z-index: 1;
       text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
@@ -248,51 +234,48 @@
 
     .hero p {
       color: rgba(255, 255, 255, 0.92);
-      max-width: 560px;
+      max-width: 100%;
       margin: 0;
-      line-height: 1.65;
+      line-height: 1.5;
       position: relative;
       z-index: 1;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
     }
 
     .toolbar {
       display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin: 32px 0 24px;
-      align-items: stretch;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0 16px;
     }
 
     .search-wrapper {
-      flex: 1 1 360px;
-      min-width: 0;
+      width: 100%;
       position: relative;
     }
 
     .search-icon {
       position: absolute;
-      left: 18px;
+      left: 16px;
       top: 50%;
       transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       color: var(--primary-red);
       pointer-events: none;
-      transition: all 0.3s ease;
     }
 
     .search {
       width: 100%;
       border: 2px solid var(--line);
-      border-radius: 16px;
-      padding: 16px 50px 16px 50px;
+      border-radius: 14px;
+      padding: 14px 44px 14px 44px;
       background: var(--paper);
       font: inherit;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text-primary);
-      transition: all 0.3s ease;
       box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
     }
 
     .search::placeholder {
@@ -300,29 +283,19 @@
       font-style: italic;
     }
 
-    .search:hover {
-      border-color: var(--primary-red);
-      box-shadow: var(--shadow-md);
-    }
-
     .search:focus {
       outline: none;
       border-color: var(--primary-red);
-      box-shadow: 0 0 0 6px rgba(194, 43, 38, 0.1), var(--shadow-md);
-    }
-
-    .search:focus ~ .search-icon {
-      color: var(--dark-red);
-      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 0 4px rgba(194, 43, 38, 0.1);
     }
 
     .search-clear {
       position: absolute;
-      right: 16px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       border: 0;
       background: rgba(194, 43, 38, 0.1);
@@ -330,13 +303,6 @@
       display: none;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .search-clear:hover {
-      background: var(--primary-red);
-      color: white;
-      transform: translateY(-50%) rotate(90deg);
     }
 
     .search-clear.visible {
@@ -350,11 +316,11 @@
       right: 0;
       background: var(--paper);
       border: 2px solid var(--line);
-      border-radius: 16px;
-      margin-top: 8px;
+      border-radius: 14px;
+      margin-top: 6px;
       box-shadow: var(--shadow-lg);
       z-index: 50;
-      max-height: 400px;
+      max-height: 300px;
       overflow-y: auto;
       opacity: 0;
       pointer-events: none;
@@ -369,12 +335,11 @@
     }
 
     .suggestion-item {
-      padding: 14px 18px;
+      padding: 12px 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 12px;
-      transition: all 0.2s ease;
+      gap: 10px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -382,113 +347,70 @@
       border-bottom: none;
     }
 
-    .suggestion-item:hover {
-      background: rgba(194, 43, 38, 0.05);
-      padding-left: 22px;
+    .suggestion-item:active {
+      background: rgba(194, 43, 38, 0.08);
     }
 
     .suggestion-item svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       color: var(--muted);
-    }
-
-    .suggestion-item.recent svg {
-      color: var(--gold);
+      flex-shrink: 0;
     }
 
     .suggestion-text {
       font-weight: 600;
       color: var(--text-primary);
+      font-size: 0.9rem;
     }
 
     .suggestion-meta {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--muted);
       margin-left: auto;
     }
 
+    /* Filtri marche - tutti scorrevoli */
     .filters-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .filter-all {
-      flex-shrink: 0;
-      border: 2px solid var(--primary-red);
-      border-radius: 999px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      font-weight: 800;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .filter-all:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(194, 43, 38, 0.4);
-    }
-
-    .filter-all.active {
-      background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
-    }
-
-    .filters-divider {
-      width: 2px;
-      height: 32px;
-      background: linear-gradient(to bottom, transparent, var(--primary-red), transparent);
-      flex-shrink: 0;
-      margin: 0 6px;
-      opacity: 0.3;
-    }
-
-    .filters {
-      display: flex;
-      gap: 10px;
+      width: 100%;
       overflow-x: auto;
-      padding: 6px 2px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary-red) transparent;
-      flex: 1;
-      min-width: 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 4px 0;
     }
 
-    .filters::-webkit-scrollbar {
-      height: 6px;
+    .filters-wrapper::-webkit-scrollbar {
+      display: none;
     }
 
-    .filters::-webkit-scrollbar-thumb {
-      background: var(--primary-red);
-      border-radius: 3px;
+    .filters-container {
+      display: flex;
+      gap: 8px;
+      padding: 0 4px;
+      white-space: nowrap;
     }
 
+    .filter-all,
     .filter {
       border: 2px solid var(--line);
       border-radius: 999px;
-      padding: 11px 16px;
+      padding: 10px 18px;
       background: var(--paper);
       color: var(--muted);
-      white-space: nowrap;
-      font-size: 0.9rem;
       font-weight: 700;
-      transition: all 0.25s ease;
+      font-size: 0.85rem;
+      white-space: nowrap;
       flex-shrink: 0;
+      transition: all 0.25s ease;
     }
 
-    .filter:hover {
-      border-color: var(--primary-red);
-      color: var(--primary-red);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
+    .filter-all:active,
+    .filter:active {
+      transform: scale(0.96);
     }
 
+    .filter-all.active,
     .filter.active {
       color: white;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
@@ -496,76 +418,32 @@
       box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
     }
 
-    .controls-bar {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .control-label {
-      font-weight: 700;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .select-input {
-      padding: 10px 16px;
-      border: 2px solid var(--line);
-      border-radius: 12px;
-      background: var(--paper);
-      font: inherit;
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      min-width: 180px;
-    }
-
-    .select-input:hover {
-      border-color: var(--primary-red);
-    }
-
-    .select-input:focus {
-      outline: none;
-      border-color: var(--primary-red);
-      box-shadow: 0 0 0 4px rgba(194, 43, 38, 0.1);
-    }
-
     .olfactory-filters {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
     .olfactory-filter {
-      padding: 10px 16px;
+      padding: 9px 14px;
       border: 2px solid var(--line);
-      border-radius: 12px;
+      border-radius: 999px;
       background: var(--paper);
       color: var(--muted);
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
-      transition: all 0.25s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex: 1;
+      min-width: calc(50% - 4px);
+      justify-content: center;
     }
 
-    .olfactory-filter:hover {
-      border-color: var(--primary-red);
-      color: var(--primary-red);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
+    .olfactory-filter:active {
+      transform: scale(0.97);
     }
 
     .olfactory-filter.active {
@@ -576,29 +454,64 @@
     }
 
     .olfactory-icon {
-      font-size: 1.1rem;
+      font-size: 1rem;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .control-group {
+      width: 100%;
+    }
+
+    .control-label {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .select-input,
+    .gender-filters {
+      width: 100%;
+    }
+
+    .select-input {
+      padding: 10px 14px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      font: inherit;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      -webkit-appearance: none;
     }
 
     .gender-filters {
       display: flex;
-      gap: 8px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .gender-btn {
-      padding: 10px 18px;
+      flex: 1;
+      min-width: calc(50% - 3px);
+      padding: 9px 12px;
       border: 2px solid var(--line);
-      border-radius: 12px;
+      border-radius: 999px;
       background: var(--paper);
       color: var(--muted);
       font-weight: 700;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      font-size: 0.82rem;
     }
 
-    .gender-btn:hover {
-      border-color: var(--primary-red);
-      color: var(--primary-red);
+    .gender-btn:active {
+      transform: scale(0.97);
     }
 
     .gender-btn.active {
@@ -610,88 +523,60 @@
 
     .notice {
       color: var(--muted);
-      margin: 0 0 24px;
-      font-size: 0.95rem;
-      padding-left: 12px;
+      margin: 0 0 16px;
+      font-size: 0.88rem;
+      padding-left: 10px;
       border-left: 3px solid var(--primary-red);
     }
 
     .products-count {
       color: var(--muted);
-      font-size: 0.92rem;
-      margin-bottom: 16px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
     .card {
       background: var(--card-bg);
       border: 2px solid var(--card-border);
-      border-radius: 24px;
-      padding: 16px;
+      border-radius: 18px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      min-height: 420px;
+      min-height: 280px;
       box-shadow: var(--shadow-sm);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
 
     .card.scroll-hidden {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(30px);
     }
 
     .card.scroll-visible {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-red), var(--gold), var(--primary-red));
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .card.selected {
       border-color: var(--primary-red);
-      box-shadow: 0 8px 28px rgba(194, 43, 38, 0.2);
-      background: linear-gradient(145deg, rgba(253, 242, 240, 0.98) 0%, rgba(250, 245, 242, 0.95) 100%);
-    }
-
-    body.dark .card.selected {
-      background: linear-gradient(145deg, #3a2020 0%, #2a1818 100%);
-    }
-
-    .card.selected::before {
-      opacity: 1;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(194, 43, 38, 0.3);
+      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.15);
     }
 
     .favorite-btn {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      width: 36px;
-      height: 36px;
+      top: 10px;
+      left: 10px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       border: 0;
       background: rgba(255, 255, 255, 0.95);
@@ -699,262 +584,218 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
       z-index: 10;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
-    body.dark .favorite-btn {
-      background: rgba(42, 35, 32, 0.95);
-    }
-
-    .favorite-btn:hover {
-      transform: scale(1.15);
-      color: var(--primary-red);
+    .favorite-btn:active {
+      transform: scale(0.9);
     }
 
     .favorite-btn.active {
       background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
       color: white;
-      box-shadow: 0 4px 16px rgba(233, 30, 99, 0.4);
     }
 
     .favorite-btn svg {
-      width: 20px;
-      height: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .favorite-btn.active svg {
-      animation: heartBeat 0.4s ease;
-    }
-
-    @keyframes heartBeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+      width: 18px;
+      height: 18px;
     }
 
     .product-image {
       width: 100%;
-      height: 210px;
+      height: 140px;
       object-fit: cover;
-      border-radius: 16px;
+      border-radius: 12px;
       background: linear-gradient(135deg, #f5f0e8 0%, #ebe3d8 100%);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease;
       cursor: pointer;
-    }
-
-    body.dark .product-image {
-      background: linear-gradient(135deg, #3a322c 0%, #2a2320 100%);
-    }
-
-    .product-image:hover {
-      transform: scale(1.03);
-    }
-
-    .card:hover .product-image {
-      transform: scale(1.05);
     }
 
     .badge {
       align-self: flex-start;
       color: var(--primary-red);
-      background: linear-gradient(135deg, rgba(194, 43, 38, 0.1) 0%, rgba(194, 43, 38, 0.05) 100%);
-      padding: 6px 12px;
+      background: rgba(194, 43, 38, 0.08);
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      margin-top: 16px;
-      border: 1px solid rgba(194, 43, 38, 0.2);
-      letter-spacing: 0.05em;
+      margin-top: 10px;
+      letter-spacing: 0.03em;
     }
 
     .gender-badge {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 999px;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
       margin-top: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
     .gender-badge.male {
       background: rgba(59, 130, 246, 0.15);
       color: #2563eb;
-      border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
     .gender-badge.female {
       background: rgba(236, 72, 153, 0.15);
       color: #db2777;
-      border: 1px solid rgba(236, 72, 153, 0.3);
     }
 
     .gender-badge.unisex {
       background: rgba(16, 185, 129, 0.15);
       color: #059669;
-      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     .product-name {
-      font: 800 1.1rem/1.3 Georgia, serif;
-      margin: 12px 0 6px;
+      font: 700 0.9rem/1.2 Georgia, serif;
+      margin: 8px 0 4px;
       color: var(--text-primary);
     }
 
     .meta {
       color: var(--muted);
-      font-size: 0.88rem;
-      margin: 0 0 12px;
-      font-weight: 600;
+      font-size: 0.8rem;
+      margin: 0 0 8px;
     }
 
     .price-tag {
       color: var(--primary-red);
-      font-weight: 800;
-      font-size: 0.95rem;
-      margin: 0 0 16px;
-      padding: 8px 12px;
-      background: linear-gradient(135deg, rgba(194, 43, 38, 0.08) 0%, rgba(194, 43, 38, 0.03) 100%);
-      border-radius: 12px;
-      border-left: 3px solid var(--primary-red);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin: 0 0 10px;
+      padding: 6px 10px;
+      background: rgba(194, 43, 38, 0.06);
+      border-radius: 10px;
+      border-left: 2px solid var(--primary-red);
     }
 
     .quantity-selector {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin-top: auto;
-      padding: 12px;
-      background: linear-gradient(135deg, rgba(194, 43, 38, 0.05) 0%, rgba(194, 43, 38, 0.02) 100%);
-      border-radius: 14px;
+      padding: 10px;
+      background: rgba(194, 43, 38, 0.05);
+      border-radius: 12px;
       border: 2px solid rgba(194, 43, 38, 0.15);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s ease;
-    }
-
-    .card.selected .quantity-selector {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .qty-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       border: 0;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       color: white;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(194, 43, 38, 0.25);
-    }
-
-    .qty-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.35);
     }
 
     .qty-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
     }
 
     .qty-value {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--primary-red);
-      min-width: 32px;
+      min-width: 28px;
       text-align: center;
     }
 
     .add {
       width: 100%;
-      margin-top: 12px;
-      padding: 14px;
+      margin-top: 8px;
+      padding: 12px;
       border: 0;
-      border-radius: 14px;
+      border-radius: 12px;
       color: white;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      font-weight: 800;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.25);
+      font-weight: 700;
+      font-size: 0.85rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .card.selected .add {
       display: none;
     }
 
-    .add:hover {
-      background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.35);
-    }
-
     .add:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
-    @keyframes pulse-red {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(194, 43, 38, 0.4); }
-      50% { box-shadow: 0 0 0 12px rgba(194, 43, 38, 0); }
+    .selected-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.3s ease;
+      z-index: 2;
     }
 
-    .card.added {
-      animation: pulse-red 0.6s ease;
+    .card.selected .selected-badge {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .empty {
       grid-column: 1/-1;
       text-align: center;
-      padding: 64px 12px;
+      padding: 40px 12px;
       color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 0.95rem;
     }
 
     .toast-container {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 20px;
+      left: 16px;
+      right: 16px;
       z-index: 1000;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       pointer-events: none;
     }
 
     .toast {
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       color: white;
-      padding: 16px 24px;
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(194, 43, 38, 0.4);
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.4);
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 700;
+      font-size: 0.9rem;
       animation: slideIn 0.3s ease;
       pointer-events: auto;
-      min-width: 280px;
     }
 
     @keyframes slideIn {
-      from { transform: translateX(400px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .toast.hiding {
@@ -962,63 +803,47 @@
     }
 
     @keyframes slideOut {
-      to { transform: translateX(400px); opacity: 0; }
-    }
-
-    .toast-icon {
-      width: 24px;
-      height: 24px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary-red);
-      font-weight: 800;
+      to { transform: translateY(100px); opacity: 0; }
     }
 
     .pagination {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
-      margin-top: 40px;
+      gap: 6px;
+      margin-top: 24px;
       flex-wrap: wrap;
     }
 
     .page-btn {
-      padding: 10px 16px;
+      padding: 8px 12px;
       border: 2px solid var(--line);
-      border-radius: 12px;
+      border-radius: 10px;
       background: var(--paper);
       color: var(--muted);
       font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      font-size: 0.85rem;
     }
 
-    .page-btn:hover {
-      border-color: var(--primary-red);
-      color: var(--primary-red);
-      transform: translateY(-2px);
+    .page-btn:active {
+      transform: scale(0.96);
     }
 
     .page-btn.active {
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       color: white;
       border-color: var(--primary-red);
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
     }
 
     .page-btn:disabled {
       opacity: 0.4;
-      cursor: not-allowed;
     }
 
     .page-info {
       color: var(--muted);
       font-weight: 600;
-      margin: 0 12px;
+      font-size: 0.85rem;
+      margin: 0 8px;
     }
 
     .drawer {
@@ -1042,11 +867,11 @@
       right: 0;
       top: 0;
       bottom: 0;
-      width: min(480px, 100%);
+      width: min(400px, 100%);
       background: var(--panel-bg);
-      padding: 28px;
+      padding: 20px;
       transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s ease;
       display: flex;
       flex-direction: column;
       box-shadow: -8px 0 40px rgba(0, 0, 0, 0.2);
@@ -1061,12 +886,12 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid var(--line);
-      padding-bottom: 20px;
-      margin-bottom: 20px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
     }
 
     .panel h2 {
-      font: 800 2rem Georgia, serif;
+      font: 800 1.6rem Georgia, serif;
       margin: 0;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       -webkit-background-clip: text;
@@ -1077,64 +902,52 @@
     .close {
       background: none;
       border: 0;
-      font-size: 2rem;
+      font-size: 1.8rem;
       line-height: 1;
       color: var(--muted);
-      transition: all 0.2s ease;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
     }
 
-    .close:hover {
-      color: var(--primary-red);
+    .close:active {
       background: rgba(194, 43, 38, 0.1);
-      transform: rotate(90deg);
     }
 
     .items {
       overflow: auto;
       flex: 1;
+      -webkit-overflow-scrolling: touch;
     }
 
     .item {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 14px;
+      grid-template-columns: 56px 1fr auto;
+      gap: 12px;
       align-items: center;
-      padding: 18px 0;
+      padding: 14px 0;
       border-bottom: 1px solid var(--line);
-      transition: all 0.2s ease;
-    }
-
-    .item:hover {
-      background: rgba(194, 43, 38, 0.03);
-      margin: 0 -12px;
-      padding-left: 12px;
-      padding-right: 12px;
-      border-radius: 12px;
     }
 
     .item img {
-      width: 64px;
-      height: 64px;
+      width: 56px;
+      height: 56px;
       object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
     }
 
     .item-name {
-      font-weight: 800;
-      margin: 0 0 4px;
-      color: var(--text-primary);
+      font-weight: 700;
+      margin: 0 0 3px;
+      font-size: 0.9rem;
     }
 
     .item-meta {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin: 0;
     }
 
@@ -1142,84 +955,39 @@
       background: none;
       border: 0;
       color: var(--primary-red);
-      font-size: 1.4rem;
-      padding: 6px 10px;
-      transition: all 0.2s ease;
-      border-radius: 8px;
+      font-size: 1.3rem;
+      padding: 4px 8px;
     }
 
-    .remove:hover {
-      background: rgba(194, 43, 38, 0.1);
+    .remove:active {
       transform: scale(1.1);
     }
 
     .panel-foot {
       border-top: 2px solid var(--line);
-      padding-top: 20px;
-      margin-top: 20px;
+      padding-top: 16px;
+      margin-top: 16px;
     }
 
     .whatsapp {
       display: block;
       width: 100%;
-      padding: 16px;
+      padding: 14px;
       border: 0;
-      border-radius: 16px;
+      border-radius: 12px;
       color: white;
       background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
       font-weight: 800;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       text-align: center;
       text-decoration: none;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
     }
 
-    .whatsapp:hover {
-      background: linear-gradient(135deg, #1da851 0%, #169045 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    .whatsapp:active {
+      transform: scale(0.97);
     }
 
-    .count {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--gold) 0%, #b8941f 100%);
-      color: white;
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: 0.85rem;
-      margin-left: 8px;
-      font-weight: 800;
-      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-    }
-
-    .selected-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.85rem;
-      box-shadow: 0 2px 8px rgba(194, 43, 38, 0.3);
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.3s ease;
-      z-index: 2;
-    }
-
-    .card.selected .selected-badge {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* MODAL - Desktop centrato */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -1230,9 +998,9 @@
       transition: opacity 0.3s ease;
       z-index: 300;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      padding: 20px;
+      padding: 0;
     }
 
     .modal-overlay.open {
@@ -1242,536 +1010,249 @@
 
     .modal {
       background: var(--paper);
-      border-radius: 28px;
-      max-width: 800px;
+      border-radius: 20px 20px 0 0;
       width: 100%;
-      max-height: 90vh;
+      max-height: 85vh;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      transform: scale(0.9);
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
       transition: transform 0.3s ease;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-      margin: 0;
+      box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.4);
+      margin-bottom: env(safe-area-inset-bottom, 0);
     }
 
     .modal-overlay.open .modal {
-      transform: scale(1);
+      transform: translateY(0);
     }
 
     .modal-image-wrapper {
       background: linear-gradient(135deg, #f5f0e8 0%, #ebe3d8 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
+      padding: 20px;
       position: relative;
-    }
-
-    body.dark .modal-image-wrapper {
-      background: linear-gradient(135deg, #3a322c 0%, #2a2320 100%);
+      max-height: 35vh;
+      overflow: hidden;
     }
 
     .modal-image {
       width: 100%;
-      max-height: 400px;
+      max-height: 100%;
       object-fit: contain;
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
     .modal-content {
-      padding: 40px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      max-height: 50vh;
+      padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));
     }
 
     .modal-close {
       position: absolute;
       top: 12px;
       right: 12px;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: 0;
       background: rgba(255, 255, 255, 0.95);
       color: var(--ink);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
       z-index: 10;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     }
 
-    body.dark .modal-close {
-      background: var(--paper);
-      color: var(--text-primary);
-    }
-
-    .modal-close:hover {
+    .modal-close:active {
       background: var(--primary-red);
       color: white;
-      transform: rotate(90deg);
     }
 
     .modal-brand {
       color: var(--primary-red);
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 8px;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
     }
 
     .modal-name {
-      font: 800 2rem/1.1 Georgia, serif;
-      margin: 0 0 16px;
+      font: 800 1.5rem/1.1 Georgia, serif;
+      margin: 0 0 12px;
       color: var(--text-primary);
     }
 
     .modal-details {
       display: flex;
-      gap: 12px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .modal-detail {
-      padding: 8px 14px;
+      padding: 6px 12px;
       background: rgba(194, 43, 38, 0.08);
-      border-radius: 10px;
-      font-size: 0.88rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: var(--text-primary);
     }
 
     .modal-description {
       color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 24px;
-      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
     }
 
     .modal-price {
       color: var(--primary-red);
-      font-weight: 800;
-      font-size: 1.1rem;
-      padding: 12px 16px;
-      background: linear-gradient(135deg, rgba(194, 43, 38, 0.08) 0%, rgba(194, 43, 38, 0.03) 100%);
-      border-radius: 12px;
-      border-left: 3px solid var(--primary-red);
-      margin-bottom: 24px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      background: rgba(194, 43, 38, 0.06);
+      border-radius: 10px;
+      border-left: 2px solid var(--primary-red);
+      margin-bottom: 18px;
     }
 
     .modal-add {
       width: 100%;
-      padding: 16px;
+      padding: 14px;
       border: 0;
-      border-radius: 14px;
+      border-radius: 12px;
       color: white;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.3);
-      transition: all 0.3s ease;
+      gap: 8px;
+      margin-top: auto;
     }
 
-    .modal-add:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(194, 43, 38, 0.4);
+    .modal-add:active {
+      transform: scale(0.97);
     }
 
-    /* MOBILE OPTIMIZATIONS */
-    @media (max-width: 768px) {
+    @media (min-width: 769px) {
       .shell {
-        padding: 0 16px 100px;
-      }
-
-      header {
-        padding: 14px 0;
-      }
-
-      .brand {
-        font-size: 1.3rem;
-      }
-
-      .brand-logo {
-        width: 42px;
-        height: 42px;
-      }
-
-      .hero {
-        padding: 40px 24px;
-        margin-bottom: 24px;
-        border-radius: 24px;
-      }
-
-      .hero h1 {
-        font-size: 2rem !important;
-        line-height: 1.1;
-      }
-
-      .hero p {
-        font-size: 0.95rem;
-      }
-
-      .toolbar {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .search-wrapper {
-        flex: 1 1 100%;
-      }
-
-      .filters-wrapper {
-        width: 100%;
-        overflow-x: auto;
-        padding-bottom: 8px;
-      }
-
-      .filter-all {
-        flex-shrink: 0;
-        padding: 10px 18px;
-        font-size: 0.88rem;
-      }
-
-      .filters-divider {
-        display: none;
-      }
-
-      .filters {
-        gap: 8px;
-      }
-
-      .filter {
-        padding: 9px 14px;
-        font-size: 0.82rem;
-      }
-
-      .controls-bar {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .control-group {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-
-      .select-input,
-      .gender-filters {
-        width: 100%;
-      }
-
-      .gender-filters {
-        flex-wrap: wrap;
-      }
-
-      .gender-btn {
-        flex: 1;
-        min-width: calc(50% - 4px);
-        padding: 9px 12px;
-        font-size: 0.82rem;
-      }
-
-      .olfactory-filters {
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .olfactory-filter {
-        flex: 1;
-        min-width: calc(50% - 4px);
-        padding: 9px 12px;
-        font-size: 0.82rem;
-        justify-content: center;
+        padding: 0 24px 120px;
       }
 
       .grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
       }
 
       .card {
-        min-height: 320px;
-        padding: 12px;
+        min-height: 340px;
+        padding: 14px;
       }
 
       .product-image {
-        height: 160px;
+        height: 180px;
       }
 
-      .product-name {
-        font-size: 0.95rem;
+      .hero {
+        padding: 56px 32px;
+        border-radius: 28px;
+        margin-bottom: 32px;
       }
 
-      .list-button {
-        padding: 10px 14px;
-        font-size: 0.85rem;
+      .hero::before {
+        width: 380px;
+        height: 380px;
       }
 
-      .header-actions {
-        gap: 8px;
+      h1 {
+        font-size: clamp(2.2rem, 5vw, 4rem);
       }
 
-      .theme-toggle,
-      .favorites-toggle {
-        width: 40px;
-        height: 40px;
+      .hero p {
+        font-size: 1.05rem;
       }
 
-      /* Modal bottom sheet su mobile */
+      .toolbar {
+        flex-direction: row;
+        gap: 16px;
+      }
+
+      .search-wrapper {
+        flex: 1;
+      }
+
+      .filters-wrapper {
+        overflow-x: visible;
+      }
+
+      .filters-container {
+        flex-wrap: nowrap;
+      }
+
+      .olfactory-filters {
+        flex-wrap: nowrap;
+      }
+
+      .olfactory-filter {
+        flex: none;
+        min-width: auto;
+      }
+
+      .controls-bar {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .control-group {
+        width: auto;
+      }
+
       .modal-overlay {
-        align-items: flex-end;
-        padding: 0;
+        align-items: center;
+        padding: 20px;
       }
 
       .modal {
-        grid-template-columns: 1fr;
-        max-height: 85vh;
-        height: auto;
-        border-radius: 24px 24px 0 0;
-        transform: translateY(100%);
-        margin-bottom: env(safe-area-inset-bottom);
+        max-width: 700px;
+        border-radius: 24px;
+        max-height: 90vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        transform: scale(0.9);
+        margin-bottom: 0;
       }
 
       .modal-overlay.open .modal {
-        transform: translateY(0);
+        transform: scale(1);
       }
 
       .modal-image-wrapper {
-        padding: 24px;
-        max-height: 35vh;
-        border-radius: 0;
+        max-height: none;
+        padding: 32px;
       }
 
       .modal-content {
-        padding: 24px;
-        max-height: 50vh;
-        padding-bottom: calc(24px + env(safe-area-inset-bottom));
-      }
-
-      .modal-name {
-        font-size: 1.5rem;
+        max-height: none;
+        padding: 32px;
+        padding-bottom: 32px;
       }
 
       .modal-close {
         top: 16px;
         right: 16px;
-        background: var(--paper);
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-      }
-
-      .search-suggestions {
-        max-height: 300px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .hero h1 {
-        font-size: 1.6rem !important;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .olfactory-filter,
-      .gender-btn {
-        min-width: 100%;
-      }
-    }
-
-    @media (max-height: 600px) {
-      .modal {
-        max-height: 95vh;
-      }
-
-      .modal-image-wrapper {
-        max-height: 30vh;
-        padding: 16px;
-      }
-
-      .modal-content {
-        max-height: 65vh;
-        padding: 16px;
       }
 
       .modal-name {
-        font-size: 1.3rem;
+        font-size: 1.8rem;
       }
-    }
-
-    /* DARK MODE - Elementi mancanti */
-    body.dark .search {
-      background: var(--paper);
-      color: var(--text-primary);
-      border-color: var(--line);
-    }
-
-    body.dark .search::placeholder {
-      color: var(--muted);
-    }
-
-    body.dark .select-input {
-      background: var(--paper);
-      color: var(--text-primary);
-      border-color: var(--line);
-    }
-
-    body.dark .filter {
-      background: var(--paper);
-      color: var(--muted);
-      border-color: var(--line);
-    }
-
-    body.dark .filter:hover {
-      color: var(--primary-red);
-      border-color: var(--primary-red);
-    }
-
-    body.dark .gender-btn {
-      background: var(--paper);
-      color: var(--muted);
-      border-color: var(--line);
-    }
-
-    body.dark .gender-btn:hover {
-      color: var(--primary-red);
-      border-color: var(--primary-red);
-    }
-
-    body.dark .olfactory-filter {
-      background: var(--paper);
-      color: var(--muted);
-      border-color: var(--line);
-    }
-
-    body.dark .olfactory-filter:hover {
-      color: var(--primary-red);
-      border-color: var(--primary-red);
-    }
-
-    body.dark .search-suggestions {
-      background: var(--paper);
-      border-color: var(--line);
-    }
-
-    body.dark .suggestion-item {
-      border-bottom-color: var(--line);
-    }
-
-    body.dark .suggestion-item:hover {
-      background: rgba(194, 43, 38, 0.1);
-    }
-
-    body.dark .suggestion-text {
-      color: var(--text-primary);
-    }
-
-    body.dark .suggestion-meta {
-      color: var(--muted);
-    }
-
-    body.dark .products-count,
-    body.dark .notice {
-      color: var(--muted);
-    }
-
-    body.dark .page-btn {
-      background: var(--paper);
-      color: var(--muted);
-      border-color: var(--line);
-    }
-
-    body.dark .page-btn:hover {
-      color: var(--primary-red);
-      border-color: var(--primary-red);
-    }
-
-    body.dark .page-info {
-      color: var(--muted);
-    }
-
-    body.dark .modal {
-      background: var(--paper);
-    }
-
-    body.dark .modal-brand {
-      color: var(--primary-red);
-    }
-
-    body.dark .modal-name,
-    body.dark .modal-description {
-      color: var(--text-primary);
-    }
-
-    body.dark .modal-detail {
-      background: rgba(194, 43, 38, 0.15);
-      color: var(--text-primary);
-    }
-
-    body.dark .panel {
-      background: var(--panel-bg);
-    }
-
-    body.dark .item-name {
-      color: var(--text-primary);
-    }
-
-    body.dark .item-meta {
-      color: var(--muted);
-    }
-
-    body.dark .empty {
-      color: var(--muted);
-    }
-
-    body.dark .theme-toggle,
-    body.dark .favorites-toggle {
-      background: var(--paper);
-      color: var(--text-primary);
-      border-color: var(--line);
-    }
-
-    body.dark .theme-toggle:hover,
-    body.dark .favorites-toggle:hover {
-      border-color: var(--primary-red);
-      color: var(--primary-red);
-    }
-
-    body.dark .badge {
-      background: rgba(194, 43, 38, 0.15);
-      color: var(--primary-red);
-    }
-
-    body.dark .price-tag {
-      background: rgba(194, 43, 38, 0.12);
-      color: var(--primary-red);
-    }
-
-    body.dark .quantity-selector {
-      background: rgba(194, 43, 38, 0.08);
-      border-color: rgba(194, 43, 38, 0.3);
-    }
-
-    body.dark .qty-value {
-      color: var(--primary-red);
-    }
-
-    body.dark .product-image {
-      background: linear-gradient(135deg, #3a322c 0%, #2a2320 100%);
     }
   </style>
 </head>
@@ -1783,29 +1264,14 @@
         <span>RedClub</span>
       </div>
       <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
-          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-
         <button class="favorites-toggle" id="favoritesToggle" onclick="toggleFavorites()" aria-label="Preferiti">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
           <span class="favorites-count" id="favoritesCount">0</span>
         </button>
-
         <button class="list-button" onclick="toggleDrawer()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 2L6 7H3L8 22H16L21 7H18L15 2H9Z"/>
           </svg>
           Lista <span class="count" id="count">0</span>
@@ -1836,9 +1302,9 @@
       </div>
 
       <div class="filters-wrapper">
-        <button class="filter-all active" id="filterAll" onclick="setFilter('Tutti')">Tutti i Marchi</button>
-        <div class="filters-divider"></div>
-        <div class="filters" id="filters"></div>
+        <div class="filters-container" id="filtersContainer">
+          <button class="filter-all active" id="filterAll" onclick="setFilter('Tutti')">Tutti i Marchi</button>
+        </div>
       </div>
     </div>
 
@@ -1848,11 +1314,11 @@
         Tutti
       </button>
       <button class="olfactory-filter" data-olfactory="woody" onclick="setOlfactoryFilter('woody')">
-        <span class="olfactory-icon">🌲</span>
+        <span class="olfactory-icon"></span>
         Legnosi
       </button>
       <button class="olfactory-filter" data-olfactory="floral" onclick="setOlfactoryFilter('floral')">
-        <span class="olfactory-icon"></span>
+        <span class="olfactory-icon">🌹</span>
         Floreali
       </button>
       <button class="olfactory-filter" data-olfactory="citrus" onclick="setOlfactoryFilter('citrus')">
@@ -1864,7 +1330,7 @@
         Orientali
       </button>
       <button class="olfactory-filter" data-olfactory="fresh" onclick="setOlfactoryFilter('fresh')">
-        <span class="olfactory-icon">💧</span>
+        <span class="olfactory-icon"></span>
         Freschi
       </button>
     </div>
@@ -1909,7 +1375,7 @@
       <div class="items" id="items"></div>
       <div class="panel-foot">
         <a class="whatsapp" id="whatsapp" href="#" onclick="sendWhatsApp(event)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
           Invia su WhatsApp
@@ -1929,9 +1395,9 @@
         <h2 class="modal-name" id="modalName"></h2>
         <div class="modal-details" id="modalDetails"></div>
         <p class="modal-description" id="modalDescription"></p>
-        <div class="modal-price"> Prezzo su richiesta</div>
+        <div class="modal-price">💎 Prezzo su richiesta</div>
         <button class="modal-add" id="modalAdd" onclick="addToCardFromModal()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
@@ -1945,156 +1411,156 @@
 
   <script>
     const PRODUCTS = [
-      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh"},
-      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental"},
-      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral"},
-      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental"},
-      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental"},
-      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental"},
-      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh"},
-      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental"},
-      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental"},
-      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental"},
-      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental"},
-      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental"},
-      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental"},
-      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral"},
-      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral"},
-      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral"},
-      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody"},
-      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental"},
-      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental"},
-      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody"},
-      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody"},
-      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental"},
-      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody"},
-      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus"},
-      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental"},
-      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental"},
-      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody"},
-      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental"},
-      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental"},
-      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental"},
-      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus"},
-      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental"},
-      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental"},
-      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral"},
-      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral"},
-      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody"},
-      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus"},
-      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus"},
-      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh"},
-      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental"},
-      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
-      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental"},
-      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental"},
-      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
-      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
-      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody"},
-      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody"},
-      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral"},
-      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental"},
-      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody"},
-      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral"},
-      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral"},
-      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral"},
-      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental"},
-      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
-      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
-      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
-      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
-      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral"},
-      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody"},
-      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody"},
-      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental"},
-      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody"},
-      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody"},
-      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental"},
-      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral"},
-      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral"},
-      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
-      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
-      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody"},
-      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
-      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh"},
-      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody"},
-      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh"},
-      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh"},
-      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus"}
+      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh", description: "Freschezza selvaggia e virile, un'esplosione di note agrumate e speziate che evoca paesaggi desertici al crepuscolo."},
+      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", description: "Intensità magnetica e raffinata, dove la lavanda si fonde con note boisée per un'eleganza contemporanea."},
+      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", description: "Libertà assoluta in bottiglia, bergamotto di Reggio Calabria e pepe di Sichuan per un carattere audace."},
+      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "Un bouquet solare di ylang-ylang, rosa e gelsomino che celebra la femminilità radiosa."},
+      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "L'essenza assoluta del lusso floreale, con note di tuberosa e sandalo per una sensualità senza tempo."},
+      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "Romanticismo parigino in ogni spruzzo, rosa centifolia e peonia per un'eleganza giovanile."},
+      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "Profumo-couture che unisce iris e patchouli per una femminilità sofisticata e moderna."},
+      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental", description: "Tuberosa intensa e frutti rossi per una seduzione misteriosa e indimenticabile."},
+      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", description: "Freschezza glaciale con vaniglia del Madagascar, un contrasto termico affascinante."},
+      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral", description: "L'icona senza tempo, aldeidi e fiori bianchi per un'eleganza eterna e raffinata."},
+      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", description: "Il profumo più celebre al mondo, ylang-ylang e rosa di Grasse in perfetta armonia."},
+      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", description: "Libertà e eleganza in equilibrio, agrumi freschi e legni nobili per l'uomo contemporaneo."},
+      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", description: "Profondità boisée con incenso e sandalo, per un'eleganza maschile intensa."},
+      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", description: "Spirito libero e femminile, arancia sanguinella e patchouli per una modernità audace."},
+      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", description: "Energia sportiva e raffinatezza, note marine e tonka per vitalità immediata."},
+      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori bianchi illuminati dal sole, gelsomino e ylang-ylang per una femminilità radiosa."},
+      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", description: "Libertà assoluta, lavanda francese e fior d'arancio del Marocco per una donna libera."},
+      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", description: "Freschezza floreale audace, un inno alla libertà femminile con note luminose."},
+      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh", description: "Affermazione di sé, ambroxan e bergamotto per un'eleganza maschile contemporanea."},
+      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental", description: "Caffè nero e fiori bianchi, una fragranza rock-chic per notti indimenticabili."},
+      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", description: "Intensità assoluta con vaniglia bourbon e gelsomino, seduzione senza compromessi."},
+      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", description: "Versione estrema con note gourmand e fiori bianchi, per una femminilità audace."},
+      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", description: "Orchidea vanigliata e lavanda, un'intensità floreale calda e avvolgente."},
+      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", description: "Icona maschile, lavanda e vaniglia in un flacone a forma di torso per seduzione maschile."},
+      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", description: "Spezie orientali e iris, eleganza maschile sofisticata e misteriosa."},
+      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh", description: "Freschezza tropicale, noce di cocco e bergamotto per un'evasione estiva."},
+      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", description: "Gardenia e caramello, un profumo scandalosamente femminile e gourmand."},
+      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", description: "Intensità scandalosa con miele e fiori bianchi, femminilità audace."},
+      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", description: "Menta fresca e mela verde, energia giovanile e mediterranea."},
+      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", description: "Acqua di mare e legni, freschezza mediterranea per uomo moderno."},
+      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral", description: "Zenzero e fiori lilla, freschezza speziata e femminile."},
+      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral", description: "Melograno e peonia, luminosità floreale per donna radiosa."},
+      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh", description: "Note marine e incenso, eleganza maschile profonda e raffinata."},
+      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral", description: "Ribes nero e vaniglia, femminilità intensa e seducente."},
+      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", description: "Tuberosa e vaniglia, un percorso floreale luminoso e moderno."},
+      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", description: "Fiori bianchi intensificati, vaniglia bourbon per femminilità avvolgente."},
+      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh", description: "Vittoria in bottiglia, note marine e legnose per uomo vincente."},
+      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental", description: "Oro liquido, spezie e cuoio per un successo sfavillante."},
+      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", description: "Intensità dorata con davana e patchouli, seduzione maschile potente."},
+      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", description: "Versione Parfum con note boisée rafforzate, eleganza maschile assoluta."},
+      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", description: "Doppia personalità, tuberosa e cacao per donna seducente e misteriosa."},
+      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", description: "Versione suprema con iris e vaniglia, femminilità lussuosa."},
+      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", description: "Rosa e pralina, dolcezza femminile con un tocco audace."},
+      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral", description: "Tuberosa e gardenia, esplosione floreale bianca per eleganza naturale."},
+      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral", description: "Fiori bianchi e sandalo, ambrosia floreale per donna raffinata."},
+      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral", description: "Gardenia e pera, freschezza floreale fruttata e femminile."},
+      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", description: "Neroli e tuberosa, paradosso tra luce e ombra per donna moderna."},
+      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", description: "Intensità del paradosso, vaniglia e fiori bianchi per femminilità profonda."},
+      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh", description: "Lavanda e ambroxan, freschezza minerale per uomo contemporaneo."},
+      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", description: "Iris pallido e pralina, felicità in bottiglia per donna ottimista."},
+      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", description: "Luminosità floreale, pesca e iris per gioia di vivere radiosa."},
+      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", description: "Rosa e biancospino, idolo floreale per donna ispiratrice."},
+      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", description: "Tuberosa proibita e legni, trasgressione elegante e femminile."},
+      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", description: "Intensità proibita con vaniglia e fiori bianchi, seduzione audace."},
+      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody", description: "Legni preziosi e pera, gentilezza maschile sofisticata."},
+      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental", description: "Orchidea nera e spezie, lusso oscuro e sensuale senza tempo."},
+      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody", description: "Legno di oud e sandalo, eleganza orientale raffinata e preziosa."},
+      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Tabacco e vaniglia, calore avvolgente e sofisticato."},
+      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", description: "Mela e legni, successo maschile in bottiglia elegante."},
+      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", description: "Intensità del successo, vaniglia e legni per uomo determinato."},
+      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental", description: "Zenzero e maninka, seduzione maschile moderna."},
+      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral", description: "Vaniglia bourbon e fiori, romanità contemporanea e audace."},
+      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody", description: "Legno di vetiver e salvia, Roma moderna in versione maschile."},
+      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Limone di Sicilia e legni, Mediterraneo intenso e luminoso."},
+      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral", description: "Neroli e vaniglia, devozione floreale calda e avvolgente."},
+      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral", description: "Bambù e loto, purezza cristallina e femminile."},
+      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental", description: "Rum e spezie, eleganza maschile intensa e sofisticata."},
+      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental", description: "Spezie esplosive e tabacco, potenza orientale maschile."},
+      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral", description: "Bouquet esplosivo di fiori, femminilità radiosa e generosa."},
+      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral", description: "Frutti rossi e fiori, eroina moderna e femminile."},
+      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh", description: "Cardamomo e legni, british style fresco e raffinato."},
+      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody", description: "Legno di cedro e vaniglia, desiderio maschile irresistibile."},
+      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental", description: "Cannella e tabacco, notte misteriosa e seducente."},
+      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral", description: "Orchidea e vaniglia, eleganza orientale accessibile e raffinata."},
+      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental", description: "Spezie orientali e legni, forza maschile intensa."},
+      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Miele e tabacco, lusso italiano artigianale e prezioso."},
+      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Agrumi siciliani e muschio, freschezza mediterranea lussuosa."},
+      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Spezie preziose e fiori, rinascimento olfattivo raffinato."},
+      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody", description: "Legni rari e ambra, stelle cadenti in bottiglia preziosa."},
+      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Oud e rosa, viaggio nell'Oriente lussuoso e misterioso."},
+      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral", description: "Fiori classici italiani, tradizione profumiera raffinata."},
+      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral", description: "Fiori notturni e vaniglia, luce lunare femminile e poetica."},
+      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody", description: "Legni australiani e spezie, viaggio nell'emisfero sud maschile."},
+      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus", description: "Tè nero e agrumi, immaginazione creativa e raffinata."},
+      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody", description: "Oud e legni, ombra del nomade nel deserto prezioso."},
+      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", description: "Agrumi e spezie leggere, freschezza del viaggio maschile."},
+      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Arancia e mandarino, tuffo pomeridiano rinfrescante."},
+      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", description: "Note acquatiche e agrumi, leggerezza maschile contemporanea."},
+      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", description: "Zenzero e ambroxan, immensità fresca e maschile."},
+      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh", description: "Frutti rossi e menta, freschezza californiana rilassante."},
+      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori armoniosi e vaniglia, sinfonia femminile elegante."},
+      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Iris e patchouli, acchiappasogni floreale e poetico."},
+      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Tuberosa e sandalo, nella pelle femminile sensuale."},
+      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori bianchi luminosi, apice della femminilità floreale."},
+      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Ylang-ylang e vaniglia, cuore che batte femminile."},
+      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Spezie incendiate e incenso, notte di fuoco intensa."},
+      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Rosa e legni preziosi, sabbie rosa del deserto femminile."},
+      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Oud e zafferano, grandezza orientale mistica e potente."},
+      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", description: "Vaniglia e spezie, afrodisiaco assoluto e sensuale."},
+      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", description: "Tabacco e rum, effetti collaterali piacevoli e intensi."},
+      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Legni terapeutici e spezie, riabilitazione olfattiva."},
+      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Muschio e legni, terapia muschiosa avvolgente."},
+      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Legni benedetti e ambra, benedizione olfattiva preziosa."},
+      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody", description: "Legni nobili e spezie, paragone di eccellenza maschile."},
+      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral", description: "Rosa atomica e patchouli, potenza floreale esplosiva."},
+      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental", description: "Cognac e cannella, parte degli angeli golosa e sofisticata."},
+      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody", description: "Rum e legni, via diretta al paradiso maschile."},
+      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", description: "Fiori bianchi e ambra, brava ragazza che diventa cattiva."},
+      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", description: "Neroli e marshmallow, amore dolce e timido."},
+      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori di pesco e vaniglia, principessa moderna e femminile."},
+      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", description: "Rosa e frutti, principessa floreale contemporanea."},
+      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori rossi e spezie, gioco pericoloso e seducente."},
+      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Caffè e spezie verdi, ebbrezza orientale intensa."},
+      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Tè matcha e legni, cerimonia del tè contemporanea."},
+      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Tè nero e cedro, eleganza boisée raffinata."},
+      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Sandalwood e cuoio, icona unisex sofisticata."},
+      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Ambroxan e muschio, un altro 13 misterioso."},
+      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Rosa e ambroxan, baia floreale contemporanea."},
+      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Giglio e vaniglia, giglio luminoso e raffinato."},
+      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Patchouli e betulla, intensità boisée affumicata."},
+      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Rosa e legni, rosa contemporanea unisex."},
+      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Tuberosa e spezie, tuberosa intensa e sensuale."},
+      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Fior d'arancio e gelsomino, purezza floreale mediterranea."},
+      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Muschio e ambra, muschio caldo e avvolgente."},
+      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Legno di gaiaco e rosa, legno prezioso e floreale."},
+      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody", description: "Oud e zafferano, eleganza reale orientale."},
+      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental", description: "Vaniglia e spezie, calore orientale avvolgente."},
+      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", description: "Legni preziosi e ambra, cavallo reale maschile."},
+      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Mela e vaniglia, eleganza maschile raffinata."},
+      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Vaniglia bourbon e spezie, Layton gourmand maschile."},
+      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Mandorla e vaniglia, cavallo alato maschile."},
+      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Pegasus intensificato, esclusività maschile preziosa."},
+      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", description: "Legni speziati e ambra, forza maschile orientale."},
+      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Tabacco e vaniglia, re Erode maschile e sofisticato."},
+      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Layton esclusivo, vaniglia e spezie raffinate."},
+      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", description: "Rosa e lichene, femminilità floreale raffinata."},
+      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", description: "Delina esclusivo, rosa e vaniglia lussuosa."},
+      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Melone e cuoio, freschezza sportiva maschile."},
+      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Pomodoro e caffè, energia rossa maschile."},
+      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", description: "Mango e legni, eleganza nera maschile."},
+      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Pino e cuoio, classicità verde maschile."},
+      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Note marine e agrumi, blu ultra fresco maschile."},
+      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", description: "Oud e spezie, supremazia maschile orientale."},
+      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", description: "Ananas e betulla, successo maschile leggendario."},
+      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", description: "Violetta e sandalo, tweed irlandese fresco e maschile."},
+      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh", description: "Tè verde e ribes, acqua di montagna argentata."},
+      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Lime e cocco, acque delle Isole Vergini tropicali."}
     ];
 
-    const WHATSAPP_NUMBER = "391234567890";
+    const WHATSAPP_NUMBER = "4915511780179";
     let list = JSON.parse(localStorage.getItem("list") || "[]");
     let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     let recentSearches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
@@ -2106,41 +1572,16 @@
     let currentModalProduct = null;
     const ITEMS_PER_PAGE = 24;
 
-    // Delegazione eventi per i filtri
-    document.getElementById("filters").addEventListener("click", function(e) {
-      const btn = e.target.closest(".filter");
-      if (btn) {
-        const brand = btn.getAttribute("data-brand");
-        setFilter(brand);
-      }
-    });
-
-    // Dark Mode
-    const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
-    const savedTheme = localStorage.getItem("theme");
-
-    function setThemeIcon(isDark) {
-      if (isDark) {
-        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-      } else {
-        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
-      }
+    // Inizializza filtri marche scorrevoli
+    function initBrandFilters() {
+      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
+      const container = document.getElementById("filtersContainer");
+      
+      container.innerHTML = brands.map(b => 
+        `<button class="filter ${b === activeFilter ? 'active' : ''}" onclick="setFilter('${b.replace(/'/g, "\\'")}')">${b}</button>`
+      ).join("");
     }
 
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-      setThemeIcon(true);
-    }
-
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      const isDark = document.body.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-      setThemeIcon(isDark);
-    });
-
-    // Preferiti
     function toggleFavorite(id, event) {
       if (event) event.stopPropagation();
       const index = favorites.indexOf(id);
@@ -2170,7 +1611,6 @@
       showToast("Visualizzando i tuoi preferiti ❤️");
     }
 
-    // Search avanzata
     function handleSearch() {
       const search = document.getElementById("search").value.toLowerCase().trim();
       const suggestionsDiv = document.getElementById("searchSuggestions");
@@ -2190,7 +1630,7 @@
         if (suggestions.length > 0 || recentSearches.length > 0) {
           let html = '';
           if (recentSearches.length > 0 && suggestions.length === 0) {
-            html += '<div style="padding: 10px 18px; font-size: 0.8rem; color: var(--muted); font-weight: 700;">Ricerche recenti</div>';
+            html += '<div style="padding: 10px 16px; font-size: 0.75rem; color: var(--muted); font-weight: 700;">Ricerche recenti</div>';
             recentSearches.forEach(term => {
               html += `<div class="suggestion-item recent" onclick="selectSuggestion('${term}')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -2229,7 +1669,6 @@
       }
     });
 
-    // Filtro olfattivo
     function setOlfactoryFilter(family) {
       activeOlfactory = family;
       currentPage = 1;
@@ -2261,6 +1700,7 @@
     function setFilter(brand) {
       activeFilter = brand;
       currentPage = 1;
+      initBrandFilters();
       render();
     }
 
@@ -2296,12 +1736,7 @@
       document.getElementById("productsCount").textContent =
         `Visualizzati ${paginated.length} di ${filtered.length} prodotti`;
 
-      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
-      document.getElementById("filters").innerHTML = brands.map(b =>
-        `<button class="filter ${b === activeFilter ? 'active' : ''}" data-brand="${b}">${b}</button>`
-      ).join("");
-
-      document.getElementById("filterAll").classList.toggle("active", activeFilter === "Tutti");
+      initBrandFilters();
 
       document.getElementById("grid").innerHTML = paginated.length ? paginated.map((p, idx) => {
         const qty = getQuantity(p.id);
@@ -2310,7 +1745,7 @@
         const genderLabels = { male: "Uomo", female: "Donna", unisex: "Unisex" };
 
         return `
-        <div class="card ${isSelected ? 'selected' : ''} scroll-hidden" data-id="${p.id}" style="transition-delay: ${idx * 30}ms">
+        <div class="card ${isSelected ? 'selected' : ''} scroll-hidden" data-id="${p.id}" style="transition-delay: ${idx * 25}ms">
           <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(${p.id}, event)" aria-label="Aggiungi ai preferiti">
             <svg viewBox="0 0 24 24" fill="${isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -2334,11 +1769,11 @@
             </div>
           ` : `
             <button class="add" onclick="addToCard(${p.id}, this)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
-              Aggiungi alla lista
+              Aggiungi
             </button>
           `}
         </div>
@@ -2360,7 +1795,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
       cards.forEach(card => observer.observe(card));
     }
 
@@ -2369,23 +1804,16 @@
         document.getElementById("pagination").innerHTML = "";
         return;
       }
-      let html = `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prec</button>`;
-      const maxVisible = 5;
+      let html = `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>←</button>`;
+      const maxVisible = 3;
       let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
       let endPage = Math.min(totalPages, startPage + maxVisible - 1);
       if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
-      if (startPage > 1) {
-        html += `<button class="page-btn" onclick="changePage(1)">1</button>`;
-        if (startPage > 2) html += `<span class="page-info">...</span>`;
-      }
       for (let i = startPage; i <= endPage; i++) {
         html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
       }
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) html += `<span class="page-info">...</span>`;
-        html += `<button class="page-btn" onclick="changePage(${totalPages})">${totalPages}</button>`;
-      }
-      html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Succ →</button>`;
+      html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>→</button>`;
+      html += `<span class="page-info">${currentPage}/${totalPages}</span>`;
       document.getElementById("pagination").innerHTML = html;
     }
 
@@ -2401,7 +1829,7 @@
       const container = document.getElementById("toastContainer");
       const toast = document.createElement("div");
       toast.className = "toast";
-      toast.innerHTML = `<div class="toast-icon">✓</div><div>${message}</div>`;
+      toast.innerHTML = `<span>✓</span><span>${message}</span>`;
       container.appendChild(toast);
       setTimeout(() => {
         toast.classList.add("hiding");
@@ -2421,7 +1849,7 @@
       };
       document.getElementById("modalBrand").textContent = product.brand;
       document.getElementById("modalName").textContent = product.name;
-      document.getElementById("modalDescription").textContent = `Fragranza ${product.olfactory} di alta qualità, perfetta per ogni occasione.`;
+      document.getElementById("modalDescription").textContent = product.description;
       document.getElementById("modalDetails").innerHTML = `
         <span class="modal-detail">📦 ${product.size}</span>
         <span class="modal-detail gender-badge ${product.gender}">${genderLabels[product.gender]}</span>
@@ -2458,10 +1886,9 @@
       list.push(id);
       localStorage.setItem("list", JSON.stringify(list));
       const card = btn.closest('.card');
-      card.classList.add('added');
-      setTimeout(() => card.classList.remove('added'), 600);
+      card.classList.add('selected');
       const product = PRODUCTS.find(p => p.id === id);
-      showToast(`${product.name} aggiunto alla lista!`);
+      showToast(`${product.name} aggiunto!`);
       updateCount();
       render();
     }
@@ -2471,7 +1898,7 @@
       const newQty = currentQty + change;
       if (newQty <= 0) {
         list = list.filter(itemId => itemId !== id);
-        showToast("Prodotto rimosso dalla lista");
+        showToast("Prodotto rimosso");
       } else {
         if (change > 0) list.push(id);
         else {
@@ -2512,7 +1939,7 @@
           </div>
           <button class="remove" onclick="removeFromList(${i.index})" aria-label="Rimuovi">×</button>
         </div>
-      `).join("") : '<div class="empty" style="text-align: center; padding: 48px 12px; color: var(--muted);">La tua lista è vuota</div>';
+      `).join("") : '<div class="empty" style="text-align: center; padding: 40px 12px; color: var(--muted); font-size: 0.9rem;">La tua lista è vuota</div>';
     }
 
     function sendWhatsApp(e) {
@@ -2544,7 +1971,9 @@
       document.getElementById("search").focus();
     }
 
+    // Inizializzazione
     updateFavoritesCount();
+    initBrandFilters();
     render();
   </script>
 </body>
