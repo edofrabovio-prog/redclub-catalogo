@@ -15,6 +15,7 @@
       --paper: #fffdfa;
       --line: #e7dfd4;
       --muted: #726a62;
+      
       --gold: #d4af37;
       --shadow-sm: 0 2px 8px rgba(194, 43, 38, 0.08);
       --shadow-md: 0 8px 24px rgba(194, 43, 38, 0.12);
@@ -54,154 +55,129 @@ body::before {
   opacity: 0.08;
 }
 
-/* Rettangolo sfocato 1 - Centro sinistra */
-body::after {
-  content: '';
+/* Rettangolo sfocato 1 - Angolo alto sinistra con dissolvenza */
+.bg-blur-1 {
   position: fixed;
-  top: 40%;
-  left: -10%;
-  width: 500px;
+  top: -100px;
+  left: -100px;
+  width: 400px;
   height: 500px;
-  background: linear-gradient(135deg, rgba(194, 43, 38, 0.15) 0%, rgba(139, 31, 27, 0.1) 100%);
+  background: linear-gradient(180deg, rgba(194, 43, 38, 0.25) 0%, rgba(194, 43, 38, 0.1) 40%, rgba(194, 43, 38, 0) 100%);
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(60px);
   z-index: -1;
   pointer-events: none;
 }
 
-/* Elementi decorativi sfocati aggiuntivi */
-.bg-blur-1 {
+/* Rettangolo sfocato 2 - Angolo alto destra con dissolvenza */
+.bg-blur-2 {
   position: fixed;
-  top: 60%;
-  right: -15%;
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(184, 148, 31, 0.08) 100%);
+  top: -120px;
+  right: -120px;
+  width: 450px;
+  height: 550px;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 40%, rgba(212, 175, 55, 0) 100%);
   border-radius: 50%;
   filter: blur(70px);
   z-index: -1;
   pointer-events: none;
 }
 
-.bg-blur-2 {
+/* Rettangolo sfocato 3 - Angolo basso sinistra con dissolvenza */
+.bg-blur-3 {
   position: fixed;
-  bottom: 10%;
-  left: 5%;
-  width: 350px;
-  height: 350px;
-  background: linear-gradient(135deg, rgba(194, 43, 38, 0.1) 0%, rgba(139, 31, 27, 0.05) 100%);
+  bottom: 50px;
+  left: -120px;
+  width: 450px;
+  height: 500px;
+  background: linear-gradient(0deg, rgba(194, 43, 38, 0.2) 0%, rgba(139, 31, 27, 0.1) 40%, rgba(194, 43, 38, 0) 100%);
   border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
-  filter: blur(60px);
+  filter: blur(80px);
   z-index: -1;
   pointer-events: none;
 }
 
-.bg-blur-3 {
+/* Rettangolo sfocato 4 - Centro destra con dissolvenza */
+.bg-blur-4 {
   position: fixed;
-  bottom: 20%;
-  right: 0%;
-  width: 450px;
-  height: 450px;
-  background: linear-gradient(135deg, rgba(232, 78, 74, 0.08) 0%, rgba(194, 43, 38, 0.05) 100%);
+  top: 40%;
+  right: -120px;
+  width: 400px;
+  height: 500px;
+  background: linear-gradient(180deg, rgba(232, 78, 74, 0.15) 0%, rgba(194, 43, 38, 0.08) 40%, rgba(194, 43, 38, 0) 100%);
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   filter: blur(75px);
   z-index: -1;
   pointer-events: none;
 }
 
-.bg-blur-4 {
-  position: fixed;
-  top: 70%;
-  left: 20%;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, rgba(139, 31, 27, 0.12) 0%, rgba(194, 43, 38, 0.08) 100%);
-  border-radius: 50%;
-  filter: blur(65px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Desktop - aggiustamenti */
+/* Desktop - dimensioni maggiori */
 @media (min-width: 769px) {
-  body::after {
-    left: -5%;
-    width: 600px;
-    height: 600px;
-    filter: blur(90px);
-  }
-  
   .bg-blur-1 {
-    right: -10%;
+    top: -150px;
+    left: -150px;
     width: 500px;
-    height: 500px;
+    height: 600px;
     filter: blur(80px);
   }
   
   .bg-blur-2 {
-    bottom: 15%;
-    left: 8%;
-    width: 400px;
+    top: -150px;
+    right: -150px;
+    width: 550px;
+    height: 650px;
+    filter: blur(90px);
+  }
+  
+  .bg-blur-3 {
+    bottom: 80px;
+    left: -180px;
+    width: 550px;
+    height: 600px;
+    filter: blur(100px);
+  }
+  
+  .bg-blur-4 {
+    top: 35%;
+    right: -180px;
+    width: 500px;
+    height: 600px;
+    filter: blur(90px);
+  }
+}
+
+/* Mobile - dimensioni ridotte */
+@media (max-width: 768px) {
+  .bg-blur-1 {
+    top: -80px;
+    left: -80px;
+    width: 300px;
+    height: 400px;
+    filter: blur(50px);
+  }
+  
+  .bg-blur-2 {
+    top: -100px;
+    right: -100px;
+    width: 350px;
+    height: 450px;
+    filter: blur(60px);
+  }
+  
+  .bg-blur-3 {
+    bottom: 30px;
+    left: -100px;
+    width: 350px;
     height: 400px;
     filter: blur(70px);
   }
   
-  .bg-blur-3 {
-    bottom: 25%;
-    right: 5%;
-    width: 550px;
-    height: 550px;
-    filter: blur(85px);
-  }
-  
   .bg-blur-4 {
-    top: 65%;
-    left: 25%;
-    width: 350px;
-    height: 350px;
-    filter: blur(75px);
-  }
-}
-
-/* Mobile - ottimizzazioni */
-@media (max-width: 768px) {
-  body::after {
-    top: 50%;
-    width: 300px;
-    height: 300px;
-    filter: blur(60px);
-  }
-  
-  .bg-blur-1 {
-    top: 65%;
-    right: -20%;
-    width: 280px;
-    height: 280px;
-    filter: blur(55px);
-  }
-  
-  .bg-blur-2 {
-    bottom: 5%;
-    left: -5%;
-    width: 250px;
-    height: 250px;
-    filter: blur(50px);
-  }
-  
-  .bg-blur-3 {
-    bottom: 15%;
-    right: -10%;
+    top: 45%;
+    right: -100px;
     width: 320px;
-    height: 320px;
-    filter: blur(60px);
-  }
-  
-  .bg-blur-4 {
-    top: 75%;
-    left: 15%;
-    width: 220px;
-    height: 220px;
-    filter: blur(50px);
+    height: 420px;
+    filter: blur(65px);
   }
 }
     button { font: inherit; cursor: pointer; }
