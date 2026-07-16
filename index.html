@@ -1189,8 +1189,79 @@
         flex: 1;
       }
 
-      .filters-wrapper {
-        overflow-x: visible;
+     /* Filtri marche - scrolling su tutti i dispositivi */
+.filters-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-red) transparent;
+  padding: 8px 0;
+}
+
+.filters-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.filters-wrapper::-webkit-scrollbar-thumb {
+  background: var(--primary-red);
+  border-radius: 3px;
+}
+
+.filters-container {
+  display: flex;
+  gap: 8px;
+  padding: 0 4px;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.filter-all,
+.filter {
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: var(--paper);
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-all:active,
+.filter:active {
+  transform: scale(0.96);
+}
+
+.filter-all.active,
+.filter.active {
+  color: white;
+  background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+  border-color: var(--primary-red);
+  box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
+}
+
+/* Desktop optimizations */
+@media (min-width: 769px) {
+  .filters-wrapper {
+    overflow-x: auto;
+  }
+  
+  .toolbar {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .search-wrapper {
+    width: 100%;
+    flex: none;
+  }
+}
       }
 
       .filters-container {
@@ -1301,62 +1372,58 @@
         <div class="search-suggestions" id="searchSuggestions"></div>
       </div>
 
-      <div class="filters-wrapper">
-        <div class="filters-container" id="filtersContainer">
-          <button class="filter-all active" id="filterAll" onclick="setFilter('Tutti')">Tutti i Marchi</button>
-        </div>
-      </div>
-    </div>
+      <!-- Filtri marche con emoji -->
+<div class="filters-wrapper">
+  <div class="filters-container" id="filtersContainer">
+    <button class="filter-all active" id="filterAll" onclick="setFilter('Tutti')">🏪 Tutti i Marchi</button>
+  </div>
+</div>
 
-    <div class="olfactory-filters">
-      <button class="olfactory-filter active" data-olfactory="all" onclick="setOlfactoryFilter('all')">
-        <span class="olfactory-icon"></span>
-        Tutti
-      </button>
-      <button class="olfactory-filter" data-olfactory="woody" onclick="setOlfactoryFilter('woody')">
-        <span class="olfactory-icon"></span>
-        Legnosi
-      </button>
-      <button class="olfactory-filter" data-olfactory="floral" onclick="setOlfactoryFilter('floral')">
-        <span class="olfactory-icon">🌹</span>
-        Floreali
-      </button>
-      <button class="olfactory-filter" data-olfactory="citrus" onclick="setOlfactoryFilter('citrus')">
-        <span class="olfactory-icon">🍊</span>
-        Agrumati
-      </button>
-      <button class="olfactory-filter" data-olfactory="oriental" onclick="setOlfactoryFilter('oriental')">
-        <span class="olfactory-icon">🌶️</span>
-        Orientali
-      </button>
-      <button class="olfactory-filter" data-olfactory="fresh" onclick="setOlfactoryFilter('fresh')">
-        <span class="olfactory-icon"></span>
-        Freschi
-      </button>
-    </div>
+<!-- Filtri olfattivi con emoji -->
+<div class="olfactory-filters">
+  <button class="olfactory-filter active" data-olfactory="all" onclick="setOlfactoryFilter('all')">
+    🔍 Tutti
+  </button>
+  <button class="olfactory-filter" data-olfactory="woody" onclick="setOlfactoryFilter('woody')">
+    🌲 Legnosi
+  </button>
+  <button class="olfactory-filter" data-olfactory="floral" onclick="setOlfactoryFilter('floral')">
+     Floreali
+  </button>
+  <button class="olfactory-filter" data-olfactory="citrus" onclick="setOlfactoryFilter('citrus')">
+    🍊 Agrumati
+  </button>
+  <button class="olfactory-filter" data-olfactory="oriental" onclick="setOlfactoryFilter('oriental')">
+    ️ Orientali
+  </button>
+  <button class="olfactory-filter" data-olfactory="fresh" onclick="setOlfactoryFilter('fresh')">
+    💧 Freschi
+  </button>
+</div>
 
-    <div class="controls-bar">
-      <div class="control-group">
-        <span class="control-label">Ordina per:</span>
-        <select class="select-input" id="sortSelect" onchange="handleSort()">
-          <option value="default">Posizione predefinita</option>
-          <option value="name-asc">Nome (A-Z)</option>
-          <option value="name-desc">Nome (Z-A)</option>
-          <option value="brand-asc">Marca (A-Z)</option>
-          <option value="brand-desc">Marca (Z-A)</option>
-        </select>
-      </div>
+<!-- Filtri genere con emoji -->
+<div class="controls-bar">
+  <div class="control-group">
+    <span class="control-label">Ordina per:</span>
+    <select class="select-input" id="sortSelect" onchange="handleSort()">
+      <option value="default"> Posizione predefinita</option>
+      <option value="name-asc">🔤 Nome (A-Z)</option>
+      <option value="name-desc"> Nome (Z-A)</option>
+      <option value="brand-asc">🏷️ Marca (A-Z)</option>
+      <option value="brand-desc">🏷️ Marca (Z-A)</option>
+    </select>
+  </div>
 
-      <div class="control-group">
-        <span class="control-label">Genere:</span>
-        <div class="gender-filters">
-          <button class="gender-btn active" data-gender="all" onclick="setGenderFilter('all')">Tutti</button>
-          <button class="gender-btn" data-gender="male" onclick="setGenderFilter('male')">Uomo</button>
-          <button class="gender-btn" data-gender="female" onclick="setGenderFilter('female')">Donna</button>
-          <button class="gender-btn" data-gender="unisex" onclick="setGenderFilter('unisex')">Unisex</button>
-        </div>
-      </div>
+  <div class="control-group">
+    <span class="control-label">Genere:</span>
+    <div class="gender-filters">
+      <button class="gender-btn active" data-gender="all" onclick="setGenderFilter('all')">👥 Tutti</button>
+      <button class="gender-btn" data-gender="male" onclick="setGenderFilter('male')"> Uomo</button>
+      <button class="gender-btn" data-gender="female" onclick="setGenderFilter('female')">👩 Donna</button>
+      <button class="gender-btn" data-gender="unisex" onclick="setGenderFilter('unisex')">👤 Unisex</button>
     </div>
+  </div>
+</div>
 
     <div class="products-count" id="productsCount">Caricamento prodotti...</div>
 
