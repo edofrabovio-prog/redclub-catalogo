@@ -2,35 +2,26 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
   <meta name="theme-color" content="#0a0a0a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
   <meta name="description" content="RedClub - Profumi di lusso selezionati. Scopri la tua fragranza ideale." />
   <title>RedClub | Luxury Fragrances</title>
   
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8LGBKGX82"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-E8LGBKGX82');
-    gtag('event', 'add_to_list', {
-  product_name: 'Lattafa Khamrah'
-});
-    gtag('event', 'view_list');
-    gtag('event', 'whatsapp_click');
-    gtag('event', 'remove_from_list');
-    gtag('event', 'search', {
-  search_term: 'Sauvage'
-});
+    gtag('config', 'GA_MEASUREMENT_ID');
   </script>
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -57,10 +48,21 @@
       --space-xl: 4rem;
       --transition-fast: 0.2s ease;
       --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
 
     body {
       font-family: var(--font-sans);
@@ -68,6 +70,16 @@
       color: var(--white-pure);
       overflow-x: hidden;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      touch-action: manipulation;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: 16px; /* Previene zoom iOS su input */
     }
 
     .bg-animation {
@@ -76,6 +88,7 @@
       width: 100%; height: 100%;
       z-index: -1;
       background: linear-gradient(135deg, var(--black-deep) 0%, var(--black-soft) 100%);
+      pointer-events: none;
     }
 
     .bg-particle {
@@ -95,10 +108,12 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(10, 10, 10, 0.8);
+      background: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
       transition: var(--transition-base);
+      padding-top: var(--safe-top);
     }
 
     .navbar.scrolled {
@@ -113,14 +128,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: var(--space-sm);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: var(--space-sm);
+      gap: var(--space-xs);
       font-family: var(--font-serif);
-      font-size: 1.8rem;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
       font-weight: 700;
       background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       -webkit-background-clip: text;
@@ -129,22 +145,25 @@
     }
 
     .brand-logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
+      width: clamp(36px, 8vw, 50px);
+      height: clamp(36px, 8vw, 50px);
+      border-radius: 10px;
       object-fit: cover;
       border: 2px solid var(--gold-rose);
+      flex-shrink: 0;
     }
 
     .nav-actions {
       display: flex;
-      gap: var(--space-sm);
+      gap: 8px;
       align-items: center;
     }
 
     .nav-btn {
-      width: 45px;
-      height: 45px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 50%;
       border: 1px solid var(--glass-border);
       background: var(--glass-bg);
@@ -156,33 +175,33 @@
       transition: var(--transition-fast);
       position: relative;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 18px;
     }
 
-    .nav-btn:hover {
-      background: rgba(212, 175, 55, 0.2);
-      border-color: var(--gold-rose);
-      transform: translateY(-2px);
+    .nav-btn:active {
+      transform: scale(0.92);
     }
 
     .nav-btn .badge {
       position: absolute;
-      top: -2px; right: -2px;
+      top: -4px; right: -4px;
       background: linear-gradient(135deg, var(--red-ruby) 0%, var(--red-dark) 100%);
       color: white;
-      font-size: 0.7rem;
+      font-size: 10px;
       font-weight: 700;
       padding: 2px 6px;
       border-radius: 10px;
-      min-width: 20px;
+      min-width: 18px;
       text-align: center;
     }
 
     .hero {
-      margin-top: 80px;
-      padding: var(--space-xl) var(--space-md);
+      margin-top: calc(70px + var(--safe-top));
+      padding: var(--space-lg) var(--space-md);
       position: relative;
       overflow: hidden;
-      min-height: 70vh;
+      min-height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -201,20 +220,20 @@
       border: 1px solid var(--gold-rose);
       border-radius: 30px;
       color: var(--gold-rose);
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
       animation: fadeInUp 1s ease;
     }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: clamp(1.8rem, 7vw, 5rem);
       font-weight: 700;
       line-height: 1.1;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
       background: linear-gradient(135deg, var(--white-pure) 0%, var(--gold-light) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -223,31 +242,39 @@
     }
 
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: clamp(0.9rem, 3vw, 1.2rem);
       color: var(--gray-medium);
-      margin-bottom: var(--space-lg);
+      margin-bottom: var(--space-md);
       animation: fadeInUp 1s ease 0.4s both;
+      padding: 0 var(--space-xs);
     }
 
     .hero-cta {
       display: inline-flex;
-      gap: var(--space-sm);
+      gap: var(--space-xs);
       animation: fadeInUp 1s ease 0.6s both;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .btn {
-      padding: var(--space-sm) var(--space-lg);
+      padding: 12px 24px;
+      min-height: 44px;
       border-radius: 50px;
       font-weight: 600;
       cursor: pointer;
       transition: var(--transition-fast);
       border: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: var(--space-xs);
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
     }
 
     .btn-primary {
@@ -256,20 +283,10 @@
       box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
-    }
-
     .btn-secondary {
       background: transparent;
       color: var(--white-pure);
       border: 2px solid var(--glass-border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold-rose);
-      background: rgba(212, 175, 55, 0.1);
     }
 
     @keyframes fadeInUp {
@@ -277,9 +294,9 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SEZIONE PROMOZIONI - NUOVA */
+    /* PROMOZIONI */
     .promotions-section {
-      padding: var(--space-lg) var(--space-md);
+      padding: var(--space-md);
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -287,51 +304,30 @@
     .promotion-card {
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(194, 43, 38, 0.15) 100%);
       border: 2px solid var(--gold-rose);
-      border-radius: 24px;
-      padding: var(--space-lg);
+      border-radius: 20px;
+      padding: var(--space-md);
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
-      gap: var(--space-lg);
-      transition: var(--transition-base);
-    }
-
-    .promotion-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
-    }
-
-    .promotion-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
-      border-radius: 50%;
+      gap: var(--space-md);
     }
 
     .promotion-icon {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
       background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
+      font-size: 2.5rem;
       flex-shrink: 0;
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
-      position: relative;
-      z-index: 2;
     }
 
     .promotion-content {
       flex: 1;
-      position: relative;
-      z-index: 2;
     }
 
     .promotion-badge {
@@ -340,24 +336,19 @@
       background: var(--red-ruby);
       color: white;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: var(--space-xs);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
     }
 
     .promotion-title {
       font-family: var(--font-serif);
-      font-size: 1.8rem;
+      font-size: clamp(1.1rem, 4vw, 1.8rem);
       margin-bottom: var(--space-xs);
       color: var(--white-pure);
+      line-height: 1.2;
     }
 
     .promotion-title span {
@@ -367,25 +358,23 @@
 
     .promotion-description {
       color: var(--gray-medium);
-      font-size: 1rem;
-      margin-bottom: var(--space-sm);
+      font-size: 0.9rem;
+      margin-bottom: var(--space-xs);
     }
 
     .promotion-conditions {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: var(--gray-medium);
       font-style: italic;
     }
 
     .promotion-cta {
       flex-shrink: 0;
-      position: relative;
-      z-index: 2;
     }
 
-    /* Quiz Section */
+    /* QUIZ */
     .quiz-section {
-      padding: var(--space-xl) var(--space-md);
+      padding: var(--space-lg) var(--space-md);
       background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.05) 100%);
     }
 
@@ -394,21 +383,21 @@
       margin: 0 auto;
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
-      border-radius: 30px;
-      padding: var(--space-lg);
-      box-shadow: var(--glass-shadow);
+      border-radius: 24px;
+      padding: var(--space-md);
     }
 
     .quiz-header {
       text-align: center;
-      margin-bottom: var(--space-lg);
+      margin-bottom: var(--space-md);
     }
 
     .quiz-title {
       font-family: var(--font-serif);
-      font-size: 2rem;
-      margin-bottom: var(--space-sm);
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      margin-bottom: var(--space-xs);
       color: var(--gold-rose);
     }
 
@@ -428,32 +417,37 @@
     }
 
     .quiz-question {
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 4vw, 1.3rem);
       margin-bottom: var(--space-md);
       text-align: center;
       color: var(--white-pure);
+      line-height: 1.3;
     }
 
     .quiz-options {
       display: grid;
-      gap: var(--space-sm);
+      gap: var(--space-xs);
     }
 
     .quiz-option {
-      padding: var(--space-md);
+      padding: var(--space-sm);
+      min-height: 50px;
       background: rgba(255, 255, 255, 0.05);
       border: 2px solid var(--glass-border);
-      border-radius: 15px;
+      border-radius: 12px;
       cursor: pointer;
       transition: var(--transition-fast);
       text-align: center;
       color: var(--white-pure);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.95rem;
     }
 
-    .quiz-option:hover {
-      border-color: var(--gold-rose);
-      background: rgba(212, 175, 55, 0.1);
-      transform: translateX(10px);
+    .quiz-option:active {
+      transform: scale(0.98);
     }
 
     .quiz-option.selected {
@@ -461,9 +455,9 @@
       background: rgba(212, 175, 55, 0.2);
     }
 
-    /* Filters Section - NON STICKY */
+    /* FILTRI - NON STICKY */
     .filters-section {
-      padding: var(--space-lg) var(--space-md);
+      padding: var(--space-md);
       background: rgba(10, 10, 10, 0.9);
       border-bottom: 1px solid var(--glass-border);
     }
@@ -480,15 +474,15 @@
 
     .search-input {
       width: 100%;
-      padding: var(--space-md) var(--space-lg);
-      padding-left: 50px;
+      padding: 14px 16px 14px 48px;
+      min-height: 48px;
       background: var(--glass-bg);
       border: 2px solid var(--glass-border);
       border-radius: 50px;
       color: var(--white-pure);
-      font-size: 1rem;
       transition: var(--transition-fast);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .search-input::placeholder {
@@ -503,15 +497,16 @@
 
     .search-icon {
       position: absolute;
-      left: 20px;
+      left: 18px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--gray-medium);
+      font-size: 18px;
     }
 
     .filters-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: 1fr;
       gap: var(--space-md);
     }
 
@@ -522,7 +517,7 @@
     }
 
     .filter-label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--gray-medium);
       font-weight: 600;
       text-transform: uppercase;
@@ -531,31 +526,35 @@
 
     .filter-options {
       display: flex;
-      gap: var(--space-xs);
+      gap: 8px;
       flex-wrap: wrap;
     }
 
     .filter-chip {
-      padding: var(--space-xs) var(--space-sm);
+      padding: 10px 16px;
+      min-height: 40px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
+      border-radius: 50px;
       font-size: 0.85rem;
       cursor: pointer;
       transition: var(--transition-fast);
       color: var(--white-pure);
+      white-space: nowrap;
     }
 
-    .filter-chip:hover,
+    .filter-chip:active {
+      transform: scale(0.95);
+    }
+
     .filter-chip.active {
       background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       border-color: transparent;
-      color: var(--white-pure);
     }
 
-    /* Products Grid */
+    /* PRODOTTI */
     .products-section {
-      padding: var(--space-xl) var(--space-md);
+      padding: var(--space-lg) var(--space-md);
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -564,28 +563,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: var(--space-lg);
+      margin-bottom: var(--space-md);
       flex-wrap: wrap;
-      gap: var(--space-sm);
+      gap: var(--space-xs);
     }
 
     .section-title {
       font-family: var(--font-serif);
-      font-size: 2.5rem;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
       background: linear-gradient(135deg, var(--white-pure) 0%, var(--gold-light) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .products-count {
       color: var(--gray-medium);
-      font-size: 0.95rem;
+      font-size: 0.85rem;
     }
 
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: var(--space-lg);
+      gap: var(--space-md);
     }
 
     .product-card {
@@ -595,18 +595,24 @@
       overflow: hidden;
       transition: var(--transition-base);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       position: relative;
+      cursor: pointer;
+    }
+
+    .product-card:active {
+      transform: scale(0.98);
     }
 
     .product-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-5px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       border-color: var(--gold-rose);
     }
 
     .product-image-wrapper {
       position: relative;
-      height: 280px;
+      height: 240px;
       overflow: hidden;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(194, 43, 38, 0.1) 100%);
     }
@@ -615,21 +621,21 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: var(--transition-slow);
+      transition: var(--transition-base);
     }
 
     .product-card:hover .product-image {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
 
     .product-badge {
       position: absolute;
-      top: var(--space-sm);
-      left: var(--space-sm);
-      padding: var(--space-xs) var(--space-sm);
+      top: var(--space-xs);
+      left: var(--space-xs);
+      padding: 6px 12px;
       background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -638,12 +644,14 @@
 
     .product-favorite {
       position: absolute;
-      top: var(--space-sm);
-      right: var(--space-sm);
+      top: var(--space-xs);
+      right: var(--space-xs);
       width: 40px;
       height: 40px;
+      min-width: 40px;
+      min-height: 40px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border: none;
       display: flex;
       align-items: center;
@@ -651,37 +659,53 @@
       cursor: pointer;
       transition: var(--transition-fast);
       color: var(--gray-medium);
+      font-size: 18px;
+      z-index: 5;
     }
 
-    .product-favorite:hover,
+    .product-favorite:active {
+      transform: scale(0.9);
+    }
+
     .product-favorite.active {
       color: var(--red-ruby);
-      transform: scale(1.1);
     }
 
     .product-info {
-      padding: var(--space-md);
+      padding: var(--space-sm);
     }
 
     .product-brand {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: var(--gold-rose);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: var(--space-xs);
+      margin-bottom: 4px;
     }
 
     .product-name {
       font-family: var(--font-serif);
-      font-size: 1.3rem;
-      margin-bottom: var(--space-xs);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
       color: var(--white-pure);
+      line-height: 1.2;
+    }
+
+    .product-description {
+      font-size: 0.8rem;
+      color: var(--gray-medium);
+      line-height: 1.4;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .product-notes {
       display: flex;
-      gap: var(--space-xs);
+      gap: 6px;
       margin-bottom: var(--space-sm);
       flex-wrap: wrap;
     }
@@ -690,7 +714,7 @@
       padding: 4px 10px;
       background: rgba(212, 175, 55, 0.15);
       border-radius: 15px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--gold-light);
     }
 
@@ -698,18 +722,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: var(--space-sm);
+      padding-top: var(--space-xs);
       border-top: 1px solid var(--glass-border);
+      gap: var(--space-xs);
     }
 
     .product-price {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--gold-rose);
     }
 
     .product-add {
-      padding: var(--space-xs) var(--space-md);
+      padding: 10px 16px;
+      min-height: 40px;
       background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       border: none;
       border-radius: 20px;
@@ -717,24 +743,28 @@
       font-weight: 600;
       cursor: pointer;
       transition: var(--transition-fast);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .product-add:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    .product-add:active {
+      transform: scale(0.95);
     }
 
-    /* Product Modal */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.9);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: 2000;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--space-md);
+      padding: var(--space-sm);
       opacity: 0;
       pointer-events: none;
       transition: var(--transition-base);
@@ -748,7 +778,7 @@
     .modal-content {
       background: linear-gradient(135deg, var(--black-soft) 0%, var(--black-deep) 100%);
       border: 1px solid var(--glass-border);
-      border-radius: 30px;
+      border-radius: 24px;
       max-width: 1000px;
       width: 100%;
       max-height: 90vh;
@@ -756,6 +786,7 @@
       position: relative;
       transform: scale(0.9);
       transition: var(--transition-base);
+      -webkit-overflow-scrolling: touch;
     }
 
     .modal-overlay.active .modal-content {
@@ -764,10 +795,12 @@
 
     .modal-close {
       position: absolute;
-      top: var(--space-md);
-      right: var(--space-md);
-      width: 45px;
-      height: 45px;
+      top: var(--space-sm);
+      right: var(--space-sm);
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 50%;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
@@ -775,12 +808,13 @@
       font-size: 1.5rem;
       cursor: pointer;
       z-index: 10;
-      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .modal-close:hover {
+    .modal-close:active {
       background: var(--red-ruby);
-      transform: rotate(90deg);
     }
 
     .modal-body {
@@ -798,41 +832,43 @@
 
     .modal-info h2 {
       font-family: var(--font-serif);
-      font-size: 2.5rem;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
       margin-bottom: var(--space-sm);
       color: var(--white-pure);
+      line-height: 1.2;
     }
 
     .modal-brand {
       color: var(--gold-rose);
-      font-size: 1rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
     }
 
     .modal-description {
       color: var(--gray-medium);
-      line-height: 1.8;
-      margin-bottom: var(--space-lg);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+      font-size: 0.95rem;
     }
 
     .olfactory-pyramid {
-      margin: var(--space-lg) 0;
+      margin: var(--space-md) 0;
     }
 
     .pyramid-title {
       font-family: var(--font-serif);
-      font-size: 1.5rem;
-      margin-bottom: var(--space-md);
+      font-size: 1.3rem;
+      margin-bottom: var(--space-sm);
       color: var(--gold-rose);
     }
 
     .pyramid-level {
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
       padding: var(--space-sm);
       background: rgba(255, 255, 255, 0.03);
-      border-radius: 15px;
+      border-radius: 12px;
       border-left: 3px solid var(--gold-rose);
     }
 
@@ -840,6 +876,7 @@
       font-weight: 700;
       margin-bottom: var(--space-xs);
       color: var(--gold-light);
+      font-size: 0.9rem;
     }
 
     .pyramid-notes {
@@ -852,18 +889,19 @@
       padding: 6px 12px;
       background: rgba(212, 175, 55, 0.15);
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--white-pure);
     }
 
-    /* Cart Drawer */
+    /* CART DRAWER */
     .cart-drawer {
       position: fixed;
       top: 0;
-      right: -450px;
+      right: -100%;
       width: 100%;
       max-width: 450px;
       height: 100vh;
+      height: 100dvh;
       background: linear-gradient(180deg, var(--black-soft) 0%, var(--black-deep) 100%);
       border-left: 1px solid var(--glass-border);
       z-index: 3000;
@@ -871,6 +909,7 @@
       box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
+      padding-top: var(--safe-top);
     }
 
     .cart-drawer.active {
@@ -878,7 +917,7 @@
     }
 
     .cart-header {
-      padding: var(--space-lg);
+      padding: var(--space-md);
       border-bottom: 1px solid var(--glass-border);
       display: flex;
       justify-content: space-between;
@@ -887,137 +926,126 @@
 
     .cart-title {
       font-family: var(--font-serif);
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: var(--white-pure);
     }
 
     .cart-items {
       flex: 1;
       overflow-y: auto;
-      padding: var(--space-md);
+      padding: var(--space-sm);
+      -webkit-overflow-scrolling: touch;
     }
 
     .cart-item {
       display: flex;
-      gap: var(--space-md);
-      padding: var(--space-md);
+      gap: var(--space-sm);
+      padding: var(--space-sm);
       background: var(--glass-bg);
-      border-radius: 15px;
-      margin-bottom: var(--space-md);
+      border-radius: 12px;
+      margin-bottom: var(--space-sm);
       border: 1px solid var(--glass-border);
     }
 
     .cart-item-image {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
+      min-width: 70px;
       border-radius: 10px;
       object-fit: cover;
     }
 
     .cart-item-info {
       flex: 1;
+      min-width: 0;
     }
 
     .cart-item-name {
       font-weight: 700;
-      margin-bottom: var(--space-xs);
+      margin-bottom: 4px;
       color: var(--white-pure);
+      font-size: 0.9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .cart-item-price {
       color: var(--gold-rose);
       font-weight: 600;
+      font-size: 0.85rem;
     }
 
     .cart-footer {
-      padding: var(--space-lg);
+      padding: var(--space-md);
       border-top: 1px solid var(--glass-border);
       background: rgba(212, 175, 55, 0.05);
+      padding-bottom: calc(var(--space-md) + var(--safe-bottom));
     }
 
     .cart-total {
       display: flex;
       justify-content: space-between;
-      margin-bottom: var(--space-md);
-      font-size: 1.2rem;
+      margin-bottom: var(--space-sm);
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--white-pure);
     }
 
     .cart-checkout {
       width: 100%;
-      padding: var(--space-md);
+      padding: var(--space-sm);
+      min-height: 48px;
       background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       border: none;
-      border-radius: 15px;
+      border-radius: 12px;
       color: var(--white-pure);
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
-      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
     }
 
-    .cart-checkout:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    .cart-checkout:active {
+      transform: scale(0.98);
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero {
-        margin-top: 70px;
-        padding: var(--space-lg) var(--space-sm);
-      }
-
-      .hero-title {
-        font-size: 2rem;
-      }
-
-      .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: var(--space-md);
-      }
-
-      .modal-body {
-        grid-template-columns: 1fr;
-      }
-
-      .cart-drawer {
-        max-width: 100%;
-      }
-
-      .filters-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .promotion-card {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .promotion-icon {
-        width: 80px;
-        height: 80px;
-        font-size: 2.5rem;
-      }
-
-      .promotion-title {
-        font-size: 1.4rem;
-      }
-
-      .promotion-cta {
-        width: 100%;
-      }
-
-      .promotion-cta .btn {
-        width: 100%;
-        justify-content: center;
-      }
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: calc(30px + var(--safe-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: slideUp 0.3s ease;
+      font-size: 0.9rem;
+      max-width: 90%;
+      text-align: center;
     }
 
+    @keyframes slideUp {
+      from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateX(-50%) translateY(0); opacity: 1; }
+      to { transform: translateX(-50%) translateY(100px); opacity: 0; }
+    }
+
+    /* SCROLLBAR */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
     }
 
     ::-webkit-scrollbar-track {
@@ -1026,11 +1054,141 @@
 
     ::-webkit-scrollbar-thumb {
       background: var(--gold-rose);
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--red-ruby);
+    /* RESPONSIVE MOBILE */
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 12px 16px;
+      }
+
+      .hero {
+        margin-top: calc(60px + var(--safe-top));
+        padding: var(--space-md) 16px;
+        min-height: 50vh;
+      }
+
+      .hero-cta {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+      }
+
+      .promotions-section {
+        padding: var(--space-sm);
+      }
+
+      .promotion-card {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-sm);
+        gap: var(--space-sm);
+      }
+
+      .promotion-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+      }
+
+      .promotion-cta {
+        width: 100%;
+      }
+
+      .promotion-cta .btn {
+        width: 100%;
+      }
+
+      .quiz-section {
+        padding: var(--space-md) 16px;
+      }
+
+      .quiz-container {
+        padding: var(--space-sm);
+      }
+
+      .filters-section {
+        padding: var(--space-sm);
+      }
+
+      .products-section {
+        padding: var(--space-md) 16px;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-image-wrapper {
+        height: 180px;
+      }
+
+      .product-name {
+        font-size: 0.95rem;
+      }
+
+      .product-description {
+        font-size: 0.72rem;
+        -webkit-line-clamp: 2;
+      }
+
+      .product-notes {
+        gap: 4px;
+      }
+
+      .note-tag {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+      }
+
+      .product-add {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+      }
+
+      .modal-body {
+        grid-template-columns: 1fr;
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+
+      .modal-content {
+        max-height: 95vh;
+        max-height: 95dvh;
+      }
+
+      .cart-drawer {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image-wrapper {
+        height: 220px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .filters-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .promotion-card {
+        padding: var(--space-lg);
+      }
+
+      .promotion-title {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
@@ -1044,14 +1202,14 @@
         <span>RedClub</span>
       </div>
       <div class="nav-actions">
-        <button class="nav-btn" onclick="toggleQuiz()" title="Quiz Olfattivo">
+        <button class="nav-btn" onclick="toggleQuiz()" title="Quiz Olfattivo" aria-label="Quiz">
           <i class="fas fa-question-circle"></i>
         </button>
-        <button class="nav-btn" onclick="toggleFavorites()" title="Preferiti">
+        <button class="nav-btn" onclick="toggleFavorites()" title="Preferiti" aria-label="Preferiti">
           <i class="fas fa-heart"></i>
           <span class="badge" id="favoritesCount">0</span>
         </button>
-        <button class="nav-btn" onclick="toggleCart()" title="La tua Lista">
+        <button class="nav-btn" onclick="toggleCart()" title="La tua Lista" aria-label="Lista">
           <i class="fas fa-shopping-bag"></i>
           <span class="badge" id="cartCount">0</span>
         </button>
@@ -1077,12 +1235,11 @@
     </div>
   </section>
 
-  <!-- SEZIONE PROMOZIONI -->
   <section class="promotions-section">
     <div class="promotion-card">
       <div class="promotion-icon">🎁</div>
       <div class="promotion-content">
-        <span class="promotion-badge"> Nuova Offerta</span>
+        <span class="promotion-badge">🔥 Nuova Offerta</span>
         <h2 class="promotion-title"><span>10% di sconto</span> sul primo ordine</h2>
         <p class="promotion-description">
           Ordina più di 3 prodotti e ricevi subito il 10% di sconto sul tuo primo acquisto!
@@ -1104,7 +1261,7 @@
     <div class="quiz-container">
       <div class="quiz-header">
         <h2 class="quiz-title">Scopri il tuo profumo ideale</h2>
-        <p style="color: var(--gray-medium);">Rispondi a poche domande e ti consiglieremo le fragranze perfette per te</p>
+        <p style="color: var(--gray-medium); font-size: 0.9rem;">Rispondi a poche domande e ti consiglieremo le fragranze perfette per te</p>
       </div>
       <div class="quiz-progress">
         <div class="quiz-progress-bar" id="quizProgress"></div>
@@ -1113,12 +1270,11 @@
     </div>
   </section>
 
-  <!-- Filters Section - NON STICKY -->
   <section class="filters-section">
     <div class="filters-container">
       <div class="search-box">
         <i class="fas fa-search search-icon"></i>
-        <input type="text" class="search-input" id="searchInput" placeholder="Cerca profumi, marche, note olfattive..." oninput="handleSearch()">
+        <input type="text" class="search-input" id="searchInput" placeholder="Cerca profumi, marche, note olfattive..." oninput="handleSearch()" autocomplete="off">
       </div>
       <div class="filters-grid">
         <div class="filter-group">
@@ -1128,7 +1284,7 @@
             <button class="filter-chip" onclick="filterBy('olfactory', 'woody')">🌲 Legnosi</button>
             <button class="filter-chip" onclick="filterBy('olfactory', 'floral')">🌹 Floreali</button>
             <button class="filter-chip" onclick="filterBy('olfactory', 'citrus')">🍊 Agrumati</button>
-            <button class="filter-chip" onclick="filterBy('olfactory', 'oriental')">🌶️ Orientali</button>
+            <button class="filter-chip" onclick="filterBy('olfactory', 'oriental')">️ Orientali</button>
             <button class="filter-chip" onclick="filterBy('olfactory', 'fresh')">💧 Freschi</button>
           </div>
         </div>
@@ -1137,8 +1293,8 @@
           <div class="filter-options">
             <button class="filter-chip active" onclick="filterBy('gender', 'all')">Tutti</button>
             <button class="filter-chip" onclick="filterBy('gender', 'male')">👨 Uomo</button>
-            <button class="filter-chip" onclick="filterBy('gender', 'female')"> Donna</button>
-            <button class="filter-chip" onclick="filterBy('gender', 'unisex')">👤 Unisex</button>
+            <button class="filter-chip" onclick="filterBy('gender', 'female')">👩 Donna</button>
+            <button class="filter-chip" onclick="filterBy('gender', 'unisex')"> Unisex</button>
           </div>
         </div>
         <div class="filter-group">
@@ -1163,7 +1319,7 @@
 
   <div class="modal-overlay" id="productModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()">×</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="Chiudi">×</button>
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
@@ -1171,7 +1327,7 @@
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
       <h2 class="cart-title">La tua Lista</h2>
-      <button class="nav-btn" onclick="toggleCart()">
+      <button class="nav-btn" onclick="toggleCart()" aria-label="Chiudi carrello">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -1189,154 +1345,157 @@
   </div>
 
   <script>
+    // ============================================
+    // DATA - Tutti i prodotti con dati completi
+    // ============================================
     const PRODUCTS = [
-      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza selvaggia e virile.", notes: ["Bergamotto", "Pepe", "Ambroxan"], pyramid: {top: ["Bergamotto", "Pepe"], heart: ["Lavanda", "Patchouli"], base: ["Ambroxan", "Cedro"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Intensità magnetica e raffinata.", notes: ["Bergamotto", "Lavanda", "Ambroxan"], pyramid: {top: ["Bergamotto"], heart: ["Lavanda", "Spezie"], base: ["Ambroxan", "Legni"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
-      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Libertà assoluta in bottiglia.", notes: ["Bergamotto", "Pepe", "Ambroxan"], pyramid: {top: ["Bergamotto", "Pepe"], heart: ["Lavanda", "Patchouli"], base: ["Ambroxan", "Cedro"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Un bouquet solare di ylang-ylang, rosa e gelsomino.", notes: ["Ylang-Ylang", "Rosa", "Gelsomino"], pyramid: {top: ["Ylang-Ylang", "Rosa"], heart: ["Gelsomino", "Tuberosa"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
-      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "L'essenza assoluta del lusso floreale.", notes: ["Tuberosa", "Gelsomino", "Sandalwood"], pyramid: {top: ["Ylang-Ylang"], heart: ["Tuberosa", "Gelsomino"], base: ["Sandalwood", "Vaniglia"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
-      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Romanticismo parigino in ogni spruzzo.", notes: ["Rosa", "Peonia", "Iris"], pyramid: {top: ["Mandarino"], heart: ["Rosa", "Peonia"], base: ["Patchouli", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Profumo-couture sofisticato e moderno.", notes: ["Iris", "Rosa", "Patchouli"], pyramid: {top: ["Mandarino"], heart: ["Rosa", "Iris"], base: ["Patchouli", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Tuberosa intensa e frutti rossi.", notes: ["Tuberosa", "Frutti Rossi", "Vaniglia"], pyramid: {top: ["Coriandolo", "Anice"], heart: ["Tuberosa", "Frutti Rossi"], base: ["Vaniglia", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza glaciale con vaniglia del Madagascar.", notes: ["Menta", "Limone", "Vaniglia"], pyramid: {top: ["Menta", "Limone"], heart: ["Neroli", "Violetta"], base: ["Vaniglia", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "L'icona senza tempo.", notes: ["Aldeidi", "Ylang-Ylang", "Vaniglia"], pyramid: {top: ["Aldeidi", "Neroli"], heart: ["Ylang-Ylang", "Gelsomino"], base: ["Vaniglia", "Sandalwood"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
-      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Il profumo più celebre al mondo.", notes: ["Aldeidi", "Ylang-Ylang", "Rosa"], pyramid: {top: ["Aldeidi"], heart: ["Ylang-Ylang", "Rosa", "Gelsomino"], base: ["Vaniglia", "Muschio"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
-      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Libertà e eleganza in equilibrio.", notes: ["Limone", "Menta", "Cedro"], pyramid: {top: ["Limone", "Menta"], heart: ["Zenzero", "Gelsomino"], base: ["Cedro", "Incenso"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Profondità boisée con incenso e sandalo.", notes: ["Limone", "Incenso", "Sandalwood"], pyramid: {top: ["Limone"], heart: ["Zenzero", "Noce Moscata"], base: ["Incenso", "Sandalwood", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Spirito libero e femminile.", notes: ["Arancia", "Gelsomino", "Patchouli"], pyramid: {top: ["Arancia", "Mandarino"], heart: ["Rosa", "Gelsomino"], base: ["Patchouli", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Energia sportiva e raffinatezza.", notes: ["Note Marine", "Pepe", "Tonka"], pyramid: {top: ["Note Marine", "Limone"], heart: ["Pepe", "Noce Moscata"], base: ["Tonka", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi illuminati dal sole.", notes: ["Gelsomino", "Ylang-Ylang", "Tuberosa"], pyramid: {top: ["Mandarino"], heart: ["Gelsomino", "Ylang-Ylang"], base: ["Sandalwood", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Libertà assoluta.", notes: ["Lavanda", "Fior d'Arancio", "Vaniglia"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Fior d'Arancio", "Gelsomino"], base: ["Vaniglia", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Freschezza floreale audace.", notes: ["Lavanda", "Fior d'Arancio", "Mandarino"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Fior d'Arancio"], base: ["Vaniglia", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Affermazione di sé.", notes: ["Bergamotto", "Ambroxan", "Patchouli"], pyramid: {top: ["Bergamotto"], heart: ["Ambroxan", "Lavanda"], base: ["Patchouli", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Caffè nero e fiori bianchi.", notes: ["Caffè", "Gelsomino", "Vaniglia"], pyramid: {top: ["Caffè", "Pepe Rosa"], heart: ["Gelsomino", "Fior d'Arancio"], base: ["Vaniglia", "Patchouli", "Cedro"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Intensità assoluta.", notes: ["Caffè", "Vaniglia Bourbon", "Gelsomino"], pyramid: {top: ["Caffè"], heart: ["Gelsomino", "Fior d'Arancio"], base: ["Vaniglia Bourbon", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Versione estrema.", notes: ["Caffè", "Vaniglia", "Gelsomino"], pyramid: {top: ["Caffè", "Mandarino"], heart: ["Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Orchidea vanigliata e lavanda.", notes: ["Orchidea", "Lavanda", "Vaniglia"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Orchidea", "Fior d'Arancio"], base: ["Vaniglia", "Tonka"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Icona maschile.", notes: ["Lavanda", "Menta", "Vaniglia"], pyramid: {top: ["Lavanda", "Menta"], heart: ["Cannella", "Cumino"], base: ["Vaniglia", "Sandalwood"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie orientali e iris.", notes: ["Cardamomo", "Iris", "Vaniglia"], pyramid: {top: ["Cardamomo"], heart: ["Iris", "Lavanda"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza tropicale.", notes: ["Bergamotto", "Noce di Cocco", "Tonka"], pyramid: {top: ["Bergamotto"], heart: ["Noce di Cocco"], base: ["Tonka", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Gardenia e caramello.", notes: ["Gardenia", "Caramello", "Miele"], pyramid: {top: ["Mandarino", "Gardenia"], heart: ["Gardenia", "Caramello"], base: ["Miele", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità scandalosa.", notes: ["Miele", "Gardenia", "Caramello"], pyramid: {top: ["Gardenia"], heart: ["Miele", "Caramello"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Menta fresca e mela verde.", notes: ["Menta", "Mela Verde", "Vaniglia"], pyramid: {top: ["Menta", "Mela Verde", "Limone"], heart: ["Gelsomino", "Ambroxan"], base: ["Vaniglia", "Cedro", "Vetiver"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Acqua di mare e legni.", notes: ["Note Marine", "Fico", "Ambroxan"], pyramid: {top: ["Note Marine", "Fico"], heart: ["Violetta", "Patchouli"], base: ["Ambroxan", "Muschio"]}, intensity: "medium", season: ["summer"], occasion: ["day"]},
-      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Zenzero e fiori lilla.", notes: ["Zenzero", "Fiori Lilla", "Muschio"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Fiori Lilla", "Gelsomino"], base: ["Muschio", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
-      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Melograno e peonia.", notes: ["Melograno", "Peonia", "Muschio"], pyramid: {top: ["Melograno", "Yuzu"], heart: ["Peonia", "Magnolia"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note marine e incenso.", notes: ["Note Marine", "Bergamotto", "Incenso"], pyramid: {top: ["Note Marine", "Bergamotto"], heart: ["Rosmarino", "Salvia"], base: ["Incenso", "Patchouli"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Ribes nero e vaniglia.", notes: ["Ribes Nero", "Freesia", "Vaniglia"], pyramid: {top: ["Ribes Nero"], heart: ["Freesia", "Rosa"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e vaniglia.", notes: ["Tuberosa", "Gelsomino", "Vaniglia"], pyramid: {top: ["Arancia", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Cedro"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi intensificati.", notes: ["Tuberosa", "Gelsomino", "Vaniglia Bourbon"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia Bourbon", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Vittoria in bottiglia.", notes: ["Note Marine", "Legni", "Ambroxan"], pyramid: {top: ["Note Marine", "Limone"], heart: ["Legni", "Gelsomino"], base: ["Ambroxan", "Muschio"]}, intensity: "medium", season: ["summer"], occasion: ["day"]},
-      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Oro liquido, spezie e cuoio.", notes: ["Mandarino", "Cannella", "Cuoio"], pyramid: {top: ["Mandarino", "Pompelmo"], heart: ["Cannella", "Spezie"], base: ["Cuoio", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Intensità dorata.", notes: ["Davana", "Patchouli", "Vaniglia"], pyramid: {top: ["Mandarino"], heart: ["Davana", "Cannella"], base: ["Patchouli", "Vaniglia"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Versione Parfum.", notes: ["Mandarino", "Cannella", "Legni"], pyramid: {top: ["Mandarino"], heart: ["Cannella", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Doppia personalità.", notes: ["Tuberosa", "Gelsomino", "Cacao"], pyramid: {top: ["Mandorla", "Caffè"], heart: ["Tuberosa", "Gelsomino"], base: ["Cacao", "Tonka", "Sandalwood"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Versione suprema.", notes: ["Iris", "Tuberosa", "Vaniglia"], pyramid: {top: ["Mandorla"], heart: ["Iris", "Tuberosa"], base: ["Vaniglia", "Tonka"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Rosa e pralina.", notes: ["Rosa", "Pralina", "Tuberosa"], pyramid: {top: ["Rosa", "Pompelmo"], heart: ["Pralina", "Tuberosa"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
-      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e gardenia.", notes: ["Tuberosa", "Gardenia", "Rangoon"], pyramid: {top: ["Rangoon"], heart: ["Tuberosa", "Gardenia"], base: ["Muschio", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi e sandalo.", notes: ["Tuberosa", "Gardenia", "Sandalwood"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gardenia"], base: ["Sandalwood", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Gardenia e pera.", notes: ["Gardenia", "Pera", "Patchouli"], pyramid: {top: ["Pera", "Mandarino"], heart: ["Gardenia", "Fiori Bianchi"], base: ["Patchouli", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e tuberosa.", notes: ["Neroli", "Tuberosa", "Ambra"], pyramid: {top: ["Neroli", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Ambra", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità del paradosso.", notes: ["Neroli", "Tuberosa", "Vaniglia"], pyramid: {top: ["Neroli"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Lavanda e ambroxan.", notes: ["Lavanda", "Ambroxan", "Legni"], pyramid: {top: ["Lavanda", "Bergamotto"], heart: ["Ambroxan", "Note Minerali"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Iris pallido e pralina.", notes: ["Iris", "Pralina", "Patchouli"], pyramid: {top: ["Ribes Nero", "Pera"], heart: ["Iris", "Gelsomino"], base: ["Pralina", "Patchouli"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Luminosità floreale.", notes: ["Pesca", "Iris", "Pralina"], pyramid: {top: ["Pesca", "Limone"], heart: ["Iris", "Gelsomino"], base: ["Pralina", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e biancospino.", notes: ["Rosa", "Biancospino", "Muschio"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Rosa", "Biancospino"], base: ["Muschio", "Vaniglia"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa proibita.", notes: ["Tuberosa", "Gelsomino", "Legni"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità proibita.", notes: ["Tuberosa", "Gelsomino", "Vaniglia"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni preziosi e pera.", notes: ["Pera", "Iris", "Legni"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Iris", "Cardamomo"], base: ["Legni", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Orchidea nera e spezie.", notes: ["Orchidea", "Spezie", "Patchouli"], pyramid: {top: ["Tartufo", "Ylang-Ylang"], heart: ["Orchidea", "Spezie"], base: ["Patchouli", "Incenso", "Vaniglia"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legno di oud e sandalo.", notes: ["Oud", "Sandalwood", "Cardamomo"], pyramid: {top: ["Cardamomo", "Legno di Rosa"], heart: ["Oud", "Sandalwood"], base: ["Ambra", "Tonka"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e vaniglia.", notes: ["Tabacco", "Vaniglia", "Cacao"], pyramid: {top: ["Tabacco", "Spezie"], heart: ["Vaniglia", "Cacao"], base: ["Legni", "Frutta Secca"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Mela e legni.", notes: ["Mela", "Cannella", "Legni"], pyramid: {top: ["Mela", "Bergamotto"], heart: ["Cannella", "Chiodi di Garofano"], base: ["Legni", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Intensità del successo.", notes: ["Mela", "Vaniglia", "Legni"], pyramid: {top: ["Mela"], heart: ["Cannella", "Cardamomo"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Zenzero e maninka.", notes: ["Zenzero", "Maninka", "Cuoio"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Maninka", "Lavanda"], base: ["Cuoio", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Vaniglia bourbon e fiori.", notes: ["Gelsomino", "Vaniglia Bourbon", "Legni"], pyramid: {top: ["Bergamotto", "Pepata"], heart: ["Gelsomino", "Fiori Bianchi"], base: ["Vaniglia Bourbon", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legno di vetiver e salvia.", notes: ["Vetiver", "Salvia", "Legni"], pyramid: {top: ["Bergamotto", "Salvia"], heart: ["Vetiver", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Limone di Sicilia e legni.", notes: ["Limone", "Pompelmo", "Legni"], pyramid: {top: ["Limone", "Pompelmo"], heart: ["Note Marine", "Gelsomino"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["summer"], occasion: ["day"]},
-      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e vaniglia.", notes: ["Neroli", "Vaniglia", "Gelsomino"], pyramid: {top: ["Neroli", "Limone"], heart: ["Gelsomino", "Fiori Bianchi"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
-      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Bambù e loto.", notes: ["Bambù", "Loto", "Muschio"], pyramid: {top: ["Bambù", "Nashi"], heart: ["Loto", "Gelsomino"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Rum e spezie.", notes: ["Rum", "Spezie", "Cuoio"], pyramid: {top: ["Rum", "Spezie"], heart: ["Tuberosa", "Iris"], base: ["Cuoio", "Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie esplosive e tabacco.", notes: ["Tabacco", "Spezie", "Vaniglia"], pyramid: {top: ["Lavanda", "Bergamotto"], heart: ["Tabacco", "Spezie"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Bouquet esplosivo di fiori.", notes: ["Orchidea", "Freesia", "Patchouli"], pyramid: {top: ["Tè Verde", "Bergamotto"], heart: ["Orchidea", "Freesia", "Gelsomino"], base: ["Patchouli", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Frutti rossi e fiori.", notes: ["Frutti Rossi", "Gelsomino", "Muschio"], pyramid: {top: ["Frutti Rossi", "Limone"], heart: ["Gelsomino", "Tè"], base: ["Muschio", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Cardamomo e legni.", notes: ["Cardamomo", "Limone", "Legni"], pyramid: {top: ["Cardamomo", "Limone"], heart: ["Nocciola", "Spezie"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legno di cedro e vaniglia.", notes: ["Cedro", "Vaniglia", "Cardamomo"], pyramid: {top: ["Cardamomo"], heart: ["Cedro", "Lavanda"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Cannella e tabacco.", notes: ["Cannella", "Tabacco", "Cuoio"], pyramid: {top: ["Mandarino", "Lavanda"], heart: ["Cannella", "Tabacco"], base: ["Cuoio", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Orchidea e vaniglia.", notes: ["Orchidea", "Vaniglia", "Legni"], pyramid: {top: ["Arancia", "Bergamotto"], heart: ["Orchidea", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie orientali e legni.", notes: ["Spezie", "Caffè", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Caffè", "Tabacco"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Miele e tabacco.", notes: ["Miele", "Tabacco", "Lavanda"], pyramid: {top: ["Lavanda", "Limone", "Bergamotto"], heart: ["Miele", "Cannella"], base: ["Tabacco", "Legni", "Vaniglia"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Agrumi siciliani e muschio.", notes: ["Agrumi", "Muschio", "Ambra"], pyramid: {top: ["Limone", "Bergamotto", "Arancia"], heart: ["Frutti Esotici"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Spezie preziose e fiori.", notes: ["Spezie", "Fiori", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Fiori", "Iris"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni rari e ambra.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Rari"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Oud e rosa.", notes: ["Oud", "Rosa", "Spezie"], pyramid: {top: ["Bergamotto", "Lavanda"], heart: ["Oud", "Rosa"], base: ["Spezie", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Fiori classici italiani.", notes: ["Fiori", "Legni", "Muschio"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Classici"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori notturni e vaniglia.", notes: ["Fiori Notturni", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Notturni", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni australiani e spezie.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Australiani"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus", price: "Su richiesta", description: "Tè nero e agrumi.", notes: ["Tè Nero", "Agrumi", "Cannella"], pyramid: {top: ["Limone", "Arancia", "Bergamotto"], heart: ["Tè Nero", "Cannella"], base: ["Oud", "Sandalwood", "Ambroxan"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e legni.", notes: ["Oud", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Oud", "Legni"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Agrumi e spezie leggere.", notes: ["Agrumi", "Spezie", "Legni"], pyramid: {top: ["Limone", "Bergamotto"], heart: ["Spezie Leggere", "Tè"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Arancia e mandarino.", notes: ["Arancia", "Mandarino", "Bergamotto"], pyramid: {top: ["Arancia", "Mandarino"], heart: ["Bergamotto", "Limone"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note acquatiche e agrumi.", notes: ["Note Acquatiche", "Agrumi", "Legni"], pyramid: {top: ["Agrumi", "Note Acquatiche"], heart: ["Tè", "Spezie"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Zenzero e ambroxan.", notes: ["Zenzero", "Ambroxan", "Legni"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Ambroxan", "Note Acquatiche"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh", price: "Su richiesta", description: "Frutti rossi e menta.", notes: ["Frutti Rossi", "Menta", "Legni"], pyramid: {top: ["Frutti Rossi", "Menta"], heart: ["Note Acquatiche"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori armoniosi e vaniglia.", notes: ["Fiori", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Armoniosi", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Iris e patchouli.", notes: ["Iris", "Patchouli", "Vaniglia"], pyramid: {top: ["Bergamotto"], heart: ["Iris", "Fiori"], base: ["Patchouli", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e sandalo.", notes: ["Tuberosa", "Sandalwood", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Sandalwood", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi luminosi.", notes: ["Fiori Bianchi", "Legni", "Muschio"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Bianchi", "Gelsomino"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Ylang-ylang e vaniglia.", notes: ["Ylang-Ylang", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Ylang-Ylang", "Fiori"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Spezie incendiate e incenso.", notes: ["Spezie", "Incenso", "Legni"], pyramid: {top: ["Spezie", "Pepe"], heart: ["Incenso", "Oud"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e legni preziosi.", notes: ["Rosa", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Rosa", "Fiori"], base: ["Legni Preziosi", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e zafferano.", notes: ["Oud", "Zafferano", "Legni"], pyramid: {top: ["Zafferano", "Lavanda"], heart: ["Oud", "Nutmeg"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia e spezie.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e rum.", notes: ["Tabacco", "Rum", "Vaniglia"], pyramid: {top: ["Rum", "Cannella"], heart: ["Tabacco", "Fiori"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni terapeutici e spezie.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Muschio e legni.", notes: ["Muschio", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni benedetti e ambra.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni nobili e spezie.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Nobili"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa atomica e patchouli.", notes: ["Rosa", "Patchouli", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Rosa", "Fiori"], base: ["Patchouli", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Cognac e cannella.", notes: ["Cognac", "Cannella", "Vaniglia"], pyramid: {top: ["Cognac", "Cannella"], heart: ["Pralina", "Fiori"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Rum e legni.", notes: ["Rum", "Legni", "Ambra"], pyramid: {top: ["Rum", "Bergamotto"], heart: ["Legni", "Patchouli"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi e ambra.", notes: ["Fiori Bianchi", "Ambra", "Legni"], pyramid: {top: ["Arancia", "Neroli"], heart: ["Fiori Bianchi", "Gelsomino"], base: ["Ambra", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e marshmallow.", notes: ["Neroli", "Marshmallow", "Ambra"], pyramid: {top: ["Neroli", "Bergamotto"], heart: ["Marshmallow", "Fiori"], base: ["Ambra", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori di pesco e vaniglia.", notes: ["Fiori di Pesco", "Vaniglia", "Legni"], pyramid: {top: ["Fiori di Pesco", "Bergamotto"], heart: ["Fiori", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e frutti.", notes: ["Rosa", "Frutti", "Legni"], pyramid: {top: ["Rosa", "Frutti"], heart: ["Fiori", "Gelsomino"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
-      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori rossi e spezie.", notes: ["Fiori Rossi", "Spezie", "Legni"], pyramid: {top: ["Fiori Rossi", "Spezie"], heart: ["Fiori", "Gelsomino"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Caffè e spezie verdi.", notes: ["Caffè", "Spezie Verdi", "Legni"], pyramid: {top: ["Caffè", "Cardamomo"], heart: ["Spezie Verdi", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Tè matcha e legni.", notes: ["Tè Matcha", "Legni", "Muschio"], pyramid: {top: ["Tè Matcha", "Bergamotto"], heart: ["Legni", "Fiori"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Tè nero e cedro.", notes: ["Tè Nero", "Cedro", "Ambra"], pyramid: {top: ["Tè Nero", "Bergamotto"], heart: ["Cedro", "Fichi"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Sandalwood e cuoio.", notes: ["Sandalwood", "Cuoio", "Cedro"], pyramid: {top: ["Cardamomo", "Iris"], heart: ["Violetta", "Ambroxan"], base: ["Sandalwood", "Cuoio", "Cedro"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
-      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Ambroxan e muschio.", notes: ["Ambroxan", "Muschio", "Legni"], pyramid: {top: ["Ambroxan", "Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Rosa e ambroxan.", notes: ["Rosa", "Ambroxan", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Ambroxan", "Fiori"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Giglio e vaniglia.", notes: ["Giglio", "Vaniglia", "Legni"], pyramid: {top: ["Giglio", "Bergamotto"], heart: ["Fiori Bianchi"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Patchouli e betulla.", notes: ["Patchouli", "Betulla", "Legni"], pyramid: {top: ["Betulla", "Bergamotto"], heart: ["Patchouli", "Incenso"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Rosa e legni.", notes: ["Rosa", "Legni", "Muschio"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Legni", "Fiori"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e spezie.", notes: ["Tuberosa", "Spezie", "Legni"], pyramid: {top: ["Tuberosa", "Spezie"], heart: ["Fiori Bianchi"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Fior d'arancio e gelsomino.", notes: ["Fior d'Arancio", "Gelsomino", "Legni"], pyramid: {top: ["Fior d'Arancio", "Bergamotto"], heart: ["Gelsomino", "Fiori"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Muschio e ambra.", notes: ["Muschio", "Ambra", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Ambra", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legno di gaiaco e rosa.", notes: ["Gaiaco", "Rosa", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Gaiaco", "Legni"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e zafferano.", notes: ["Oud", "Zafferano", "Legni"], pyramid: {top: ["Zafferano", "Lavanda"], heart: ["Oud", "Legni"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia e spezie.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni preziosi e ambra.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Preziosi"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Mela e vaniglia.", notes: ["Mela", "Vaniglia", "Lavanda"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Violetta", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia bourbon e spezie.", notes: ["Vaniglia Bourbon", "Spezie", "Legni"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Vaniglia Bourbon", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Mandorla e vaniglia.", notes: ["Mandorla", "Vaniglia", "Legni"], pyramid: {top: ["Mandorla", "Bergamotto"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Pegasus intensificato.", notes: ["Mandorla", "Vaniglia", "Legni"], pyramid: {top: ["Mandorla", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni speziati e ambra.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e vaniglia.", notes: ["Tabacco", "Vaniglia", "Legni"], pyramid: {top: ["Tabacco", "Pepe"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Layton esclusivo.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Vaniglia", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e lichene.", notes: ["Rosa", "Lichene", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Lichene", "Fiori"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Delina esclusivo.", notes: ["Rosa", "Vaniglia", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
-      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Melone e cuoio.", notes: ["Melone", "Cuoio", "Legni"], pyramid: {top: ["Melone", "Mandarino"], heart: ["Cuoio", "Note Marine"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Pomodoro e caffè.", notes: ["Pomodoro", "Caffè", "Legni"], pyramid: {top: ["Pomodoro", "Limone"], heart: ["Caffè", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Mango e legni.", notes: ["Mango", "Legni", "Ambra"], pyramid: {top: ["Mango", "Bergamotto"], heart: ["Legni", "Patchouli"], base: ["Ambra", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
-      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Pino e cuoio.", notes: ["Pino", "Cuoio", "Legni"], pyramid: {top: ["Pino", "Bergamotto"], heart: ["Cuoio", "Note Verdi"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note marine e agrumi.", notes: ["Note Marine", "Agrumi", "Legni"], pyramid: {top: ["Note Marine", "Agrumi"], heart: ["Lavanda", "Spezie"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
-      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Oud e spezie.", notes: ["Oud", "Spezie", "Legni"], pyramid: {top: ["Oud", "Bergamotto"], heart: ["Spezie", "Incenso"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
-      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Ananas e betulla.", notes: ["Ananas", "Betulla", "Muschio"], pyramid: {top: ["Ananas", "Bergamotto", "Mela"], heart: ["Betulla", "Patchouli", "Gelsomino"], base: ["Muschio", "Vaniglia", "Quercia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
-      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Violetta e sandalo.", notes: ["Violetta", "Sandalwood", "Ambra"], pyramid: {top: ["Violetta", "Limone"], heart: ["Iris", "Gelsomino"], base: ["Sandalwood", "Ambra"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh", price: "Su richiesta", description: "Tè verde e ribes.", notes: ["Tè Verde", "Ribes", "Muschio"], pyramid: {top: ["Tè Verde", "Ribes", "Arancia"], heart: ["Note Acquatiche", "Fiori"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
-      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Lime e cocco.", notes: ["Lime", "Cocco", "Rum"], pyramid: {top: ["Lime", "Bergamotto"], heart: ["Cocco", "Fiori Tropicali"], base: ["Rum", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]}
+      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza selvaggia e virile.", shortDesc: "Bergamotto, pepe e ambroxan in un'esplosione fresca e maschile.", notes: ["Bergamotto", "Pepe", "Ambroxan"], pyramid: {top: ["Bergamotto", "Pepe"], heart: ["Lavanda", "Patchouli"], base: ["Ambroxan", "Cedro"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Intensità magnetica e raffinata.", shortDesc: "Lavanda e ambroxan per un'eleganza maschile contemporanea.", notes: ["Bergamotto", "Lavanda", "Ambroxan"], pyramid: {top: ["Bergamotto"], heart: ["Lavanda", "Spezie"], base: ["Ambroxan", "Legni"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
+      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Libertà assoluta in bottiglia.", shortDesc: "Bergamotto di Reggio Calabria e pepe di Sichuan.", notes: ["Bergamotto", "Pepe", "Ambroxan"], pyramid: {top: ["Bergamotto", "Pepe"], heart: ["Lavanda", "Patchouli"], base: ["Ambroxan", "Cedro"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Un bouquet solare di ylang-ylang, rosa e gelsomino.", shortDesc: "Bouquet solare di ylang-ylang, rosa e gelsomino.", notes: ["Ylang-Ylang", "Rosa", "Gelsomino"], pyramid: {top: ["Ylang-Ylang", "Rosa"], heart: ["Gelsomino", "Tuberosa"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
+      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "L'essenza assoluta del lusso floreale.", shortDesc: "Tuberosa e sandalo per sensualità senza tempo.", notes: ["Tuberosa", "Gelsomino", "Sandalwood"], pyramid: {top: ["Ylang-Ylang"], heart: ["Tuberosa", "Gelsomino"], base: ["Sandalwood", "Vaniglia"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
+      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Romanticismo parigino in ogni spruzzo.", shortDesc: "Rosa centifolia e peonia per eleganza giovanile.", notes: ["Rosa", "Peonia", "Iris"], pyramid: {top: ["Mandarino"], heart: ["Rosa", "Peonia"], base: ["Patchouli", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Profumo-couture sofisticato e moderno.", shortDesc: "Iris e patchouli per femminilità sofisticata.", notes: ["Iris", "Rosa", "Patchouli"], pyramid: {top: ["Mandarino"], heart: ["Rosa", "Iris"], base: ["Patchouli", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Tuberosa intensa e frutti rossi.", shortDesc: "Tuberosa e frutti rossi per seduzione misteriosa.", notes: ["Tuberosa", "Frutti Rossi", "Vaniglia"], pyramid: {top: ["Coriandolo", "Anice"], heart: ["Tuberosa", "Frutti Rossi"], base: ["Vaniglia", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza glaciale con vaniglia del Madagascar.", shortDesc: "Menta, limone e vaniglia del Madagascar.", notes: ["Menta", "Limone", "Vaniglia"], pyramid: {top: ["Menta", "Limone"], heart: ["Neroli", "Violetta"], base: ["Vaniglia", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "L'icona senza tempo.", shortDesc: "Aldeidi e fiori bianchi per eleganza eterna.", notes: ["Aldeidi", "Ylang-Ylang", "Vaniglia"], pyramid: {top: ["Aldeidi", "Neroli"], heart: ["Ylang-Ylang", "Gelsomino"], base: ["Vaniglia", "Sandalwood"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
+      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Il profumo più celebre al mondo.", shortDesc: "Ylang-ylang e rosa di Grasse in perfetta armonia.", notes: ["Aldeidi", "Ylang-Ylang", "Rosa"], pyramid: {top: ["Aldeidi"], heart: ["Ylang-Ylang", "Rosa", "Gelsomino"], base: ["Vaniglia", "Muschio"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
+      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Libertà e eleganza in equilibrio.", shortDesc: "Agrumi freschi e legni nobili per uomo contemporaneo.", notes: ["Limone", "Menta", "Cedro"], pyramid: {top: ["Limone", "Menta"], heart: ["Zenzero", "Gelsomino"], base: ["Cedro", "Incenso"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Profondità boisée con incenso e sandalo.", shortDesc: "Incenso e sandalo per eleganza maschile intensa.", notes: ["Limone", "Incenso", "Sandalwood"], pyramid: {top: ["Limone"], heart: ["Zenzero", "Noce Moscata"], base: ["Incenso", "Sandalwood", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Spirito libero e femminile.", shortDesc: "Arancia sanguinella e patchouli per modernità audace.", notes: ["Arancia", "Gelsomino", "Patchouli"], pyramid: {top: ["Arancia", "Mandarino"], heart: ["Rosa", "Gelsomino"], base: ["Patchouli", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Energia sportiva e raffinatezza.", shortDesc: "Note marine e tonka per vitalità immediata.", notes: ["Note Marine", "Pepe", "Tonka"], pyramid: {top: ["Note Marine", "Limone"], heart: ["Pepe", "Noce Moscata"], base: ["Tonka", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi illuminati dal sole.", shortDesc: "Gelsomino e ylang-ylang per femminilità radiosa.", notes: ["Gelsomino", "Ylang-Ylang", "Tuberosa"], pyramid: {top: ["Mandarino"], heart: ["Gelsomino", "Ylang-Ylang"], base: ["Sandalwood", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Libertà assoluta.", shortDesc: "Lavanda francese e fior d'arancio del Marocco.", notes: ["Lavanda", "Fior d'Arancio", "Vaniglia"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Fior d'Arancio", "Gelsomino"], base: ["Vaniglia", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Freschezza floreale audace.", shortDesc: "Inno alla libertà femminile con note luminose.", notes: ["Lavanda", "Fior d'Arancio", "Mandarino"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Fior d'Arancio"], base: ["Vaniglia", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Affermazione di sé.", shortDesc: "Ambroxan e bergamotto per eleganza maschile.", notes: ["Bergamotto", "Ambroxan", "Patchouli"], pyramid: {top: ["Bergamotto"], heart: ["Ambroxan", "Lavanda"], base: ["Patchouli", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Caffè nero e fiori bianchi.", shortDesc: "Fragranza rock-chic per notti indimenticabili.", notes: ["Caffè", "Gelsomino", "Vaniglia"], pyramid: {top: ["Caffè", "Pepe Rosa"], heart: ["Gelsomino", "Fior d'Arancio"], base: ["Vaniglia", "Patchouli", "Cedro"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Intensità assoluta.", shortDesc: "Vaniglia bourbon e gelsomino, seduzione senza compromessi.", notes: ["Caffè", "Vaniglia Bourbon", "Gelsomino"], pyramid: {top: ["Caffè"], heart: ["Gelsomino", "Fior d'Arancio"], base: ["Vaniglia Bourbon", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Versione estrema.", shortDesc: "Note gourmand e fiori bianchi per femminilità audace.", notes: ["Caffè", "Vaniglia", "Gelsomino"], pyramid: {top: ["Caffè", "Mandarino"], heart: ["Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Orchidea vanigliata e lavanda.", shortDesc: "Intensità floreale calda e avvolgente.", notes: ["Orchidea", "Lavanda", "Vaniglia"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Orchidea", "Fior d'Arancio"], base: ["Vaniglia", "Tonka"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Icona maschile.", shortDesc: "Lavanda e vaniglia in flacone a forma di torso.", notes: ["Lavanda", "Menta", "Vaniglia"], pyramid: {top: ["Lavanda", "Menta"], heart: ["Cannella", "Cumino"], base: ["Vaniglia", "Sandalwood"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie orientali e iris.", shortDesc: "Eleganza maschile sofisticata e misteriosa.", notes: ["Cardamomo", "Iris", "Vaniglia"], pyramid: {top: ["Cardamomo"], heart: ["Iris", "Lavanda"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza tropicale.", shortDesc: "Noce di cocco e bergamotto per evasione estiva.", notes: ["Bergamotto", "Noce di Cocco", "Tonka"], pyramid: {top: ["Bergamotto"], heart: ["Noce di Cocco"], base: ["Tonka", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Gardenia e caramello.", shortDesc: "Profumo scandalosamente femminile e gourmand.", notes: ["Gardenia", "Caramello", "Miele"], pyramid: {top: ["Mandarino", "Gardenia"], heart: ["Gardenia", "Caramello"], base: ["Miele", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità scandalosa.", shortDesc: "Miele e fiori bianchi per femminilità audace.", notes: ["Miele", "Gardenia", "Caramello"], pyramid: {top: ["Gardenia"], heart: ["Miele", "Caramello"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Menta fresca e mela verde.", shortDesc: "Energia giovanile e mediterranea.", notes: ["Menta", "Mela Verde", "Vaniglia"], pyramid: {top: ["Menta", "Mela Verde", "Limone"], heart: ["Gelsomino", "Ambroxan"], base: ["Vaniglia", "Cedro", "Vetiver"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Acqua di mare e legni.", shortDesc: "Freschezza mediterranea per uomo moderno.", notes: ["Note Marine", "Fico", "Ambroxan"], pyramid: {top: ["Note Marine", "Fico"], heart: ["Violetta", "Patchouli"], base: ["Ambroxan", "Muschio"]}, intensity: "medium", season: ["summer"], occasion: ["day"]},
+      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Zenzero e fiori lilla.", shortDesc: "Freschezza speziata e femminile.", notes: ["Zenzero", "Fiori Lilla", "Muschio"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Fiori Lilla", "Gelsomino"], base: ["Muschio", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
+      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Melograno e peonia.", shortDesc: "Luminosità floreale per donna radiosa.", notes: ["Melograno", "Peonia", "Muschio"], pyramid: {top: ["Melograno", "Yuzu"], heart: ["Peonia", "Magnolia"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note marine e incenso.", shortDesc: "Eleganza maschile profonda e raffinata.", notes: ["Note Marine", "Bergamotto", "Incenso"], pyramid: {top: ["Note Marine", "Bergamotto"], heart: ["Rosmarino", "Salvia"], base: ["Incenso", "Patchouli"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Ribes nero e vaniglia.", shortDesc: "Femminilità intensa e seducente.", notes: ["Ribes Nero", "Freesia", "Vaniglia"], pyramid: {top: ["Ribes Nero"], heart: ["Freesia", "Rosa"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e vaniglia.", shortDesc: "Percorso floreale luminoso e moderno.", notes: ["Tuberosa", "Gelsomino", "Vaniglia"], pyramid: {top: ["Arancia", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Cedro"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi intensificati.", shortDesc: "Vaniglia bourbon per femminilità avvolgente.", notes: ["Tuberosa", "Gelsomino", "Vaniglia Bourbon"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia Bourbon", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Vittoria in bottiglia.", shortDesc: "Note marine e legnose per uomo vincente.", notes: ["Note Marine", "Legni", "Ambroxan"], pyramid: {top: ["Note Marine", "Limone"], heart: ["Legni", "Gelsomino"], base: ["Ambroxan", "Muschio"]}, intensity: "medium", season: ["summer"], occasion: ["day"]},
+      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Oro liquido, spezie e cuoio.", shortDesc: "Successo sfavillante in bottiglia.", notes: ["Mandarino", "Cannella", "Cuoio"], pyramid: {top: ["Mandarino", "Pompelmo"], heart: ["Cannella", "Spezie"], base: ["Cuoio", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Intensità dorata.", shortDesc: "Davana e patchouli per seduzione potente.", notes: ["Davana", "Patchouli", "Vaniglia"], pyramid: {top: ["Mandarino"], heart: ["Davana", "Cannella"], base: ["Patchouli", "Vaniglia"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Versione Parfum.", shortDesc: "Note boisée rafforzate, eleganza assoluta.", notes: ["Mandarino", "Cannella", "Legni"], pyramid: {top: ["Mandarino"], heart: ["Cannella", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Doppia personalità.", shortDesc: "Tuberosa e cacao per donna seducente.", notes: ["Tuberosa", "Gelsomino", "Cacao"], pyramid: {top: ["Mandorla", "Caffè"], heart: ["Tuberosa", "Gelsomino"], base: ["Cacao", "Tonka", "Sandalwood"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Versione suprema.", shortDesc: "Iris e vaniglia per femminilità lussuosa.", notes: ["Iris", "Tuberosa", "Vaniglia"], pyramid: {top: ["Mandorla"], heart: ["Iris", "Tuberosa"], base: ["Vaniglia", "Tonka"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Rosa e pralina.", shortDesc: "Dolcezza femminile con tocco audace.", notes: ["Rosa", "Pralina", "Tuberosa"], pyramid: {top: ["Rosa", "Pompelmo"], heart: ["Pralina", "Tuberosa"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
+      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e gardenia.", shortDesc: "Esplosione floreale bianca per eleganza naturale.", notes: ["Tuberosa", "Gardenia", "Rangoon"], pyramid: {top: ["Rangoon"], heart: ["Tuberosa", "Gardenia"], base: ["Muschio", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi e sandalo.", shortDesc: "Ambrosia floreale per donna raffinata.", notes: ["Tuberosa", "Gardenia", "Sandalwood"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gardenia"], base: ["Sandalwood", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Gardenia e pera.", shortDesc: "Freschezza floreale fruttata e femminile.", notes: ["Gardenia", "Pera", "Patchouli"], pyramid: {top: ["Pera", "Mandarino"], heart: ["Gardenia", "Fiori Bianchi"], base: ["Patchouli", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e tuberosa.", shortDesc: "Paradosso tra luce e ombra per donna moderna.", notes: ["Neroli", "Tuberosa", "Ambra"], pyramid: {top: ["Neroli", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Ambra", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità del paradosso.", shortDesc: "Vaniglia e fiori bianchi per femminilità profonda.", notes: ["Neroli", "Tuberosa", "Vaniglia"], pyramid: {top: ["Neroli"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Lavanda e ambroxan.", shortDesc: "Freschezza minerale per uomo contemporaneo.", notes: ["Lavanda", "Ambroxan", "Legni"], pyramid: {top: ["Lavanda", "Bergamotto"], heart: ["Ambroxan", "Note Minerali"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Iris pallido e pralina.", shortDesc: "Felicità in bottiglia per donna ottimista.", notes: ["Iris", "Pralina", "Patchouli"], pyramid: {top: ["Ribes Nero", "Pera"], heart: ["Iris", "Gelsomino"], base: ["Pralina", "Patchouli"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Luminosità floreale.", shortDesc: "Pesca e iris per gioia di vivere radiosa.", notes: ["Pesca", "Iris", "Pralina"], pyramid: {top: ["Pesca", "Limone"], heart: ["Iris", "Gelsomino"], base: ["Pralina", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e biancospino.", shortDesc: "Idolo floreale per donna ispiratrice.", notes: ["Rosa", "Biancospino", "Muschio"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Rosa", "Biancospino"], base: ["Muschio", "Vaniglia"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa proibita.", shortDesc: "Trasgressione elegante e femminile.", notes: ["Tuberosa", "Gelsomino", "Legni"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità proibita.", shortDesc: "Vaniglia e fiori bianchi, seduzione audace.", notes: ["Tuberosa", "Gelsomino", "Vaniglia"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni preziosi e pera.", shortDesc: "Gentilezza maschile sofisticata.", notes: ["Pera", "Iris", "Legni"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Iris", "Cardamomo"], base: ["Legni", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Orchidea nera e spezie.", shortDesc: "Lusso oscuro e sensuale senza tempo.", notes: ["Orchidea", "Spezie", "Patchouli"], pyramid: {top: ["Tartufo", "Ylang-Ylang"], heart: ["Orchidea", "Spezie"], base: ["Patchouli", "Incenso", "Vaniglia"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legno di oud e sandalo.", shortDesc: "Eleganza orientale raffinata e preziosa.", notes: ["Oud", "Sandalwood", "Cardamomo"], pyramid: {top: ["Cardamomo", "Legno di Rosa"], heart: ["Oud", "Sandalwood"], base: ["Ambra", "Tonka"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e vaniglia.", shortDesc: "Calore avvolgente e sofisticato.", notes: ["Tabacco", "Vaniglia", "Cacao"], pyramid: {top: ["Tabacco", "Spezie"], heart: ["Vaniglia", "Cacao"], base: ["Legni", "Frutta Secca"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Mela e legni.", shortDesc: "Successo maschile in bottiglia elegante.", notes: ["Mela", "Cannella", "Legni"], pyramid: {top: ["Mela", "Bergamotto"], heart: ["Cannella", "Chiodi di Garofano"], base: ["Legni", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Intensità del successo.", shortDesc: "Vaniglia e legni per uomo determinato.", notes: ["Mela", "Vaniglia", "Legni"], pyramid: {top: ["Mela"], heart: ["Cannella", "Cardamomo"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Zenzero e maninka.", shortDesc: "Seduzione maschile moderna.", notes: ["Zenzero", "Maninka", "Cuoio"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Maninka", "Lavanda"], base: ["Cuoio", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Vaniglia bourbon e fiori.", shortDesc: "Romanità contemporanea e audace.", notes: ["Gelsomino", "Vaniglia Bourbon", "Legni"], pyramid: {top: ["Bergamotto", "Pepata"], heart: ["Gelsomino", "Fiori Bianchi"], base: ["Vaniglia Bourbon", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legno di vetiver e salvia.", shortDesc: "Roma moderna in versione maschile.", notes: ["Vetiver", "Salvia", "Legni"], pyramid: {top: ["Bergamotto", "Salvia"], heart: ["Vetiver", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Limone di Sicilia e legni.", shortDesc: "Mediterraneo intenso e luminoso.", notes: ["Limone", "Pompelmo", "Legni"], pyramid: {top: ["Limone", "Pompelmo"], heart: ["Note Marine", "Gelsomino"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["summer"], occasion: ["day"]},
+      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e vaniglia.", shortDesc: "Devozione floreale calda e avvolgente.", notes: ["Neroli", "Vaniglia", "Gelsomino"], pyramid: {top: ["Neroli", "Limone"], heart: ["Gelsomino", "Fiori Bianchi"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
+      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Bambù e loto.", shortDesc: "Purezza cristallina e femminile.", notes: ["Bambù", "Loto", "Muschio"], pyramid: {top: ["Bambù", "Nashi"], heart: ["Loto", "Gelsomino"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Rum e spezie.", shortDesc: "Eleganza maschile intensa e sofisticata.", notes: ["Rum", "Spezie", "Cuoio"], pyramid: {top: ["Rum", "Spezie"], heart: ["Tuberosa", "Iris"], base: ["Cuoio", "Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie esplosive e tabacco.", shortDesc: "Potenza orientale maschile.", notes: ["Tabacco", "Spezie", "Vaniglia"], pyramid: {top: ["Lavanda", "Bergamotto"], heart: ["Tabacco", "Spezie"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Bouquet esplosivo di fiori.", shortDesc: "Femminilità radiosa e generosa.", notes: ["Orchidea", "Freesia", "Patchouli"], pyramid: {top: ["Tè Verde", "Bergamotto"], heart: ["Orchidea", "Freesia", "Gelsomino"], base: ["Patchouli", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Frutti rossi e fiori.", shortDesc: "Eroina moderna e femminile.", notes: ["Frutti Rossi", "Gelsomino", "Muschio"], pyramid: {top: ["Frutti Rossi", "Limone"], heart: ["Gelsomino", "Tè"], base: ["Muschio", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Cardamomo e legni.", shortDesc: "British style fresco e raffinato.", notes: ["Cardamomo", "Limone", "Legni"], pyramid: {top: ["Cardamomo", "Limone"], heart: ["Nocciola", "Spezie"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legno di cedro e vaniglia.", shortDesc: "Desiderio maschile irresistibile.", notes: ["Cedro", "Vaniglia", "Cardamomo"], pyramid: {top: ["Cardamomo"], heart: ["Cedro", "Lavanda"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Cannella e tabacco.", shortDesc: "Notte misteriosa e seducente.", notes: ["Cannella", "Tabacco", "Cuoio"], pyramid: {top: ["Mandarino", "Lavanda"], heart: ["Cannella", "Tabacco"], base: ["Cuoio", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Orchidea e vaniglia.", shortDesc: "Eleganza orientale accessibile e raffinata.", notes: ["Orchidea", "Vaniglia", "Legni"], pyramid: {top: ["Arancia", "Bergamotto"], heart: ["Orchidea", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie orientali e legni.", shortDesc: "Forza maschile intensa.", notes: ["Spezie", "Caffè", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Caffè", "Tabacco"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Miele e tabacco.", shortDesc: "Lusso italiano artigianale e prezioso.", notes: ["Miele", "Tabacco", "Lavanda"], pyramid: {top: ["Lavanda", "Limone", "Bergamotto"], heart: ["Miele", "Cannella"], base: ["Tabacco", "Legni", "Vaniglia"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Agrumi siciliani e muschio.", shortDesc: "Freschezza mediterranea lussuosa.", notes: ["Agrumi", "Muschio", "Ambra"], pyramid: {top: ["Limone", "Bergamotto", "Arancia"], heart: ["Frutti Esotici"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Spezie preziose e fiori.", shortDesc: "Rinascimento olfattivo raffinato.", notes: ["Spezie", "Fiori", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Fiori", "Iris"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni rari e ambra.", shortDesc: "Stelle cadenti in bottiglia preziosa.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Rari"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Oud e rosa.", shortDesc: "Viaggio nell'Oriente lussuoso e misterioso.", notes: ["Oud", "Rosa", "Spezie"], pyramid: {top: ["Bergamotto", "Lavanda"], heart: ["Oud", "Rosa"], base: ["Spezie", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Fiori classici italiani.", shortDesc: "Tradizione profumiera raffinata.", notes: ["Fiori", "Legni", "Muschio"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Classici"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori notturni e vaniglia.", shortDesc: "Luce lunare femminile e poetica.", notes: ["Fiori Notturni", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Notturni", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni australiani e spezie.", shortDesc: "Viaggio nell'emisfero sud maschile.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Australiani"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus", price: "Su richiesta", description: "Tè nero e agrumi.", shortDesc: "Immaginazione creativa e raffinata.", notes: ["Tè Nero", "Agrumi", "Cannella"], pyramid: {top: ["Limone", "Arancia", "Bergamotto"], heart: ["Tè Nero", "Cannella"], base: ["Oud", "Sandalwood", "Ambroxan"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e legni.", shortDesc: "Ombra del nomade nel deserto prezioso.", notes: ["Oud", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Oud", "Legni"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Agrumi e spezie leggere.", shortDesc: "Freschezza del viaggio maschile.", notes: ["Agrumi", "Spezie", "Legni"], pyramid: {top: ["Limone", "Bergamotto"], heart: ["Spezie Leggere", "Tè"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Arancia e mandarino.", shortDesc: "Tuffo pomeridiano rinfrescante.", notes: ["Arancia", "Mandarino", "Bergamotto"], pyramid: {top: ["Arancia", "Mandarino"], heart: ["Bergamotto", "Limone"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note acquatiche e agrumi.", shortDesc: "Leggerezza maschile contemporanea.", notes: ["Note Acquatiche", "Agrumi", "Legni"], pyramid: {top: ["Agrumi", "Note Acquatiche"], heart: ["Tè", "Spezie"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Zenzero e ambroxan.", shortDesc: "Immensità fresca e maschile.", notes: ["Zenzero", "Ambroxan", "Legni"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Ambroxan", "Note Acquatiche"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh", price: "Su richiesta", description: "Frutti rossi e menta.", shortDesc: "Freschezza californiana rilassante.", notes: ["Frutti Rossi", "Menta", "Legni"], pyramid: {top: ["Frutti Rossi", "Menta"], heart: ["Note Acquatiche"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori armoniosi e vaniglia.", shortDesc: "Sinfonia femminile elegante.", notes: ["Fiori", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Armoniosi", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Iris e patchouli.", shortDesc: "Acchiappasogni floreale e poetico.", notes: ["Iris", "Patchouli", "Vaniglia"], pyramid: {top: ["Bergamotto"], heart: ["Iris", "Fiori"], base: ["Patchouli", "Vaniglia"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e sandalo.", shortDesc: "Nella pelle femminile sensuale.", notes: ["Tuberosa", "Sandalwood", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Sandalwood", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi luminosi.", shortDesc: "Apice della femminilità floreale.", notes: ["Fiori Bianchi", "Legni", "Muschio"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Bianchi", "Gelsomino"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Ylang-ylang e vaniglia.", shortDesc: "Cuore che batte femminile.", notes: ["Ylang-Ylang", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Ylang-Ylang", "Fiori"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Spezie incendiate e incenso.", shortDesc: "Notte di fuoco intensa.", notes: ["Spezie", "Incenso", "Legni"], pyramid: {top: ["Spezie", "Pepe"], heart: ["Incenso", "Oud"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e legni preziosi.", shortDesc: "Sabbie rosa del deserto femminile.", notes: ["Rosa", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Rosa", "Fiori"], base: ["Legni Preziosi", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e zafferano.", shortDesc: "Grandezza orientale mistica e potente.", notes: ["Oud", "Zafferano", "Legni"], pyramid: {top: ["Zafferano", "Lavanda"], heart: ["Oud", "Nutmeg"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia e spezie.", shortDesc: "Afrodisiaco assoluto e sensuale.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e rum.", shortDesc: "Effetti collaterali piacevoli e intensi.", notes: ["Tabacco", "Rum", "Vaniglia"], pyramid: {top: ["Rum", "Cannella"], heart: ["Tabacco", "Fiori"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni terapeutici e spezie.", shortDesc: "Riabilitazione olfattiva.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Muschio e legni.", shortDesc: "Terapia muschiosa avvolgente.", notes: ["Muschio", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni benedetti e ambra.", shortDesc: "Benedizione olfattiva preziosa.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni nobili e spezie.", shortDesc: "Paragone di eccellenza maschile.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Nobili"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa atomica e patchouli.", shortDesc: "Potenza floreale esplosiva.", notes: ["Rosa", "Patchouli", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Rosa", "Fiori"], base: ["Patchouli", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Cognac e cannella.", shortDesc: "Parte degli angeli golosa e sofisticata.", notes: ["Cognac", "Cannella", "Vaniglia"], pyramid: {top: ["Cognac", "Cannella"], heart: ["Pralina", "Fiori"], base: ["Vaniglia", "Legni"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Rum e legni.", shortDesc: "Via diretta al paradiso maschile.", notes: ["Rum", "Legni", "Ambra"], pyramid: {top: ["Rum", "Bergamotto"], heart: ["Legni", "Patchouli"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi e ambra.", shortDesc: "Brava ragazza che diventa cattiva.", notes: ["Fiori Bianchi", "Ambra", "Legni"], pyramid: {top: ["Arancia", "Neroli"], heart: ["Fiori Bianchi", "Gelsomino"], base: ["Ambra", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e marshmallow.", shortDesc: "Amore dolce e timido.", notes: ["Neroli", "Marshmallow", "Ambra"], pyramid: {top: ["Neroli", "Bergamotto"], heart: ["Marshmallow", "Fiori"], base: ["Ambra", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori di pesco e vaniglia.", shortDesc: "Principessa moderna e femminile.", notes: ["Fiori di Pesco", "Vaniglia", "Legni"], pyramid: {top: ["Fiori di Pesco", "Bergamotto"], heart: ["Fiori", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e frutti.", shortDesc: "Principessa floreale contemporanea.", notes: ["Rosa", "Frutti", "Legni"], pyramid: {top: ["Rosa", "Frutti"], heart: ["Fiori", "Gelsomino"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day", "evening"]},
+      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori rossi e spezie.", shortDesc: "Gioco pericoloso e seducente.", notes: ["Fiori Rossi", "Spezie", "Legni"], pyramid: {top: ["Fiori Rossi", "Spezie"], heart: ["Fiori", "Gelsomino"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Caffè e spezie verdi.", shortDesc: "Ebbrezza orientale intensa.", notes: ["Caffè", "Spezie Verdi", "Legni"], pyramid: {top: ["Caffè", "Cardamomo"], heart: ["Spezie Verdi", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Tè matcha e legni.", shortDesc: "Cerimonia del tè contemporanea.", notes: ["Tè Matcha", "Legni", "Muschio"], pyramid: {top: ["Tè Matcha", "Bergamotto"], heart: ["Legni", "Fiori"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Tè nero e cedro.", shortDesc: "Eleganza boisée raffinata.", notes: ["Tè Nero", "Cedro", "Ambra"], pyramid: {top: ["Tè Nero", "Bergamotto"], heart: ["Cedro", "Fichi"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Sandalwood e cuoio.", shortDesc: "Icona unisex sofisticata.", notes: ["Sandalwood", "Cuoio", "Cedro"], pyramid: {top: ["Cardamomo", "Iris"], heart: ["Violetta", "Ambroxan"], base: ["Sandalwood", "Cuoio", "Cedro"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
+      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Ambroxan e muschio.", shortDesc: "Un altro 13 misterioso.", notes: ["Ambroxan", "Muschio", "Legni"], pyramid: {top: ["Ambroxan", "Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Rosa e ambroxan.", shortDesc: "Baia floreale contemporanea.", notes: ["Rosa", "Ambroxan", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Ambroxan", "Fiori"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Giglio e vaniglia.", shortDesc: "Giglio luminoso e raffinato.", notes: ["Giglio", "Vaniglia", "Legni"], pyramid: {top: ["Giglio", "Bergamotto"], heart: ["Fiori Bianchi"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Patchouli e betulla.", shortDesc: "Intensità boisée affumicata.", notes: ["Patchouli", "Betulla", "Legni"], pyramid: {top: ["Betulla", "Bergamotto"], heart: ["Patchouli", "Incenso"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Rosa e legni.", shortDesc: "Rosa contemporanea unisex.", notes: ["Rosa", "Legni", "Muschio"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Legni", "Fiori"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e spezie.", shortDesc: "Tuberosa intensa e sensuale.", notes: ["Tuberosa", "Spezie", "Legni"], pyramid: {top: ["Tuberosa", "Spezie"], heart: ["Fiori Bianchi"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Fior d'arancio e gelsomino.", shortDesc: "Purezza floreale mediterranea.", notes: ["Fior d'Arancio", "Gelsomino", "Legni"], pyramid: {top: ["Fior d'Arancio", "Bergamotto"], heart: ["Gelsomino", "Fiori"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Muschio e ambra.", shortDesc: "Muschio caldo e avvolgente.", notes: ["Muschio", "Ambra", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Ambra", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legno di gaiaco e rosa.", shortDesc: "Legno prezioso e floreale.", notes: ["Gaiaco", "Rosa", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Gaiaco", "Legni"], base: ["Muschio", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e zafferano.", shortDesc: "Eleganza reale orientale.", notes: ["Oud", "Zafferano", "Legni"], pyramid: {top: ["Zafferano", "Lavanda"], heart: ["Oud", "Legni"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia e spezie.", shortDesc: "Calore orientale avvolgente.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni preziosi e ambra.", shortDesc: "Cavallo reale maschile.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Preziosi"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Mela e vaniglia.", shortDesc: "Eleganza maschile raffinata.", notes: ["Mela", "Vaniglia", "Lavanda"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Violetta", "Gelsomino"], base: ["Vaniglia", "Legni"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia bourbon e spezie.", shortDesc: "Layton gourmand maschile.", notes: ["Vaniglia Bourbon", "Spezie", "Legni"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Vaniglia Bourbon", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Mandorla e vaniglia.", shortDesc: "Cavallo alato maschile.", notes: ["Mandorla", "Vaniglia", "Legni"], pyramid: {top: ["Mandorla", "Bergamotto"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Pegasus intensificato.", shortDesc: "Esclusività maschile preziosa.", notes: ["Mandorla", "Vaniglia", "Legni"], pyramid: {top: ["Mandorla", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni speziati e ambra.", shortDesc: "Forza maschile orientale.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e vaniglia.", shortDesc: "Re Erode maschile e sofisticato.", notes: ["Tabacco", "Vaniglia", "Legni"], pyramid: {top: ["Tabacco", "Pepe"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Layton esclusivo.", shortDesc: "Vaniglia e spezie raffinate.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Vaniglia", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e lichene.", shortDesc: "Femminilità floreale raffinata.", notes: ["Rosa", "Lichene", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Lichene", "Fiori"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Delina esclusivo.", shortDesc: "Rosa e vaniglia lussuosa.", notes: ["Rosa", "Vaniglia", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["all"], occasion: ["evening"]},
+      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Melone e cuoio.", shortDesc: "Freschezza sportiva maschile.", notes: ["Melone", "Cuoio", "Legni"], pyramid: {top: ["Melone", "Mandarino"], heart: ["Cuoio", "Note Marine"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Pomodoro e caffè.", shortDesc: "Energia rossa maschile.", notes: ["Pomodoro", "Caffè", "Legni"], pyramid: {top: ["Pomodoro", "Limone"], heart: ["Caffè", "Spezie"], base: ["Legni", "Ambra"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Mango e legni.", shortDesc: "Eleganza nera maschile.", notes: ["Mango", "Legni", "Ambra"], pyramid: {top: ["Mango", "Bergamotto"], heart: ["Legni", "Patchouli"], base: ["Ambra", "Muschio"]}, intensity: "medium", season: ["all"], occasion: ["evening"]},
+      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Pino e cuoio.", shortDesc: "Classicità verde maschile.", notes: ["Pino", "Cuoio", "Legni"], pyramid: {top: ["Pino", "Bergamotto"], heart: ["Cuoio", "Note Verdi"], base: ["Legni", "Muschio"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note marine e agrumi.", shortDesc: "Blu ultra fresco maschile.", notes: ["Note Marine", "Agrumi", "Legni"], pyramid: {top: ["Note Marine", "Agrumi"], heart: ["Lavanda", "Spezie"], base: ["Legni", "Muschio"]}, intensity: "light", season: ["summer"], occasion: ["day"]},
+      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Oud e spezie.", shortDesc: "Supremazia maschile orientale.", notes: ["Oud", "Spezie", "Legni"], pyramid: {top: ["Oud", "Bergamotto"], heart: ["Spezie", "Incenso"], base: ["Legni", "Ambra"]}, intensity: "strong", season: ["autumn", "winter"], occasion: ["evening"]},
+      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Ananas e betulla.", shortDesc: "Successo maschile leggendario.", notes: ["Ananas", "Betulla", "Muschio"], pyramid: {top: ["Ananas", "Bergamotto", "Mela"], heart: ["Betulla", "Patchouli", "Gelsomino"], base: ["Muschio", "Vaniglia", "Quercia"]}, intensity: "medium", season: ["all"], occasion: ["day", "evening"]},
+      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Violetta e sandalo.", shortDesc: "Tweed irlandese fresco e maschile.", notes: ["Violetta", "Sandalwood", "Ambra"], pyramid: {top: ["Violetta", "Limone"], heart: ["Iris", "Gelsomino"], base: ["Sandalwood", "Ambra"]}, intensity: "medium", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh", price: "Su richiesta", description: "Tè verde e ribes.", shortDesc: "Acqua di montagna argentata.", notes: ["Tè Verde", "Ribes", "Muschio"], pyramid: {top: ["Tè Verde", "Ribes", "Arancia"], heart: ["Note Acquatiche", "Fiori"], base: ["Muschio", "Legni"]}, intensity: "light", season: ["spring", "summer"], occasion: ["day"]},
+      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Lime e cocco.", shortDesc: "Acque delle Isole Vergini tropicali.", notes: ["Lime", "Cocco", "Rum"], pyramid: {top: ["Lime", "Bergamotto"], heart: ["Cocco", "Fiori Tropicali"], base: ["Rum", "Legni"]}, intensity: "light", season: ["summer"], occasion: ["day"]}
     ];
 
     const WHATSAPP_NUMBER = "4915511780179";
@@ -1345,11 +1504,17 @@
     let currentFilters = { olfactory: 'all', gender: 'all', search: '', sort: 'default' };
     let quizStep = 0;
     let quizAnswers = {};
+    let lastSearchTerm = '';
 
     document.addEventListener('DOMContentLoaded', () => {
       createParticles();
       renderProducts();
       updateCounts();
+      
+      // Track view_list event
+      if (typeof gtag === 'function') {
+        gtag('event', 'view_list');
+      }
       
       window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -1397,23 +1562,24 @@
       document.getElementById('productsCount').textContent = `${filtered.length} profumi`;
 
       grid.innerHTML = filtered.map(product => `
-        <div class="product-card">
+        <div class="product-card" onclick="openModal(${product.id})">
           <div class="product-image-wrapper">
-            <img src="assets/${product.id}.jpg" alt="${product.name}" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%231a1a1a%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23d4af37%22 font-size=%2220%22%3E${product.brand}%3C/text%3E%3C/svg%3E'">
+            <img src="assets/${product.id}.jpg" alt="${product.name}" class="product-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%231a1a1a%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23d4af37%22 font-size=%2220%22%3E${product.brand}%3C/text%3E%3C/svg%3E'">
             <span class="product-badge">${product.gender === 'male' ? 'Uomo' : product.gender === 'female' ? 'Donna' : 'Unisex'}</span>
-            <button class="product-favorite ${favorites.includes(product.id) ? 'active' : ''}" onclick="toggleFavorite(${product.id})">
+            <button class="product-favorite ${favorites.includes(product.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${product.id})" aria-label="Aggiungi ai preferiti">
               <i class="fas fa-heart"></i>
             </button>
           </div>
           <div class="product-info">
             <div class="product-brand">${product.brand}</div>
             <h3 class="product-name">${product.name}</h3>
+            <p class="product-description">${product.shortDesc}</p>
             <div class="product-notes">
               ${product.notes.slice(0, 3).map(note => `<span class="note-tag">${note}</span>`).join('')}
             </div>
             <div class="product-footer">
               <span class="product-price">${product.price}</span>
-              <button class="product-add" onclick="addToCart(${product.id})">
+              <button class="product-add" onclick="event.stopPropagation(); addToCart(${product.id})" aria-label="Aggiungi alla lista">
                 <i class="fas fa-plus"></i> Aggiungi
               </button>
             </div>
@@ -1441,7 +1607,19 @@
     }
 
     function handleSearch() {
-      currentFilters.search = document.getElementById('searchInput').value;
+      const searchTerm = document.getElementById('searchInput').value;
+      currentFilters.search = searchTerm;
+      
+      // Track search event solo se cambia il termine
+      if (searchTerm.trim().length >= 2 && searchTerm.trim() !== lastSearchTerm) {
+        lastSearchTerm = searchTerm.trim();
+        if (typeof gtag === 'function') {
+          gtag('event', 'search', { 
+            search_term: lastSearchTerm
+          });
+        }
+      }
+      
       renderProducts();
     }
 
@@ -1458,13 +1636,31 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCounts();
       showToast(`${product.name} aggiunto alla lista!`);
+      
+      // Track add_to_list event
+      if (typeof gtag === 'function') {
+        gtag('event', 'add_to_list', {
+          product_name: product.name,
+          product_brand: product.brand,
+          product_id: product.id
+        });
+      }
     }
 
     function removeFromCart(productId) {
+      const product = cart.find(item => item.id === productId);
       cart = cart.filter(item => item.id !== productId);
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCounts();
       renderCart();
+      
+      // Track remove_from_list event
+      if (typeof gtag === 'function' && product) {
+        gtag('event', 'remove_from_list', {
+          product_name: product.name,
+          product_brand: product.brand
+        });
+      }
     }
 
     function updateQuantity(productId, change) {
@@ -1505,17 +1701,17 @@
 
       container.innerHTML = cart.map(item => `
         <div class="cart-item">
-          <img src="assets/${item.id}.jpg" alt="${item.name}" class="cart-item-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%231a1a1a%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
+          <img src="assets/${item.id}.jpg" alt="${item.name}" class="cart-item-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%231a1a1a%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
           <div class="cart-item-info">
             <div class="cart-item-name">${item.name}</div>
-            <div style="color: var(--gray-medium); font-size: 0.85rem;">${item.brand} • ${item.size}</div>
+            <div style="color: var(--gray-medium); font-size: 0.8rem;">${item.brand} • ${item.size}</div>
             <div class="cart-item-price">${item.price}</div>
           </div>
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <button onclick="updateQuantity(${item.id}, -1)" style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; cursor: pointer;">-</button>
-            <span>${item.quantity}</span>
-            <button onclick="updateQuantity(${item.id}, 1)" style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; cursor: pointer;">+</button>
-            <button onclick="removeFromCart(${item.id})" style="margin-left: 10px; background: none; border: none; color: var(--red-ruby); cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button onclick="updateQuantity(${item.id}, -1)" style="width: 32px; height: 32px; min-width: 32px; min-height: 32px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; cursor: pointer; font-size: 16px;">-</button>
+            <span style="min-width: 20px; text-align: center;">${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, 1)" style="width: 32px; height: 32px; min-width: 32px; min-height: 32px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; cursor: pointer; font-size: 16px;">+</button>
+            <button onclick="removeFromCart(${item.id})" style="margin-left: 6px; background: none; border: none; color: var(--red-ruby); cursor: pointer; font-size: 18px; padding: 6px;">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -1555,19 +1751,23 @@
       
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = favoriteProducts.map(product => `
-        <div class="product-card">
+        <div class="product-card" onclick="openModal(${product.id})">
           <div class="product-image-wrapper">
-            <img src="assets/${product.id}.jpg" alt="${product.name}" class="product-image">
-            <button class="product-favorite active" onclick="toggleFavorite(${product.id})">
+            <img src="assets/${product.id}.jpg" alt="${product.name}" class="product-image" loading="lazy">
+            <button class="product-favorite active" onclick="event.stopPropagation(); toggleFavorite(${product.id})">
               <i class="fas fa-heart"></i>
             </button>
           </div>
           <div class="product-info">
             <div class="product-brand">${product.brand}</div>
             <h3 class="product-name">${product.name}</h3>
+            <p class="product-description">${product.shortDesc}</p>
+            <div class="product-notes">
+              ${product.notes.slice(0, 3).map(note => `<span class="note-tag">${note}</span>`).join('')}
+            </div>
             <div class="product-footer">
               <span class="product-price">${product.price}</span>
-              <button class="product-add" onclick="addToCart(${product.id})">
+              <button class="product-add" onclick="event.stopPropagation(); addToCart(${product.id})">
                 <i class="fas fa-plus"></i> Aggiungi
               </button>
             </div>
@@ -1581,11 +1781,13 @@
 
     function openModal(productId) {
       const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      
       const modal = document.getElementById('productModal');
       const modalBody = document.getElementById('modalBody');
       
       modalBody.innerHTML = `
-        <img src="assets/${product.id}.jpg" alt="${product.name}" class="modal-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%231a1a1a%22 width=%22400%22 height=%22400%22/%3E%3C/svg%3E'">
+        <img src="assets/${product.id}.jpg" alt="${product.name}" class="modal-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%231a1a1a%22 width=%22400%22 height=%22400%22/%3E%3C/svg%3E'">
         <div class="modal-info">
           <div class="modal-brand">${product.brand}</div>
           <h2>${product.name}</h2>
@@ -1613,9 +1815,9 @@
             </div>
           </div>
           
-          <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--glass-border);">
-            <div style="font-size: 1.5rem; color: var(--gold-rose); font-weight: 700; margin-bottom: var(--space-md);">${product.price}</div>
-            <button class="btn btn-primary" style="width: 100%; padding: var(--space-md);" onclick="addToCart(${product.id}); closeModal();">
+          <div style="margin-top: var(--space-md); padding-top: var(--space-sm); border-top: 1px solid var(--glass-border);">
+            <div style="font-size: 1.3rem; color: var(--gold-rose); font-weight: 700; margin-bottom: var(--space-sm);">${product.price}</div>
+            <button class="btn btn-primary" style="width: 100%; padding: 14px;" onclick="addToCart(${product.id}); closeModal();">
               <i class="fas fa-shopping-bag"></i> Aggiungi alla Lista
             </button>
           </div>
@@ -1633,7 +1835,7 @@
       }
     }
 
-    // QUIZ ESPANSO E PRECISO
+    // QUIZ ESPANSO
     const quizQuestions = [
       {
         question: "Per chi è il profumo?",
@@ -1649,11 +1851,11 @@
         question: "Qual è la tua famiglia olfattiva preferita?",
         key: "olfactory",
         options: [
-          { value: "fresh", label: " Freschi e Acquatici", icon: "" },
+          { value: "fresh", label: " Freschi e Acquatici", icon: "💧" },
           { value: "floral", label: "🌹 Floreali e Romantici", icon: "🌹" },
           { value: "woody", label: "🌲 Legnosi e Intensi", icon: "🌲" },
           { value: "oriental", label: "🌶️ Orientali e Speziati", icon: "️" },
-          { value: "citrus", label: "🍊 Agrumati e Energizzanti", icon: "🍊" }
+          { value: "citrus", label: "🍊 Agrumati e Energizzanti", icon: "" }
         ]
       },
       {
@@ -1691,7 +1893,7 @@
         options: [
           { value: "designer", label: " Grandi Maison (Dior, Chanel, YSL...)", icon: "👔" },
           { value: "niche", label: "✨ Profumeria di Nicchia (Xerjoff, LV, Le Labo...)", icon: "✨" },
-          { value: "any", label: "🎯 Indifferente", icon: "🎯" }
+          { value: "any", label: "🎯 Indifferente", icon: "" }
         ]
       }
     ];
@@ -1723,8 +1925,8 @@
         <div class="quiz-options">
           ${question.options.map((opt, idx) => `
             <div class="quiz-option" onclick="selectQuizOption('${opt.value}')">
-              <span style="font-size: 1.5rem; margin-right: 10px;">${opt.icon}</span>
-              ${opt.label}
+              <span style="font-size: 1.5rem;">${opt.icon}</span>
+              <span>${opt.label}</span>
             </div>
           `).join('')}
         </div>
@@ -1754,47 +1956,44 @@
     function showQuizResults() {
       const recommendations = getRecommendations();
       const container = document.getElementById('quizContent');
-      
-      const totalScore = recommendations.reduce((sum, r) => sum + r.score, 0);
       const maxScore = quizQuestions.length * 3;
-      const matchPercentage = Math.round((totalScore / (recommendations.length * maxScore)) * 100);
       
       container.innerHTML = `
-        <div style="text-align: center; padding: var(--space-lg);">
-          <div style="font-size: 4rem; margin-bottom: var(--space-md);">🎯</div>
-          <h3 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: var(--space-sm); color: var(--gold-rose);">
+        <div style="text-align: center; padding: var(--space-md);">
+          <div style="font-size: 3rem; margin-bottom: var(--space-sm);">🎯</div>
+          <h3 style="font-family: var(--font-serif); font-size: clamp(1.3rem, 5vw, 2rem); margin-bottom: var(--space-xs); color: var(--gold-rose);">
             Ecco i profumi perfetti per te!
           </h3>
-          <p style="color: var(--gray-medium); margin-bottom: var(--space-lg);">
-            Abbiamo analizzato le tue preferenze e trovato <strong style="color: var(--gold-rose);">${recommendations.length} fragranze</strong> che corrispondono al tuo profilo.
+          <p style="color: var(--gray-medium); margin-bottom: var(--space-md); font-size: 0.9rem;">
+            Abbiamo trovato <strong style="color: var(--gold-rose);">${recommendations.length} fragranze</strong> che corrispondono al tuo profilo.
           </p>
-          <div style="display: grid; gap: var(--space-md);">
-            ${recommendations.map((product, idx) => `
-              <div style="background: var(--glass-bg); padding: var(--space-md); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm);">
-                <div style="flex: 1; text-align: left;">
-                  <div style="color: var(--gold-rose); font-size: 0.85rem; font-weight: 600;">${product.brand} • ${product.size}</div>
-                  <div style="font-weight: 700; font-size: 1.1rem; color: var(--white-pure);">${product.name}</div>
-                  <div style="color: var(--gray-medium); font-size: 0.8rem; margin-top: 4px;">
+          <div style="display: grid; gap: var(--space-sm);">
+            ${recommendations.map((product) => `
+              <div style="background: var(--glass-bg); padding: var(--space-sm); border-radius: 12px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; gap: var(--space-xs); text-align: left;">
+                <div style="flex: 1; min-width: 0;">
+                  <div style="color: var(--gold-rose); font-size: 0.75rem; font-weight: 600;">${product.brand} • ${product.size}</div>
+                  <div style="font-weight: 700; font-size: 0.95rem; color: var(--white-pure); margin: 4px 0;">${product.name}</div>
+                  <div style="color: var(--gray-medium); font-size: 0.75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     ${product.notes.slice(0, 3).join(' • ')}
                   </div>
                 </div>
                 <div style="text-align: center; flex-shrink: 0;">
-                  <div style="background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 8px;">
-                    ${Math.round((product.score / maxScore) * 100)}% match
+                  <div style="background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin-bottom: 8px;">
+                    ${Math.round((product.score / maxScore) * 100)}%
                   </div>
-                  <button class="btn btn-primary" onclick="addToCart(${product.id})" style="padding: 8px 16px; font-size: 0.85rem;">
-                    <i class="fas fa-plus"></i> Aggiungi
+                  <button class="btn btn-primary" onclick="addToCart(${product.id})" style="padding: 8px 14px; font-size: 0.8rem;">
+                    <i class="fas fa-plus"></i>
                   </button>
                 </div>
               </div>
             `).join('')}
           </div>
-          <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-lg); flex-wrap: wrap; justify-content: center;">
-            <button class="btn btn-secondary" onclick="toggleQuiz()">
+          <div style="display: flex; gap: var(--space-xs); margin-top: var(--space-md); flex-wrap: wrap; justify-content: center;">
+            <button class="btn btn-secondary" onclick="toggleQuiz()" style="flex: 1; min-width: 140px;">
               <i class="fas fa-redo"></i> Rifai il Quiz
             </button>
-            <button class="btn btn-primary" onclick="scrollToProducts(); toggleQuiz();">
-              <i class="fas fa-compass"></i> Esplora Tutta la Collezione
+            <button class="btn btn-primary" onclick="scrollToProducts(); toggleQuiz();" style="flex: 1; min-width: 140px;">
+              <i class="fas fa-compass"></i> Esplora Tutto
             </button>
           </div>
         </div>
@@ -1804,36 +2003,29 @@
     }
 
     function getRecommendations() {
-      // Algoritmo di scoring preciso
       const scored = PRODUCTS.map(product => {
         let score = 0;
         
-        // 1. Genere (peso: 3)
         if (quizAnswers.gender === 'any' || product.gender === quizAnswers.gender || product.gender === 'unisex') {
           score += 3;
         }
         
-        // 2. Famiglia olfattiva (peso: 3)
         if (product.olfactory === quizAnswers.olfactory) {
           score += 3;
         }
         
-        // 3. Occasione (peso: 2)
         if (quizAnswers.occasion === 'both' || product.occasion.includes(quizAnswers.occasion)) {
           score += 2;
         }
         
-        // 4. Intensità (peso: 2)
         if (product.intensity === quizAnswers.intensity) {
           score += 2;
         }
         
-        // 5. Stagione (peso: 2)
         if (quizAnswers.season === 'all' || product.season.includes(quizAnswers.season)) {
           score += 2;
         }
         
-        // 6. Tipo (designer vs niche) (peso: 2)
         if (quizAnswers.type === 'any') {
           score += 2;
         } else if (quizAnswers.type === 'niche' && nicheBrands.includes(product.brand)) {
@@ -1845,10 +2037,8 @@
         return { ...product, score };
       });
       
-      // Ordina per punteggio decrescente
       scored.sort((a, b) => b.score - a.score);
       
-      // Prendi i top 9 (espanso)
       return scored.slice(0, 9);
     }
 
@@ -1865,6 +2055,14 @@
       const whatsappText = `Ciao! Mi interessano questi profumi:\n\n${message}\n\nPotete darmi maggiori informazioni e il prezzo?`;
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
       
+      // Track whatsapp_click event
+      if (typeof gtag === 'function') {
+        gtag('event', 'whatsapp_click', {
+          products_count: cart.length,
+          total_items: cart.reduce((sum, item) => sum + item.quantity, 0)
+        });
+      }
+      
       window.open(whatsappUrl, '_blank');
     }
 
@@ -1873,21 +2071,11 @@
     }
 
     function showToast(message) {
+      const existingToast = document.querySelector('.toast');
+      if (existingToast) existingToast.remove();
+      
       const toast = document.createElement('div');
-      toast.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
-        color: white;
-        padding: 15px 30px;
-        border-radius: 50px;
-        font-weight: 600;
-        z-index: 9999;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        animation: slideUp 0.3s ease;
-      `;
+      toast.className = 'toast';
       toast.textContent = message;
       document.body.appendChild(toast);
       
@@ -1896,19 +2084,6 @@
         setTimeout(() => toast.remove(), 300);
       }, 2500);
     }
-
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideUp {
-        from { transform: translateX(-50%) translateY(100px); opacity: 0; }
-        to { transform: translateX(-50%) translateY(0); opacity: 1; }
-      }
-      @keyframes slideDown {
-        from { transform: translateX(-50%) translateY(0); opacity: 1; }
-        to { transform: translateX(-50%) translateY(100px); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
   </script>
 </body>
 </html>
