@@ -3,2215 +3,1719 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#c22b26" />
-  <title>RedClub | Profumi selezionati</title>
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="RedClub - Profumi di lusso selezionati. Scopri la tua fragranza ideale." />
+  <title>RedClub | Luxury Fragrances</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     :root {
-      --primary-red: #c22b26;
-      --dark-red: #8b1f1b;
-      --light-red: #e84e4a;
-      --ink: #1a1512;
-      --cream: #f8f4ed;
-      --paper: #fffdfa;
-      --line: #e7dfd4;
-      --muted: #726a62;
+      /* Luxury Color Palette */
+      --black-deep: #0a0a0a;
+      --black-soft: #1a1a1a;
+      --gold-rose: #d4af37;
+      --gold-light: #f4e5c2;
+      --white-pure: #ffffff;
+      --white-soft: #f8f8f8;
+      --red-ruby: #c22b26;
+      --red-dark: #8b1f1b;
+      --gray-light: #e5e5e5;
+      --gray-medium: #888888;
       
-      --gold: #d4af37;
-      --shadow-sm: 0 2px 8px rgba(194, 43, 38, 0.08);
-      --shadow-md: 0 8px 24px rgba(194, 43, 38, 0.12);
-      --shadow-lg: 0 16px 40px rgba(194, 43, 38, 0.15);
-      --bg-gradient: linear-gradient(135deg, #faf6f1 0%, #f0e8e0 100%);
-      --card-bg: linear-gradient(145deg, rgba(255, 253, 250, 0.98) 0%, rgba(248, 244, 237, 0.95) 100%);
-      --card-border: rgba(231, 223, 212, 0.8);
-      --header-bg: rgba(248, 244, 237, 0.95);
-      --panel-bg: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
-      --text-primary: var(--ink);
-      --text-secondary: var(--muted);
+      /* Glassmorphism */
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      
+      /* Typography */
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+      --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-  margin: 0;
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text-primary);
-  background: var(--bg-gradient);
-  position: relative;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100vw;
-}
-
-/* Sfondo principale con gradiente */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 300px;
-  background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-  z-index: -1;
-  opacity: 0.08;
-}
-
-/* Rettangolo sfocato 1 - Angolo alto sinistra con dissolvenza */
-.bg-blur-1 {
-  position: fixed;
-  top: -100px;
-  left: -100px;
-  width: 400px;
-  height: 500px;
-  background: linear-gradient(180deg, rgba(194, 43, 38, 0.25) 0%, rgba(194, 43, 38, 0.1) 40%, rgba(194, 43, 38, 0) 100%);
-  border-radius: 50%;
-  filter: blur(60px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Rettangolo sfocato 2 - Angolo alto destra con dissolvenza */
-.bg-blur-2 {
-  position: fixed;
-  top: -120px;
-  right: -120px;
-  width: 450px;
-  height: 550px;
-  background: linear-gradient(180deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 40%, rgba(212, 175, 55, 0) 100%);
-  border-radius: 50%;
-  filter: blur(70px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Rettangolo sfocato 3 - Angolo basso sinistra con dissolvenza */
-.bg-blur-3 {
-  position: fixed;
-  bottom: 50px;
-  left: -120px;
-  width: 450px;
-  height: 500px;
-  background: linear-gradient(0deg, rgba(194, 43, 38, 0.2) 0%, rgba(139, 31, 27, 0.1) 40%, rgba(194, 43, 38, 0) 100%);
-  border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
-  filter: blur(80px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Rettangolo sfocato 4 - Centro destra con dissolvenza */
-.bg-blur-4 {
-  position: fixed;
-  top: 40%;
-  right: -120px;
-  width: 400px;
-  height: 500px;
-  background: linear-gradient(180deg, rgba(232, 78, 74, 0.15) 0%, rgba(194, 43, 38, 0.08) 40%, rgba(194, 43, 38, 0) 100%);
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  filter: blur(75px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Desktop - dimensioni maggiori */
-@media (min-width: 769px) {
-  .bg-blur-1 {
-    top: -150px;
-    left: -150px;
-    width: 500px;
-    height: 600px;
-    filter: blur(80px);
-  }
-  
-  .bg-blur-2 {
-    top: -150px;
-    right: -150px;
-    width: 550px;
-    height: 650px;
-    filter: blur(90px);
-  }
-  
-  .bg-blur-3 {
-    bottom: 80px;
-    left: -180px;
-    width: 550px;
-    height: 600px;
-    filter: blur(100px);
-  }
-  
-  .bg-blur-4 {
-    top: 35%;
-    right: -180px;
-    width: 500px;
-    height: 600px;
-    filter: blur(90px);
-  }
-}
-
-/* Mobile - dimensioni ridotte */
-@media (max-width: 768px) {
-  .bg-blur-1 {
-    top: -80px;
-    left: -80px;
-    width: 300px;
-    height: 400px;
-    filter: blur(50px);
-  }
-  
-  .bg-blur-2 {
-    top: -100px;
-    right: -100px;
-    width: 350px;
-    height: 450px;
-    filter: blur(60px);
-  }
-  
-  .bg-blur-3 {
-    bottom: 30px;
-    left: -100px;
-    width: 350px;
-    height: 400px;
-    filter: blur(70px);
-  }
-  
-  .bg-blur-4 {
-    top: 45%;
-    right: -100px;
-    width: 320px;
-    height: 420px;
-    filter: blur(65px);
-  }
-}
-    button { font: inherit; cursor: pointer; }
-
-    .shell {
-      max-width: 1280px;
-      margin: auto;
-      padding: 0 16px 120px;
-      width: 100%;
+      font-family: var(--font-sans);
+      background: var(--black-deep);
+      color: var(--white-pure);
+      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 0;
-      position: sticky;
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
       top: 0;
-      z-index: 100;
-      background: var(--header-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 2px solid rgba(194, 43, 38, 0.1);
-      box-shadow: var(--shadow-sm);
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, var(--black-deep) 0%, var(--black-soft) 100%);
+    }
+
+    .bg-particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--gold-rose) 0%, transparent 70%);
+      opacity: 0.3;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-100px) rotate(180deg); }
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition-base);
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-family: Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      gap: var(--space-sm);
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      flex-shrink: 0;
     }
 
     .brand-logo {
-      width: 45px;
-      height: 45px;
+      width: 50px;
+      height: 50px;
       border-radius: 12px;
       object-fit: cover;
-      object-position: 50% 12%;
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.25);
-      border: 2px solid rgba(194, 43, 38, 0.2);
+      border: 2px solid var(--gold-rose);
     }
 
-    .header-actions {
+    .nav-actions {
       display: flex;
+      gap: var(--space-sm);
       align-items: center;
-      gap: 10px;
     }
 
-    .favorites-toggle {
-      width: 42px;
-      height: 42px;
+    .nav-btn {
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
-      border: 2px solid var(--line);
-      background: var(--paper);
-      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--white-pure);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: var(--transition-fast);
       position: relative;
-      flex-shrink: 0;
+      backdrop-filter: blur(10px);
     }
 
-    .favorites-toggle:active {
-      transform: scale(0.95);
+    .nav-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-rose);
+      transform: translateY(-2px);
     }
 
-    .favorites-toggle svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .favorites-count {
+    .nav-btn .badge {
       position: absolute;
-      top: -4px;
-      right: -4px;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+      top: -2px;
+      right: -2px;
+      background: linear-gradient(135deg, var(--red-ruby) 0%, var(--red-dark) 100%);
       color: white;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      font-size: 0.65rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.3s ease;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      min-width: 20px;
+      text-align: center;
     }
 
-    .favorites-count.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .list-button {
-      border: 2px solid var(--primary-red);
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      padding: 10px 16px;
-      font-weight: 800;
-      font-size: 0.88rem;
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .list-button:active {
-      transform: scale(0.96);
-    }
-
+    /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, rgba(139, 31, 27, 0.92) 0%, rgba(194, 43, 38, 0.88) 100%);
-      color: white;
-      border-radius: 24px;
-      padding: 40px 20px;
-      margin-bottom: 24px;
+      margin-top: 80px;
+      padding: var(--space-xl) var(--space-md);
+      position: relative;
       overflow: hidden;
-      position: relative;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      height: 300px;
-      background: url('assets/redclub-logo.png') center/contain no-repeat;
-      opacity: 0.15;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 800;
-      position: relative;
-      z-index: 1;
-    }
-
-    h1 {
-      max-width: 100%;
-      font: 800 clamp(1.8rem, 5vw, 3rem)/1.1 Georgia, serif;
-      letter-spacing: -0.03em;
-      margin: 12px 0;
-      position: relative;
-      z-index: 1;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero p {
-      color: rgba(255, 255, 255, 0.92);
-      max-width: 100%;
-      margin: 0;
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
-      font-size: 0.95rem;
-    }
-
-    .toolbar {
+      min-height: 70vh;
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 20px 0 16px;
+      align-items: center;
+      justify-content: center;
     }
 
-    .search-wrapper {
-      width: 100%;
+    .hero-content {
+      max-width: 900px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-md);
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-rose);
+      border-radius: 30px;
+      color: var(--gold-rose);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-md);
+      background: linear-gradient(135deg, var(--white-pure) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--gray-medium);
+      margin-bottom: var(--space-lg);
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: var(--space-sm);
+      animation: fadeInUp 1s ease 0.6s both;
+    }
+
+    .btn {
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      border: none;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      color: var(--white-pure);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white-pure);
+      border: 2px solid var(--glass-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-rose);
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Quiz Section */
+    .quiz-section {
+      padding: var(--space-xl) var(--space-md);
+      background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.05) 100%);
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      padding: var(--space-lg);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: var(--space-sm);
+      color: var(--gold-rose);
+    }
+
+    .quiz-progress {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: var(--space-md);
+    }
+
+    .quiz-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .quiz-question {
+      font-size: 1.3rem;
+      margin-bottom: var(--space-md);
+      text-align: center;
+      color: var(--white-pure);
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .quiz-option {
+      padding: var(--space-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid var(--glass-border);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-align: center;
+      color: var(--white-pure);
+    }
+
+    .quiz-option:hover {
+      border-color: var(--gold-rose);
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateX(10px);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--gold-rose);
+      background: rgba(212, 175, 55, 0.2);
+    }
+
+    /* Filters Section */
+    .filters-section {
+      padding: var(--space-lg) var(--space-md);
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .filters-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .search-box {
       position: relative;
+      margin-bottom: var(--space-md);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: var(--space-md) var(--space-lg);
+      padding-left: 50px;
+      background: var(--glass-bg);
+      border: 2px solid var(--glass-border);
+      border-radius: 50px;
+      color: var(--white-pure);
+      font-size: 1rem;
+      transition: var(--transition-fast);
+      backdrop-filter: blur(10px);
+    }
+
+    .search-input::placeholder {
+      color: var(--gray-medium);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--gold-rose);
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
     }
 
     .search-icon {
       position: absolute;
-      left: 16px;
+      left: 20px;
       top: 50%;
       transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      color: var(--primary-red);
-      pointer-events: none;
+      color: var(--gray-medium);
     }
 
-    .search {
-      width: 100%;
-      border: 2px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 44px 14px 44px;
-      background: var(--paper);
-      font: inherit;
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      box-shadow: var(--shadow-sm);
-      -webkit-appearance: none;
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
     }
 
-    .search::placeholder {
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .search:focus {
-      outline: none;
-      border-color: var(--primary-red);
-      box-shadow: 0 0 0 4px rgba(194, 43, 38, 0.1);
-    }
-
-    .search-clear {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 0;
-      background: rgba(194, 43, 38, 0.1);
-      color: var(--primary-red);
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .search-clear.visible {
-      display: flex;
-    }
-
-    .search-suggestions {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--paper);
-      border: 2px solid var(--line);
-      border-radius: 14px;
-      margin-top: 6px;
-      box-shadow: var(--shadow-lg);
-      z-index: 50;
-      max-height: 300px;
-      overflow-y: auto;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
-    }
-
-    .search-suggestions.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .suggestion-item {
-      padding: 12px 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .suggestion-item:last-child {
-      border-bottom: none;
-    }
-
-    .suggestion-item:active {
-      background: rgba(194, 43, 38, 0.08);
-    }
-
-    .suggestion-item svg {
-      width: 16px;
-      height: 16px;
-      color: var(--muted);
-      flex-shrink: 0;
-    }
-
-    .suggestion-text {
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-    }
-
-    .suggestion-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-left: auto;
-    }
-
-    /* Filtri marche - scrolling indipendente */
-    .filters-wrapper {
-      width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary-red) transparent;
-      padding: 8px 0 12px 0;
-    }
-
-    .filters-wrapper::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .filters-wrapper::-webkit-scrollbar-thumb {
-      background: var(--primary-red);
-      border-radius: 2px;
-    }
-
-    .filters-container {
-      display: flex;
-      gap: 8px;
-      padding: 0 8px;
-      white-space: nowrap;
-      width: max-content;
-      max-width: 100%;
-    }
-
-    .filter-all,
-    .filter {
-      border: 2px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 18px;
-      background: var(--paper);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: all 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .filter-all:active,
-    .filter:active {
-      transform: scale(0.96);
-    }
-
-    .filter-all.active,
-    .filter.active {
-      color: white;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      border-color: var(--primary-red);
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
-    }
-
-    /* Filtri olfattivi - scrolling indipendente */
-    .olfactory-filters {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 8px;
-      margin-bottom: 12px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      padding: 4px 4px 8px 4px;
-      width: 100%;
-    }
-
-    .olfactory-filters::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .olfactory-filters::-webkit-scrollbar-thumb {
-      background: var(--primary-red);
-      border-radius: 2px;
-    }
-
-    .olfactory-filter {
-      padding: 9px 14px;
-      border: 2px solid var(--line);
-      border-radius: 999px;
-      background: var(--paper);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-      white-space: nowrap;
-    }
-
-    .olfactory-filter:active {
-      transform: scale(0.97);
-    }
-
-    .olfactory-filter.active {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      border-color: var(--primary-red);
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
-    }
-
-    .olfactory-icon {
-      font-size: 1rem;
-    }
-
-    /* Controlli - layout mobile ottimizzato */
-    .controls-bar {
+    .filter-group {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 16px;
-      width: 100%;
-      overflow-x: hidden;
+      gap: var(--space-xs);
     }
 
-    .control-group {
-      width: 100%;
-    }
-
-    .control-label {
-      font-weight: 700;
-      color: var(--muted);
+    .filter-label {
       font-size: 0.85rem;
-      margin-bottom: 6px;
-      display: block;
+      color: var(--gray-medium);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .select-input,
-    .gender-filters {
-      width: 100%;
-    }
-
-    .select-input {
-      padding: 10px 14px;
-      border: 2px solid var(--line);
-      border-radius: 12px;
-      background: var(--paper);
-      font: inherit;
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      -webkit-appearance: none;
-    }
-
-    .gender-filters {
+    .filter-options {
       display: flex;
+      gap: var(--space-xs);
       flex-wrap: wrap;
-      gap: 6px;
-      width: 100%;
     }
 
-    .gender-btn {
-      flex: 1;
-      min-width: calc(50% - 3px);
-      padding: 9px 12px;
-      border: 2px solid var(--line);
-      border-radius: 999px;
-      background: var(--paper);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.82rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .filter-chip {
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      color: var(--white-pure);
     }
 
-    .gender-btn:active {
-      transform: scale(0.97);
+    .filter-chip:hover,
+    .filter-chip.active {
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      border-color: transparent;
+      color: var(--white-pure);
     }
 
-    .gender-btn.active {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      border-color: var(--primary-red);
-      box-shadow: 0 4px 12px rgba(194, 43, 38, 0.3);
+    /* Products Grid */
+    .products-section {
+      padding: var(--space-xl) var(--space-md);
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .notice {
-      color: var(--muted);
-      margin: 0 0 16px;
-      font-size: 0.88rem;
-      padding-left: 10px;
-      border-left: 3px solid var(--primary-red);
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--white-pure) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .products-count {
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-bottom: 12px;
-      font-weight: 600;
+      color: var(--gray-medium);
+      font-size: 0.95rem;
     }
 
-    .grid {
+    .products-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-lg);
     }
 
-    .card {
-      background: var(--card-bg);
-      border: 2px solid var(--card-border);
-      border-radius: 18px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      min-height: 280px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
+    .product-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
       overflow: hidden;
+      transition: var(--transition-base);
+      backdrop-filter: blur(10px);
+      position: relative;
     }
 
-    .card.scroll-hidden {
-      opacity: 0;
-      transform: translateY(30px);
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border-color: var(--gold-rose);
     }
 
-    .card.scroll-visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .card.selected {
-      border-color: var(--primary-red);
-      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.15);
-    }
-
-    .favorite-btn {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 0;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .favorite-btn:active {
-      transform: scale(0.9);
-    }
-
-    .favorite-btn.active {
-      background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
-      color: white;
-    }
-
-    .favorite-btn svg {
-      width: 18px;
-      height: 18px;
+    .product-image-wrapper {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(194, 43, 38, 0.1) 100%);
     }
 
     .product-image {
       width: 100%;
-      height: 140px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #f5f0e8 0%, #ebe3d8 100%);
-      cursor: pointer;
+      transition: var(--transition-slow);
     }
 
-    .badge {
-      align-self: flex-start;
-      color: var(--primary-red);
-      background: rgba(194, 43, 38, 0.08);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 800;
-      margin-top: 10px;
-      letter-spacing: 0.03em;
-    }
-
-    .gender-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-
-    .gender-badge.male {
-      background: rgba(59, 130, 246, 0.15);
-      color: #2563eb;
-    }
-
-    .gender-badge.female {
-      background: rgba(236, 72, 153, 0.15);
-      color: #db2777;
-    }
-
-    .gender-badge.unisex {
-      background: rgba(16, 185, 129, 0.15);
-      color: #059669;
-    }
-
-    .product-name {
-      font: 700 0.9rem/1.2 Georgia, serif;
-      margin: 8px 0 4px;
-      color: var(--text-primary);
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin: 0 0 8px;
-    }
-
-    .price-tag {
-      color: var(--primary-red);
-      font-weight: 700;
-      font-size: 0.85rem;
-      margin: 0 0 10px;
-      padding: 6px 10px;
-      background: rgba(194, 43, 38, 0.06);
-      border-radius: 10px;
-      border-left: 2px solid var(--primary-red);
-    }
-
-    .quantity-selector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: auto;
-      padding: 10px;
-      background: rgba(194, 43, 38, 0.05);
-      border-radius: 12px;
-      border: 2px solid rgba(194, 43, 38, 0.15);
-    }
-
-    .qty-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 0;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      font-size: 1.3rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .qty-btn:active {
-      transform: scale(0.92);
-    }
-
-    .qty-value {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--primary-red);
-      min-width: 28px;
-      text-align: center;
-    }
-
-    .add {
-      width: 100%;
-      margin-top: 8px;
-      padding: 12px;
-      border: 0;
-      border-radius: 12px;
-      color: white;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      font-weight: 700;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .card.selected .add {
-      display: none;
-    }
-
-    .add:active {
-      transform: scale(0.97);
-    }
-
-    .selected-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.8rem;
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.3s ease;
-      z-index: 2;
-    }
-
-    .card.selected .selected-badge {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .empty {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 40px 12px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .toast-container {
-      position: fixed;
-      bottom: 20px;
-      left: 16px;
-      right: 16px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      pointer-events: none;
-    }
-
-    .toast {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      padding: 14px 18px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(194, 43, 38, 0.4);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      animation: slideIn 0.3s ease;
-      pointer-events: auto;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .toast.hiding {
-      animation: slideOut 0.3s ease forwards;
-    }
-
-    @keyframes slideOut {
-      to { transform: translateY(100px); opacity: 0; }
-    }
-
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      margin-top: 24px;
-      flex-wrap: wrap;
-    }
-
-    .page-btn {
-      padding: 8px 12px;
-      border: 2px solid var(--line);
-      border-radius: 10px;
-      background: var(--paper);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-
-    .page-btn:active {
-      transform: scale(0.96);
-    }
-
-    .page-btn.active {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      color: white;
-      border-color: var(--primary-red);
-    }
-
-    .page-btn:disabled {
-      opacity: 0.4;
-    }
-
-    .page-info {
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin: 0 8px;
-    }
-
-    .drawer {
-      position: fixed;
-      inset: 0;
-      background: rgba(26, 21, 18, 0.6);
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
-      z-index: 200;
-    }
-
-    .drawer.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .panel {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: min(400px, 100%);
-      background: var(--panel-bg);
-      padding: 20px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      box-shadow: -8px 0 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .drawer.open .panel {
-      transform: none;
-    }
-
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 16px;
-      margin-bottom: 16px;
-    }
-
-    .panel h2 {
-      font: 800 1.6rem Georgia, serif;
-      margin: 0;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .close {
-      background: none;
-      border: 0;
-      font-size: 1.8rem;
-      line-height: 1;
-      color: var(--muted);
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-
-    .close:active {
-      background: rgba(194, 43, 38, 0.1);
-    }
-
-    .items {
-      overflow: auto;
-      flex: 1;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .item {
-      display: grid;
-      grid-template-columns: 56px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .item img {
-      width: 56px;
-      height: 56px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .item-name {
-      font-weight: 700;
-      margin: 0 0 3px;
-      font-size: 0.9rem;
-    }
-
-    .item-meta {
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin: 0;
-    }
-
-    .remove {
-      background: none;
-      border: 0;
-      color: var(--primary-red);
-      font-size: 1.3rem;
-      padding: 4px 8px;
-    }
-
-    .remove:active {
+    .product-card:hover .product-image {
       transform: scale(1.1);
     }
 
-    .panel-foot {
-      border-top: 2px solid var(--line);
-      padding-top: 16px;
-      margin-top: 16px;
+    .product-badge {
+      position: absolute;
+      top: var(--space-sm);
+      left: var(--space-sm);
+      padding: var(--space-xs) var(--space-sm);
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white-pure);
     }
 
-    .whatsapp {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      color: white;
-      background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-align: center;
-      text-decoration: none;
-      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+    .product-favorite {
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-sm);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      color: var(--gray-medium);
     }
 
-    .whatsapp:active {
-      transform: scale(0.97);
+    .product-favorite:hover,
+    .product-favorite.active {
+      color: var(--red-ruby);
+      transform: scale(1.1);
     }
 
+    .product-info {
+      padding: var(--space-md);
+    }
+
+    .product-brand {
+      font-size: 0.85rem;
+      color: var(--gold-rose);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      margin-bottom: var(--space-xs);
+      color: var(--white-pure);
+    }
+
+    .product-notes {
+      display: flex;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .note-tag {
+      padding: 4px 10px;
+      background: rgba(212, 175, 55, 0.15);
+      border-radius: 15px;
+      font-size: 0.75rem;
+      color: var(--gold-light);
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .product-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--gold-rose);
+    }
+
+    .product-add {
+      padding: var(--space-xs) var(--space-md);
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      border: none;
+      border-radius: 20px;
+      color: var(--white-pure);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .product-add:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Product Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 300;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 0;
+      transition: var(--transition-base);
     }
 
-    .modal-overlay.open {
+    .modal-overlay.active {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .modal {
-      background: var(--paper);
-      border-radius: 20px 20px 0 0;
-      width: 100%;
-      max-height: 85vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-      box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.4);
-      margin-bottom: env(safe-area-inset-bottom, 0);
-    }
-
-    .modal-overlay.open .modal {
-      transform: translateY(0);
-    }
-
-    .modal-image-wrapper {
-      background: linear-gradient(135deg, #f5f0e8 0%, #ebe3d8 100%);
-      padding: 20px;
-      position: relative;
-      max-height: 35vh;
-      overflow: hidden;
-    }
-
-    .modal-image {
-      width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-
     .modal-content {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
+      background: linear-gradient(135deg, var(--black-soft) 0%, var(--black-deep) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      max-width: 1000px;
+      width: 100%;
+      max-height: 90vh;
       overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      max-height: 50vh;
-      padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));
+      position: relative;
+      transform: scale(0.9);
+      transition: var(--transition-base);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
     }
 
     .modal-close {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 36px;
-      height: 36px;
+      top: var(--space-md);
+      right: var(--space-md);
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
-      border: 0;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--ink);
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--white-pure);
+      font-size: 1.5rem;
+      cursor: pointer;
       z-index: 10;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      transition: var(--transition-fast);
     }
 
-    .modal-close:active {
-      background: var(--primary-red);
-      color: white;
+    .modal-close:hover {
+      background: var(--red-ruby);
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+    }
+
+    .modal-image {
+      width: 100%;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(194, 43, 38, 0.1) 100%);
+    }
+
+    .modal-info h2 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      margin-bottom: var(--space-sm);
+      color: var(--white-pure);
     }
 
     .modal-brand {
-      color: var(--primary-red);
-      font-weight: 800;
-      font-size: 0.85rem;
+      color: var(--gold-rose);
+      font-size: 1rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 6px;
-    }
-
-    .modal-name {
-      font: 800 1.5rem/1.1 Georgia, serif;
-      margin: 0 0 12px;
-      color: var(--text-primary);
-    }
-
-    .modal-details {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .modal-detail {
-      padding: 6px 12px;
-      background: rgba(194, 43, 38, 0.08);
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 700;
+      letter-spacing: 0.2em;
+      margin-bottom: var(--space-md);
     }
 
     .modal-description {
-      color: var(--muted);
-      line-height: 1.5;
-      margin-bottom: 18px;
-      font-size: 0.9rem;
+      color: var(--gray-medium);
+      line-height: 1.8;
+      margin-bottom: var(--space-lg);
     }
 
-    .modal-price {
-      color: var(--primary-red);
+    /* Olfactory Pyramid */
+    .olfactory-pyramid {
+      margin: var(--space-lg) 0;
+    }
+
+    .pyramid-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+      color: var(--gold-rose);
+    }
+
+    .pyramid-level {
+      margin-bottom: var(--space-md);
+      padding: var(--space-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 15px;
+      border-left: 3px solid var(--gold-rose);
+    }
+
+    .pyramid-level-title {
       font-weight: 700;
-      font-size: 0.95rem;
-      padding: 10px 14px;
-      background: rgba(194, 43, 38, 0.06);
-      border-radius: 10px;
-      border-left: 2px solid var(--primary-red);
-      margin-bottom: 18px;
+      margin-bottom: var(--space-xs);
+      color: var(--gold-light);
     }
 
-    .modal-add {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      color: white;
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-      font-weight: 800;
-      font-size: 0.95rem;
+    .pyramid-notes {
       display: flex;
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+    }
+
+    .pyramid-note {
+      padding: 6px 12px;
+      background: rgba(212, 175, 55, 0.15);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--white-pure);
+    }
+
+    /* Cart Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 100%;
+      max-width: 450px;
+      height: 100vh;
+      background: linear-gradient(180deg, var(--black-soft) 0%, var(--black-deep) 100%);
+      border-left: 1px solid var(--glass-border);
+      z-index: 3000;
+      transition: var(--transition-base);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-drawer.active {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: auto;
     }
 
-    .modal-add:active {
-      transform: scale(0.97);
+    .cart-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--white-pure);
     }
 
-    /* Desktop optimizations */
-    @media (min-width: 769px) {
-      body {
-        overflow-x: visible;
-      }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-md);
+    }
 
-      .shell {
-        padding: 0 24px 120px;
-      }
+    .cart-item {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--glass-bg);
+      border-radius: 15px;
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--glass-border);
+    }
 
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
-      }
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
 
-      .card {
-        min-height: 340px;
-        padding: 14px;
-      }
+    .cart-item-info {
+      flex: 1;
+    }
 
-      .product-image {
-        height: 180px;
-      }
+    .cart-item-name {
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+      color: var(--white-pure);
+    }
 
+    .cart-item-price {
+      color: var(--gold-rose);
+      font-weight: 600;
+    }
+
+    .cart-footer {
+      padding: var(--space-lg);
+      border-top: 1px solid var(--glass-border);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-md);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white-pure);
+    }
+
+    .cart-checkout {
+      width: 100%;
+      padding: var(--space-md);
+      background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+      border: none;
+      border-radius: 15px;
+      color: var(--white-pure);
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .cart-checkout:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
       .hero {
-        padding: 56px 32px;
-        border-radius: 28px;
-        margin-bottom: 32px;
+        margin-top: 70px;
+        padding: var(--space-lg) var(--space-sm);
       }
 
-      .hero::before {
-        width: 380px;
-        height: 380px;
+      .hero-title {
+        font-size: 2rem;
       }
 
-      h1 {
-        font-size: clamp(2.2rem, 5vw, 4rem);
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: var(--space-md);
       }
 
-      .hero p {
-        font-size: 1.05rem;
+      .modal-body {
+        grid-template-columns: 1fr;
       }
 
-      .toolbar {
-        flex-direction: column;
-        gap: 16px;
+      .cart-drawer {
+        max-width: 100%;
       }
 
-      .search-wrapper {
-        width: 100%;
-        flex: none;
-      }
-
-      .filters-wrapper {
-        overflow-x: auto;
-      }
-
-      .olfactory-filters {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-      }
-
-      .controls-bar {
-        flex-direction: row;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .control-group {
-        width: auto;
-      }
-
-      .gender-filters {
-        flex-wrap: nowrap;
-        width: auto;
-      }
-
-      .gender-btn {
-        min-width: auto;
-        flex: none;
-      }
-
-      .modal-overlay {
-        align-items: center;
-        padding: 20px;
-      }
-
-      .modal {
-        max-width: 700px;
-        border-radius: 24px;
-        max-height: 90vh;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        transform: scale(0.9);
-        margin-bottom: 0;
-      }
-
-      .modal-overlay.open .modal {
-        transform: scale(1);
-      }
-
-      .modal-image-wrapper {
-        max-height: none;
-        padding: 32px;
-      }
-
-      .modal-content {
-        max-height: none;
-        padding: 32px;
-        padding-bottom: 32px;
-      }
-
-      .modal-close {
-        top: 16px;
-        right: 16px;
-      }
-
-      .modal-name {
-        font-size: 1.8rem;
+      .filters-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 380px) {
-      .gender-btn {
-        min-width: 100%;
-      }
+    /* Loading Animation */
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
 
-      .filter-all,
-      .filter {
-        padding: 9px 14px;
-        font-size: 0.8rem;
-      }
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
 
-      .olfactory-filter {
-        padding: 8px 12px;
-        font-size: 0.78rem;
-      }
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--black-deep);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold-rose);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--red-ruby);
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-E8LGBKGX82');
-</script>
 </head>
 <body>
-  <div class="bg-blur-1"></div>
-  <div class="bg-blur-2"></div>
-  <div class="bg-blur-3"></div>
-  <div class="bg-blur-4"></div>
-  
-  <div class="shell">
-    <!-- resto del contenuto -->
-  <div class="shell">
-    <header>
+  <!-- Background Animation -->
+  <div class="bg-animation" id="bgAnimation"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
       <div class="brand">
-        <img src="assets/redclub-logo.png" alt="RedClub" class="brand-logo" />
+        <img src="assets/redclub-logo.png" alt="RedClub" class="brand-logo">
         <span>RedClub</span>
       </div>
-      <div class="header-actions">
-        <button class="favorites-toggle" id="favoritesToggle" onclick="toggleFavorites()" aria-label="Preferiti">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-          <span class="favorites-count" id="favoritesCount">0</span>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="toggleQuiz()" title="Quiz Olfattivo">
+          <i class="fas fa-question-circle"></i>
         </button>
-        <button class="list-button" onclick="toggleDrawer()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 2L6 7H3L8 22H16L21 7H18L15 2H9Z"/>
-          </svg>
-          Lista <span class="count" id="count">0</span>
+        <button class="nav-btn" onclick="toggleFavorites()" title="Preferiti">
+          <i class="fas fa-heart"></i>
+          <span class="badge" id="favoritesCount">0</span>
+        </button>
+        <button class="nav-btn" onclick="toggleCart()" title="La tua Lista">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge" id="cartCount">0</span>
         </button>
       </div>
-    </header>
+    </div>
+  </nav>
 
-    <section class="hero">
-      <div class="eyebrow">Profumi selezionati</div>
-      <h1>Trova il tuo prossimo profumo.</h1>
-      <p>Aggiungi i prodotti alla lista e ricevi informazioni e prezzo direttamente su WhatsApp.</p>
-    </section>
-
-    <div class="toolbar">
-      <div class="search-wrapper">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input class="search" id="search" type="text" placeholder="Cerca per nome, marca o tipologia..." oninput="handleSearch(); updateClearBtn();" />
-        <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Cancella ricerca">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Profumi Selezionati</div>
+      <h1 class="hero-title">Trova il tuo prossimo profumo</h1>
+      <p class="hero-subtitle">Scopri fragranze esclusive e ricevi informazioni personalizzate direttamente su WhatsApp</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="scrollToProducts()">
+          <i class="fas fa-compass"></i>
+          Esplora Collezione
         </button>
-        <div class="search-suggestions" id="searchSuggestions"></div>
+        <button class="btn btn-secondary" onclick="toggleQuiz()">
+          <i class="fas fa-magic"></i>
+          Quiz Olfattivo
+        </button>
       </div>
+    </div>
+  </section>
 
-      <div class="filters-wrapper">
-        <div class="filters-container" id="filtersContainer">
-          <button class="filter-all active" onclick="setFilter('Tutti')">🏪 Tutti i Marchi</button>
+  <!-- Quiz Section -->
+  <section class="quiz-section" id="quizSection" style="display: none;">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h2 class="quiz-title">Scopri il tuo profumo ideale</h2>
+        <p style="color: var(--gray-medium);">Rispondi a poche domande e ti consiglieremo la fragranza perfetta per te</p>
+      </div>
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar" id="quizProgress"></div>
+      </div>
+      <div id="quizContent"></div>
+    </div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="filters-container">
+      <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Cerca profumi, marche, note olfattive..." oninput="handleSearch()">
+      </div>
+      <div class="filters-grid">
+        <div class="filter-group">
+          <span class="filter-label">Famiglia Olfattiva</span>
+          <div class="filter-options">
+            <button class="filter-chip active" onclick="filterBy('olfactory', 'all')">Tutti</button>
+            <button class="filter-chip" onclick="filterBy('olfactory', 'woody')">🌲 Legnosi</button>
+            <button class="filter-chip" onclick="filterBy('olfactory', 'floral')">🌹 Floreali</button>
+            <button class="filter-chip" onclick="filterBy('olfactory', 'citrus')">🍊 Agrumati</button>
+            <button class="filter-chip" onclick="filterBy('olfactory', 'oriental')">️ Orientali</button>
+            <button class="filter-chip" onclick="filterBy('olfactory', 'fresh')">💧 Freschi</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Genere</span>
+          <div class="filter-options">
+            <button class="filter-chip active" onclick="filterBy('gender', 'all')">Tutti</button>
+            <button class="filter-chip" onclick="filterBy('gender', 'male')">Uomo</button>
+            <button class="filter-chip" onclick="filterBy('gender', 'female')">Donna</button>
+            <button class="filter-chip" onclick="filterBy('gender', 'unisex')">Unisex</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Ordina per</span>
+          <div class="filter-options">
+            <button class="filter-chip active" onclick="sortBy('default')">Predefinito</button>
+            <button class="filter-chip" onclick="sortBy('name')">Nome</button>
+            <button class="filter-chip" onclick="sortBy('brand')">Marca</button>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="olfactory-filters">
-      <button class="olfactory-filter active" data-olfactory="all" onclick="setOlfactoryFilter('all')">
-        🔍 Tutti
-      </button>
-      <button class="olfactory-filter" data-olfactory="woody" onclick="setOlfactoryFilter('woody')">
-        🌲 Legnosi
-      </button>
-      <button class="olfactory-filter" data-olfactory="floral" onclick="setOlfactoryFilter('floral')">
-        🌹 Floreali
-      </button>
-      <button class="olfactory-filter" data-olfactory="citrus" onclick="setOlfactoryFilter('citrus')">
-        🍊 Agrumati
-      </button>
-      <button class="olfactory-filter" data-olfactory="oriental" onclick="setOlfactoryFilter('oriental')">
-        🌶️ Orientali
-      </button>
-      <button class="olfactory-filter" data-olfactory="fresh" onclick="setOlfactoryFilter('fresh')">
-         Freschi
-      </button>
+  <!-- Products Section -->
+  <section class="products-section" id="productsSection">
+    <div class="section-header">
+      <h2 class="section-title">Collezione</h2>
+      <span class="products-count" id="productsCount">Caricamento...</span>
     </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
 
-    <div class="controls-bar">
-      <div class="control-group">
-        <span class="control-label">Ordina per:</span>
-        <select class="select-input" id="sortSelect" onchange="handleSort()">
-          <option value="default">📍 Posizione predefinita</option>
-          <option value="name-asc">🔤 Nome (A-Z)</option>
-          <option value="name-desc">🔤 Nome (Z-A)</option>
-          <option value="brand-asc">🏷️ Marca (A-Z)</option>
-          <option value="brand-desc">🏷️ Marca (Z-A)</option>
-        </select>
-      </div>
-
-      <div class="control-group">
-        <span class="control-label">Genere:</span>
-        <div class="gender-filters">
-          <button class="gender-btn active" data-gender="all" onclick="setGenderFilter('all')">👥 Tutti</button>
-          <button class="gender-btn" data-gender="male" onclick="setGenderFilter('male')">👨 Uomo</button>
-          <button class="gender-btn" data-gender="female" onclick="setGenderFilter('female')">👩 Donna</button>
-          <button class="gender-btn" data-gender="unisex" onclick="setGenderFilter('unisex')">👤 Unisex</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="products-count" id="productsCount">Caricamento prodotti...</div>
-
-    <p class="notice">✨ Tutti i prodotti sono disponibili. Prezzo su richiesta.</p>
-    <div class="grid" id="grid"></div>
-
-    <div class="pagination" id="pagination"></div>
-  </div>
-
-  <div class="drawer" id="drawer" onclick="if(event.target===this)toggleDrawer()">
-    <div class="panel">
-      <div class="panel-head">
-        <h2>La tua lista</h2>
-        <button class="close" onclick="toggleDrawer()">×</button>
-      </div>
-      <div class="items" id="items"></div>
-      <div class="panel-foot">
-        <a class="whatsapp" id="whatsapp" <a href="https://wa.me/4915511780179"
-
-onclick="gtag('event','whatsapp_click',{
-event_category:'Contatti',
-event_label:'Pulsante WhatsApp'
-});">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-          Invia su WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-    <div class="modal">
+  <!-- Product Modal -->
+  <div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">×</button>
-      <div class="modal-image-wrapper">
-        <img id="modalImage" class="modal-image" src="" alt="" />
-      </div>
-      <div class="modal-content">
-        <div class="modal-brand" id="modalBrand"></div>
-        <h2 class="modal-name" id="modalName"></h2>
-        <div class="modal-details" id="modalDetails"></div>
-        <p class="modal-description" id="modalDescription"></p>
-        <div class="modal-price">💎 Prezzo su richiesta</div>
-        <button class="modal-add" id="modalAdd" onclick="addToCardFromModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          Aggiungi alla lista
-        </button>
-      </div>
+      <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
 
-  <div class="toast-container" id="toastContainer"></div>
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2 class="cart-title">La tua Lista</h2>
+      <button class="nav-btn" onclick="toggleCart()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Totale:</span>
+        <span id="cartTotal">0 prodotti</span>
+      </div>
+      <button class="cart-checkout" onclick="sendWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+        Invia su WhatsApp
+      </button>
+    </div>
+  </div>
 
   <script>
+    // Data - Tutti i prodotti del catalogo
     const PRODUCTS = [
-      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh", description: "Freschezza selvaggia e virile, un'esplosione di note agrumate e speziate che evoca paesaggi desertici al crepuscolo."},
-      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", description: "Intensità magnetica e raffinata, dove la lavanda si fonde con note boisée per un'eleganza contemporanea."},
-      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", description: "Libertà assoluta in bottiglia, bergamotto di Reggio Calabria e pepe di Sichuan per un carattere audace."},
-      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "Un bouquet solare di ylang-ylang, rosa e gelsomino che celebra la femminilità radiosa."},
-      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "L'essenza assoluta del lusso floreale, con note di tuberosa e sandalo per una sensualità senza tempo."},
-      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "Romanticismo parigino in ogni spruzzo, rosa centifolia e peonia per un'eleganza giovanile."},
-      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", description: "Profumo-couture che unisce iris e patchouli per una femminilità sofisticata e moderna."},
-      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental", description: "Tuberosa intensa e frutti rossi per una seduzione misteriosa e indimenticabile."},
-      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", description: "Freschezza glaciale con vaniglia del Madagascar, un contrasto termico affascinante."},
-      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral", description: "L'icona senza tempo, aldeidi e fiori bianchi per un'eleganza eterna e raffinata."},
-      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", description: "Il profumo più celebre al mondo, ylang-ylang e rosa di Grasse in perfetta armonia."},
-      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", description: "Libertà e eleganza in equilibrio, agrumi freschi e legni nobili per l'uomo contemporaneo."},
-      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", description: "Profondità boisée con incenso e sandalo, per un'eleganza maschile intensa."},
-      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", description: "Spirito libero e femminile, arancia sanguinella e patchouli per una modernità audace."},
-      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", description: "Energia sportiva e raffinatezza, note marine e tonka per vitalità immediata."},
-      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori bianchi illuminati dal sole, gelsomino e ylang-ylang per una femminilità radiosa."},
-      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", description: "Libertà assoluta, lavanda francese e fior d'arancio del Marocco per una donna libera."},
-      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", description: "Freschezza floreale audace, un inno alla libertà femminile con note luminose."},
-      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh", description: "Affermazione di sé, ambroxan e bergamotto per un'eleganza maschile contemporanea."},
-      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental", description: "Caffè nero e fiori bianchi, una fragranza rock-chic per notti indimenticabili."},
-      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", description: "Intensità assoluta con vaniglia bourbon e gelsomino, seduzione senza compromessi."},
-      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", description: "Versione estrema con note gourmand e fiori bianchi, per una femminilità audace."},
-      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", description: "Orchidea vanigliata e lavanda, un'intensità floreale calda e avvolgente."},
-      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", description: "Icona maschile, lavanda e vaniglia in un flacone a forma di torso per seduzione maschile."},
-      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", description: "Spezie orientali e iris, eleganza maschile sofisticata e misteriosa."},
-      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh", description: "Freschezza tropicale, noce di cocco e bergamotto per un'evasione estiva."},
-      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", description: "Gardenia e caramello, un profumo scandalosamente femminile e gourmand."},
-      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", description: "Intensità scandalosa con miele e fiori bianchi, femminilità audace."},
-      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", description: "Menta fresca e mela verde, energia giovanile e mediterranea."},
-      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", description: "Acqua di mare e legni, freschezza mediterranea per uomo moderno."},
-      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral", description: "Zenzero e fiori lilla, freschezza speziata e femminile."},
-      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral", description: "Melograno e peonia, luminosità floreale per donna radiosa."},
-      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh", description: "Note marine e incenso, eleganza maschile profonda e raffinata."},
-      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral", description: "Ribes nero e vaniglia, femminilità intensa e seducente."},
-      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", description: "Tuberosa e vaniglia, un percorso floreale luminoso e moderno."},
-      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", description: "Fiori bianchi intensificati, vaniglia bourbon per femminilità avvolgente."},
-      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh", description: "Vittoria in bottiglia, note marine e legnose per uomo vincente."},
-      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental", description: "Oro liquido, spezie e cuoio per un successo sfavillante."},
-      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", description: "Intensità dorata con davana e patchouli, seduzione maschile potente."},
-      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", description: "Versione Parfum con note boisée rafforzate, eleganza maschile assoluta."},
-      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", description: "Doppia personalità, tuberosa e cacao per donna seducente e misteriosa."},
-      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", description: "Versione suprema con iris e vaniglia, femminilità lussuosa."},
-      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", description: "Rosa e pralina, dolcezza femminile con un tocco audace."},
-      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral", description: "Tuberosa e gardenia, esplosione floreale bianca per eleganza naturale."},
-      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral", description: "Fiori bianchi e sandalo, ambrosia floreale per donna raffinata."},
-      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral", description: "Gardenia e pera, freschezza floreale fruttata e femminile."},
-      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", description: "Neroli e tuberosa, paradosso tra luce e ombra per donna moderna."},
-      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", description: "Intensità del paradosso, vaniglia e fiori bianchi per femminilità profonda."},
-      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh", description: "Lavanda e ambroxan, freschezza minerale per uomo contemporaneo."},
-      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", description: "Iris pallido e pralina, felicità in bottiglia per donna ottimista."},
-      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", description: "Luminosità floreale, pesca e iris per gioia di vivere radiosa."},
-      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", description: "Rosa e biancospino, idolo floreale per donna ispiratrice."},
-      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", description: "Tuberosa proibita e legni, trasgressione elegante e femminile."},
-      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", description: "Intensità proibita con vaniglia e fiori bianchi, seduzione audace."},
-      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody", description: "Legni preziosi e pera, gentilezza maschile sofisticata."},
-      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental", description: "Orchidea nera e spezie, lusso oscuro e sensuale senza tempo."},
-      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody", description: "Legno di oud e sandalo, eleganza orientale raffinata e preziosa."},
-      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Tabacco e vaniglia, calore avvolgente e sofisticato."},
-      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", description: "Mela e legni, successo maschile in bottiglia elegante."},
-      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", description: "Intensità del successo, vaniglia e legni per uomo determinato."},
-      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental", description: "Zenzero e maninka, seduzione maschile moderna."},
-      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral", description: "Vaniglia bourbon e fiori, romanità contemporanea e audace."},
-      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody", description: "Legno di vetiver e salvia, Roma moderna in versione maschile."},
-      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Limone di Sicilia e legni, Mediterraneo intenso e luminoso."},
-      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral", description: "Neroli e vaniglia, devozione floreale calda e avvolgente."},
-      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral", description: "Bambù e loto, purezza cristallina e femminile."},
-      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental", description: "Rum e spezie, eleganza maschile intensa e sofisticata."},
-      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental", description: "Spezie esplosive e tabacco, potenza orientale maschile."},
-      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral", description: "Bouquet esplosivo di fiori, femminilità radiosa e generosa."},
-      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral", description: "Frutti rossi e fiori, eroina moderna e femminile."},
-      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh", description: "Cardamomo e legni, british style fresco e raffinato."},
-      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody", description: "Legno di cedro e vaniglia, desiderio maschile irresistibile."},
-      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental", description: "Cannella e tabacco, notte misteriosa e seducente."},
-      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral", description: "Orchidea e vaniglia, eleganza orientale accessibile e raffinata."},
-      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental", description: "Spezie orientali e legni, forza maschile intensa."},
-      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Miele e tabacco, lusso italiano artigianale e prezioso."},
-      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Agrumi siciliani e muschio, freschezza mediterranea lussuosa."},
-      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Spezie preziose e fiori, rinascimento olfattivo raffinato."},
-      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody", description: "Legni rari e ambra, stelle cadenti in bottiglia preziosa."},
-      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Oud e rosa, viaggio nell'Oriente lussuoso e misterioso."},
-      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral", description: "Fiori classici italiani, tradizione profumiera raffinata."},
-      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral", description: "Fiori notturni e vaniglia, luce lunare femminile e poetica."},
-      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody", description: "Legni australiani e spezie, viaggio nell'emisfero sud maschile."},
-      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus", description: "Tè nero e agrumi, immaginazione creativa e raffinata."},
-      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody", description: "Oud e legni, ombra del nomade nel deserto prezioso."},
-      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", description: "Agrumi e spezie leggere, freschezza del viaggio maschile."},
-      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Arancia e mandarino, tuffo pomeridiano rinfrescante."},
-      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", description: "Note acquatiche e agrumi, leggerezza maschile contemporanea."},
-      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", description: "Zenzero e ambroxan, immensità fresca e maschile."},
-      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh", description: "Frutti rossi e menta, freschezza californiana rilassante."},
-      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori armoniosi e vaniglia, sinfonia femminile elegante."},
-      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Iris e patchouli, acchiappasogni floreale e poetico."},
-      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Tuberosa e sandalo, nella pelle femminile sensuale."},
-      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori bianchi luminosi, apice della femminilità floreale."},
-      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Ylang-ylang e vaniglia, cuore che batte femminile."},
-      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Spezie incendiate e incenso, notte di fuoco intensa."},
-      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", description: "Rosa e legni preziosi, sabbie rosa del deserto femminile."},
-      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Oud e zafferano, grandezza orientale mistica e potente."},
-      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", description: "Vaniglia e spezie, afrodisiaco assoluto e sensuale."},
-      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", description: "Tabacco e rum, effetti collaterali piacevoli e intensi."},
-      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Legni terapeutici e spezie, riabilitazione olfattiva."},
-      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Muschio e legni, terapia muschiosa avvolgente."},
-      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", description: "Legni benedetti e ambra, benedizione olfattiva preziosa."},
-      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody", description: "Legni nobili e spezie, paragone di eccellenza maschile."},
-      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral", description: "Rosa atomica e patchouli, potenza floreale esplosiva."},
-      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental", description: "Cognac e cannella, parte degli angeli golosa e sofisticata."},
-      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody", description: "Rum e legni, via diretta al paradiso maschile."},
-      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", description: "Fiori bianchi e ambra, brava ragazza che diventa cattiva."},
-      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", description: "Neroli e marshmallow, amore dolce e timido."},
-      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori di pesco e vaniglia, principessa moderna e femminile."},
-      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", description: "Rosa e frutti, principessa floreale contemporanea."},
-      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", description: "Fiori rossi e spezie, gioco pericoloso e seducente."},
-      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental", description: "Caffè e spezie verdi, ebbrezza orientale intensa."},
-      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Tè matcha e legni, cerimonia del tè contemporanea."},
-      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Tè nero e cedro, eleganza boisée raffinata."},
-      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Sandalwood e cuoio, icona unisex sofisticata."},
-      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Ambroxan e muschio, un altro 13 misterioso."},
-      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Rosa e ambroxan, baia floreale contemporanea."},
-      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Giglio e vaniglia, giglio luminoso e raffinato."},
-      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Patchouli e betulla, intensità boisée affumicata."},
-      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Rosa e legni, rosa contemporanea unisex."},
-      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Tuberosa e spezie, tuberosa intensa e sensuale."},
-      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", description: "Fior d'arancio e gelsomino, purezza floreale mediterranea."},
-      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Muschio e ambra, muschio caldo e avvolgente."},
-      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", description: "Legno di gaiaco e rosa, legno prezioso e floreale."},
-      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody", description: "Oud e zafferano, eleganza reale orientale."},
-      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental", description: "Vaniglia e spezie, calore orientale avvolgente."},
-      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", description: "Legni preziosi e ambra, cavallo reale maschile."},
-      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Mela e vaniglia, eleganza maschile raffinata."},
-      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Vaniglia bourbon e spezie, Layton gourmand maschile."},
-      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Mandorla e vaniglia, cavallo alato maschile."},
-      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Pegasus intensificato, esclusività maschile preziosa."},
-      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", description: "Legni speziati e ambra, forza maschile orientale."},
-      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Tabacco e vaniglia, re Erode maschile e sofisticato."},
-      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", description: "Layton esclusivo, vaniglia e spezie raffinate."},
-      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", description: "Rosa e lichene, femminilità floreale raffinata."},
-      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", description: "Delina esclusivo, rosa e vaniglia lussuosa."},
-      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Melone e cuoio, freschezza sportiva maschile."},
-      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Pomodoro e caffè, energia rossa maschile."},
-      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", description: "Mango e legni, eleganza nera maschile."},
-      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Pino e cuoio, classicità verde maschile."},
-      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", description: "Note marine e agrumi, blu ultra fresco maschile."},
-      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", description: "Oud e spezie, supremazia maschile orientale."},
-      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", description: "Ananas e betulla, successo maschile leggendario."},
-      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", description: "Violetta e sandalo, tweed irlandese fresco e maschile."},
-      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh", description: "Tè verde e ribes, acqua di montagna argentata."},
-      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus", description: "Lime e cocco, acque delle Isole Vergini tropicali."}
+      {id: 633, name: "Sauvage EDT", brand: "Dior", size: "60ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza selvaggia e virile, un'esplosione di note agrumate e speziate che evoca paesaggi desertici al crepuscolo.", notes: ["Bergamotto", "Pepe", "Ambroxan"], pyramid: {top: ["Bergamotto", "Pepe"], heart: ["Lavanda", "Patchouli"], base: ["Ambroxan", "Cedro"]}},
+      {id: 634, name: "Sauvage EDP", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Intensità magnetica e raffinata, dove la lavanda si fonde con note boisée per un'eleganza contemporanea.", notes: ["Bergamotto", "Lavanda", "Ambroxan"], pyramid: {top: ["Bergamotto"], heart: ["Lavanda", "Spezie"], base: ["Ambroxan", "Legni"]}},
+      {id: 638, name: "Sauvage EDT", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Libertà assoluta in bottiglia, bergamotto di Reggio Calabria e pepe di Sichuan per un carattere audace.", notes: ["Bergamotto", "Pepe", "Ambroxan"], pyramid: {top: ["Bergamotto", "Pepe"], heart: ["Lavanda", "Patchouli"], base: ["Ambroxan", "Cedro"]}},
+      {id: 643, name: "J'adore EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Un bouquet solare di ylang-ylang, rosa e gelsomino che celebra la femminilità radiosa.", notes: ["Ylang-Ylang", "Rosa", "Gelsomino"], pyramid: {top: ["Ylang-Ylang", "Rosa"], heart: ["Gelsomino", "Tuberosa"], base: ["Legni", "Muschio"]}},
+      {id: 646, name: "J'adore Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "L'essenza assoluta del lusso floreale, con note di tuberosa e sandalo per una sensualità senza tempo.", notes: ["Tuberosa", "Gelsomino", "Sandalwood"], pyramid: {top: ["Ylang-Ylang"], heart: ["Tuberosa", "Gelsomino"], base: ["Sandalwood", "Vaniglia"]}},
+      {id: 654, name: "Miss Dior EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Romanticismo parigino in ogni spruzzo, rosa centifolia e peonia per un'eleganza giovanile.", notes: ["Rosa", "Peonia", "Iris"], pyramid: {top: ["Mandarino"], heart: ["Rosa", "Peonia"], base: ["Patchouli", "Muschio"]}},
+      {id: 661, name: "Miss Dior Parfum", brand: "Dior", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Profumo-couture che unisce iris e patchouli per una femminilità sofisticata e moderna.", notes: ["Iris", "Rosa", "Patchouli"], pyramid: {top: ["Mandarino"], heart: ["Rosa", "Iris"], base: ["Patchouli", "Legni"]}},
+      {id: 691, name: "Poison EDP", brand: "Dior", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Tuberosa intensa e frutti rossi per una seduzione misteriosa e indimenticabile.", notes: ["Tuberosa", "Frutti Rossi", "Vaniglia"], pyramid: {top: ["Coriandolo", "Anice"], heart: ["Tuberosa", "Frutti Rossi"], base: ["Vaniglia", "Ambra"]}},
+      {id: 641, name: "Fahrenheit 32", brand: "Dior", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza glaciale con vaniglia del Madagascar, un contrasto termico affascinante.", notes: ["Menta", "Limone", "Vaniglia"], pyramid: {top: ["Menta", "Limone"], heart: ["Neroli", "Violetta"], base: ["Vaniglia", "Legni"]}},
+      {id: 730, name: "N°5 Eau de Parfum", brand: "Chanel", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "L'icona senza tempo, aldeidi e fiori bianchi per un'eleganza eterna e raffinata.", notes: ["Aldeidi", "Ylang-Ylang", "Vaniglia"], pyramid: {top: ["Aldeidi", "Neroli"], heart: ["Ylang-Ylang", "Gelsomino"], base: ["Vaniglia", "Sandalwood"]}},
+      {id: 733, name: "N°5 EDP", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Il profumo più celebre al mondo, ylang-ylang e rosa di Grasse in perfetta armonia.", notes: ["Aldeidi", "Ylang-Ylang", "Rosa"], pyramid: {top: ["Aldeidi"], heart: ["Ylang-Ylang", "Rosa", "Gelsomino"], base: ["Vaniglia", "Muschio"]}},
+      {id: 702, name: "Bleu de Chanel EDT", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Libertà e eleganza in equilibrio, agrumi freschi e legni nobili per l'uomo contemporaneo.", notes: ["Limone", "Menta", "Cedro"], pyramid: {top: ["Limone", "Menta"], heart: ["Zenzero", "Gelsomino"], base: ["Cedro", "Incenso"]}},
+      {id: 715, name: "Bleu de Chanel EDP", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Profondità boisée con incenso e sandalo, per un'eleganza maschile intensa.", notes: ["Limone", "Incenso", "Sandalwood"], pyramid: {top: ["Limone"], heart: ["Zenzero", "Noce Moscata"], base: ["Incenso", "Sandalwood", "Ambra"]}},
+      {id: 707, name: "Coco Mademoiselle", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Spirito libero e femminile, arancia sanguinella e patchouli per una modernità audace.", notes: ["Arancia", "Gelsomino", "Patchouli"], pyramid: {top: ["Arancia", "Mandarino"], heart: ["Rosa", "Gelsomino"], base: ["Patchouli", "Vaniglia"]}},
+      {id: 718, name: "Allure Homme Sport", brand: "Chanel", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Energia sportiva e raffinatezza, note marine e tonka per vitalità immediata.", notes: ["Note Marine", "Pepe", "Tonka"], pyramid: {top: ["Note Marine", "Limone"], heart: ["Pepe", "Noce Moscata"], base: ["Tonka", "Legni"]}},
+      {id: 709, name: "Gabrielle Essence", brand: "Chanel", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi illuminati dal sole, gelsomino e ylang-ylang per una femminilità radiosa.", notes: ["Gelsomino", "Ylang-Ylang", "Tuberosa"], pyramid: {top: ["Mandarino"], heart: ["Gelsomino", "Ylang-Ylang"], base: ["Sandalwood", "Muschio"]}},
+      {id: 33, name: "Libre EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Libertà assoluta, lavanda francese e fior d'arancio del Marocco per una donna libera.", notes: ["Lavanda", "Fior d'Arancio", "Vaniglia"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Fior d'Arancio", "Gelsomino"], base: ["Vaniglia", "Muschio"]}},
+      {id: 35, name: "Libre EDT", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Freschezza floreale audace, un inno alla libertà femminile con note luminose.", notes: ["Lavanda", "Fior d'Arancio", "Mandarino"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Fior d'Arancio"], base: ["Vaniglia", "Legni"]}},
+      {id: 56, name: "MYSLF EDP", brand: "Yves Saint Laurent", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Affermazione di sé, ambroxan e bergamotto per un'eleganza maschile contemporanea.", notes: ["Bergamotto", "Ambroxan", "Patchouli"], pyramid: {top: ["Bergamotto"], heart: ["Ambroxan", "Lavanda"], base: ["Patchouli", "Legni"]}},
+      {id: 61, name: "Black Opium EDP", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Caffè nero e fiori bianchi, una fragranza rock-chic per notti indimenticabili.", notes: ["Caffè", "Gelsomino", "Vaniglia"], pyramid: {top: ["Caffè", "Pepe Rosa"], heart: ["Gelsomino", "Fior d'Arancio"], base: ["Vaniglia", "Patchouli", "Cedro"]}},
+      {id: 64, name: "Black Opium Intense", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Intensità assoluta con vaniglia bourbon e gelsomino, seduzione senza compromessi.", notes: ["Caffè", "Vaniglia Bourbon", "Gelsomino"], pyramid: {top: ["Caffè"], heart: ["Gelsomino", "Fior d'Arancio"], base: ["Vaniglia Bourbon", "Legni"]}},
+      {id: 67, name: "Black Opium Extreme", brand: "Yves Saint Laurent", size: "100ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Versione estrema con note gourmand e fiori bianchi, per una femminilità audace.", notes: ["Caffè", "Vaniglia", "Gelsomino"], pyramid: {top: ["Caffè", "Mandarino"], heart: ["Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 48, name: "Libre Intense", brand: "Yves Saint Laurent", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Orchidea vanigliata e lavanda, un'intensità floreale calda e avvolgente.", notes: ["Orchidea", "Lavanda", "Vaniglia"], pyramid: {top: ["Lavanda", "Mandarino"], heart: ["Orchidea", "Fior d'Arancio"], base: ["Vaniglia", "Tonka"]}},
+      {id: 17, name: "Le Male EDP", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Icona maschile, lavanda e vaniglia in un flacone a forma di torso per seduzione maschile.", notes: ["Lavanda", "Menta", "Vaniglia"], pyramid: {top: ["Lavanda", "Menta"], heart: ["Cannella", "Cumino"], base: ["Vaniglia", "Sandalwood"]}},
+      {id: 21, name: "Le Male Le Parfum", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie orientali e iris, eleganza maschile sofisticata e misteriosa.", notes: ["Cardamomo", "Iris", "Vaniglia"], pyramid: {top: ["Cardamomo"], heart: ["Iris", "Lavanda"], base: ["Vaniglia", "Legni"]}},
+      {id: 14, name: "Le Beau EDT", brand: "Jean Paul Gaultier", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Freschezza tropicale, noce di cocco e bergamotto per un'evasione estiva.", notes: ["Bergamotto", "Noce di Cocco", "Tonka"], pyramid: {top: ["Bergamotto"], heart: ["Noce di Cocco"], base: ["Tonka", "Legni"]}},
+      {id: 956, name: "Scandal EDP", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Gardenia e caramello, un profumo scandalosamente femminile e gourmand.", notes: ["Gardenia", "Caramello", "Miele"], pyramid: {top: ["Mandarino", "Gardenia"], heart: ["Gardenia", "Caramello"], base: ["Miele", "Legni"]}},
+      {id: 963, name: "Scandal Absolu", brand: "Jean Paul Gaultier", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità scandalosa con miele e fiori bianchi, femminilità audace.", notes: ["Miele", "Gardenia", "Caramello"], pyramid: {top: ["Gardenia"], heart: ["Miele", "Caramello"], base: ["Legni", "Ambra"]}},
+      {id: 905, name: "Eros EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Menta fresca e mela verde, energia giovanile e mediterranea.", notes: ["Menta", "Mela Verde", "Vaniglia"], pyramid: {top: ["Menta", "Mela Verde", "Limone"], heart: ["Gelsomino", "Ambroxan"], base: ["Vaniglia", "Cedro", "Vetiver"]}},
+      {id: 900, name: "Dylan Blue EDT", brand: "Versace", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Acqua di mare e legni, freschezza mediterranea per uomo moderno.", notes: ["Note Marine", "Fico", "Ambroxan"], pyramid: {top: ["Note Marine", "Fico"], heart: ["Violetta", "Patchouli"], base: ["Ambroxan", "Muschio"]}},
+      {id: 901, name: "Dylan Purple", brand: "Versace", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Zenzero e fiori lilla, freschezza speziata e femminile.", notes: ["Zenzero", "Fiori Lilla", "Muschio"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Fiori Lilla", "Gelsomino"], base: ["Muschio", "Legni"]}},
+      {id: 914, name: "Bright Crystal", brand: "Versace", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Melograno e peonia, luminosità floreale per donna radiosa.", notes: ["Melograno", "Peonia", "Muschio"], pyramid: {top: ["Melograno", "Yuzu"], heart: ["Peonia", "Magnolia"], base: ["Muschio", "Legni"]}},
+      {id: 934, name: "Acqua di Giò Profumo", brand: "Armani", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note marine e incenso, eleganza maschile profonda e raffinata.", notes: ["Note Marine", "Bergamotto", "Incenso"], pyramid: {top: ["Note Marine", "Bergamotto"], heart: ["Rosmarino", "Salvia"], base: ["Incenso", "Patchouli"]}},
+      {id: 337, name: "Sì EDP", brand: "Armani", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Ribes nero e vaniglia, femminilità intensa e seducente.", notes: ["Ribes Nero", "Freesia", "Vaniglia"], pyramid: {top: ["Ribes Nero"], heart: ["Freesia", "Rosa"], base: ["Vaniglia", "Legni"]}},
+      {id: 327, name: "My Way EDP", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e vaniglia, un percorso floreale luminoso e moderno.", notes: ["Tuberosa", "Gelsomino", "Vaniglia"], pyramid: {top: ["Arancia", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Cedro"]}},
+      {id: 333, name: "My Way Intense", brand: "Armani", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi intensificati, vaniglia bourbon per femminilità avvolgente.", notes: ["Tuberosa", "Gelsomino", "Vaniglia Bourbon"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia Bourbon", "Legni"]}},
+      {id: 150, name: "Invictus EDT", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Vittoria in bottiglia, note marine e legnose per uomo vincente.", notes: ["Note Marine", "Legni", "Ambroxan"], pyramid: {top: ["Note Marine", "Limone"], heart: ["Legni", "Gelsomino"], base: ["Ambroxan", "Muschio"]}},
+      {id: 159, name: "1 Million EDT", brand: "Paco Rabanne", size: "80ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Oro liquido, spezie e cuoio per un successo sfavillante.", notes: ["Mandarino", "Cannella", "Cuoio"], pyramid: {top: ["Mandarino", "Pompelmo"], heart: ["Cannella", "Spezie"], base: ["Cuoio", "Legni"]}},
+      {id: 161, name: "1 Million Elixir", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Intensità dorata con davana e patchouli, seduzione maschile potente.", notes: ["Davana", "Patchouli", "Vaniglia"], pyramid: {top: ["Mandarino"], heart: ["Davana", "Cannella"], base: ["Patchouli", "Vaniglia"]}},
+      {id: 168, name: "1 Million Parfum", brand: "Paco Rabanne", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Versione Parfum con note boisée rafforzate, eleganza maschile assoluta.", notes: ["Mandarino", "Cannella", "Legni"], pyramid: {top: ["Mandarino"], heart: ["Cannella", "Spezie"], base: ["Legni", "Ambra"]}},
+      {id: 1, name: "Good Girl EDP", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Doppia personalità, tuberosa e cacao per donna seducente e misteriosa.", notes: ["Tuberosa", "Gelsomino", "Cacao"], pyramid: {top: ["Mandorla", "Caffè"], heart: ["Tuberosa", "Gelsomino"], base: ["Cacao", "Tonka", "Sandalwood"]}},
+      {id: 6, name: "Good Girl Supreme", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Versione suprema con iris e vaniglia, femminilità lussuosa.", notes: ["Iris", "Tuberosa", "Vaniglia"], pyramid: {top: ["Mandorla"], heart: ["Iris", "Tuberosa"], base: ["Vaniglia", "Tonka"]}},
+      {id: 9, name: "Good Girl Blush", brand: "Carolina Herrera", size: "80ML", gender: "female", olfactory: "oriental", price: "Su richiesta", description: "Rosa e pralina, dolcezza femminile con un tocco audace.", notes: ["Rosa", "Pralina", "Tuberosa"], pyramid: {top: ["Rosa", "Pompelmo"], heart: ["Pralina", "Tuberosa"], base: ["Legni", "Muschio"]}},
+      {id: 775, name: "Bloom EDP", brand: "Gucci", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e gardenia, esplosione floreale bianca per eleganza naturale.", notes: ["Tuberosa", "Gardenia", "Rangoon"], pyramid: {top: ["Rangoon"], heart: ["Tuberosa", "Gardenia"], base: ["Muschio", "Legni"]}},
+      {id: 782, name: "Bloom Ambrosia", brand: "Gucci", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi e sandalo, ambrosia floreale per donna raffinata.", notes: ["Tuberosa", "Gardenia", "Sandalwood"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gardenia"], base: ["Sandalwood", "Ambra"]}},
+      {id: 799, name: "Flora Gorgeous Gardenia", brand: "Gucci", size: "75ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Gardenia e pera, freschezza floreale fruttata e femminile.", notes: ["Gardenia", "Pera", "Patchouli"], pyramid: {top: ["Pera", "Mandarino"], heart: ["Gardenia", "Fiori Bianchi"], base: ["Patchouli", "Muschio"]}},
+      {id: 250, name: "Paradoxe EDP", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e tuberosa, paradosso tra luce e ombra per donna moderna.", notes: ["Neroli", "Tuberosa", "Ambra"], pyramid: {top: ["Neroli", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Ambra", "Legni"]}},
+      {id: 252, name: "Paradoxe Intense", brand: "Prada", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità del paradosso, vaniglia e fiori bianchi per femminilità profonda.", notes: ["Neroli", "Tuberosa", "Vaniglia"], pyramid: {top: ["Neroli"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Ambra"]}},
+      {id: 255, name: "Luna Rossa Carbon", brand: "Prada", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Lavanda e ambroxan, freschezza minerale per uomo contemporaneo.", notes: ["Lavanda", "Ambroxan", "Legni"], pyramid: {top: ["Lavanda", "Bergamotto"], heart: ["Ambroxan", "Note Minerali"], base: ["Legni", "Muschio"]}},
+      {id: 922, name: "La Vie Est Belle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Iris pallido e pralina, felicità in bottiglia per donna ottimista.", notes: ["Iris", "Pralina", "Patchouli"], pyramid: {top: ["Ribes Nero", "Pera"], heart: ["Iris", "Gelsomino"], base: ["Pralina", "Patchouli"]}},
+      {id: 925, name: "La Vie Est Belle L'Éclat", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Luminosità floreale, pesca e iris per gioia di vivere radiosa.", notes: ["Pesca", "Iris", "Pralina"], pyramid: {top: ["Pesca", "Limone"], heart: ["Iris", "Gelsomino"], base: ["Pralina", "Legni"]}},
+      {id: 929, name: "Idôle EDP", brand: "Lancôme", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e biancospino, idolo floreale per donna ispiratrice.", notes: ["Rosa", "Biancospino", "Muschio"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Rosa", "Biancospino"], base: ["Muschio", "Vaniglia"]}},
+      {id: 987, name: "L'Interdit EDP", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa proibita e legni, trasgressione elegante e femminile.", notes: ["Tuberosa", "Gelsomino", "Legni"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Legni", "Ambra"]}},
+      {id: 994, name: "L'Interdit Intense", brand: "Givenchy", size: "80ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Intensità proibita con vaniglia e fiori bianchi, seduzione audace.", notes: ["Tuberosa", "Gelsomino", "Vaniglia"], pyramid: {top: ["Arancia"], heart: ["Tuberosa", "Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 1002, name: "Gentleman EDP", brand: "Givenchy", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni preziosi e pera, gentilezza maschile sofisticata.", notes: ["Pera", "Iris", "Legni"], pyramid: {top: ["Pera", "Bergamotto"], heart: ["Iris", "Cardamomo"], base: ["Legni", "Vaniglia"]}},
+      {id: 197, name: "Black Orchid EDP", brand: "Tom Ford", size: "75ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Orchidea nera e spezie, lusso oscuro e sensuale senza tempo.", notes: ["Orchidea", "Spezie", "Patchouli"], pyramid: {top: ["Tartufo", "Ylang-Ylang"], heart: ["Orchidea", "Spezie"], base: ["Patchouli", "Incenso", "Vaniglia"]}},
+      {id: 202, name: "Oud Wood", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legno di oud e sandalo, eleganza orientale raffinata e preziosa.", notes: ["Oud", "Sandalwood", "Cardamomo"], pyramid: {top: ["Cardamomo", "Legno di Rosa"], heart: ["Oud", "Sandalwood"], base: ["Ambra", "Tonka"]}},
+      {id: 246, name: "Tobacco Vanille", brand: "Tom Ford", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e vaniglia, calore avvolgente e sofisticato.", notes: ["Tabacco", "Vaniglia", "Cacao"], pyramid: {top: ["Tabacco", "Spezie"], heart: ["Vaniglia", "Cacao"], base: ["Legni", "Frutta Secca"]}},
+      {id: 1042, name: "Boss Bottled EDP", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Mela e legni, successo maschile in bottiglia elegante.", notes: ["Mela", "Cannella", "Legni"], pyramid: {top: ["Mela", "Bergamotto"], heart: ["Cannella", "Chiodi di Garofano"], base: ["Legni", "Vaniglia"]}},
+      {id: 1050, name: "Boss Bottled Parfum", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Intensità del successo, vaniglia e legni per uomo determinato.", notes: ["Mela", "Vaniglia", "Legni"], pyramid: {top: ["Mela"], heart: ["Cannella", "Cardamomo"], base: ["Vaniglia", "Legni"]}},
+      {id: 1053, name: "Boss The Scent", brand: "Hugo Boss", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Zenzero e maninka, seduzione maschile moderna.", notes: ["Zenzero", "Maninka", "Cuoio"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Maninka", "Lavanda"], base: ["Cuoio", "Legni"]}},
+      {id: 89, name: "Born in Roma Donna", brand: "Valentino", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Vaniglia bourbon e fiori, romanità contemporanea e audace.", notes: ["Gelsomino", "Vaniglia Bourbon", "Legni"], pyramid: {top: ["Bergamotto", "Pepata"], heart: ["Gelsomino", "Fiori Bianchi"], base: ["Vaniglia Bourbon", "Legni"]}},
+      {id: 110, name: "Born in Roma Uomo", brand: "Valentino", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legno di vetiver e salvia, Roma moderna in versione maschile.", notes: ["Vetiver", "Salvia", "Legni"], pyramid: {top: ["Bergamotto", "Salvia"], heart: ["Vetiver", "Spezie"], base: ["Legni", "Ambra"]}},
+      {id: 404, name: "Light Blue Intense", brand: "Dolce & Gabbana", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Limone di Sicilia e legni, Mediterraneo intenso e luminoso.", notes: ["Limone", "Pompelmo", "Legni"], pyramid: {top: ["Limone", "Pompelmo"], heart: ["Note Marine", "Gelsomino"], base: ["Legni", "Muschio"]}},
+      {id: 394, name: "Devotion EDP", brand: "Dolce & Gabbana", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e vaniglia, devozione floreale calda e avvolgente.", notes: ["Neroli", "Vaniglia", "Gelsomino"], pyramid: {top: ["Neroli", "Limone"], heart: ["Gelsomino", "Fiori Bianchi"], base: ["Vaniglia", "Legni"]}},
+      {id: 452, name: "Omnia Crystalline", brand: "Bvlgari", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Bambù e loto, purezza cristallina e femminile.", notes: ["Bambù", "Loto", "Muschio"], pyramid: {top: ["Bambù", "Nashi"], heart: ["Loto", "Gelsomino"], base: ["Muschio", "Legni"]}},
+      {id: 472, name: "Man in Black EDP", brand: "Bvlgari", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Rum e spezie, eleganza maschile intensa e sofisticata.", notes: ["Rum", "Spezie", "Cuoio"], pyramid: {top: ["Rum", "Spezie"], heart: ["Tuberosa", "Iris"], base: ["Cuoio", "Legni", "Ambra"]}},
+      {id: 1058, name: "Spicebomb Extreme", brand: "Viktor&Rolf", size: "90ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie esplosive e tabacco, potenza orientale maschile.", notes: ["Tabacco", "Spezie", "Vaniglia"], pyramid: {top: ["Lavanda", "Bergamotto"], heart: ["Tabacco", "Spezie"], base: ["Vaniglia", "Legni"]}},
+      {id: 1063, name: "Flowerbomb EDP", brand: "Viktor&Rolf", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Bouquet esplosivo di fiori, femminilità radiosa e generosa.", notes: ["Orchidea", "Freesia", "Patchouli"], pyramid: {top: ["Tè Verde", "Bergamotto"], heart: ["Orchidea", "Freesia", "Gelsomino"], base: ["Patchouli", "Muschio"]}},
+      {id: 423, name: "Her EDP", brand: "Burberry", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Frutti rossi e fiori, eroina moderna e femminile.", notes: ["Frutti Rossi", "Gelsomino", "Muschio"], pyramid: {top: ["Frutti Rossi", "Limone"], heart: ["Gelsomino", "Tè"], base: ["Muschio", "Legni"]}},
+      {id: 415, name: "Brit for Him", brand: "Burberry", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Cardamomo e legni, british style fresco e raffinato.", notes: ["Cardamomo", "Limone", "Legni"], pyramid: {top: ["Cardamomo", "Limone"], heart: ["Nocciola", "Spezie"], base: ["Legni", "Muschio"]}},
+      {id: 614, name: "The Most Wanted Parfum", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legno di cedro e vaniglia, desiderio maschile irresistibile.", notes: ["Cedro", "Vaniglia", "Cardamomo"], pyramid: {top: ["Cardamomo"], heart: ["Cedro", "Lavanda"], base: ["Vaniglia", "Legni"]}},
+      {id: 616, name: "Wanted by Night", brand: "Azzaro", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Cannella e tabacco, notte misteriosa e seducente.", notes: ["Cannella", "Tabacco", "Cuoio"], pyramid: {top: ["Mandarino", "Lavanda"], heart: ["Cannella", "Tabacco"], base: ["Cuoio", "Legni"]}},
+      {id: 625, name: "Yara EDP", brand: "Lattafa", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Orchidea e vaniglia, eleganza orientale accessibile e raffinata.", notes: ["Orchidea", "Vaniglia", "Legni"], pyramid: {top: ["Arancia", "Bergamotto"], heart: ["Orchidea", "Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 627, name: "Asad EDP", brand: "Lattafa", size: "100ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Spezie orientali e legni, forza maschile intensa.", notes: ["Spezie", "Caffè", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Caffè", "Tabacco"], base: ["Legni", "Ambra"]}},
+      {id: 115, name: "Xerjoff Naxos", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Miele e tabacco, lusso italiano artigianale e prezioso.", notes: ["Miele", "Tabacco", "Lavanda"], pyramid: {top: ["Lavanda", "Limone", "Bergamotto"], heart: ["Miele", "Cannella"], base: ["Tabacco", "Legni", "Vaniglia"]}},
+      {id: 116, name: "Xerjoff Erba Pura", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Agrumi siciliani e muschio, freschezza mediterranea lussuosa.", notes: ["Agrumi", "Muschio", "Ambra"], pyramid: {top: ["Limone", "Bergamotto", "Arancia"], heart: ["Frutti Esotici"], base: ["Muschio", "Ambra"]}},
+      {id: 117, name: "Xerjoff Renaissance", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Spezie preziose e fiori, rinascimento olfattivo raffinato.", notes: ["Spezie", "Fiori", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Fiori", "Iris"], base: ["Legni", "Ambra"]}},
+      {id: 118, name: "Xerjoff Shooting Stars", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni rari e ambra, stelle cadenti in bottiglia preziosa.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Rari"], base: ["Ambra", "Muschio"]}},
+      {id: 126, name: "Xerjoff Alexandria", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Oud e rosa, viaggio nell'Oriente lussuoso e misterioso.", notes: ["Oud", "Rosa", "Spezie"], pyramid: {top: ["Bergamotto", "Lavanda"], heart: ["Oud", "Rosa"], base: ["Spezie", "Ambra"]}},
+      {id: 127, name: "Xerjoff Casamorati", brand: "Xerjoff", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Fiori classici italiani, tradizione profumiera raffinata.", notes: ["Fiori", "Legni", "Muschio"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Classici"], base: ["Legni", "Muschio"]}},
+      {id: 142, name: "Xerjoff Moon", brand: "Xerjoff", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori notturni e vaniglia, luce lunare femminile e poetica.", notes: ["Fiori Notturni", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Notturni", "Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 143, name: "Xerjoff Southern Cross", brand: "Xerjoff", size: "50ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni australiani e spezie, viaggio nell'emisfero sud maschile.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Australiani"], base: ["Ambra", "Muschio"]}},
+      {id: 823, name: "Imagination", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "citrus", price: "Su richiesta", description: "Tè nero e agrumi, immaginazione creativa e raffinata.", notes: ["Tè Nero", "Agrumi", "Cannella"], pyramid: {top: ["Limone", "Arancia", "Bergamotto"], heart: ["Tè Nero", "Cannella"], base: ["Oud", "Sandalwood", "Ambroxan"]}},
+      {id: 824, name: "Ombre Nomade", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e legni, ombra del nomade nel deserto prezioso.", notes: ["Oud", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Oud", "Legni"], base: ["Ambra", "Muschio"]}},
+      {id: 825, name: "Sur la Route", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Agrumi e spezie leggere, freschezza del viaggio maschile.", notes: ["Agrumi", "Spezie", "Legni"], pyramid: {top: ["Limone", "Bergamotto"], heart: ["Spezie Leggere", "Tè"], base: ["Legni", "Muschio"]}},
+      {id: 826, name: "Afternoon Swim", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Arancia e mandarino, tuffo pomeridiano rinfrescante.", notes: ["Arancia", "Mandarino", "Bergamotto"], pyramid: {top: ["Arancia", "Mandarino"], heart: ["Bergamotto", "Limone"], base: ["Muschio", "Legni"]}},
+      {id: 827, name: "Meteore", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note acquatiche e agrumi, leggerezza maschile contemporanea.", notes: ["Note Acquatiche", "Agrumi", "Legni"], pyramid: {top: ["Agrumi", "Note Acquatiche"], heart: ["Tè", "Spezie"], base: ["Legni", "Muschio"]}},
+      {id: 828, name: "L'Immensité", brand: "Louis Vuitton", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Zenzero e ambroxan, immensità fresca e maschile.", notes: ["Zenzero", "Ambroxan", "Legni"], pyramid: {top: ["Zenzero", "Bergamotto"], heart: ["Ambroxan", "Note Acquatiche"], base: ["Legni", "Muschio"]}},
+      {id: 829, name: "Pacific Chill", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "fresh", price: "Su richiesta", description: "Frutti rossi e menta, freschezza californiana rilassante.", notes: ["Frutti Rossi", "Menta", "Legni"], pyramid: {top: ["Frutti Rossi", "Menta"], heart: ["Note Acquatiche"], base: ["Legni", "Muschio"]}},
+      {id: 830, name: "Symphony", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori armoniosi e vaniglia, sinfonia femminile elegante.", notes: ["Fiori", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Armoniosi", "Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 831, name: "Attrape-Rêves", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Iris e patchouli, acchiappasogni floreale e poetico.", notes: ["Iris", "Patchouli", "Vaniglia"], pyramid: {top: ["Bergamotto"], heart: ["Iris", "Fiori"], base: ["Patchouli", "Vaniglia"]}},
+      {id: 832, name: "Dans la Peau", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e sandalo, nella pelle femminile sensuale.", notes: ["Tuberosa", "Sandalwood", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Tuberosa", "Gelsomino"], base: ["Sandalwood", "Ambra"]}},
+      {id: 833, name: "Apogée", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi luminosi, apice della femminilità floreale.", notes: ["Fiori Bianchi", "Legni", "Muschio"], pyramid: {top: ["Bergamotto"], heart: ["Fiori Bianchi", "Gelsomino"], base: ["Legni", "Muschio"]}},
+      {id: 834, name: "Coeur Battant", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Ylang-ylang e vaniglia, cuore che batte femminile.", notes: ["Ylang-Ylang", "Vaniglia", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Ylang-Ylang", "Fiori"], base: ["Vaniglia", "Legni"]}},
+      {id: 835, name: "Nuit de Feu", brand: "Louis Vuitton", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Spezie incendiate e incenso, notte di fuoco intensa.", notes: ["Spezie", "Incenso", "Legni"], pyramid: {top: ["Spezie", "Pepe"], heart: ["Incenso", "Oud"], base: ["Legni", "Ambra"]}},
+      {id: 836, name: "Les Sables Roses", brand: "Louis Vuitton", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e legni preziosi, sabbie rosa del deserto femminile.", notes: ["Rosa", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Rosa", "Fiori"], base: ["Legni Preziosi", "Ambra"]}},
+      {id: 289, name: "Initio Oud for Greatness", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e zafferano, grandezza orientale mistica e potente.", notes: ["Oud", "Zafferano", "Legni"], pyramid: {top: ["Zafferano", "Lavanda"], heart: ["Oud", "Nutmeg"], base: ["Legni", "Ambra"]}},
+      {id: 290, name: "Initio Absolute Aphrodisiac", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia e spezie, afrodisiaco assoluto e sensuale.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 291, name: "Initio Side Effect", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e rum, effetti collaterali piacevoli e intensi.", notes: ["Tabacco", "Rum", "Vaniglia"], pyramid: {top: ["Rum", "Cannella"], heart: ["Tabacco", "Fiori"], base: ["Vaniglia", "Legni"]}},
+      {id: 292, name: "Initio Rehab", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni terapeutici e spezie, riabilitazione olfattiva.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}},
+      {id: 293, name: "Initio Musk Therapy", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Muschio e legni, terapia muschiosa avvolgente.", notes: ["Muschio", "Legni", "Ambra"], pyramid: {top: ["Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 294, name: "Initio Blessed Baraka", brand: "Initio", size: "90ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legni benedetti e ambra, benedizione olfattiva preziosa.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}},
+      {id: 295, name: "Initio Paragon", brand: "Initio", size: "90ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni nobili e spezie, paragone di eccellenza maschile.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Nobili"], base: ["Ambra", "Muschio"]}},
+      {id: 296, name: "Initio Atomic Rose", brand: "Initio", size: "90ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa atomica e patchouli, potenza floreale esplosiva.", notes: ["Rosa", "Patchouli", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Rosa", "Fiori"], base: ["Patchouli", "Legni"]}},
+      {id: 304, name: "Kilian Angels' Share", brand: "By Kilian", size: "50ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Cognac e cannella, parte degli angeli golosa e sofisticata.", notes: ["Cognac", "Cannella", "Vaniglia"], pyramid: {top: ["Cognac", "Cannella"], heart: ["Pralina", "Fiori"], base: ["Vaniglia", "Legni"]}},
+      {id: 305, name: "Kilian Straight to Heaven", brand: "By Kilian", size: "50ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Rum e legni, via diretta al paradiso maschile.", notes: ["Rum", "Legni", "Ambra"], pyramid: {top: ["Rum", "Bergamotto"], heart: ["Legni", "Patchouli"], base: ["Ambra", "Muschio"]}},
+      {id: 306, name: "Kilian Good Girl Gone Bad", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori bianchi e ambra, brava ragazza che diventa cattiva.", notes: ["Fiori Bianchi", "Ambra", "Legni"], pyramid: {top: ["Arancia", "Neroli"], heart: ["Fiori Bianchi", "Gelsomino"], base: ["Ambra", "Legni"]}},
+      {id: 307, name: "Kilian Love Don't Be Shy", brand: "By Kilian", size: "50ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Neroli e marshmallow, amore dolce e timido.", notes: ["Neroli", "Marshmallow", "Ambra"], pyramid: {top: ["Neroli", "Bergamotto"], heart: ["Marshmallow", "Fiori"], base: ["Ambra", "Muschio"]}},
+      {id: 308, name: "Kilian Princess", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori di pesco e vaniglia, principessa moderna e femminile.", notes: ["Fiori di Pesco", "Vaniglia", "Legni"], pyramid: {top: ["Fiori di Pesco", "Bergamotto"], heart: ["Fiori", "Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 309, name: "Kilian Princess Rose", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e frutti, principessa floreale contemporanea.", notes: ["Rosa", "Frutti", "Legni"], pyramid: {top: ["Rosa", "Frutti"], heart: ["Fiori", "Gelsomino"], base: ["Legni", "Muschio"]}},
+      {id: 311, name: "Kilian Playing with the Devil", brand: "By Kilian", size: "100ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Fiori rossi e spezie, gioco pericoloso e seducente.", notes: ["Fiori Rossi", "Spezie", "Legni"], pyramid: {top: ["Fiori Rossi", "Spezie"], heart: ["Fiori", "Gelsomino"], base: ["Legni", "Ambra"]}},
+      {id: 312, name: "Kilian Intoxicated", brand: "By Kilian", size: "100ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Caffè e spezie verdi, ebbrezza orientale intensa.", notes: ["Caffè", "Spezie Verdi", "Legni"], pyramid: {top: ["Caffè", "Cardamomo"], heart: ["Spezie Verdi", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 940, name: "Le Labo Thé Matcha 26", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Tè matcha e legni, cerimonia del tè contemporanea.", notes: ["Tè Matcha", "Legni", "Muschio"], pyramid: {top: ["Tè Matcha", "Bergamotto"], heart: ["Legni", "Fiori"], base: ["Muschio", "Ambra"]}},
+      {id: 941, name: "Le Labo Thé Noir 29", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Tè nero e cedro, eleganza boisée raffinata.", notes: ["Tè Nero", "Cedro", "Ambra"], pyramid: {top: ["Tè Nero", "Bergamotto"], heart: ["Cedro", "Fichi"], base: ["Ambra", "Muschio"]}},
+      {id: 942, name: "Le Labo Santal 33", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Sandalwood e cuoio, icona unisex sofisticata.", notes: ["Sandalwood", "Cuoio", "Cedro"], pyramid: {top: ["Cardamomo", "Iris"], heart: ["Violetta", "Ambroxan"], base: ["Sandalwood", "Cuoio", "Cedro"]}},
+      {id: 943, name: "Le Labo Another 13", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Ambroxan e muschio, un altro 13 misterioso.", notes: ["Ambroxan", "Muschio", "Legni"], pyramid: {top: ["Ambroxan", "Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 944, name: "Le Labo Baie 19", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Rosa e ambroxan, baia floreale contemporanea.", notes: ["Rosa", "Ambroxan", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Ambroxan", "Fiori"], base: ["Legni", "Muschio"]}},
+      {id: 945, name: "Le Labo Lys 41", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Giglio e vaniglia, giglio luminoso e raffinato.", notes: ["Giglio", "Vaniglia", "Legni"], pyramid: {top: ["Giglio", "Bergamotto"], heart: ["Fiori Bianchi"], base: ["Vaniglia", "Legni"]}},
+      {id: 946, name: "Le Labo Patchouli 24", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Patchouli e betulla, intensità boisée affumicata.", notes: ["Patchouli", "Betulla", "Legni"], pyramid: {top: ["Betulla", "Bergamotto"], heart: ["Patchouli", "Incenso"], base: ["Legni", "Ambra"]}},
+      {id: 947, name: "Le Labo Rose 31", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Rosa e legni, rosa contemporanea unisex.", notes: ["Rosa", "Legni", "Muschio"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Legni", "Fiori"], base: ["Muschio", "Ambra"]}},
+      {id: 948, name: "Le Labo Tubéreuse 40", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Tuberosa e spezie, tuberosa intensa e sensuale.", notes: ["Tuberosa", "Spezie", "Legni"], pyramid: {top: ["Tuberosa", "Spezie"], heart: ["Fiori Bianchi"], base: ["Legni", "Ambra"]}},
+      {id: 949, name: "Le Labo Fleur d'Oranger 27", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "floral", price: "Su richiesta", description: "Fior d'arancio e gelsomino, purezza floreale mediterranea.", notes: ["Fior d'Arancio", "Gelsomino", "Legni"], pyramid: {top: ["Fior d'Arancio", "Bergamotto"], heart: ["Gelsomino", "Fiori"], base: ["Legni", "Muschio"]}},
+      {id: 950, name: "Le Labo Musc 25", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Muschio e ambra, muschio caldo e avvolgente.", notes: ["Muschio", "Ambra", "Legni"], pyramid: {top: ["Bergamotto"], heart: ["Muschio", "Fiori"], base: ["Ambra", "Legni"]}},
+      {id: 951, name: "Le Labo Gaiac 10", brand: "Le Labo", size: "100ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Legno di gaiaco e rosa, legno prezioso e floreale.", notes: ["Gaiaco", "Rosa", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Gaiaco", "Legni"], base: ["Muschio", "Ambra"]}},
+      {id: 868, name: "Parfums de Marly Haltane", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "woody", price: "Su richiesta", description: "Oud e zafferano, eleganza reale orientale.", notes: ["Oud", "Zafferano", "Legni"], pyramid: {top: ["Zafferano", "Lavanda"], heart: ["Oud", "Legni"], base: ["Ambra", "Muschio"]}},
+      {id: 869, name: "Parfums de Marly Althair", brand: "Parfums de Marly", size: "125ML", gender: "unisex", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia e spezie, calore orientale avvolgente.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 870, name: "Parfums de Marly Godolphin", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni preziosi e ambra, cavallo reale maschile.", notes: ["Legni", "Ambra", "Spezie"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni Preziosi"], base: ["Ambra", "Muschio"]}},
+      {id: 871, name: "Parfums de Marly Layton", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Mela e vaniglia, eleganza maschile raffinata.", notes: ["Mela", "Vaniglia", "Lavanda"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Violetta", "Gelsomino"], base: ["Vaniglia", "Legni"]}},
+      {id: 872, name: "Parfums de Marly Layton Vanilla", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Vaniglia bourbon e spezie, Layton gourmand maschile.", notes: ["Vaniglia Bourbon", "Spezie", "Legni"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Vaniglia Bourbon", "Spezie"], base: ["Legni", "Ambra"]}},
+      {id: 874, name: "Parfums de Marly Pegasus", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Mandorla e vaniglia, cavallo alato maschile.", notes: ["Mandorla", "Vaniglia", "Legni"], pyramid: {top: ["Mandorla", "Bergamotto"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 875, name: "Parfums de Marly Pegasus Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Pegasus intensificato, esclusività maschile preziosa.", notes: ["Mandorla", "Vaniglia", "Legni"], pyramid: {top: ["Mandorla", "Spezie"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 877, name: "Parfums de Marly Kalan", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Legni speziati e ambra, forza maschile orientale.", notes: ["Legni", "Spezie", "Ambra"], pyramid: {top: ["Bergamotto", "Spezie"], heart: ["Legni", "Incenso"], base: ["Ambra", "Muschio"]}},
+      {id: 878, name: "Parfums de Marly Herod", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Tabacco e vaniglia, re Erode maschile e sofisticato.", notes: ["Tabacco", "Vaniglia", "Legni"], pyramid: {top: ["Tabacco", "Pepe"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 879, name: "Parfums de Marly Layton Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "male", olfactory: "oriental", price: "Su richiesta", description: "Layton esclusivo, vaniglia e spezie raffinate.", notes: ["Vaniglia", "Spezie", "Legni"], pyramid: {top: ["Mela", "Lavanda"], heart: ["Vaniglia", "Spezie"], base: ["Legni", "Ambra"]}},
+      {id: 880, name: "Parfums de Marly Delina", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Rosa e lichene, femminilità floreale raffinata.", notes: ["Rosa", "Lichene", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Lichene", "Fiori"], base: ["Legni", "Muschio"]}},
+      {id: 881, name: "Parfums de Marly Delina Exclusif", brand: "Parfums de Marly", size: "125ML", gender: "female", olfactory: "floral", price: "Su richiesta", description: "Delina esclusivo, rosa e vaniglia lussuosa.", notes: ["Rosa", "Vaniglia", "Legni"], pyramid: {top: ["Rosa", "Bergamotto"], heart: ["Vaniglia", "Fiori"], base: ["Legni", "Ambra"]}},
+      {id: 1009, name: "Polo Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Melone e cuoio, freschezza sportiva maschile.", notes: ["Melone", "Cuoio", "Legni"], pyramid: {top: ["Melone", "Mandarino"], heart: ["Cuoio", "Note Marine"], base: ["Legni", "Muschio"]}},
+      {id: 1010, name: "Polo Red", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Pomodoro e caffè, energia rossa maschile.", notes: ["Pomodoro", "Caffè", "Legni"], pyramid: {top: ["Pomodoro", "Limone"], heart: ["Caffè", "Spezie"], base: ["Legni", "Ambra"]}},
+      {id: 1011, name: "Polo Black", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Mango e legni, eleganza nera maschile.", notes: ["Mango", "Legni", "Ambra"], pyramid: {top: ["Mango", "Bergamotto"], heart: ["Legni", "Patchouli"], base: ["Ambra", "Muschio"]}},
+      {id: 1012, name: "Polo Green", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Pino e cuoio, classicità verde maschile.", notes: ["Pino", "Cuoio", "Legni"], pyramid: {top: ["Pino", "Bergamotto"], heart: ["Cuoio", "Note Verdi"], base: ["Legni", "Muschio"]}},
+      {id: 1013, name: "Polo Ultra Blue", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Note marine e agrumi, blu ultra fresco maschile.", notes: ["Note Marine", "Agrumi", "Legni"], pyramid: {top: ["Note Marine", "Agrumi"], heart: ["Lavanda", "Spezie"], base: ["Legni", "Muschio"]}},
+      {id: 1014, name: "Polo Supreme Oud", brand: "Ralph Lauren", size: "125ML", gender: "male", olfactory: "woody", price: "Su richiesta", description: "Oud e spezie, supremazia maschile orientale.", notes: ["Oud", "Spezie", "Legni"], pyramid: {top: ["Oud", "Bergamotto"], heart: ["Spezie", "Incenso"], base: ["Legni", "Ambra"]}},
+      {id: 1114, name: "Creed Aventus", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Ananas e betulla, successo maschile leggendario.", notes: ["Ananas", "Betulla", "Muschio"], pyramid: {top: ["Ananas", "Bergamotto", "Mela"], heart: ["Betulla", "Patchouli", "Gelsomino"], base: ["Muschio", "Vaniglia", "Quercia"]}},
+      {id: 1115, name: "Creed Green Irish Tweed", brand: "Creed", size: "100ML", gender: "male", olfactory: "fresh", price: "Su richiesta", description: "Violetta e sandalo, tweed irlandese fresco e maschile.", notes: ["Violetta", "Sandalwood", "Ambra"], pyramid: {top: ["Violetta", "Limone"], heart: ["Iris", "Gelsomino"], base: ["Sandalwood", "Ambra"]}},
+      {id: 1116, name: "Creed Silver Mountain Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "fresh", price: "Su richiesta", description: "Tè verde e ribes, acqua di montagna argentata.", notes: ["Tè Verde", "Ribes", "Muschio"], pyramid: {top: ["Tè Verde", "Ribes", "Arancia"], heart: ["Note Acquatiche", "Fiori"], base: ["Muschio", "Legni"]}},
+      {id: 1117, name: "Creed Virgin Island Water", brand: "Creed", size: "100ML", gender: "unisex", olfactory: "citrus", price: "Su richiesta", description: "Lime e cocco, acque delle Isole Vergini tropicali.", notes: ["Lime", "Cocco", "Rum"], pyramid: {top: ["Lime", "Bergamotto"], heart: ["Cocco", "Fiori Tropicali"], base: ["Rum", "Legni"]}}
     ];
 
     const WHATSAPP_NUMBER = "4915511780179";
-    let list = JSON.parse(localStorage.getItem("list") || "[]");
-    let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    let recentSearches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
-    let activeFilter = "Tutti";
-    let activeGender = "all";
-    let activeOlfactory = "all";
-    let currentSort = "default";
-    let currentPage = 1;
-    let currentModalProduct = null;
-    const ITEMS_PER_PAGE = 24;
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    let currentFilters = { olfactory: 'all', gender: 'all', search: '', sort: 'default' };
+    let quizStep = 0;
+    let quizAnswers = {};
 
-    const brandEmojis = {
-      'Armani': '👔',
-      'Azzaro': '⭐',
-      'Burberry': '🧥',
-      'Bvlgari': '💎',
-      'By Kilian': '🥃',
-      'Carolina Herrera': '',
-      'Chanel': '👗',
-      'Creed': '🛡️',
-      'Dior': '🌹',
-      'Dolce & Gabbana': '👑',
-      'Givenchy': '🦌',
-      'Gucci': '🐍',
-      'Hugo Boss': '💼',
-      'Jean Paul Gaultier': '👕',
-      'Lancôme': '🌸',
-      'Lattafa': '🕌',
-      'Le Labo': '🧪',
-      'Louis Vuitton': '👜',
-      'Initio': '✨',
-      'Parfums de Marly': '🐴',
-      'Paco Rabanne': '🏆',
-      'Prada': '👠',
-      'Ralph Lauren': '🐎',
-      'Tom Ford': '🕶️',
-      'Valentino': '❤️',
-      'Versace': '️',
-      'Viktor&Rolf': '🎭',
-      'Xerjoff': '🌟',
-      'Yves Saint Laurent': '💄'
-    };
-
-    function initBrandFilters() {
-      const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
-      const container = document.getElementById("filtersContainer");
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      renderProducts();
+      updateCounts();
       
-      let html = '<button class="filter-all active" onclick="setFilter(\'Tutti\')">🏪 Tutti i Marchi</button>';
-      
-      brands.forEach(brand => {
-        const emoji = brandEmojis[brand] || '🏷️';
-        const isActive = brand === activeFilter ? 'active' : '';
-        html += `<button class="filter ${isActive}" onclick="setFilter('${brand.replace(/'/g, "\\'")}')">${emoji} ${brand}</button>`;
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
       });
-      
-      container.innerHTML = html;
+    });
+
+    // Create floating particles
+    function createParticles() {
+      const container = document.getElementById('bgAnimation');
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'bg-particle';
+        particle.style.width = Math.random() * 200 + 100 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+        container.appendChild(particle);
+      }
     }
 
-    function toggleFavorite(id, event) {
-      if (event) event.stopPropagation();
-      const index = favorites.indexOf(id);
-      const product = PRODUCTS.find(p => p.id === id);
+    // Render Products
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      let filtered = PRODUCTS.filter(p => {
+        const matchOlfactory = currentFilters.olfactory === 'all' || p.olfactory === currentFilters.olfactory;
+        const matchGender = currentFilters.gender === 'all' || p.gender === currentFilters.gender;
+        const matchSearch = !currentFilters.search || 
+          p.name.toLowerCase().includes(currentFilters.search.toLowerCase()) ||
+          p.brand.toLowerCase().includes(currentFilters.search.toLowerCase()) ||
+          p.notes.some(n => n.toLowerCase().includes(currentFilters.search.toLowerCase()));
+        return matchOlfactory && matchGender && matchSearch;
+      });
+
+      // Sort
+      if (currentFilters.sort === 'name') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (currentFilters.sort === 'brand') {
+        filtered.sort((a, b) => a.brand.localeCompare(b.brand));
+      }
+
+      document.getElementById('productsCount').textContent = `${filtered.length} profumi`;
+
+      grid.innerHTML = filtered.map(product => `
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image-wrapper">
+            <img src="assets/${product.id}.jpg" alt="${product.name}" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%231a1a1a%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23d4af37%22 font-size=%2220%22%3E${product.brand}%3C/text%3E%3C/svg%3E'">
+            <span class="product-badge">${product.gender === 'male' ? 'Uomo' : product.gender === 'female' ? 'Donna' : 'Unisex'}</span>
+            <button class="product-favorite ${favorites.includes(product.id) ? 'active' : ''}" onclick="toggleFavorite(${product.id})">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">${product.brand}</div>
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-notes">
+              ${product.notes.slice(0, 3).map(note => `<span class="note-tag">${note}</span>`).join('')}
+            </div>
+            <div class="product-footer">
+              <span class="product-price">${product.price}</span>
+              <button class="product-add" onclick="addToCart(${product.id})">
+                <i class="fas fa-plus"></i> Aggiungi
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter Functions
+    function filterBy(type, value) {
+      currentFilters[type] = value;
+      
+      // Update active chips
+      event.target.parentElement.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      renderProducts();
+    }
+
+    function sortBy(type) {
+      currentFilters.sort = type;
+      event.target.parentElement.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      renderProducts();
+    }
+
+    function handleSearch() {
+      currentFilters.search = document.getElementById('searchInput').value;
+      renderProducts();
+    }
+
+    // Cart Functions
+    function addToCart(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      const existingItem = cart.find(item => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCounts();
+      showToast(`${product.name} aggiunto alla lista!`);
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCounts();
+      renderCart();
+    }
+
+    function updateQuantity(productId, change) {
+      const item = cart.find(item => item.id === productId);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          removeFromCart(productId);
+        } else {
+          localStorage.setItem('cart', JSON.stringify(cart));
+          updateCounts();
+          renderCart();
+        }
+      }
+    }
+
+    function updateCounts() {
+      const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartCount').textContent = cartCount;
+      document.getElementById('favoritesCount').textContent = favorites.length;
+    }
+
+    function toggleCart() {
+      const drawer = document.getElementById('cartDrawer');
+      drawer.classList.toggle('active');
+      if (drawer.classList.contains('active')) {
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      if (cart.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--gray-medium);">La tua lista è vuota</div>';
+        document.getElementById('cartTotal').textContent = '0 prodotti';
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="assets/${item.id}.jpg" alt="${item.name}" class="cart-item-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%231a1a1a%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div style="color: var(--gray-medium); font-size: 0.85rem;">${item.brand} • ${item.size}</div>
+            <div class="cart-item-price">${item.price}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button onclick="updateQuantity(${item.id}, -1)" style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; cursor: pointer;">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, 1)" style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; cursor: pointer;">+</button>
+            <button onclick="removeFromCart(${item.id})" style="margin-left: 10px; background: none; border: none; color: var(--red-ruby); cursor: pointer;">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartTotal').textContent = `${totalItems} prodott${totalItems === 1 ? 'o' : 'i'}`;
+    }
+
+    // Favorites
+    function toggleFavorite(productId) {
+      const index = favorites.indexOf(productId);
+      const product = PRODUCTS.find(p => p.id === productId);
+      
       if (index > -1) {
         favorites.splice(index, 1);
         showToast(`${product.name} rimosso dai preferiti`);
       } else {
-        favorites.push(id);
+        favorites.push(productId);
         showToast(`${product.name} aggiunto ai preferiti ❤️`);
       }
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-      updateFavoritesCount();
-      render();
-    }
-
-    function updateFavoritesCount() {
-      const count = favorites.length;
-      const badge = document.getElementById("favoritesCount");
-      badge.textContent = count;
-      badge.classList.toggle("show", count > 0);
+      
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      updateCounts();
+      renderProducts();
     }
 
     function toggleFavorites() {
-      activeFilter = "favorites";
-      render();
-      showToast("Visualizzando i tuoi preferiti ❤️");
-    }
-
-    function handleSearch() {
-      const search = document.getElementById("search").value.toLowerCase().trim();
-      const suggestionsDiv = document.getElementById("searchSuggestions");
-
-      if (search.length >= 2) {
-        if (!recentSearches.includes(search)) {
-          recentSearches.unshift(search);
-          if (recentSearches.length > 5) recentSearches.pop();
-          localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-        }
-
-        const suggestions = PRODUCTS.filter(p =>
-          p.name.toLowerCase().includes(search) ||
-          p.brand.toLowerCase().includes(search)
-        ).slice(0, 5);
-
-        if (suggestions.length > 0 || recentSearches.length > 0) {
-          let html = '';
-          if (recentSearches.length > 0 && suggestions.length === 0) {
-            html += '<div style="padding: 10px 16px; font-size: 0.75rem; color: var(--muted); font-weight: 700;">Ricerche recenti</div>';
-            recentSearches.forEach(term => {
-              html += `<div class="suggestion-item recent" onclick="selectSuggestion('${term}')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <span class="suggestion-text">${term}</span>
-              </div>`;
-            });
-          }
-          suggestions.forEach(p => {
-            html += `<div class="suggestion-item" onclick="selectSuggestion('${p.name}')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-              <span class="suggestion-text">${p.name}</span>
-              <span class="suggestion-meta">${p.brand}</span>
-            </div>`;
-          });
-          suggestionsDiv.innerHTML = html;
-          suggestionsDiv.classList.add("show");
-        } else {
-          suggestionsDiv.classList.remove("show");
-        }
-      } else {
-        suggestionsDiv.classList.remove("show");
-      }
-      currentPage = 1;
-      render();
-    }
-
-    function selectSuggestion(term) {
-      document.getElementById("search").value = term;
-      document.getElementById("searchSuggestions").classList.remove("show");
-      handleSearch();
-    }
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".search-wrapper")) {
-        document.getElementById("searchSuggestions").classList.remove("show");
-      }
-    });
-
-    function setOlfactoryFilter(family) {
-      activeOlfactory = family;
-      currentPage = 1;
-      document.querySelectorAll('.olfactory-filter').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.olfactory === family);
-      });
-      render();
-    }
-
-    function getQuantity(id) {
-      return list.filter(itemId => itemId === id).length;
-    }
-
-    function handleSort() {
-      currentSort = document.getElementById("sortSelect").value;
-      currentPage = 1;
-      render();
-    }
-
-    function setGenderFilter(gender) {
-      activeGender = gender;
-      currentPage = 1;
-      document.querySelectorAll('.gender-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.gender === gender);
-      });
-      render();
-    }
-
-    function setFilter(brand) {
-      activeFilter = brand;
-      currentPage = 1;
-      initBrandFilters();
-      render();
-    }
-
-    function getFilteredProducts() {
-      const search = document.getElementById("search").value.toLowerCase();
-      let filtered = PRODUCTS.filter(p => {
-        const matchesBrand = activeFilter === "Tutti" || (activeFilter === "favorites" ? favorites.includes(p.id) : p.brand === activeFilter);
-        const matchesSearch = p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search);
-        const matchesGender = activeGender === "all" || p.gender === activeGender;
-        const matchesOlfactory = activeOlfactory === "all" || p.olfactory === activeOlfactory;
-        return matchesBrand && matchesSearch && matchesGender && matchesOlfactory;
-      });
-      switch(currentSort) {
-        case "name-asc": filtered.sort((a, b) => a.name.localeCompare(b.name)); break;
-        case "name-desc": filtered.sort((a, b) => b.name.localeCompare(a.name)); break;
-        case "brand-asc": filtered.sort((a, b) => a.brand.localeCompare(b.brand)); break;
-        case "brand-desc": filtered.sort((a, b) => b.brand.localeCompare(a.brand)); break;
-      }
-      return filtered;
-    }
-
-    function getPaginatedProducts(products) {
-      const start = (currentPage - 1) * ITEMS_PER_PAGE;
-      const end = start + ITEMS_PER_PAGE;
-      return products.slice(start, end);
-    }
-
-    function render() {
-      const filtered = getFilteredProducts();
-      const paginated = getPaginatedProducts(filtered);
-      const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-
-      document.getElementById("productsCount").textContent =
-        `Visualizzati ${paginated.length} di ${filtered.length} prodotti`;
-
-      initBrandFilters();
-
-      document.getElementById("grid").innerHTML = paginated.length ? paginated.map((p, idx) => {
-        const qty = getQuantity(p.id);
-        const isSelected = qty > 0;
-        const isFavorite = favorites.includes(p.id);
-        const genderLabels = { male: "Uomo", female: "Donna", unisex: "Unisex" };
-
-        return `
-        <div class="card ${isSelected ? 'selected' : ''} scroll-hidden" data-id="${p.id}" style="transition-delay: ${idx * 25}ms">
-          <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(${p.id}, event)" aria-label="Aggiungi ai preferiti">
-            <svg viewBox="0 0 24 24" fill="${isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-          </button>
-          <div class="selected-badge">✓</div>
-          <img src="assets/${p.id}.jpg" alt="${p.name}" class="product-image"
-               loading="lazy"
-               onclick="openModal(${p.id})"
-               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f0e8%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23c22b26%22 font-size=%2216%22 font-weight=%22bold%22%3E${p.brand}%3C/text%3E%3C/svg%3E'" />
-          <div class="badge">${p.brand}</div>
-          <span class="gender-badge ${p.gender}">${genderLabels[p.gender]}</span>
-          <div class="product-name">${p.name}</div>
-          <div class="meta">${p.size}</div>
-          <div class="price-tag">💎 Prezzo su richiesta</div>
-          ${isSelected ? `
-            <div class="quantity-selector">
-              <button class="qty-btn" onclick="updateQuantity(${p.id}, -1)">−</button>
-              <span class="qty-value">${qty}</span>
-              <button class="qty-btn" onclick="updateQuantity(${p.id}, 1)">+</button>
-            </div>
-          ` : `
-            <button class="add" onclick="addToCard(${p.id}, this)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              Aggiungi
-            </button>
-          `}
-        </div>
-      `}).join("") : '<div class="empty">Nessun prodotto trovato</div>';
-
-      renderPagination(totalPages);
-      updateCount();
-      initScrollAnimations();
-    }
-
-    function initScrollAnimations() {
-      const cards = document.querySelectorAll('.card.scroll-hidden');
-      if (!cards.length) return;
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove('scroll-hidden');
-            entry.target.classList.add('scroll-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-      cards.forEach(card => observer.observe(card));
-    }
-
-    function renderPagination(totalPages) {
-      if (totalPages <= 1) {
-        document.getElementById("pagination").innerHTML = "";
+      if (favorites.length === 0) {
+        showToast('Nessun preferito salvato');
         return;
       }
-      let html = `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>←</button>`;
-      const maxVisible = 3;
-      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-      if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
-      for (let i = startPage; i <= endPage; i++) {
-        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
-      }
-      html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>→</button>`;
-      html += `<span class="page-info">${currentPage}/${totalPages}</span>`;
-      document.getElementById("pagination").innerHTML = html;
+      
+      const favoriteProducts = PRODUCTS.filter(p => favorites.includes(p.id));
+      currentFilters.search = '';
+      document.getElementById('searchInput').value = '';
+      
+      // Filter to show only favorites
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = favoriteProducts.map(product => `
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="assets/${product.id}.jpg" alt="${product.name}" class="product-image">
+            <button class="product-favorite active" onclick="toggleFavorite(${product.id})">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">${product.brand}</div>
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-footer">
+              <span class="product-price">${product.price}</span>
+              <button class="product-add" onclick="addToCart(${product.id})">
+                <i class="fas fa-plus"></i> Aggiungi
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      document.getElementById('productsCount').textContent = `${favoriteProducts.length} preferiti`;
+      document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function changePage(page) {
-      const totalPages = Math.ceil(getFilteredProducts().length / ITEMS_PER_PAGE);
-      if (page < 1 || page > totalPages) return;
-      currentPage = page;
-      render();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Product Modal
+    function openModal(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      const modal = document.getElementById('productModal');
+      const modalBody = document.getElementById('modalBody');
+      
+      modalBody.innerHTML = `
+        <img src="assets/${product.id}.jpg" alt="${product.name}" class="modal-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%231a1a1a%22 width=%22400%22 height=%22400%22/%3E%3C/svg%3E'">
+        <div class="modal-info">
+          <div class="modal-brand">${product.brand}</div>
+          <h2>${product.name}</h2>
+          <p class="modal-description">${product.description}</p>
+          
+          <div class="olfactory-pyramid">
+            <h3 class="pyramid-title">Piramide Olfattiva</h3>
+            <div class="pyramid-level">
+              <div class="pyramid-level-title">🔺 Note di Testa</div>
+              <div class="pyramid-notes">
+                ${product.pyramid.top.map(note => `<span class="pyramid-note">${note}</span>`).join('')}
+              </div>
+            </div>
+            <div class="pyramid-level">
+              <div class="pyramid-level-title">❤️ Note di Cuore</div>
+              <div class="pyramid-notes">
+                ${product.pyramid.heart.map(note => `<span class="pyramid-note">${note}</span>`).join('')}
+              </div>
+            </div>
+            <div class="pyramid-level">
+              <div class="pyramid-level-title"> Note di Base</div>
+              <div class="pyramid-notes">
+                ${product.pyramid.base.map(note => `<span class="pyramid-note">${note}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--glass-border);">
+            <div style="font-size: 1.5rem; color: var(--gold-rose); font-weight: 700; margin-bottom: var(--space-md);">${product.price}</div>
+            <button class="btn btn-primary" style="width: 100%; padding: var(--space-md);" onclick="addToCart(${product.id}); closeModal();">
+              <i class="fas fa-shopping-bag"></i> Aggiungi alla Lista
+            </button>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(event) {
+      if (!event || event.target.id === 'productModal') {
+        document.getElementById('productModal').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Quiz System
+    const quizQuestions = [
+      {
+        question: "Qual è la tua famiglia olfattiva preferita?",
+        options: [
+          { value: "fresh", label: "🌊 Freschi e Acquatici", icon: "💧" },
+          { value: "floral", label: " Floreali e Romantici", icon: "🌹" },
+          { value: "woody", label: "🌲 Legnosi e Intensi", icon: "🌲" },
+          { value: "oriental", label: "🌶️ Orientali e Speziati", icon: "✨" }
+        ]
+      },
+      {
+        question: "Per quale occasione lo cerchi?",
+        options: [
+          { value: "day", label: "☀️ Uso quotidiano", icon: "" },
+          { value: "evening", label: "🌙 Serate speciali", icon: "🌃" },
+          { value: "both", label: "💫 Versatile", icon: "⭐" }
+        ]
+      },
+      {
+        question: "Che intensità preferisci?",
+        options: [
+          { value: "light", label: " Leggero e Delicato", icon: "🌸" },
+          { value: "medium", label: "⚖️ Equilibrato", icon: "⚡" },
+          { value: "strong", label: "💥 Intenso e Persistente", icon: "💥" }
+        ]
+      }
+    ];
+
+    function toggleQuiz() {
+      const section = document.getElementById('quizSection');
+      if (section.style.display === 'none') {
+        section.style.display = 'block';
+        quizStep = 0;
+        quizAnswers = {};
+        renderQuizQuestion();
+        section.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        section.style.display = 'none';
+      }
+    }
+
+    function renderQuizQuestion() {
+      const container = document.getElementById('quizContent');
+      const question = quizQuestions[quizStep];
+      const progress = ((quizStep + 1) / quizQuestions.length) * 100;
+      
+      document.getElementById('quizProgress').style.width = progress + '%';
+      
+      container.innerHTML = `
+        <div class="quiz-question">${question.question}</div>
+        <div class="quiz-options">
+          ${question.options.map((opt, idx) => `
+            <div class="quiz-option" onclick="selectQuizOption('${opt.value}')">
+              <span style="font-size: 1.5rem; margin-right: 10px;">${opt.icon}</span>
+              ${opt.label}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function selectQuizOption(value) {
+      quizAnswers[quizQuestions[quizStep].question] = value;
+      
+      // Visual feedback
+      document.querySelectorAll('.quiz-option').forEach((opt, idx) => {
+        if (quizQuestions[quizStep].options[idx].value === value) {
+          opt.classList.add('selected');
+        }
+      });
+      
+      setTimeout(() => {
+        quizStep++;
+        if (quizStep < quizQuestions.length) {
+          renderQuizQuestion();
+        } else {
+          showQuizResults();
+        }
+      }, 400);
+    }
+
+    function showQuizResults() {
+      const recommendations = getRecommendations();
+      const container = document.getElementById('quizContent');
+      
+      container.innerHTML = `
+        <div style="text-align: center; padding: var(--space-lg);">
+          <div style="font-size: 4rem; margin-bottom: var(--space-md);"></div>
+          <h3 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: var(--space-md); color: var(--gold-rose);">
+            Ecco i profumi perfetti per te!
+          </h3>
+          <p style="color: var(--gray-medium); margin-bottom: var(--space-lg);">
+            Basandoci sulle tue preferenze, ti consigliamo queste fragranze:
+          </p>
+          <div style="display: grid; gap: var(--space-md);">
+            ${recommendations.map(product => `
+              <div style="background: var(--glass-bg); padding: var(--space-md); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="color: var(--gold-rose); font-size: 0.85rem;">${product.brand}</div>
+                  <div style="font-weight: 700; font-size: 1.1rem;">${product.name}</div>
+                </div>
+                <button class="btn btn-primary" onclick="addToCart(${product.id}); toggleQuiz();">
+                  <i class="fas fa-plus"></i> Aggiungi
+                </button>
+              </div>
+            `).join('')}
+          </div>
+          <button class="btn btn-secondary" style="margin-top: var(--space-lg);" onclick="toggleQuiz()">
+            Torna alla collezione
+          </button>
+        </div>
+      `;
+      
+      document.getElementById('quizProgress').style.width = '100%';
+    }
+
+    function getRecommendations() {
+      const preferredOlfactory = quizAnswers["Qual è la tua famiglia olfattiva preferita?"];
+      
+      return PRODUCTS.filter(p => p.olfactory === preferredOlfactory).slice(0, 3);
+    }
+
+    // WhatsApp Integration
+    function sendWhatsApp() {
+      if (cart.length === 0) {
+        showToast('Aggiungi prima dei prodotti alla lista!');
+        return;
+      }
+
+      const message = cart.map(item => 
+        `• ${item.quantity}x ${item.name} (${item.brand}, ${item.size})`
+      ).join('\n');
+
+      const whatsappText = `Ciao! Mi interessano questi profumi:\n\n${message}\n\nPotete darmi maggiori informazioni e il prezzo?`;
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
+      
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // UI Helpers
+    function scrollToProducts() {
+      document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
     }
 
     function showToast(message) {
-      const container = document.getElementById("toastContainer");
-      const toast = document.createElement("div");
-      toast.className = "toast";
-      toast.innerHTML = `<span>✓</span><span>${message}</span>`;
-      container.appendChild(toast);
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        z-index: 9999;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        animation: slideUp 0.3s ease;
+      `;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
       setTimeout(() => {
-        toast.classList.add("hiding");
+        toast.style.animation = 'slideDown 0.3s ease';
         setTimeout(() => toast.remove(), 300);
       }, 2500);
     }
 
-    function openModal(id) {
-      const product = PRODUCTS.find(p => p.id === id);
-      if (!product) return;
-      currentModalProduct = product;
-      const genderLabels = { male: "Uomo", female: "Donna", unisex: "Unisex" };
-      document.getElementById("modalImage").src = `assets/${product.id}.jpg`;
-      document.getElementById("modalImage").alt = product.name;
-      document.getElementById("modalImage").onerror = function() {
-        this.src = `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f0e8%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23c22b26%22 font-size=%2216%22 font-weight=%22bold%22%3E${product.brand}%3C/text%3E%3C/svg%3E`;
-      };
-      document.getElementById("modalBrand").textContent = product.brand;
-      document.getElementById("modalName").textContent = product.name;
-      document.getElementById("modalDescription").textContent = product.description;
-      document.getElementById("modalDetails").innerHTML = `
-        <span class="modal-detail">📦 ${product.size}</span>
-        <span class="modal-detail gender-badge ${product.gender}">${genderLabels[product.gender]}</span>
-        ${getQuantity(product.id) > 0 ? `<span class="modal-detail" style="background: rgba(194,43,38,0.15); color: var(--primary-red);">✓ Nella lista (${getQuantity(product.id)})</span>` : ''}
-      `;
-      document.getElementById("modalOverlay").classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeModal() {
-      document.getElementById("modalOverlay").classList.remove("open");
-      document.body.style.overflow = "";
-      currentModalProduct = null;
-    }
-
-    function addToCardFromModal() {
-      if (!currentModalProduct) return;
-      list.push(currentModalProduct.id);
-      localStorage.setItem("list", JSON.stringify(list));
-      showToast(`${currentModalProduct.name} aggiunto alla lista!`);
-      updateCount();
-      render();
-      openModal(currentModalProduct.id);
-    }
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeModal();
-        if (document.getElementById("drawer").classList.contains("open")) toggleDrawer();
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideUp {
+        from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+        to { transform: translateX(-50%) translateY(0); opacity: 1; }
       }
-    });
-
-    function addToCard(id, btn) {
-      list.push(id);
-      localStorage.setItem("list", JSON.stringify(list));
-      const card = btn.closest('.card');
-      card.classList.add('selected');
-      const product = PRODUCTS.find(p => p.id === id);
-      showToast(`${product.name} aggiunto!`);
-      updateCount();
-      render();
-    }
-
-    function updateQuantity(id, change) {
-      const currentQty = getQuantity(id);
-      const newQty = currentQty + change;
-      if (newQty <= 0) {
-        list = list.filter(itemId => itemId !== id);
-        showToast("Prodotto rimosso");
-      } else {
-        if (change > 0) list.push(id);
-        else {
-          const index = list.indexOf(id);
-          if (index > -1) list.splice(index, 1);
-        }
+      @keyframes slideDown {
+        from { transform: translateX(-50%) translateY(0); opacity: 1; }
+        to { transform: translateX(-50%) translateY(100px); opacity: 0; }
       }
-      localStorage.setItem("list", JSON.stringify(list));
-      updateCount();
-      render();
-    }
-
-    function removeFromList(index) {
-      list.splice(index, 1);
-      localStorage.setItem("list", JSON.stringify(list));
-      updateCount();
-      renderPanel();
-      render();
-    }
-
-    function updateCount() {
-      document.getElementById("count").textContent = list.length;
-    }
-
-    function toggleDrawer() {
-      document.getElementById("drawer").classList.toggle("open");
-      renderPanel();
-    }
-
-    function renderPanel() {
-      const items = list.map((id, index) => ({product: PRODUCTS.find(p => p.id === id), index})).filter(i => i.product);
-      document.getElementById("items").innerHTML = items.length ? items.map(i => `
-        <div class="item">
-          <img src="assets/${i.product.id}.jpg" alt="${i.product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f0e8%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'" />
-          <div>
-            <div class="item-name">${i.product.name}</div>
-            <div class="item-meta">${i.product.brand} • ${i.product.size}</div>
-          </div>
-          <button class="remove" onclick="removeFromList(${i.index})" aria-label="Rimuovi">×</button>
-        </div>
-      `).join("") : '<div class="empty" style="text-align: center; padding: 40px 12px; color: var(--muted); font-size: 0.9rem;">La tua lista è vuota</div>';
-    }
-
-    function sendWhatsApp(e) {
-      e.preventDefault();
-      if (!list.length) return alert("Aggiungi prima qualche prodotto!");
-      const grouped = {};
-      list.forEach(id => {
-        if (!grouped[id]) grouped[id] = {product: PRODUCTS.find(p => p.id === id), count: 0};
-        grouped[id].count++;
-      });
-      const items = Object.values(grouped).filter(i => i.product);
-      const message = "Ciao! Mi interessano questi profumi:\n\n" +
-        items.map(i => `• ${i.count > 1 ? i.count + 'x ' : ''}${i.product.name} (${i.product.brand}, ${i.product.size})`).join("\n") +
-        "\n\nPotete darmi maggiori informazioni e il prezzo?";
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
-    }
-
-    function updateClearBtn() {
-      const search = document.getElementById("search");
-      const clearBtn = document.getElementById("searchClear");
-      clearBtn.classList.toggle("visible", search.value.length > 0);
-    }
-
-    function clearSearch() {
-      document.getElementById("search").value = "";
-      updateClearBtn();
-      currentPage = 1;
-      render();
-      document.getElementById("search").focus();
-    }
-
-    updateFavoritesCount();
-    initBrandFilters();
-    render();
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
