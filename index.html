@@ -1335,6 +1335,46 @@
     </div>
   </section>
 
+  <!-- TASTO PREORDER AIRPODS -->
+<section class="airpods-cta-section">
+  <div class="airpods-cta-card" onclick="showAirpodsSection()">
+    <div class="airpods-cta-icon">🎧</div>
+    <div class="airpods-cta-content">
+      <span class="airpods-cta-badge">✨ Preorder Esclusivo</span>
+      <h2 class="airpods-cta-title">Preordina i tuoi <span>AirPods</span></h2>
+      <p class="airpods-cta-desc">Scopri i modelli disponibili e richiedi il tuo direttamente su WhatsApp</p>
+    </div>
+    <div class="airpods-cta-arrow">
+      <i class="fas fa-arrow-right"></i>
+    </div>
+  </div>
+</section>
+
+<!-- SEZIONE AIRPODS (nascosta di default) -->
+<section class="airpods-section" id="airpodsSection" style="display: none;">
+  <div class="airpods-container">
+    <div class="airpods-header">
+      <button class="airpods-back" onclick="hideAirpodsSection()">
+        <i class="fas fa-arrow-left"></i> Torna ai Profumi
+      </button>
+      <h2 class="airpods-title">🎧 Preorder AirPods</h2>
+      <p class="airpods-subtitle">Seleziona i modelli che ti interessano e inviaci la richiesta su WhatsApp</p>
+    </div>
+
+    <div class="airpods-grid" id="airpodsGrid"></div>
+
+    <div class="airpods-footer">
+      <div class="airpods-selected-info">
+        <span class="airpods-selected-count" id="airpodsSelectedCount">0 modelli selezionati</span>
+      </div>
+      <button class="airpods-send-btn" id="airpodsSendBtn" onclick="sendAirpodsWhatsApp()" disabled>
+        <i class="fab fa-whatsapp"></i>
+        Invia Richiesta su WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+  
   <section class="quiz-section" id="quizSection" style="display: none;">
     <div class="quiz-container">
       <div class="quiz-header">
