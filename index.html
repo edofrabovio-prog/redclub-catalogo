@@ -259,6 +259,46 @@
 
     .promotions-section { padding: var(--space-md); max-width: 1400px; margin: 0 auto; }
 
+    <!-- TASTO PREORDER AIRPODS -->
+<section class="airpods-cta-section">
+  <div class="airpods-cta-card" onclick="showAirpodsSection()">
+    <div class="airpods-cta-icon">🎧</div>
+    <div class="airpods-cta-content">
+      <span class="airpods-cta-badge">✨ Preorder Esclusivo</span>
+      <h2 class="airpods-cta-title">Preordina i tuoi <span>AirPods</span></h2>
+      <p class="airpods-cta-desc">Scopri i modelli disponibili e richiedi il tuo direttamente su WhatsApp</p>
+    </div>
+    <div class="airpods-cta-arrow">
+      <i class="fas fa-arrow-right"></i>
+    </div>
+  </div>
+</section>
+
+<!-- SEZIONE AIRPODS (nascosta di default) -->
+<section class="airpods-section" id="airpodsSection" style="display: none;">
+  <div class="airpods-container">
+    <div class="airpods-header">
+      <button class="airpods-back" onclick="hideAirpodsSection()">
+        <i class="fas fa-arrow-left"></i> Torna ai Profumi
+      </button>
+      <h2 class="airpods-title"> Preorder AirPods</h2>
+      <p class="airpods-subtitle">Seleziona i modelli che ti interessano e inviaci la richiesta su WhatsApp</p>
+    </div>
+
+    <div class="airpods-grid" id="airpodsGrid"></div>
+
+    <div class="airpods-footer">
+      <div class="airpods-selected-info">
+        <span class="airpods-selected-count" id="airpodsSelectedCount">0 modelli selezionati</span>
+      </div>
+      <button class="airpods-send-btn" id="airpodsSendBtn" onclick="sendAirpodsWhatsApp()" disabled>
+        <i class="fab fa-whatsapp"></i>
+        Invia Richiesta su WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+    
     .promotion-card {
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(194, 43, 38, 0.15) 100%);
       border: 2px solid var(--gold-rose);
@@ -888,6 +928,345 @@
       .product-image-wrapper { height: 220px; }
     }
 
+    /* ============ SEZIONE CTA AIRPODS ============ */
+.airpods-cta-section {
+  padding: var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.airpods-cta-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border: 2px solid #333;
+  border-radius: 20px;
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.airpods-cta-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.airpods-cta-card:hover {
+  border-color: var(--gold-rose);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+}
+
+.airpods-cta-card:active {
+  transform: scale(0.98);
+}
+
+.airpods-cta-icon {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+}
+
+.airpods-cta-content {
+  flex: 1;
+}
+
+.airpods-cta-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, var(--gold-rose) 0%, var(--red-ruby) 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+}
+
+.airpods-cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  margin-bottom: var(--space-xs);
+  color: var(--white-pure);
+  line-height: 1.2;
+}
+
+.airpods-cta-title span {
+  color: var(--gold-rose);
+  font-weight: 700;
+}
+
+.airpods-cta-desc {
+  color: var(--gray-medium);
+  font-size: 0.85rem;
+}
+
+.airpods-cta-arrow {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-rose);
+  font-size: 1.3rem;
+  transition: var(--transition-fast);
+}
+
+.airpods-cta-card:hover .airpods-cta-arrow {
+  background: var(--gold-rose);
+  color: var(--black-deep);
+  transform: translateX(5px);
+}
+
+/* ============ SEZIONE AIRPODS DEDICATA ============ */
+.airpods-section {
+  padding: var(--space-lg) var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeInUp 0.5s ease;
+}
+
+.airpods-container {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: var(--space-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.airpods-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.airpods-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--white-pure);
+  padding: 10px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-md);
+  transition: var(--transition-fast);
+}
+
+.airpods-back:hover {
+  border-color: var(--gold-rose);
+  color: var(--gold-rose);
+}
+
+.airpods-back:active {
+  transform: scale(0.95);
+}
+
+.airpods-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  color: var(--white-pure);
+  margin-bottom: var(--space-xs);
+}
+
+.airpods-subtitle {
+  color: var(--gray-medium);
+  font-size: 1rem;
+}
+
+.airpods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.airpods-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid var(--glass-border);
+  border-radius: 16px;
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.airpods-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  transform: translateY(-3px);
+}
+
+.airpods-card:active {
+  transform: scale(0.98);
+}
+
+.airpods-card.selected {
+  border-color: var(--gold-rose);
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+}
+
+.airpods-card-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold-rose);
+  color: var(--black-deep);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.airpods-card.selected .airpods-card-check {
+  display: flex;
+}
+
+.airpods-card-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+  text-align: center;
+}
+
+.airpods-card-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--white-pure);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.airpods-card-desc {
+  color: var(--gray-medium);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+
+.airpods-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.airpods-feature-tag {
+  padding: 4px 10px;
+  background: rgba(212, 175, 55, 0.12);
+  border-radius: 12px;
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.airpods-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--glass-border);
+}
+
+.airpods-selected-info {
+  color: var(--gray-medium);
+  font-size: 0.95rem;
+}
+
+.airpods-selected-count {
+  color: var(--gold-rose);
+  font-weight: 700;
+}
+
+.airpods-send-btn {
+  padding: 14px 28px;
+  min-height: 48px;
+  background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-fast);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+.airpods-send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+}
+
+.airpods-send-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.airpods-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .airpods-cta-card {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-md);
+  }
+  
+  .airpods-cta-arrow {
+    display: none;
+  }
+  
+  .airpods-container {
+    padding: var(--space-md);
+  }
+  
+  .airpods-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .airpods-footer {
+    flex-direction: column;
+  }
+  
+  .airpods-send-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+    
     @media (min-width: 769px) {
       .filters-grid { grid-template-columns: repeat(3, 1fr); }
       .promotion-card { padding: var(--space-lg); }
@@ -1556,6 +1935,129 @@
 
     function scrollToProducts() { document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' }); }
 
+    // ============ SEZIONE AIRPODS ============
+const AIRPODS_MODELS = [
+  {
+    id: 'ap2',
+    name: 'AirPods (2ª generazione)',
+    icon: '🎧',
+    desc: 'Il classico intramontabile. Audio di qualità e connessione immediata con i tuoi dispositivi Apple.',
+    features: ['Chip H1', '24h batteria', 'Siri', 'Custodia ricarica']
+  },
+  {
+    id: 'ap3',
+    name: 'AirPods (3ª generazione)',
+    icon: '🎵',
+    desc: 'Design ridisegnato con audio spaziale personalizzato e resistenza a sudore e acqua.',
+    features: ['Audio Spaziale', 'IPX4', '30h batteria', 'MagSafe']
+  },
+  {
+    id: 'ap4',
+    name: 'AirPods 4',
+    icon: '✨',
+    desc: 'Il nuovo standard. Design aperto con chip H2 e audio spaziale avanzato.',
+    features: ['Chip H2', 'Audio Spaziale', 'USB-C', 'Design aperto']
+  },
+  {
+    id: 'ap4-anc',
+    name: 'AirPods 4 con ANC',
+    icon: '🔇',
+    desc: 'Cancellazione attiva del rumore nel design aperto. Il meglio di entrambi i mondi.',
+    features: ['ANC', 'Chip H2', 'Audio Adattivo', 'Trasparenza']
+  },
+  {
+    id: 'ap-pro2',
+    name: 'AirPods Pro (2ª gen)',
+    icon: '🎯',
+    desc: 'Cancellazione attiva del rumore, audio adattivo e custodia con altoparlante e USB-C.',
+    features: ['ANC Avanzato', 'Audio Adattivo', 'USB-C', 'IP54']
+  },
+  {
+    id: 'ap-max',
+    name: 'AirPods Max',
+    icon: '🎧',
+    desc: 'Cuffie over-ear con audio ad alta fedeltà, ANC e design in alluminio anodizzato.',
+    features: ['Hi-Fi Audio', 'ANC', 'Audio Spaziale', 'Alluminio']
+  }
+];
+
+let selectedAirpods = [];
+
+function showAirpodsSection() {
+  document.getElementById('airpodsSection').style.display = 'block';
+  document.getElementById('productsSection').style.display = 'none';
+  document.querySelector('.filters-section').style.display = 'none';
+  renderAirpods();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (typeof gtag === 'function') gtag('event', 'view_airpods_section');
+}
+
+function hideAirpodsSection() {
+  document.getElementById('airpodsSection').style.display = 'none';
+  document.getElementById('productsSection').style.display = 'block';
+  document.querySelector('.filters-section').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderAirpods() {
+  const grid = document.getElementById('airpodsGrid');
+  grid.innerHTML = AIRPODS_MODELS.map(model => `
+    <div class="airpods-card ${selectedAirpods.includes(model.id) ? 'selected' : ''}" 
+         onclick="toggleAirpod('${model.id}')">
+      <div class="airpods-card-check">✓</div>
+      <div class="airpods-card-icon">${model.icon}</div>
+      <div class="airpods-card-name">${model.name}</div>
+      <div class="airpods-card-desc">${model.desc}</div>
+      <div class="airpods-card-features">
+        ${model.features.map(f => `<span class="airpods-feature-tag">${f}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+  
+  updateAirpodsCount();
+}
+
+function toggleAirpod(id) {
+  const index = selectedAirpods.indexOf(id);
+  if (index > -1) {
+    selectedAirpods.splice(index, 1);
+  } else {
+    selectedAirpods.push(id);
+  }
+  renderAirpods();
+}
+
+function updateAirpodsCount() {
+  const count = selectedAirpods.length;
+  const countEl = document.getElementById('airpodsSelectedCount');
+  const sendBtn = document.getElementById('airpodsSendBtn');
+  
+  countEl.textContent = `${count} modell${count === 1 ? 'o' : 'i'} selezionat${count === 1 ? 'o' : 'i'}`;
+  sendBtn.disabled = count === 0;
+}
+
+function sendAirpodsWhatsApp() {
+  if (selectedAirpods.length === 0) {
+    showToast('Seleziona almeno un modello!');
+    return;
+  }
+  
+  const selectedModels = AIRPODS_MODELS.filter(m => selectedAirpods.includes(m.id));
+  const modelsList = selectedModels.map((m, i) => `${i + 1}. ${m.name}`).join('\n');
+  
+  const message = `Ciao! Sono interessato al preorder dei seguenti AirPods:\n\n${modelsList}\n\nPotete darmi maggiori informazioni su disponibilità e prezzi?`;
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  
+  if (typeof gtag === 'function') {
+    gtag('event', 'airpods_whatsapp_click', {
+      models_count: selectedAirpods.length,
+      models: selectedModels.map(m => m.name).join(', ')
+    });
+  }
+  
+  window.open(whatsappUrl, '_blank');
+}
+    
     function showToast(message) {
       const existingToast = document.querySelector('.toast');
       if (existingToast) existingToast.remove();
