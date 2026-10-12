@@ -220,21 +220,11 @@
       align-items: center;
       gap: 8px;
     }
-    .btn-primary {
-      background: var(--white);
-      color: var(--black);
-    }
+    .btn-primary { background: var(--white); color: var(--black); }
     .btn-primary:hover { background: var(--gray-100); }
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border-color: var(--white);
-    }
+    .btn-outline { background: transparent; color: var(--white); border-color: var(--white); }
     .btn-outline:hover { background: var(--white); color: var(--black); }
-    .btn-dark {
-      background: var(--black);
-      color: var(--white);
-    }
+    .btn-dark { background: var(--black); color: var(--white); }
     .btn-dark:hover { background: var(--gray-800); }
 
     /* PROMO */
@@ -390,7 +380,7 @@
     .products-section {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 24px 80px;
+      padding: 0 24px 40px;
     }
     .section-header {
       display: flex;
@@ -594,10 +584,7 @@
       padding: 48px 24px 80px;
       display: none;
     }
-    .airpods-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
+    .airpods-header { text-align: center; margin-bottom: 48px; }
     .airpods-back {
       display: inline-flex;
       align-items: center;
@@ -792,19 +779,27 @@
     }
     .modal-body {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 45% 55%;
       gap: 0;
     }
     .modal-image-wrap {
       background: var(--off-white);
-      aspect-ratio: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px;
+      padding: 32px;
+      max-height: 600px;
     }
-    .modal-image { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .modal-info { padding: 40px; }
+    .modal-image {
+      max-width: 85%;
+      max-height: 85%;
+      object-fit: contain;
+    }
+    .modal-info {
+      padding: 40px 32px;
+      overflow-y: auto;
+      max-height: 700px;
+    }
     .modal-brand {
       font-size: 11px;
       letter-spacing: 0.2em;
@@ -815,9 +810,9 @@
     }
     .modal-name {
       font-family: var(--font-serif);
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 500;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       line-height: 1.2;
     }
     .modal-desc {
@@ -831,36 +826,38 @@
       font-size: 18px;
       font-weight: 500;
       margin-bottom: 16px;
+      margin-top: 8px;
     }
     .pyramid-level {
-      padding: 16px;
+      padding: 14px 16px;
       background: var(--off-white);
       border-radius: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border-left: 3px solid var(--gold);
     }
     .pyramid-level-title {
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      font-size: 10px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--gray-600);
-      font-weight: 500;
-      margin-bottom: 8px;
+      font-weight: 600;
+      margin-bottom: 10px;
     }
     .pyramid-notes { display: flex; gap: 6px; flex-wrap: wrap; }
     .pyramid-note {
-      padding: 4px 12px;
+      padding: 5px 12px;
       background: var(--white);
       border-radius: 50px;
       font-size: 12px;
       color: var(--black);
+      border: 1px solid var(--gray-100);
     }
     .modal-price {
       font-family: var(--font-serif);
       font-size: 28px;
       font-weight: 600;
       color: var(--black);
-      margin: 24px 0;
+      margin: 24px 0 20px;
     }
     .modal-add-btn {
       width: 100%;
@@ -979,6 +976,62 @@
     }
     .cart-checkout:hover { background: #1da851; }
 
+    /* FOOTER */
+    .site-footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 40px 24px;
+      margin-top: 60px;
+    }
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .footer-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .footer-info { text-align: center; }
+    .footer-text {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin: 4px 0;
+    }
+    .footer-contact { text-align: right; }
+    .footer-link {
+      color: var(--white);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--gray-600);
+      border-radius: 50px;
+      transition: var(--transition);
+    }
+    .footer-link:hover {
+      border-color: var(--white);
+      background: var(--white);
+      color: var(--black);
+    }
+
     /* TOAST */
     .toast {
       position: fixed;
@@ -1008,12 +1061,22 @@
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .product-name { font-size: 15px; }
       .product-price { font-size: 17px; }
-      .modal-body { grid-template-columns: 1fr; }
-      .modal-info { padding: 24px; }
+      .modal-body { grid-template-columns: 1fr; max-height: 85vh; }
+      .modal-image-wrap { max-height: 280px; padding: 24px; }
+      .modal-image { max-width: 70%; max-height: 70%; }
+      .modal-info { padding: 24px; max-height: none; }
       .modal-name { font-size: 24px; }
+      .modal-content { max-height: 90vh; max-height: 90dvh; overflow-y: auto; }
       .quiz-container { padding: 24px; }
       .airpods-grid { grid-template-columns: 1fr; }
       .filters-bar { display: none; }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-brand, .footer-contact {
+        text-align: center;
+      }
     }
     @media (max-width: 480px) {
       .products-grid { grid-template-columns: 1fr; }
@@ -1065,7 +1128,7 @@
 
 <section class="promo-banner">
   <div class="promo-card">
-    <div class="promo-icon">🎁</div>
+    <div class="promo-icon"></div>
     <div class="promo-content">
       <span class="promo-badge">Nuova Offerta</span>
       <h2 class="promo-title"><span>10% di sconto</span> sul primo ordine</h2>
@@ -1090,7 +1153,6 @@
   </div>
 </section>
 
-<!-- FILTRI BAR (desktop) -->
 <section class="filters-bar" id="filtersBar">
   <div class="filter-group">
     <span class="filter-label">Famiglia Olfattiva</span>
@@ -1107,7 +1169,7 @@
     <span class="filter-label">Genere</span>
     <div class="filter-chips" id="genderChips">
       <button class="chip active" onclick="filterBy('gender','all',this)">Tutti</button>
-      <button class="chip" onclick="filterBy('gender','male',this)"> Uomo</button>
+      <button class="chip" onclick="filterBy('gender','male',this)">👨 Uomo</button>
       <button class="chip" onclick="filterBy('gender','female',this)">👩 Donna</button>
       <button class="chip" onclick="filterBy('gender','unisex',this)">Unisex</button>
     </div>
@@ -1122,7 +1184,6 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
 <section class="products-section" id="productsSection">
   <div class="section-header">
     <h2 class="section-title">Collezione</h2>
@@ -1131,11 +1192,10 @@
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
-<!-- AIRPODS SECTION -->
 <section class="airpods-section" id="airpodsSection">
   <div class="airpods-header">
     <button class="airpods-back" onclick="hideAirpodsSection()"><i class="fas fa-arrow-left"></i> Torna ai Profumi</button>
-    <h2 class="airpods-title">Preorder AirPods</h2>
+    <h2 class="airpods-title">🎧 Preorder AirPods</h2>
     <p class="airpods-subtitle">Seleziona i modelli che ti interessano e inviaci la richiesta su WhatsApp</p>
   </div>
   <div class="airpods-grid" id="airpodsGrid"></div>
@@ -1147,7 +1207,6 @@
   </div>
 </section>
 
-<!-- QUIZ -->
 <section class="quiz-section" id="quizSection">
   <div class="quiz-container">
     <div class="quiz-header">
@@ -1159,7 +1218,6 @@
   </div>
 </section>
 
-<!-- FILTER DRAWER (mobile) -->
 <div class="filter-overlay" id="filterOverlay" onclick="toggleFilterDrawer()"></div>
 <div class="filter-drawer" id="filterDrawer">
   <div class="filter-drawer-header">
@@ -1171,8 +1229,8 @@
     <div class="filter-chips">
       <button class="chip active" onclick="filterBy('olfactory','all',this); syncFilterChips('olfactory','all')">Tutti</button>
       <button class="chip" onclick="filterBy('olfactory','woody',this); syncFilterChips('olfactory','woody')">🌲 Legnosi</button>
-      <button class="chip" onclick="filterBy('olfactory','floral',this); syncFilterChips('olfactory','floral')">🌹 Floreali</button>
-      <button class="chip" onclick="filterBy('olfactory','citrus',this); syncFilterChips('olfactory','citrus')"> Agrumati</button>
+      <button class="chip" onclick="filterBy('olfactory','floral',this); syncFilterChips('olfactory','floral')"> Floreali</button>
+      <button class="chip" onclick="filterBy('olfactory','citrus',this); syncFilterChips('olfactory','citrus')">🍊 Agrumati</button>
       <button class="chip" onclick="filterBy('olfactory','oriental',this); syncFilterChips('olfactory','oriental')">🌶️ Orientali</button>
       <button class="chip" onclick="filterBy('olfactory','fresh',this); syncFilterChips('olfactory','fresh')">💧 Freschi</button>
     </div>
@@ -1182,7 +1240,7 @@
     <div class="filter-chips">
       <button class="chip active" onclick="filterBy('gender','all',this); syncFilterChips('gender','all')">Tutti</button>
       <button class="chip" onclick="filterBy('gender','male',this); syncFilterChips('gender','male')">👨 Uomo</button>
-      <button class="chip" onclick="filterBy('gender','female',this); syncFilterChips('gender','female')"> Donna</button>
+      <button class="chip" onclick="filterBy('gender','female',this); syncFilterChips('gender','female')">👩 Donna</button>
       <button class="chip" onclick="filterBy('gender','unisex',this); syncFilterChips('gender','unisex')">Unisex</button>
     </div>
   </div>
@@ -1196,7 +1254,6 @@
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">×</button>
@@ -1204,7 +1261,6 @@
   </div>
 </div>
 
-<!-- CART -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
@@ -1214,9 +1270,25 @@
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer">
     <div class="cart-total"><span>Totale:</span><span id="cartTotal">0 prodotti</span></div>
-    <button class="cart-checkout" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> Invia su WhatsApp</button>
+    <button class="cart-checkout" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> Procedi all'ordine</button>
   </div>
 </div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/redclub-logo.png" alt="RedClub" class="footer-logo">
+      <span class="footer-name">RedClub</span>
+    </div>
+    <div class="footer-info">
+      <p class="footer-text">Profumi di lusso selezionati</p>
+      <p class="footer-text">P.IVA: 03053110189</p>
+    </div>
+    <div class="footer-contact">
+      <a href="https://wa.me/4915511780179" class="footer-link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 const PRODUCTS = [
@@ -1382,7 +1454,7 @@ const AIRPODS_MODELS = [
   {id:'ap4',name:'AirPods 4',icon:'✨',desc:'Il nuovo standard con chip H2 e audio spaziale avanzato.',features:['Chip H2','Audio Spaziale','USB-C','Design aperto']},
   {id:'ap4-anc',name:'AirPods 4 con ANC',icon:'🔇',desc:'Cancellazione attiva del rumore nel design aperto.',features:['ANC','Chip H2','Audio Adattivo','Trasparenza']},
   {id:'ap-pro2',name:'AirPods Pro (2ª gen)',icon:'🎯',desc:'ANC, audio adattivo e custodia con altoparlante.',features:['ANC Avanzato','Audio Adattivo','USB-C','IP54']},
-  {id:'ap-max',name:'AirPods Max',icon:'',desc:'Cuffie over-ear con audio Hi-Fi e ANC.',features:['Hi-Fi Audio','ANC','Audio Spaziale','Alluminio']}
+  {id:'ap-max',name:'AirPods Max',icon:'🎧',desc:'Cuffie over-ear con audio Hi-Fi e ANC.',features:['Hi-Fi Audio','ANC','Audio Spaziale','Alluminio']}
 ];
 
 const nicheBrands = ['Xerjoff','Louis Vuitton','Initio','By Kilian','Le Labo','Parfums de Marly','Creed','Tom Ford'];
@@ -1574,7 +1646,7 @@ function openModal(id) {
   if (!p) return;
   document.getElementById('modalBody').innerHTML = `
     <div class="modal-image-wrap">
-      <img src="assets/${p.id}.jpg" class="modal-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23262626%22 font-family=%22serif%22 font-size=%2224%22%3E${p.brand}%3C/text%3E%3C/svg%3E'">
+      <img src="assets/${p.id}.jpg" class="modal-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23262626%22 font-family=%22serif%22 font-size=%2224%22%3E${p.brand}%3C/text%3E%3C/svg%3E'">
     </div>
     <div class="modal-info">
       <div class="modal-brand">${p.brand}</div>
@@ -1613,7 +1685,6 @@ function toggleFilterDrawer() {
   document.getElementById('filterOverlay').classList.toggle('active');
 }
 
-// AIRPODS
 function showAirpodsSection() {
   document.getElementById('airpodsSection').style.display = 'block';
   document.getElementById('productsSection').style.display = 'none';
@@ -1663,10 +1734,9 @@ function sendAirpodsWhatsApp() {
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// QUIZ
 const quizQuestions = [
   { question: "Per chi è il profumo?", key: "gender", options: [{value:"male",label:"Per Uomo",icon:"👨"},{value:"female",label:"Per Donna",icon:"👩"},{value:"unisex",label:"Unisex",icon:"👤"},{value:"any",label:"Non ho preferenze",icon:"🎯"}] },
-  { question: "Qual è la tua famiglia olfattiva preferita?", key: "olfactory", options: [{value:"fresh",label:"Freschi e Acquatici",icon:"💧"},{value:"floral",label:"Floreali e Romantici",icon:"🌹"},{value:"woody",label:"Legnosi e Intensi",icon:""},{value:"oriental",label:"Orientali e Speziati",icon:"🌶️"},{value:"citrus",label:"Agrumati e Energizzanti",icon:"🍊"}] },
+  { question: "Qual è la tua famiglia olfattiva preferita?", key: "olfactory", options: [{value:"fresh",label:"Freschi e Acquatici",icon:"💧"},{value:"floral",label:"Floreali e Romantici",icon:"🌹"},{value:"woody",label:"Legnosi e Intensi",icon:"🌲"},{value:"oriental",label:"Orientali e Speziati",icon:"🌶️"},{value:"citrus",label:"Agrumati e Energizzanti",icon:"🍊"}] },
   { question: "Per quale occasione lo cerchi?", key: "occasion", options: [{value:"day",label:"Uso quotidiano / Ufficio",icon:"☀️"},{value:"evening",label:"Serate speciali",icon:"🌙"},{value:"both",label:"Versatile",icon:"💫"}] },
   { question: "Che intensità preferisci?", key: "intensity", options: [{value:"light",label:"Leggero e Delicato",icon:"🌸"},{value:"medium",label:"Equilibrato",icon:"⚖️"},{value:"strong",label:"Intenso e Persistente",icon:"💥"}] },
   { question: "Per quale stagione?", key: "season", options: [{value:"spring",label:"Primavera",icon:"🌸"},{value:"summer",label:"Estate",icon:"☀️"},{value:"autumn",label:"Autunno",icon:"🍂"},{value:"winter",label:"Inverno",icon:"❄️"},{value:"all",label:"Tutto l'anno",icon:"🌍"}] },
