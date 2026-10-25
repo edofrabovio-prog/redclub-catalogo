@@ -40,20 +40,16 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
     html { -webkit-text-size-adjust: 100%; }
-    html, body {
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100vw;
-}
-body {
-  font-family: var(--font-sans);
-  background: var(--white);
-  color: var(--black);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  position: relative;
-}
+    body {
+      font-family: var(--font-sans);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
     button, input, select { font-family: inherit; font-size: 16px; }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
@@ -349,6 +345,34 @@ body {
     }
     .airpods-cta-card:hover .airpods-cta-arrow { background: var(--gold); border-color: var(--gold); color: var(--black); }
 
+    /* BANNER INFO SCONTI */
+    .discount-notice-banner {
+      max-width: 1400px;
+      margin: 0 auto 24px;
+      padding: 0 24px;
+    }
+    .discount-notice-inner {
+      background: var(--off-white);
+      border: 1px solid var(--gold);
+      border-left: 4px solid var(--gold);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+    .discount-notice-inner i {
+      color: var(--gold-dark);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .discount-notice-inner strong {
+      color: var(--black);
+    }
+
     /* FILTERS BAR */
     .filters-bar {
       max-width: 1400px;
@@ -411,6 +435,7 @@ body {
     .product-card {
       cursor: pointer;
       transition: var(--transition);
+      position: relative;
     }
     .product-card:hover { transform: translateY(-4px); }
     .product-image-wrap {
@@ -439,6 +464,25 @@ body {
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.05em;
+      z-index: 2;
+    }
+    .offer-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 5px 12px;
+      background: var(--red);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 3;
+      box-shadow: 0 2px 8px rgba(194, 43, 38, 0.3);
+    }
+    .offer-badge-top {
+      top: 44px;
     }
     .product-fav {
       position: absolute;
@@ -456,6 +500,7 @@ body {
       color: var(--gray-400);
       font-size: 16px;
       transition: var(--transition);
+      z-index: 2;
     }
     .product-fav:hover { color: var(--red); }
     .product-fav.active { color: var(--red); }
@@ -510,6 +555,20 @@ body {
       font-size: 20px;
       font-weight: 600;
       color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .price-original {
+      text-decoration: line-through;
+      color: var(--gray-400);
+      font-size: 15px;
+      font-weight: 400;
+    }
+    .price-discounted {
+      color: var(--red);
+      font-weight: 700;
     }
     .product-add {
       padding: 10px 20px;
@@ -864,6 +923,10 @@ body {
       font-weight: 600;
       color: var(--black);
       margin: 24px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
     .modal-add-btn {
       width: 100%;
@@ -894,10 +957,11 @@ body {
     .cart-drawer {
       position: fixed;
       top: 0;
-      right: -450px;
+      right: -100%;
       width: 100%;
       max-width: 450px;
       height: 100vh;
+      height: 100dvh;
       background: var(--white);
       z-index: 301;
       transition: right 0.3s ease;
@@ -953,26 +1017,12 @@ body {
       font-size: 16px;
     }
     .cart-footer {
-  padding: 24px;
-  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  border-top: 1px solid var(--gray-100);
-  background: var(--off-white);
-  flex-shrink: 0;
-}
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  max-width: 450px;
-  height: 100vh;
-  height: 100dvh;
-  background: var(--white);
-  z-index: 301;
-  transition: right 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
+      padding: 24px;
+      padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--gray-100);
+      background: var(--off-white);
+      flex-shrink: 0;
+    }
     .cart-total {
       display: flex;
       justify-content: space-between;
@@ -1071,74 +1121,64 @@ body {
     }
 
     /* RESPONSIVE */
-  @media (max-width: 768px) {
-  html, body { overflow-x: hidden; }
-  
-  /* HEADER COMPATTO */
-  .header { padding: 10px 12px; }
-  .header-inner { gap: 8px; }
-  .logo { font-size: 18px; gap: 6px; }
-  .logo img { width: 30px; height: 30px; }
-  .header-search { display: none; }
-  .filter-toggle-btn { 
-    display: inline-flex; 
-    padding: 8px 12px; 
-    font-size: 12px; 
-  }
-  .icon-btn { width: 36px; height: 36px; font-size: 15px; }
-  .header-actions { gap: 4px; }
-  
-  .hero { padding: 48px 20px; }
-  .hero h1 { font-size: 32px; }
-  .promo-card, .airpods-cta-card { flex-direction: column; text-align: center; padding: 24px; }
-  .promo-title { font-size: 22px; }
-  .airpods-title { font-size: 28px; }
-  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .product-name { font-size: 15px; }
-  .product-price { font-size: 17px; }
-  .modal-body { grid-template-columns: 1fr; max-height: 85vh; }
-  .modal-image-wrap { max-height: 280px; padding: 24px; }
-  .modal-image { max-width: 70%; max-height: 70%; }
-  .modal-info { padding: 24px; max-height: none; }
-  .modal-name { font-size: 24px; }
-  .modal-content { max-height: 90vh; max-height: 90dvh; overflow-y: auto; }
-  .quiz-container { padding: 24px; }
-  .airpods-grid { grid-template-columns: 1fr; }
-  .filters-bar { display: none; }
-  .footer-inner { flex-direction: column; text-align: center; }
-  .footer-brand, .footer-contact { text-align: center; }
-  .product-card { min-width: 0; }
-  .product-image-wrap { min-width: 0; }
-  .promo-banner, .airpods-cta, .products-section, .filters-bar { 
-    max-width: 100%; 
-    padding-left: 16px; 
-    padding-right: 16px; 
-  }
-  .cart-drawer { max-width: 100%; }
-  .cart-checkout { 
-    width: 100%; 
-    position: sticky; 
-    bottom: 0; 
-  }
-}
+    @media (max-width: 768px) {
+      html, body { overflow-x: hidden; }
+      .header { padding: 10px 12px; }
+      .header-inner { gap: 8px; }
+      .logo { font-size: 18px; gap: 6px; }
+      .logo img { width: 30px; height: 30px; }
+      .header-search { display: none; }
+      .filter-toggle-btn { 
+        display: inline-flex; 
+        padding: 8px 12px; 
+        font-size: 12px; 
+      }
+      .icon-btn { width: 36px; height: 36px; font-size: 15px; }
+      .header-actions { gap: 4px; }
+      .hero { padding: 48px 20px; }
+      .hero h1 { font-size: 32px; }
+      .promo-card, .airpods-cta-card { flex-direction: column; text-align: center; padding: 24px; }
+      .promo-title { font-size: 22px; }
+      .airpods-title { font-size: 28px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .product-name { font-size: 15px; }
+      .product-price { font-size: 17px; }
+      .modal-body { grid-template-columns: 1fr; max-height: 85vh; }
+      .modal-image-wrap { max-height: 280px; padding: 24px; }
+      .modal-image { max-width: 70%; max-height: 70%; }
+      .modal-info { padding: 24px; max-height: none; }
+      .modal-name { font-size: 24px; }
+      .modal-content { max-height: 90vh; max-height: 90dvh; overflow-y: auto; }
+      .quiz-container { padding: 24px; }
+      .airpods-grid { grid-template-columns: 1fr; }
+      .filters-bar { display: none; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-brand, .footer-contact { text-align: center; }
+      .product-card { min-width: 0; }
+      .product-image-wrap { min-width: 0; }
+      .promo-banner, .airpods-cta, .products-section, .filters-bar, .discount-notice-banner { 
+        max-width: 100%; 
+        padding-left: 16px; 
+        padding-right: 16px; 
+      }
+      .cart-drawer { max-width: 100%; }
+      .cart-checkout { width: 100%; }
+    }
 
-/* SCHERMI MOLTO STRETTI - nascondi il testo "RedClub" */
-@media (max-width: 380px) {
-  .logo span { display: none; }
-  .logo { gap: 0; }
-  .filter-toggle-btn span { display: none; }
-  .filter-toggle-btn { padding: 8px; }
-}
     @media (max-width: 480px) {
-  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .product-add { padding: 8px 14px; font-size: 11px; }
-  .product-notes { gap: 4px; }
-  .note-tag { font-size: 10px; padding: 2px 8px; }
-  .promo-card, .airpods-cta-card { padding: 20px; gap: 16px; }
-  .promo-icon, .airpods-cta-icon { width: 60px; height: 60px; min-width: 60px; font-size: 28px; }
-}
-    @media (max-width: 480px) {
-      .products-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .product-add { padding: 8px 14px; font-size: 11px; }
+      .product-notes { gap: 4px; }
+      .note-tag { font-size: 10px; padding: 2px 8px; }
+      .promo-card, .airpods-cta-card { padding: 20px; gap: 16px; }
+      .promo-icon, .airpods-cta-icon { width: 60px; height: 60px; min-width: 60px; font-size: 28px; }
+    }
+
+    @media (max-width: 380px) {
+      .logo span { display: none; }
+      .logo { gap: 0; }
+      .filter-toggle-btn span { display: none; }
+      .filter-toggle-btn { padding: 8px; }
     }
   </style>
 </head>
@@ -1156,7 +1196,7 @@ body {
     </div>
     <div class="header-actions">
       <button class="filter-toggle-btn" onclick="toggleFilterDrawer()">
-        <i class="fas fa-sliders"></i> Filtri
+        <i class="fas fa-sliders"></i> <span>Filtri</span>
       </button>
       <button class="icon-btn" onclick="toggleQuiz()" aria-label="Quiz">
         <i class="fas fa-question-circle"></i>
@@ -1209,6 +1249,13 @@ body {
       <p class="airpods-cta-desc">Scopri i modelli disponibili e richiedi il tuo direttamente su WhatsApp</p>
     </div>
     <div class="airpods-cta-arrow"><i class="fas fa-arrow-right"></i></div>
+  </div>
+</section>
+
+<section class="discount-notice-banner">
+  <div class="discount-notice-inner">
+    <i class="fas fa-info-circle"></i>
+    <p><strong>Nota importante:</strong> I profumi in offerta non sono cumulabili con altre promozioni attive (es. 10% sul primo ordine). Lo sconto del 15% è già applicato al prezzo indicato.</p>
   </div>
 </section>
 
@@ -1288,7 +1335,7 @@ body {
     <div class="filter-chips">
       <button class="chip active" onclick="filterBy('olfactory','all',this); syncFilterChips('olfactory','all')">Tutti</button>
       <button class="chip" onclick="filterBy('olfactory','woody',this); syncFilterChips('olfactory','woody')">🌲 Legnosi</button>
-      <button class="chip" onclick="filterBy('olfactory','floral',this); syncFilterChips('olfactory','floral')"> Floreali</button>
+      <button class="chip" onclick="filterBy('olfactory','floral',this); syncFilterChips('olfactory','floral')">🌹 Floreali</button>
       <button class="chip" onclick="filterBy('olfactory','citrus',this); syncFilterChips('olfactory','citrus')">🍊 Agrumati</button>
       <button class="chip" onclick="filterBy('olfactory','oriental',this); syncFilterChips('olfactory','oriental')">🌶️ Orientali</button>
       <button class="chip" onclick="filterBy('olfactory','fresh',this); syncFilterChips('olfactory','fresh')">💧 Freschi</button>
@@ -1351,7 +1398,7 @@ body {
 
 <script>
 const PRODUCTS = [
-  {id:633,name:"Sauvage EDT",brand:"Dior",size:"60ML",gender:"male",olfactory:"fresh",price:"45€",description:"Freschezza selvaggia e virile.",shortDesc:"Bergamotto, pepe e ambroxan in un'esplosione fresca.",notes:["Bergamotto","Pepe","Ambroxan"],pyramid:{top:["Bergamotto","Pepe"],heart:["Lavanda","Patchouli"],base:["Ambroxan","Cedro"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
+  {id:633,name:"Sauvage EDT",brand:"Dior",size:"60ML",gender:"male",olfactory:"fresh",price:"45€",bestSeller:true,description:"Freschezza selvaggia e virile.",shortDesc:"Bergamotto, pepe e ambroxan in un'esplosione fresca.",notes:["Bergamotto","Pepe","Ambroxan"],pyramid:{top:["Bergamotto","Pepe"],heart:["Lavanda","Patchouli"],base:["Ambroxan","Cedro"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:634,name:"Sauvage EDP",brand:"Dior",size:"100ML",gender:"male",olfactory:"fresh",price:"65€",description:"Intensità magnetica e raffinata.",shortDesc:"Lavanda e ambroxan per eleganza maschile contemporanea.",notes:["Bergamotto","Lavanda","Ambroxan"],pyramid:{top:["Bergamotto"],heart:["Lavanda","Spezie"],base:["Ambroxan","Legni"]},intensity:"strong",season:["all"],occasion:["evening"]},
   {id:638,name:"Sauvage EDT",brand:"Dior",size:"100ML",gender:"male",olfactory:"fresh",price:"60€",description:"Libertà assoluta in bottiglia.",shortDesc:"Bergamotto di Reggio Calabria e pepe di Sichuan.",notes:["Bergamotto","Pepe","Ambroxan"],pyramid:{top:["Bergamotto","Pepe"],heart:["Lavanda","Patchouli"],base:["Ambroxan","Cedro"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:643,name:"J'adore EDP",brand:"Dior",size:"100ML",gender:"female",olfactory:"floral",price:"70€",description:"Un bouquet solare di ylang-ylang, rosa e gelsomino.",shortDesc:"Bouquet solare di ylang-ylang, rosa e gelsomino.",notes:["Ylang-Ylang","Rosa","Gelsomino"],pyramid:{top:["Ylang-Ylang","Rosa"],heart:["Gelsomino","Tuberosa"],base:["Legni","Muschio"]},intensity:"medium",season:["spring","summer"],occasion:["day","evening"]},
@@ -1364,17 +1411,17 @@ const PRODUCTS = [
   {id:733,name:"N°5 EDP",brand:"Chanel",size:"100ML",gender:"female",olfactory:"floral",price:"70€",description:"Il profumo più celebre al mondo.",shortDesc:"Ylang-ylang e rosa di Grasse in perfetta armonia.",notes:["Aldeidi","Ylang-Ylang","Rosa"],pyramid:{top:["Aldeidi"],heart:["Ylang-Ylang","Rosa","Gelsomino"],base:["Vaniglia","Muschio"]},intensity:"strong",season:["all"],occasion:["evening"]},
   {id:702,name:"Bleu de Chanel EDT",brand:"Chanel",size:"100ML",gender:"male",olfactory:"fresh",price:"65€",description:"Libertà e eleganza in equilibrio.",shortDesc:"Agrumi freschi e legni nobili per uomo contemporaneo.",notes:["Limone","Menta","Cedro"],pyramid:{top:["Limone","Menta"],heart:["Zenzero","Gelsomino"],base:["Cedro","Incenso"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:715,name:"Bleu de Chanel EDP",brand:"Chanel",size:"100ML",gender:"male",olfactory:"fresh",price:"70€",description:"Profondità boisée con incenso e sandalo.",shortDesc:"Incenso e sandalo per eleganza maschile intensa.",notes:["Limone","Incenso","Sandalwood"],pyramid:{top:["Limone"],heart:["Zenzero","Noce Moscata"],base:["Incenso","Sandalwood","Ambra"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
-  {id:707,name:"Coco Mademoiselle",brand:"Chanel",size:"100ML",gender:"female",olfactory:"floral",price:"70€",description:"Spirito libero e femminile.",shortDesc:"Arancia sanguinella e patchouli per modernità audace.",notes:["Arancia","Gelsomino","Patchouli"],pyramid:{top:["Arancia","Mandarino"],heart:["Rosa","Gelsomino"],base:["Patchouli","Vaniglia"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
+  {id:707,name:"Coco Mademoiselle",brand:"Chanel",size:"100ML",gender:"female",olfactory:"floral",price:"70€",bestSeller:true,description:"Spirito libero e femminile.",shortDesc:"Arancia sanguinella e patchouli per modernità audace.",notes:["Arancia","Gelsomino","Patchouli"],pyramid:{top:["Arancia","Mandarino"],heart:["Rosa","Gelsomino"],base:["Patchouli","Vaniglia"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:718,name:"Allure Homme Sport",brand:"Chanel",size:"100ML",gender:"male",olfactory:"fresh",price:"60€",description:"Energia sportiva e raffinatezza.",shortDesc:"Note marine e tonka per vitalità immediata.",notes:["Note Marine","Pepe","Tonka"],pyramid:{top:["Note Marine","Limone"],heart:["Pepe","Noce Moscata"],base:["Tonka","Legni"]},intensity:"light",season:["summer"],occasion:["day"]},
   {id:709,name:"Gabrielle Essence",brand:"Chanel",size:"100ML",gender:"female",olfactory:"floral",price:"65€",description:"Fiori bianchi illuminati dal sole.",shortDesc:"Gelsomino e ylang-ylang per femminilità radiosa.",notes:["Gelsomino","Ylang-Ylang","Tuberosa"],pyramid:{top:["Mandarino"],heart:["Gelsomino","Ylang-Ylang"],base:["Sandalwood","Muschio"]},intensity:"medium",season:["spring","summer"],occasion:["day"]},
-  {id:33,name:"Libre EDP",brand:"Yves Saint Laurent",size:"90ML",gender:"female",olfactory:"floral",price:"60€",description:"Libertà assoluta.",shortDesc:"Lavanda francese e fior d'arancio del Marocco.",notes:["Lavanda","Fior d'Arancio","Vaniglia"],pyramid:{top:["Lavanda","Mandarino"],heart:["Fior d'Arancio","Gelsomino"],base:["Vaniglia","Muschio"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
+  {id:33,name:"Libre EDP",brand:"Yves Saint Laurent",size:"90ML",gender:"female",olfactory:"floral",price:"60€",bestSeller:true,description:"Libertà assoluta.",shortDesc:"Lavanda francese e fior d'arancio del Marocco.",notes:["Lavanda","Fior d'Arancio","Vaniglia"],pyramid:{top:["Lavanda","Mandarino"],heart:["Fior d'Arancio","Gelsomino"],base:["Vaniglia","Muschio"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:35,name:"Libre EDT",brand:"Yves Saint Laurent",size:"90ML",gender:"female",olfactory:"floral",price:"55€",description:"Freschezza floreale audace.",shortDesc:"Inno alla libertà femminile con note luminose.",notes:["Lavanda","Fior d'Arancio","Mandarino"],pyramid:{top:["Lavanda","Mandarino"],heart:["Fior d'Arancio"],base:["Vaniglia","Legni"]},intensity:"light",season:["spring","summer"],occasion:["day"]},
   {id:56,name:"MYSLF EDP",brand:"Yves Saint Laurent",size:"100ML",gender:"male",olfactory:"fresh",price:"60€",description:"Affermazione di sé.",shortDesc:"Ambroxan e bergamotto per eleganza maschile.",notes:["Bergamotto","Ambroxan","Patchouli"],pyramid:{top:["Bergamotto"],heart:["Ambroxan","Lavanda"],base:["Patchouli","Legni"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
-  {id:61,name:"Black Opium EDP",brand:"Yves Saint Laurent",size:"90ML",gender:"female",olfactory:"oriental",price:"55€",description:"Caffè nero e fiori bianchi.",shortDesc:"Fragranza rock-chic per notti indimenticabili.",notes:["Caffè","Gelsomino","Vaniglia"],pyramid:{top:["Caffè","Pepe Rosa"],heart:["Gelsomino","Fior d'Arancio"],base:["Vaniglia","Patchouli","Cedro"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
+  {id:61,name:"Black Opium EDP",brand:"Yves Saint Laurent",size:"90ML",gender:"female",olfactory:"oriental",price:"55€",bestSeller:true,description:"Caffè nero e fiori bianchi.",shortDesc:"Fragranza rock-chic per notti indimenticabili.",notes:["Caffè","Gelsomino","Vaniglia"],pyramid:{top:["Caffè","Pepe Rosa"],heart:["Gelsomino","Fior d'Arancio"],base:["Vaniglia","Patchouli","Cedro"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:64,name:"Black Opium Intense",brand:"Yves Saint Laurent",size:"100ML",gender:"female",olfactory:"oriental",price:"65€",description:"Intensità assoluta.",shortDesc:"Vaniglia bourbon e gelsomino, seduzione senza compromessi.",notes:["Caffè","Vaniglia Bourbon","Gelsomino"],pyramid:{top:["Caffè"],heart:["Gelsomino","Fior d'Arancio"],base:["Vaniglia Bourbon","Legni"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:67,name:"Black Opium Extreme",brand:"Yves Saint Laurent",size:"100ML",gender:"female",olfactory:"oriental",price:"65€",description:"Versione estrema.",shortDesc:"Note gourmand e fiori bianchi per femminilità audace.",notes:["Caffè","Vaniglia","Gelsomino"],pyramid:{top:["Caffè","Mandarino"],heart:["Gelsomino"],base:["Vaniglia","Legni"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:48,name:"Libre Intense",brand:"Yves Saint Laurent",size:"90ML",gender:"female",olfactory:"floral",price:"65€",description:"Orchidea vanigliata e lavanda.",shortDesc:"Intensità floreale calda e avvolgente.",notes:["Orchidea","Lavanda","Vaniglia"],pyramid:{top:["Lavanda","Mandarino"],heart:["Orchidea","Fior d'Arancio"],base:["Vaniglia","Tonka"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
-  {id:17,name:"Le Male EDP",brand:"Jean Paul Gaultier",size:"125ML",gender:"male",olfactory:"oriental",price:"55€",description:"Icona maschile.",shortDesc:"Lavanda e vaniglia in flacone a forma di torso.",notes:["Lavanda","Menta","Vaniglia"],pyramid:{top:["Lavanda","Menta"],heart:["Cannella","Cumino"],base:["Vaniglia","Sandalwood"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
+  {id:17,name:"Le Male EDP",brand:"Jean Paul Gaultier",size:"125ML",gender:"male",olfactory:"oriental",price:"55€",bestSeller:true,description:"Icona maschile.",shortDesc:"Lavanda e vaniglia in flacone a forma di torso.",notes:["Lavanda","Menta","Vaniglia"],pyramid:{top:["Lavanda","Menta"],heart:["Cannella","Cumino"],base:["Vaniglia","Sandalwood"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:21,name:"Le Male Le Parfum",brand:"Jean Paul Gaultier",size:"125ML",gender:"male",olfactory:"oriental",price:"60€",description:"Spezie orientali e iris.",shortDesc:"Eleganza maschile sofisticata e misteriosa.",notes:["Cardamomo","Iris","Vaniglia"],pyramid:{top:["Cardamomo"],heart:["Iris","Lavanda"],base:["Vaniglia","Legni"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:14,name:"Le Beau EDT",brand:"Jean Paul Gaultier",size:"125ML",gender:"male",olfactory:"fresh",price:"50€",description:"Freschezza tropicale.",shortDesc:"Noce di cocco e bergamotto per evasione estiva.",notes:["Bergamotto","Noce di Cocco","Tonka"],pyramid:{top:["Bergamotto"],heart:["Noce di Cocco"],base:["Tonka","Legni"]},intensity:"light",season:["summer"],occasion:["day"]},
   {id:956,name:"Scandal EDP",brand:"Jean Paul Gaultier",size:"100ML",gender:"female",olfactory:"floral",price:"55€",description:"Gardenia e caramello.",shortDesc:"Profumo scandalosamente femminile e gourmand.",notes:["Gardenia","Caramello","Miele"],pyramid:{top:["Mandarino","Gardenia"],heart:["Gardenia","Caramello"],base:["Miele","Legni"]},intensity:"medium",season:["all"],occasion:["evening"]},
@@ -1383,15 +1430,15 @@ const PRODUCTS = [
   {id:900,name:"Dylan Blue EDT",brand:"Versace",size:"100ML",gender:"male",olfactory:"fresh",price:"45€",description:"Acqua di mare e legni.",shortDesc:"Freschezza mediterranea per uomo moderno.",notes:["Note Marine","Fico","Ambroxan"],pyramid:{top:["Note Marine","Fico"],heart:["Violetta","Patchouli"],base:["Ambroxan","Muschio"]},intensity:"medium",season:["summer"],occasion:["day"]},
   {id:901,name:"Dylan Purple",brand:"Versace",size:"100ML",gender:"female",olfactory:"floral",price:"50€",description:"Zenzero e fiori lilla.",shortDesc:"Freschezza speziata e femminile.",notes:["Zenzero","Fiori Lilla","Muschio"],pyramid:{top:["Zenzero","Bergamotto"],heart:["Fiori Lilla","Gelsomino"],base:["Muschio","Legni"]},intensity:"medium",season:["spring","summer"],occasion:["day","evening"]},
   {id:914,name:"Bright Crystal",brand:"Versace",size:"90ML",gender:"female",olfactory:"floral",price:"40€",description:"Melograno e peonia.",shortDesc:"Luminosità floreale per donna radiosa.",notes:["Melograno","Peonia","Muschio"],pyramid:{top:["Melograno","Yuzu"],heart:["Peonia","Magnolia"],base:["Muschio","Legni"]},intensity:"light",season:["spring","summer"],occasion:["day"]},
-  {id:934,name:"Acqua di Giò Profumo",brand:"Armani",size:"100ML",gender:"male",olfactory:"fresh",price:"60€",description:"Note marine e incenso.",shortDesc:"Eleganza maschile profonda e raffinata.",notes:["Note Marine","Bergamotto","Incenso"],pyramid:{top:["Note Marine","Bergamotto"],heart:["Rosmarino","Salvia"],base:["Incenso","Patchouli"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
+  {id:934,name:"Acqua di Giò Profumo",brand:"Armani",size:"100ML",gender:"male",olfactory:"fresh",price:"60€",bestSeller:true,description:"Note marine e incenso.",shortDesc:"Eleganza maschile profonda e raffinata.",notes:["Note Marine","Bergamotto","Incenso"],pyramid:{top:["Note Marine","Bergamotto"],heart:["Rosmarino","Salvia"],base:["Incenso","Patchouli"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:337,name:"Sì EDP",brand:"Armani",size:"100ML",gender:"female",olfactory:"floral",price:"55€",description:"Ribes nero e vaniglia.",shortDesc:"Femminilità intensa e seducente.",notes:["Ribes Nero","Freesia","Vaniglia"],pyramid:{top:["Ribes Nero"],heart:["Freesia","Rosa"],base:["Vaniglia","Legni"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:327,name:"My Way EDP",brand:"Armani",size:"90ML",gender:"female",olfactory:"floral",price:"55€",description:"Tuberosa e vaniglia.",shortDesc:"Percorso floreale luminoso e moderno.",notes:["Tuberosa","Gelsomino","Vaniglia"],pyramid:{top:["Arancia","Bergamotto"],heart:["Tuberosa","Gelsomino"],base:["Vaniglia","Cedro"]},intensity:"medium",season:["spring","summer"],occasion:["day"]},
   {id:333,name:"My Way Intense",brand:"Armani",size:"90ML",gender:"female",olfactory:"floral",price:"60€",description:"Fiori bianchi intensificati.",shortDesc:"Vaniglia bourbon per femminilità avvolgente.",notes:["Tuberosa","Gelsomino","Vaniglia Bourbon"],pyramid:{top:["Arancia"],heart:["Tuberosa","Gelsomino"],base:["Vaniglia Bourbon","Legni"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:150,name:"Invictus EDT",brand:"Paco Rabanne",size:"100ML",gender:"male",olfactory:"fresh",price:"45€",description:"Vittoria in bottiglia.",shortDesc:"Note marine e legnose per uomo vincente.",notes:["Note Marine","Legni","Ambroxan"],pyramid:{top:["Note Marine","Limone"],heart:["Legni","Gelsomino"],base:["Ambroxan","Muschio"]},intensity:"medium",season:["summer"],occasion:["day"]},
-  {id:159,name:"1 Million EDT",brand:"Paco Rabanne",size:"80ML",gender:"male",olfactory:"oriental",price:"45€",description:"Oro liquido, spezie e cuoio.",shortDesc:"Successo sfavillante in bottiglia.",notes:["Mandarino","Cannella","Cuoio"],pyramid:{top:["Mandarino","Pompelmo"],heart:["Cannella","Spezie"],base:["Cuoio","Legni"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
+  {id:159,name:"1 Million EDT",brand:"Paco Rabanne",size:"80ML",gender:"male",olfactory:"oriental",price:"45€",bestSeller:true,description:"Oro liquido, spezie e cuoio.",shortDesc:"Successo sfavillante in bottiglia.",notes:["Mandarino","Cannella","Cuoio"],pyramid:{top:["Mandarino","Pompelmo"],heart:["Cannella","Spezie"],base:["Cuoio","Legni"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:161,name:"1 Million Elixir",brand:"Paco Rabanne",size:"100ML",gender:"male",olfactory:"oriental",price:"55€",description:"Intensità dorata.",shortDesc:"Davana e patchouli per seduzione potente.",notes:["Davana","Patchouli","Vaniglia"],pyramid:{top:["Mandarino"],heart:["Davana","Cannella"],base:["Patchouli","Vaniglia"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:168,name:"1 Million Parfum",brand:"Paco Rabanne",size:"100ML",gender:"male",olfactory:"oriental",price:"60€",description:"Versione Parfum.",shortDesc:"Note boisée rafforzate, eleganza assoluta.",notes:["Mandarino","Cannella","Legni"],pyramid:{top:["Mandarino"],heart:["Cannella","Spezie"],base:["Legni","Ambra"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
-  {id:1,name:"Good Girl EDP",brand:"Carolina Herrera",size:"80ML",gender:"female",olfactory:"oriental",price:"55€",description:"Doppia personalità.",shortDesc:"Tuberosa e cacao per donna seducente.",notes:["Tuberosa","Gelsomino","Cacao"],pyramid:{top:["Mandorla","Caffè"],heart:["Tuberosa","Gelsomino"],base:["Cacao","Tonka","Sandalwood"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
+  {id:1,name:"Good Girl EDP",brand:"Carolina Herrera",size:"80ML",gender:"female",olfactory:"oriental",price:"55€",bestSeller:true,description:"Doppia personalità.",shortDesc:"Tuberosa e cacao per donna seducente.",notes:["Tuberosa","Gelsomino","Cacao"],pyramid:{top:["Mandorla","Caffè"],heart:["Tuberosa","Gelsomino"],base:["Cacao","Tonka","Sandalwood"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:6,name:"Good Girl Supreme",brand:"Carolina Herrera",size:"80ML",gender:"female",olfactory:"oriental",price:"60€",description:"Versione suprema.",shortDesc:"Iris e vaniglia per femminilità lussuosa.",notes:["Iris","Tuberosa","Vaniglia"],pyramid:{top:["Mandorla"],heart:["Iris","Tuberosa"],base:["Vaniglia","Tonka"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:9,name:"Good Girl Blush",brand:"Carolina Herrera",size:"80ML",gender:"female",olfactory:"oriental",price:"55€",description:"Rosa e pralina.",shortDesc:"Dolcezza femminile con tocco audace.",notes:["Rosa","Pralina","Tuberosa"],pyramid:{top:["Rosa","Pompelmo"],heart:["Pralina","Tuberosa"],base:["Legni","Muschio"]},intensity:"medium",season:["spring","summer"],occasion:["day","evening"]},
   {id:775,name:"Bloom EDP",brand:"Gucci",size:"100ML",gender:"female",olfactory:"floral",price:"55€",description:"Tuberosa e gardenia.",shortDesc:"Esplosione floreale bianca per eleganza naturale.",notes:["Tuberosa","Gardenia","Rangoon"],pyramid:{top:["Rangoon"],heart:["Tuberosa","Gardenia"],base:["Muschio","Legni"]},intensity:"medium",season:["spring","summer"],occasion:["day"]},
@@ -1400,7 +1447,7 @@ const PRODUCTS = [
   {id:250,name:"Paradoxe EDP",brand:"Prada",size:"90ML",gender:"female",olfactory:"floral",price:"55€",description:"Neroli e tuberosa.",shortDesc:"Paradosso tra luce e ombra per donna moderna.",notes:["Neroli","Tuberosa","Ambra"],pyramid:{top:["Neroli","Bergamotto"],heart:["Tuberosa","Gelsomino"],base:["Ambra","Legni"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:252,name:"Paradoxe Intense",brand:"Prada",size:"90ML",gender:"female",olfactory:"floral",price:"65€",description:"Intensità del paradosso.",shortDesc:"Vaniglia e fiori bianchi per femminilità profonda.",notes:["Neroli","Tuberosa","Vaniglia"],pyramid:{top:["Neroli"],heart:["Tuberosa","Gelsomino"],base:["Vaniglia","Ambra"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
   {id:255,name:"Luna Rossa Carbon",brand:"Prada",size:"100ML",gender:"male",olfactory:"fresh",price:"55€",description:"Lavanda e ambroxan.",shortDesc:"Freschezza minerale per uomo contemporaneo.",notes:["Lavanda","Ambroxan","Legni"],pyramid:{top:["Lavanda","Bergamotto"],heart:["Ambroxan","Note Minerali"],base:["Legni","Muschio"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
-  {id:922,name:"La Vie Est Belle EDP",brand:"Lancôme",size:"100ML",gender:"female",olfactory:"floral",price:"60€",description:"Iris pallido e pralina.",shortDesc:"Felicità in bottiglia per donna ottimista.",notes:["Iris","Pralina","Patchouli"],pyramid:{top:["Ribes Nero","Pera"],heart:["Iris","Gelsomino"],base:["Pralina","Patchouli"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
+  {id:922,name:"La Vie Est Belle EDP",brand:"Lancôme",size:"100ML",gender:"female",olfactory:"floral",price:"60€",bestSeller:true,description:"Iris pallido e pralina.",shortDesc:"Felicità in bottiglia per donna ottimista.",notes:["Iris","Pralina","Patchouli"],pyramid:{top:["Ribes Nero","Pera"],heart:["Iris","Gelsomino"],base:["Pralina","Patchouli"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:925,name:"La Vie Est Belle L'Éclat",brand:"Lancôme",size:"100ML",gender:"female",olfactory:"floral",price:"55€",description:"Luminosità floreale.",shortDesc:"Pesca e iris per gioia di vivere radiosa.",notes:["Pesca","Iris","Pralina"],pyramid:{top:["Pesca","Limone"],heart:["Iris","Gelsomino"],base:["Pralina","Legni"]},intensity:"light",season:["spring","summer"],occasion:["day"]},
   {id:929,name:"Idôle EDP",brand:"Lancôme",size:"100ML",gender:"female",olfactory:"floral",price:"55€",description:"Rosa e biancospino.",shortDesc:"Idolo floreale per donna ispiratrice.",notes:["Rosa","Biancospino","Muschio"],pyramid:{top:["Pera","Bergamotto"],heart:["Rosa","Biancospino"],base:["Muschio","Vaniglia"]},intensity:"medium",season:["spring","summer"],occasion:["day"]},
   {id:987,name:"L'Interdit EDP",brand:"Givenchy",size:"80ML",gender:"female",olfactory:"floral",price:"55€",description:"Tuberosa proibita.",shortDesc:"Trasgressione elegante e femminile.",notes:["Tuberosa","Gelsomino","Legni"],pyramid:{top:["Pera","Bergamotto"],heart:["Tuberosa","Gelsomino"],base:["Legni","Ambra"]},intensity:"medium",season:["all"],occasion:["evening"]},
@@ -1494,7 +1541,7 @@ const PRODUCTS = [
   {id:1012,name:"Polo Green",brand:"Ralph Lauren",size:"125ML",gender:"male",olfactory:"fresh",price:"40€",description:"Pino e cuoio.",shortDesc:"Classicità verde maschile.",notes:["Pino","Cuoio","Legni"],pyramid:{top:["Pino","Bergamotto"],heart:["Cuoio","Note Verdi"],base:["Legni","Muschio"]},intensity:"medium",season:["spring","summer"],occasion:["day"]},
   {id:1013,name:"Polo Ultra Blue",brand:"Ralph Lauren",size:"125ML",gender:"male",olfactory:"fresh",price:"40€",description:"Note marine e agrumi.",shortDesc:"Blu ultra fresco maschile.",notes:["Note Marine","Agrumi","Legni"],pyramid:{top:["Note Marine","Agrumi"],heart:["Lavanda","Spezie"],base:["Legni","Muschio"]},intensity:"light",season:["summer"],occasion:["day"]},
   {id:1014,name:"Polo Supreme Oud",brand:"Ralph Lauren",size:"125ML",gender:"male",olfactory:"woody",price:"55€",description:"Oud e spezie.",shortDesc:"Supremazia maschile orientale.",notes:["Oud","Spezie","Legni"],pyramid:{top:["Oud","Bergamotto"],heart:["Spezie","Incenso"],base:["Legni","Ambra"]},intensity:"strong",season:["autumn","winter"],occasion:["evening"]},
-  {id:1114,name:"Creed Aventus",brand:"Creed",size:"100ML",gender:"male",olfactory:"fresh",price:"115€",description:"Ananas e betulla.",shortDesc:"Successo maschile leggendario.",notes:["Ananas","Betulla","Muschio"],pyramid:{top:["Ananas","Bergamotto","Mela"],heart:["Betulla","Patchouli","Gelsomino"],base:["Muschio","Vaniglia","Quercia"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
+  {id:1114,name:"Creed Aventus",brand:"Creed",size:"100ML",gender:"male",olfactory:"fresh",price:"115€",bestSeller:true,description:"Ananas e betulla.",shortDesc:"Successo maschile leggendario.",notes:["Ananas","Betulla","Muschio"],pyramid:{top:["Ananas","Bergamotto","Mela"],heart:["Betulla","Patchouli","Gelsomino"],base:["Muschio","Vaniglia","Quercia"]},intensity:"medium",season:["all"],occasion:["day","evening"]},
   {id:1115,name:"Creed Green Irish Tweed",brand:"Creed",size:"100ML",gender:"male",olfactory:"fresh",price:"110€",description:"Violetta e sandalo.",shortDesc:"Tweed irlandese fresco e maschile.",notes:["Violetta","Sandalwood","Ambra"],pyramid:{top:["Violetta","Limone"],heart:["Iris","Gelsomino"],base:["Sandalwood","Ambra"]},intensity:"medium",season:["spring","summer"],occasion:["day"]},
   {id:1116,name:"Creed Silver Mountain Water",brand:"Creed",size:"100ML",gender:"unisex",olfactory:"fresh",price:"105€",description:"Tè verde e ribes.",shortDesc:"Acqua di montagna argentata.",notes:["Tè Verde","Ribes","Muschio"],pyramid:{top:["Tè Verde","Ribes","Arancia"],heart:["Note Acquatiche","Fiori"],base:["Muschio","Legni"]},intensity:"light",season:["spring","summer"],occasion:["day"]},
   {id:1117,name:"Creed Virgin Island Water",brand:"Creed",size:"100ML",gender:"unisex",olfactory:"citrus",price:"100€",description:"Lime e cocco.",shortDesc:"Acque delle Isole Vergini tropicali.",notes:["Lime","Cocco","Rum"],pyramid:{top:["Lime","Bergamotto"],heart:["Cocco","Fiori Tropicali"],base:["Rum","Legni"]},intensity:"light",season:["summer"],occasion:["day"]}
@@ -1512,11 +1559,18 @@ const AIRPODS_MODELS = [
   {id:'ap3',name:'AirPods (3ª generazione)',icon:'🎵',desc:'Design ridisegnato con audio spaziale personalizzato.',features:['Audio Spaziale','IPX4','30h batteria','MagSafe']},
   {id:'ap4',name:'AirPods 4',icon:'✨',desc:'Il nuovo standard con chip H2 e audio spaziale avanzato.',features:['Chip H2','Audio Spaziale','USB-C','Design aperto']},
   {id:'ap4-anc',name:'AirPods 4 con ANC',icon:'🔇',desc:'Cancellazione attiva del rumore nel design aperto.',features:['ANC','Chip H2','Audio Adattivo','Trasparenza']},
-  {id:'ap-pro2',name:'AirPods Pro (2ª gen)',icon:'🎯',desc:'ANC, audio adattivo e custodia con altoparlante.',features:['ANC Avanzato','Audio Adattivo','USB-C','IP54']},
+  {id:'ap-pro2',name:'AirPods Pro (2ª gen)',icon:'',desc:'ANC, audio adattivo e custodia con altoparlante.',features:['ANC Avanzato','Audio Adattivo','USB-C','IP54']},
   {id:'ap-max',name:'AirPods Max',icon:'🎧',desc:'Cuffie over-ear con audio Hi-Fi e ANC.',features:['Hi-Fi Audio','ANC','Audio Spaziale','Alluminio']}
 ];
 
 const nicheBrands = ['Xerjoff','Louis Vuitton','Initio','By Kilian','Le Labo','Parfums de Marly','Creed','Tom Ford'];
+const DISCOUNT = 0.15; // 15% di sconto
+
+// Calcola prezzo scontato
+function getDiscountedPrice(priceStr) {
+  const num = parseFloat(priceStr.replace('€', ''));
+  return Math.round(num * (1 - DISCOUNT)) + '€';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
@@ -1535,11 +1589,14 @@ function renderProducts() {
   if (currentFilters.sort === 'name') filtered.sort((a,b) => a.name.localeCompare(b.name));
   else if (currentFilters.sort === 'brand') filtered.sort((a,b) => a.brand.localeCompare(b.brand));
   document.getElementById('productsCount').textContent = `${filtered.length} profumi`;
-  grid.innerHTML = filtered.map(p => `
+  grid.innerHTML = filtered.map(p => {
+    const isOffer = p.bestSeller;
+    const discountedPrice = isOffer ? getDiscountedPrice(p.price) : p.price;
+    return `
     <div class="product-card" onclick="openModal(${p.id})">
       <div class="product-image-wrap">
+        ${isOffer ? '<span class="offer-badge">OFFERTA</span>' : `<span class="product-badge">${p.gender === 'male' ? 'Uomo' : p.gender === 'female' ? 'Donna' : 'Unisex'}</span>`}
         <img src="assets/${p.id}.jpg" alt="${p.name}" class="product-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23262626%22 font-family=%22serif%22 font-size=%2218%22%3E${p.brand}%3C/text%3E%3C/svg%3E'">
-        <span class="product-badge">${p.gender === 'male' ? 'Uomo' : p.gender === 'female' ? 'Donna' : 'Unisex'}</span>
         <button class="product-fav ${favorites.includes(p.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${p.id})"><i class="${favorites.includes(p.id) ? 'fas' : 'far'} fa-heart"></i></button>
       </div>
       <div class="product-brand">${p.brand}</div>
@@ -1547,11 +1604,13 @@ function renderProducts() {
       <p class="product-desc">${p.shortDesc}</p>
       <div class="product-notes">${p.notes.slice(0,3).map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
       <div class="product-footer">
-        <span class="product-price">${p.price}</span>
+        <div class="product-price">
+          ${isOffer ? `<span class="price-original">${p.price}</span><span class="price-discounted">${discountedPrice}</span>` : p.price}
+        </div>
         <button class="product-add" onclick="event.stopPropagation(); addToCart(${p.id})">Aggiungi</button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 function filterBy(type, value, el) {
@@ -1645,13 +1704,15 @@ function renderCart() {
     document.getElementById('cartTotal').textContent = '0 prodotti';
     return;
   }
-  c.innerHTML = cart.map(i => `
+  c.innerHTML = cart.map(i => {
+    const discountedPrice = i.bestSeller ? getDiscountedPrice(i.price) : i.price;
+    return `
     <div class="cart-item">
       <img src="assets/${i.id}.jpg" class="cart-item-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
       <div class="cart-item-info">
         <div class="cart-item-name">${i.name}</div>
         <div class="cart-item-meta">${i.brand} • ${i.size}</div>
-        <div class="cart-item-price">${i.price}</div>
+        <div class="cart-item-price">${i.bestSeller ? `<span class="price-original" style="font-size:12px;margin-right:6px;">${i.price}</span><span class="price-discounted">${discountedPrice}</span>` : i.price}</div>
       </div>
       <div class="cart-item-actions">
         <button class="qty-btn" onclick="updateQuantity(${i.id},-1)">-</button>
@@ -1660,7 +1721,7 @@ function renderCart() {
         <button class="cart-remove" onclick="removeFromCart(${i.id})"><i class="fas fa-trash"></i></button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
   const t = cart.reduce((s,i) => s + i.quantity, 0);
   document.getElementById('cartTotal').textContent = `${t} prodott${t === 1 ? 'o' : 'i'}`;
 }
@@ -1680,9 +1741,13 @@ function toggleFavorites() {
   const fp = PRODUCTS.filter(p => favorites.includes(p.id));
   currentFilters.search = '';
   document.getElementById('searchInput').value = '';
-  document.getElementById('productsGrid').innerHTML = fp.map(p => `
+  document.getElementById('productsGrid').innerHTML = fp.map(p => {
+    const isOffer = p.bestSeller;
+    const discountedPrice = isOffer ? getDiscountedPrice(p.price) : p.price;
+    return `
     <div class="product-card" onclick="openModal(${p.id})">
       <div class="product-image-wrap">
+        ${isOffer ? '<span class="offer-badge">OFFERTA</span>' : ''}
         <img src="assets/${p.id}.jpg" class="product-image" loading="lazy">
         <button class="product-fav active" onclick="event.stopPropagation(); toggleFavorite(${p.id})"><i class="fas fa-heart"></i></button>
       </div>
@@ -1691,11 +1756,13 @@ function toggleFavorites() {
       <p class="product-desc">${p.shortDesc}</p>
       <div class="product-notes">${p.notes.slice(0,3).map(n => `<span class="note-tag">${n}</span>`).join('')}</div>
       <div class="product-footer">
-        <span class="product-price">${p.price}</span>
+        <div class="product-price">
+          ${isOffer ? `<span class="price-original">${p.price}</span><span class="price-discounted">${discountedPrice}</span>` : p.price}
+        </div>
         <button class="product-add" onclick="event.stopPropagation(); addToCart(${p.id})">Aggiungi</button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
   document.getElementById('productsCount').textContent = `${fp.length} preferiti`;
   document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
 }
@@ -1703,6 +1770,8 @@ function toggleFavorites() {
 function openModal(id) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
+  const isOffer = p.bestSeller;
+  const discountedPrice = isOffer ? getDiscountedPrice(p.price) : p.price;
   document.getElementById('modalBody').innerHTML = `
     <div class="modal-image-wrap">
       <img src="assets/${p.id}.jpg" class="modal-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23262626%22 font-family=%22serif%22 font-size=%2224%22%3E${p.brand}%3C/text%3E%3C/svg%3E'">
@@ -1724,7 +1793,10 @@ function openModal(id) {
         <div class="pyramid-level-title">Note di Base</div>
         <div class="pyramid-notes">${p.pyramid.base.map(n => `<span class="pyramid-note">${n}</span>`).join('')}</div>
       </div>
-      <div class="modal-price">${p.price}</div>
+      <div class="modal-price">
+        ${isOffer ? `<span class="price-original">${p.price}</span><span class="price-discounted">${discountedPrice}</span>` : p.price}
+        ${isOffer ? '<span style="font-size:12px;color:var(--red);font-weight:600;margin-left:8px;">-15%</span>' : ''}
+      </div>
       <button class="modal-add-btn" onclick="addToCart(${p.id}); closeModal();"><i class="fas fa-shopping-bag"></i> Aggiungi alla Lista</button>
     </div>
   `;
@@ -1750,6 +1822,7 @@ function showAirpodsSection() {
   document.getElementById('filtersBar').style.display = 'none';
   document.querySelector('.promo-banner').style.display = 'none';
   document.querySelector('.airpods-cta').style.display = 'none';
+  document.querySelector('.discount-notice-banner').style.display = 'none';
   renderAirpods();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (typeof gtag === 'function') gtag('event', 'view_airpods_section');
@@ -1761,6 +1834,7 @@ function hideAirpodsSection() {
   document.getElementById('filtersBar').style.display = 'flex';
   document.querySelector('.promo-banner').style.display = 'block';
   document.querySelector('.airpods-cta').style.display = 'block';
+  document.querySelector('.discount-notice-banner').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1794,11 +1868,11 @@ function sendAirpodsWhatsApp() {
 }
 
 const quizQuestions = [
-  { question: "Per chi è il profumo?", key: "gender", options: [{value:"male",label:"Per Uomo",icon:"👨"},{value:"female",label:"Per Donna",icon:"👩"},{value:"unisex",label:"Unisex",icon:"👤"},{value:"any",label:"Non ho preferenze",icon:"🎯"}] },
-  { question: "Qual è la tua famiglia olfattiva preferita?", key: "olfactory", options: [{value:"fresh",label:"Freschi e Acquatici",icon:"💧"},{value:"floral",label:"Floreali e Romantici",icon:"🌹"},{value:"woody",label:"Legnosi e Intensi",icon:"🌲"},{value:"oriental",label:"Orientali e Speziati",icon:"🌶️"},{value:"citrus",label:"Agrumati e Energizzanti",icon:"🍊"}] },
+  { question: "Per chi è il profumo?", key: "gender", options: [{value:"male",label:"Per Uomo",icon:"👨"},{value:"female",label:"Per Donna",icon:"👩"},{value:"unisex",label:"Unisex",icon:""},{value:"any",label:"Non ho preferenze",icon:"🎯"}] },
+  { question: "Qual è la tua famiglia olfattiva preferita?", key: "olfactory", options: [{value:"fresh",label:"Freschi e Acquatici",icon:"💧"},{value:"floral",label:"Floreali e Romantici",icon:"🌹"},{value:"woody",label:"Legnosi e Intensi",icon:""},{value:"oriental",label:"Orientali e Speziati",icon:"🌶️"},{value:"citrus",label:"Agrumati e Energizzanti",icon:"🍊"}] },
   { question: "Per quale occasione lo cerchi?", key: "occasion", options: [{value:"day",label:"Uso quotidiano / Ufficio",icon:"☀️"},{value:"evening",label:"Serate speciali",icon:"🌙"},{value:"both",label:"Versatile",icon:"💫"}] },
   { question: "Che intensità preferisci?", key: "intensity", options: [{value:"light",label:"Leggero e Delicato",icon:"🌸"},{value:"medium",label:"Equilibrato",icon:"⚖️"},{value:"strong",label:"Intenso e Persistente",icon:"💥"}] },
-  { question: "Per quale stagione?", key: "season", options: [{value:"spring",label:"Primavera",icon:"🌸"},{value:"summer",label:"Estate",icon:"☀️"},{value:"autumn",label:"Autunno",icon:"🍂"},{value:"winter",label:"Inverno",icon:"❄️"},{value:"all",label:"Tutto l'anno",icon:"🌍"}] },
+  { question: "Per quale stagione?", key: "season", options: [{value:"spring",label:"Primavera",icon:"🌸"},{value:"summer",label:"Estate",icon:"☀️"},{value:"autumn",label:"Autunno",icon:"🍂"},{value:"winter",label:"Inverno",icon:"❄️"},{value:"all",label:"Tutto l'anno",icon:""}] },
   { question: "Che tipo di fragranza preferisci?", key: "type", options: [{value:"designer",label:"Grandi Maison",icon:"👔"},{value:"niche",label:"Profumeria di Nicchia",icon:"✨"},{value:"any",label:"Indifferente",icon:"🎯"}] }
 ];
 
@@ -1806,10 +1880,12 @@ function toggleQuiz() {
   const s = document.getElementById('quizSection');
   const p = document.getElementById('productsSection');
   const f = document.getElementById('filtersBar');
+  const d = document.querySelector('.discount-notice-banner');
   if (s.style.display === 'none' || s.style.display === '') {
     s.style.display = 'block';
     p.style.display = 'none';
     f.style.display = 'none';
+    if (d) d.style.display = 'none';
     quizStep = 0; quizAnswers = {};
     renderQuizQuestion();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1817,6 +1893,7 @@ function toggleQuiz() {
     s.style.display = 'none';
     p.style.display = 'block';
     f.style.display = 'flex';
+    if (d) d.style.display = 'block';
   }
 }
 
@@ -1847,19 +1924,25 @@ function showQuizResults() {
       <h3 style="font-family:var(--font-serif);font-size:28px;margin-bottom:12px;">I profumi perfetti per te</h3>
       <p style="color:var(--gray-600);margin-bottom:32px;">Abbiamo trovato <strong>${recs.length} fragranze</strong> che corrispondono al tuo profilo.</p>
       <div style="display:grid;gap:12px;text-align:left;">
-        ${recs.map(p => `
+        ${recs.map(p => {
+          const isOffer = p.bestSeller;
+          const discountedPrice = isOffer ? getDiscountedPrice(p.price) : p.price;
+          return `
           <div style="background:var(--white);padding:16px;border-radius:12px;border:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;gap:12px;">
             <div style="flex:1;min-width:0;">
               <div style="font-size:11px;color:var(--gold-dark);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">${p.brand} • ${p.size}</div>
               <div style="font-weight:500;margin:4px 0;font-family:var(--font-serif);font-size:16px;">${p.name}</div>
               <div style="font-size:12px;color:var(--gray-600);">${p.notes.slice(0,3).join(' • ')}</div>
+              <div style="margin-top:6px;">
+                ${isOffer ? `<span class="price-original" style="font-size:12px;margin-right:6px;">${p.price}</span><span class="price-discounted" style="color:var(--red);font-weight:700;">${discountedPrice}</span>` : `<span style="font-family:var(--font-serif);font-weight:600;">${p.price}</span>`}
+              </div>
             </div>
             <div style="text-align:center;flex-shrink:0;">
               <div style="background:var(--black);color:var(--white);padding:4px 10px;border-radius:50px;font-size:11px;font-weight:600;margin-bottom:8px;">${Math.round(p.score/max*100)}%</div>
               <button class="product-add" onclick="addToCart(${p.id})" style="padding:8px 14px;font-size:11px;">Aggiungi</button>
             </div>
           </div>
-        `).join('')}
+        `}).join('')}
       </div>
       <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;justify-content:center;">
         <button class="btn btn-outline" style="color:var(--black);border-color:var(--black);" onclick="toggleQuiz()"><i class="fas fa-redo"></i> Rifai il Quiz</button>
@@ -1874,6 +1957,7 @@ function hideQuiz() {
   document.getElementById('quizSection').style.display = 'none';
   document.getElementById('productsSection').style.display = 'block';
   document.getElementById('filtersBar').style.display = 'flex';
+  document.querySelector('.discount-notice-banner').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1896,8 +1980,12 @@ function getRecommendations() {
 
 function sendWhatsApp() {
   if (cart.length === 0) { showToast('Aggiungi prima dei prodotti'); return; }
-  const msg = cart.map(i => `• ${i.quantity}x ${i.name} (${i.brand}, ${i.size})`).join('\n');
-  const text = `Ciao! Mi interessano questi profumi:\n\n${msg}\n\nPotete darmi maggiori informazioni e il prezzo?`;
+  const msg = cart.map(i => {
+    const discountedPrice = i.bestSeller ? getDiscountedPrice(i.price) : i.price;
+    const priceDisplay = i.bestSeller ? `${discountedPrice} (scontato da ${i.price})` : i.price;
+    return `• ${i.quantity}x ${i.name} (${i.brand}, ${i.size}) - ${priceDisplay}`;
+  }).join('\n');
+  const text = `Ciao! Mi interessano questi profumi:\n\n${msg}\n\nPotete darmi maggiori informazioni?`;
   if (typeof gtag === 'function') gtag('event', 'whatsapp_click', { products_count: cart.length });
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
 }
