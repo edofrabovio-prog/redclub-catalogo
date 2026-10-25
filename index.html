@@ -34,6 +34,7 @@
       --gold: #c9a961;
       --gold-dark: #a8893f;
       --red: #c22b26;
+      --green: #059669;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --transition: 0.25s ease;
@@ -1205,13 +1206,146 @@
       background: var(--off-white);
       flex-shrink: 0;
     }
-    .cart-total {
+
+    /* OPZIONI SPEDIZIONE */
+    .shipping-options {
+      margin-bottom: 20px;
+    }
+    .shipping-title {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .shipping-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    .shipping-option:hover:not(.disabled) {
+      border-color: var(--black);
+    }
+    .shipping-option.selected {
+      border-color: var(--black);
+      background: var(--off-white);
+    }
+    .shipping-option.disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      background: var(--gray-50);
+    }
+    .shipping-radio {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: var(--transition);
+    }
+    .shipping-option.selected .shipping-radio {
+      border-color: var(--black);
+    }
+    .shipping-option.selected .shipping-radio::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--black);
+    }
+    .shipping-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .shipping-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--black);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .shipping-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+    .shipping-price {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--black);
+      white-space: nowrap;
+    }
+    .shipping-price.free {
+      color: var(--green);
+    }
+    .shipping-locked {
+      font-size: 11px;
+      color: var(--red);
+      font-weight: 500;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .shipping-locked i {
+      font-size: 10px;
+    }
+
+    /* RIEPILOGO TOTALE */
+    .cart-summary {
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border: 1px solid var(--gray-100);
+    }
+    .cart-summary-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 16px;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+    .cart-summary-row.total {
+      border-top: 1px solid var(--gray-100);
+      margin-top: 8px;
+      padding-top: 12px;
       font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      font-family: var(--font-serif);
+    }
+    .cart-summary-row .label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cart-summary-row .value {
       font-weight: 500;
     }
+    .cart-summary-row .value.free {
+      color: var(--green);
+      font-weight: 600;
+    }
+
     .cart-checkout {
       width: 100%;
       padding: 16px;
@@ -1346,7 +1480,6 @@
       .cart-drawer { max-width: 100%; }
       .cart-checkout { width: 100%; }
       
-      /* Carousel mobile */
       .carousel-card { flex: 0 0 calc(50% - 8px); }
       .carousel-track { gap: 12px; }
       .carousel-title { font-size: 18px; }
@@ -1438,7 +1571,7 @@
 
 <section class="promo-banner">
   <div class="promo-card">
-    <div class="promo-icon"></div>
+    <div class="promo-icon">🎁</div>
     <div class="promo-content">
       <span class="promo-badge">Nuova Offerta</span>
       <h2 class="promo-title"><span>10% di sconto</span> sul primo ordine</h2>
@@ -1512,7 +1645,7 @@
 <section class="airpods-section" id="airpodsSection">
   <div class="airpods-header">
     <button class="airpods-back" onclick="hideAirpodsSection()"><i class="fas fa-arrow-left"></i> Torna ai Profumi</button>
-    <h2 class="airpods-title">🎧 Preorder AirPods</h2>
+    <h2 class="airpods-title"> Preorder AirPods</h2>
     <p class="airpods-subtitle">Seleziona i modelli che ti interessano e inviaci la richiesta su WhatsApp</p>
   </div>
   <div class="airpods-grid" id="airpodsGrid"></div>
@@ -1545,7 +1678,7 @@
     <div class="filter-section-title">Famiglia Olfattiva</div>
     <div class="filter-chips">
       <button class="chip active" onclick="filterBy('olfactory','all',this); syncFilterChips('olfactory','all')">Tutti</button>
-      <button class="chip" onclick="filterBy('olfactory','woody',this); syncFilterChips('olfactory','woody')"> Legnosi</button>
+      <button class="chip" onclick="filterBy('olfactory','woody',this); syncFilterChips('olfactory','woody')">🌲 Legnosi</button>
       <button class="chip" onclick="filterBy('olfactory','floral',this); syncFilterChips('olfactory','floral')">🌹 Floreali</button>
       <button class="chip" onclick="filterBy('olfactory','citrus',this); syncFilterChips('olfactory','citrus')">🍊 Agrumati</button>
       <button class="chip" onclick="filterBy('olfactory','oriental',this); syncFilterChips('olfactory','oriental')">🌶️ Orientali</button>
@@ -1586,7 +1719,44 @@
   </div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer">
-    <div class="cart-total"><span>Totale:</span><span id="cartTotal">0 prodotti</span></div>
+    <div class="shipping-options" id="shippingOptions">
+      <div class="shipping-title">Tipo di spedizione</div>
+      <div class="shipping-option selected" id="shippingStandard" onclick="selectShipping('standard')">
+        <div class="shipping-radio"></div>
+        <div class="shipping-info">
+          <div class="shipping-name">📦 Spedizione Standard</div>
+          <div class="shipping-desc">Consegna in 12-14 giorni lavorativi (esclusi festivi)</div>
+        </div>
+        <div class="shipping-price free">GRATIS</div>
+      </div>
+      <div class="shipping-option" id="shippingExpress" onclick="selectShipping('express')">
+        <div class="shipping-radio"></div>
+        <div class="shipping-info">
+          <div class="shipping-name">⚡ Spedizione Rapida 48-72h</div>
+          <div class="shipping-desc">Consegna express in 48-72 ore</div>
+          <div class="shipping-locked" id="shippingLocked" style="display: none;">
+            <i class="fas fa-lock"></i> Disponibile da 2 articoli
+          </div>
+        </div>
+        <div class="shipping-price">+14,99€</div>
+      </div>
+    </div>
+    
+    <div class="cart-summary" id="cartSummary">
+      <div class="cart-summary-row">
+        <span class="label">Subtotale</span>
+        <span class="value" id="summarySubtotal">0,00€</span>
+      </div>
+      <div class="cart-summary-row">
+        <span class="label">Spedizione</span>
+        <span class="value free" id="summaryShipping">GRATIS</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span class="label">Totale</span>
+        <span class="value" id="summaryTotal">0,00€</span>
+      </div>
+    </div>
+    
     <button class="cart-checkout" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> Procedi all'ordine</button>
   </div>
 </div>
@@ -1764,25 +1934,111 @@ let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 let currentFilters = { olfactory: 'all', gender: 'all', search: '', sort: 'default' };
 let quizStep = 0, quizAnswers = {}, lastSearchTerm = '';
 let selectedAirpods = [];
+let selectedShipping = 'standard';
+const EXPRESS_SHIPPING_COST = 14.99;
+const DISCOUNT = 0.15;
 
 const AIRPODS_MODELS = [
   {id:'ap2',name:'AirPods (2ª generazione)',icon:'🎧',desc:'Il classico intramontabile. Audio di qualità e connessione immediata.',features:['Chip H1','24h batteria','Siri','Custodia ricarica']},
   {id:'ap3',name:'AirPods (3ª generazione)',icon:'🎵',desc:'Design ridisegnato con audio spaziale personalizzato.',features:['Audio Spaziale','IPX4','30h batteria','MagSafe']},
   {id:'ap4',name:'AirPods 4',icon:'✨',desc:'Il nuovo standard con chip H2 e audio spaziale avanzato.',features:['Chip H2','Audio Spaziale','USB-C','Design aperto']},
-  {id:'ap4-anc',name:'AirPods 4 con ANC',icon:'🔇',desc:'Cancellazione attiva del rumore nel design aperto.',features:['ANC','Chip H2','Audio Adattivo','Trasparenza']},
+  {id:'ap4-anc',name:'AirPods 4 con ANC',icon:'',desc:'Cancellazione attiva del rumore nel design aperto.',features:['ANC','Chip H2','Audio Adattivo','Trasparenza']},
   {id:'ap-pro2',name:'AirPods Pro (2ª gen)',icon:'🎯',desc:'ANC, audio adattivo e custodia con altoparlante.',features:['ANC Avanzato','Audio Adattivo','USB-C','IP54']},
   {id:'ap-max',name:'AirPods Max',icon:'🎧',desc:'Cuffie over-ear con audio Hi-Fi e ANC.',features:['Hi-Fi Audio','ANC','Audio Spaziale','Alluminio']}
 ];
 
 const nicheBrands = ['Xerjoff','Louis Vuitton','Initio','By Kilian','Le Labo','Parfums de Marly','Creed','Tom Ford'];
-const DISCOUNT = 0.15;
 
 function getDiscountedPrice(priceStr) {
   const num = parseFloat(priceStr.replace('€', ''));
   return Math.round(num * (1 - DISCOUNT)) + '€';
 }
 
-// ============ CAROSELLO BEST SELLER (MANUALE) ============
+function parsePrice(priceStr) {
+  return parseFloat(priceStr.replace('€', '').replace(',', '.'));
+}
+
+function formatPrice(num) {
+  return num.toFixed(2).replace('.', ',') + '€';
+}
+
+function getCartSubtotal() {
+  return cart.reduce((sum, item) => {
+    const price = parsePrice(item.price);
+    const discountedPrice = item.bestSeller ? price * (1 - DISCOUNT) : price;
+    return sum + (discountedPrice * item.quantity);
+  }, 0);
+}
+
+function getCartItemsCount() {
+  return cart.length;
+}
+
+function updateShippingAvailability() {
+  const expressOption = document.getElementById('shippingExpress');
+  const lockedMsg = document.getElementById('shippingLocked');
+  const itemsCount = getCartItemsCount();
+  
+  if (itemsCount < 2) {
+    expressOption.classList.add('disabled');
+    if (lockedMsg) lockedMsg.style.display = 'flex';
+    
+    if (selectedShipping === 'express') {
+      selectedShipping = 'standard';
+    }
+  } else {
+    expressOption.classList.remove('disabled');
+    if (lockedMsg) lockedMsg.style.display = 'none';
+  }
+  
+  document.getElementById('shippingStandard').classList.toggle('selected', selectedShipping === 'standard');
+  document.getElementById('shippingExpress').classList.toggle('selected', selectedShipping === 'express');
+  
+  updateCartSummary();
+}
+
+function selectShipping(type) {
+  const itemsCount = getCartItemsCount();
+  
+  if (type === 'express' && itemsCount < 2) {
+    showToast('La spedizione rapida è disponibile da 2 articoli in su');
+    return;
+  }
+  
+  selectedShipping = type;
+  updateShippingAvailability();
+}
+
+function updateCartSummary() {
+  const subtotal = getCartSubtotal();
+  const shippingCost = selectedShipping === 'express' ? EXPRESS_SHIPPING_COST : 0;
+  const total = subtotal + shippingCost;
+  
+  const subtotalEl = document.getElementById('summarySubtotal');
+  const shippingEl = document.getElementById('summaryShipping');
+  const totalEl = document.getElementById('summaryTotal');
+  
+  if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+  if (shippingEl) {
+    if (shippingCost === 0) {
+      shippingEl.textContent = 'GRATIS';
+      shippingEl.className = 'value free';
+    } else {
+      shippingEl.textContent = formatPrice(shippingCost);
+      shippingEl.className = 'value';
+    }
+  }
+  if (totalEl) totalEl.textContent = formatPrice(total);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderProducts();
+  updateCounts();
+  initBestsellerCarousel();
+  if (typeof gtag === 'function') gtag('event', 'view_list');
+});
+
+// ============ CAROSELLO BEST SELLER ============
 function initBestsellerCarousel() {
   const bestSellers = PRODUCTS.filter(p => p.bestSeller);
   const track = document.getElementById('carouselTrack');
@@ -1792,7 +2048,6 @@ function initBestsellerCarousel() {
   
   if (!track || bestSellers.length === 0) return;
   
-  // Render cards
   track.innerHTML = bestSellers.map(p => {
     const discountedPrice = getDiscountedPrice(p.price);
     return `
@@ -1837,7 +2092,6 @@ function initBestsellerCarousel() {
     const offset = currentIndex * (cardWidth + gap);
     track.style.transform = `translateX(-${offset}px)`;
     
-    // Update dots
     const totalDots = maxIndex + 1;
     dotsContainer.innerHTML = '';
     for (let i = 0; i < totalDots; i++) {
@@ -1847,7 +2101,6 @@ function initBestsellerCarousel() {
       dotsContainer.appendChild(dot);
     }
     
-    // Update arrows
     prevBtn.disabled = currentIndex === 0;
     nextBtn.disabled = currentIndex >= maxIndex;
   }
@@ -1862,17 +2115,10 @@ function initBestsellerCarousel() {
     if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
   };
   
-  // Touch swipe
   let touchStartX = 0;
   let touchEndX = 0;
-  track.addEventListener('touchstart', e => { 
-    touchStartX = e.touches[0].clientX; 
-  }, { passive: true });
-  
-  track.addEventListener('touchmove', e => {
-    touchEndX = e.touches[0].clientX;
-  }, { passive: true });
-  
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchmove', e => { touchEndX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', e => {
     const diff = touchStartX - touchEndX;
     if (Math.abs(diff) > 50) {
@@ -1881,23 +2127,14 @@ function initBestsellerCarousel() {
     }
   }, { passive: true });
   
-  // Resize handler
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(updateCarousel, 100);
   });
   
-  // Init
   setTimeout(updateCarousel, 100);
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderProducts();
-  updateCounts();
-  initBestsellerCarousel();
-  if (typeof gtag === 'function') gtag('event', 'view_list');
-});
 
 function renderProducts() {
   const grid = document.getElementById('productsGrid');
@@ -2022,7 +2259,7 @@ function renderCart() {
   const c = document.getElementById('cartItems');
   if (cart.length === 0) {
     c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray-400);">La tua lista è vuota</div>';
-    document.getElementById('cartTotal').textContent = '0 prodotti';
+    updateShippingAvailability();
     return;
   }
   c.innerHTML = cart.map(i => {
@@ -2043,8 +2280,8 @@ function renderCart() {
       </div>
     </div>
   `}).join('');
-  const t = cart.reduce((s,i) => s + i.quantity, 0);
-  document.getElementById('cartTotal').textContent = `${t} prodott${t === 1 ? 'o' : 'i'}`;
+  
+  updateShippingAvailability();
 }
 
 function toggleFavorite(id) {
@@ -2307,13 +2544,29 @@ function getRecommendations() {
 
 function sendWhatsApp() {
   if (cart.length === 0) { showToast('Aggiungi prima dei prodotti'); return; }
+  
+  const subtotal = getCartSubtotal();
+  const shippingCost = selectedShipping === 'express' ? EXPRESS_SHIPPING_COST : 0;
+  const total = subtotal + shippingCost;
+  
+  const shippingLabel = selectedShipping === 'express' 
+    ? '⚡ Spedizione Rapida 48-72h (+14,99€)' 
+    : '📦 Spedizione Standard 12-14 giorni lavorativi (esclusi festivi) - GRATIS';
+  
   const msg = cart.map(i => {
     const discountedPrice = i.bestSeller ? getDiscountedPrice(i.price) : i.price;
     const priceDisplay = i.bestSeller ? `${discountedPrice} (scontato da ${i.price})` : i.price;
     return `• ${i.quantity}x ${i.name} (${i.brand}, ${i.size}) - ${priceDisplay}`;
   }).join('\n');
-  const text = `Ciao! Mi interessano questi profumi:\n\n${msg}\n\nPotete darmi maggiori informazioni?`;
-  if (typeof gtag === 'function') gtag('event', 'whatsapp_click', { products_count: cart.length });
+  
+  const text = `Ciao! Mi interessano questi profumi:\n\n${msg}\n\n Spedizione: ${shippingLabel}\n\n Subtotale: ${formatPrice(subtotal)}\n🚚 Spedizione: ${shippingCost > 0 ? formatPrice(shippingCost) : 'GRATIS'}\n💵 TOTALE: ${formatPrice(total)}\n\nPotete confermarmi disponibilità e modalità di pagamento?`;
+  
+  if (typeof gtag === 'function') gtag('event', 'whatsapp_click', { 
+    products_count: cart.length,
+    shipping_type: selectedShipping,
+    total: total.toFixed(2)
+  });
+  
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
 }
 
