@@ -170,208 +170,190 @@
     .filter-toggle-btn:hover { background: var(--black); color: var(--white); }
 
     /* CAROSELLO BEST SELLER */
-.bestseller-carousel {
-  background: var(--off-white);
-  border-bottom: 1px solid var(--gray-100);
-  padding: 24px 0;
-  overflow: hidden;
-}
-.carousel-wrapper {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-}
-.carousel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.carousel-title {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--black);
-}
-.carousel-title span {
-  color: var(--red);
-  font-weight: 600;
-}
-.carousel-arrows {
-  display: flex;
-  gap: 8px;
-}
-.carousel-arrow {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--gray-200);
-  background: var(--white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: var(--black);
-  transition: var(--transition);
-}
-.carousel-arrow:hover {
-  background: var(--black);
-  color: var(--white);
-  border-color: var(--black);
-}
-.carousel-arrow:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-.carousel-track-container {
-  position: relative;
-  overflow: hidden;
-}
-.carousel-track {
-  display: flex;
-  gap: 20px;
-  transition: transform 0.5s ease;
-  will-change: transform;
-}
-.carousel-card {
-  flex: 0 0 calc(25% - 15px);
-  min-width: 0;
-  background: var(--white);
-  border: 1px solid var(--gray-100);
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-}
-.carousel-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  border-color: var(--black);
-}
-.carousel-card-img {
-  aspect-ratio: 1;
-  background: var(--off-white);
-  position: relative;
-  overflow: hidden;
-}
-.carousel-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-.carousel-card:hover .carousel-card-img img {
-  transform: scale(1.08);
-}
-.carousel-card-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 4px 10px;
-  background: var(--red);
-  color: var(--white);
-  border-radius: 50px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  z-index: 2;
-}
-.carousel-card-discount {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  background: var(--black);
-  color: var(--white);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  z-index: 2;
-}
-.carousel-card-info {
-  padding: 14px;
-}
-.carousel-card-brand {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gray-600);
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-.carousel-card-name {
-  font-family: var(--font-serif);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--black);
-  margin-bottom: 10px;
-  line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.carousel-card-price {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.carousel-card-price .price-original {
-  text-decoration: line-through;
-  color: var(--gray-400);
-  font-size: 13px;
-  font-weight: 400;
-}
-.carousel-card-price .price-discounted {
-  color: var(--red);
-  font-weight: 700;
-  font-size: 16px;
-  font-family: var(--font-serif);
-}
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 20px;
-}
-.carousel-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: var(--gray-200);
-  cursor: pointer;
-  transition: var(--transition);
-  padding: 0;
-}
-.carousel-dot.active {
-  background: var(--black);
-  width: 24px;
-  border-radius: 4px;
-}
+    .bestseller-carousel {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 28px 0;
+    }
+    .carousel-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .carousel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .carousel-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--black);
+    }
+    .carousel-title span {
+      color: var(--red);
+      font-weight: 600;
+    }
+    .carousel-arrows {
+      display: flex;
+      gap: 8px;
+    }
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--black);
+      transition: var(--transition);
+    }
+    .carousel-arrow:hover:not(:disabled) {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+    .carousel-arrow:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .carousel-viewport {
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .carousel-card {
+      flex: 0 0 calc(25% - 12px);
+      min-width: 0;
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    .carousel-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-color: var(--black);
+    }
+    .carousel-card-img {
+      aspect-ratio: 1;
+      background: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .carousel-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .carousel-card:hover .carousel-card-img img {
+      transform: scale(1.08);
+    }
+    .carousel-card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 4px 10px;
+      background: var(--red);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .carousel-card-discount {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      z-index: 2;
+    }
+    .carousel-card-info {
+      padding: 14px;
+    }
+    .carousel-card-brand {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .carousel-card-name {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 10px;
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .carousel-card-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .carousel-card-price .price-original {
+      text-decoration: line-through;
+      color: var(--gray-400);
+      font-size: 13px;
+      font-weight: 400;
+    }
+    .carousel-card-price .price-discounted {
+      color: var(--red);
+      font-weight: 700;
+      font-size: 16px;
+      font-family: var(--font-serif);
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 20px;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: var(--gray-200);
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0;
+    }
+    .carousel-dot.active {
+      background: var(--black);
+      width: 24px;
+      border-radius: 4px;
+    }
 
-@media (max-width: 1024px) {
-  .carousel-card { flex: 0 0 calc(33.333% - 14px); }
-}
-@media (max-width: 768px) {
-  .bestseller-carousel { padding: 16px 0; }
-  .carousel-wrapper { padding: 0 16px; }
-  .carousel-card { flex: 0 0 calc(50% - 10px); }
-  .carousel-track { gap: 12px; }
-  .carousel-title { font-size: 18px; }
-  .carousel-arrow { width: 32px; height: 32px; }
-}
-@media (max-width: 480px) {
-  .carousel-card { flex: 0 0 calc(70% - 8px); }
-  .carousel-track { gap: 10px; }
-}
     /* HERO */
     .hero {
       background: var(--black);
@@ -683,9 +665,6 @@
       text-transform: uppercase;
       z-index: 3;
       box-shadow: 0 2px 8px rgba(194, 43, 38, 0.3);
-    }
-    .offer-badge-top {
-      top: 44px;
     }
     .product-fav {
       position: absolute;
@@ -1359,13 +1338,19 @@
       .footer-brand, .footer-contact { text-align: center; }
       .product-card { min-width: 0; }
       .product-image-wrap { min-width: 0; }
-      .promo-banner, .airpods-cta, .products-section, .filters-bar, .discount-notice-banner { 
+      .promo-banner, .airpods-cta, .products-section, .filters-bar, .discount-notice-banner, .carousel-wrapper { 
         max-width: 100%; 
         padding-left: 16px; 
         padding-right: 16px; 
       }
       .cart-drawer { max-width: 100%; }
       .cart-checkout { width: 100%; }
+      
+      /* Carousel mobile */
+      .carousel-card { flex: 0 0 calc(50% - 8px); }
+      .carousel-track { gap: 12px; }
+      .carousel-title { font-size: 18px; }
+      .carousel-arrow { width: 32px; height: 32px; }
     }
 
     @media (max-width: 480px) {
@@ -1375,6 +1360,8 @@
       .note-tag { font-size: 10px; padding: 2px 8px; }
       .promo-card, .airpods-cta-card { padding: 20px; gap: 16px; }
       .promo-icon, .airpods-cta-icon { width: 60px; height: 60px; min-width: 60px; font-size: 28px; }
+      .carousel-card { flex: 0 0 calc(70% - 8px); }
+      .carousel-track { gap: 10px; }
     }
 
     @media (max-width: 380px) {
@@ -1416,7 +1403,7 @@
   </div>
 </header>
 
-  <!-- CAROSELLO BEST SELLER -->
+<!-- CAROSELLO BEST SELLER -->
 <section class="bestseller-carousel">
   <div class="carousel-wrapper">
     <div class="carousel-header">
@@ -1430,13 +1417,13 @@
         </button>
       </div>
     </div>
-    <div class="carousel-track-container">
+    <div class="carousel-viewport">
       <div class="carousel-track" id="carouselTrack"></div>
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
   </div>
 </section>
-  
+
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">Profumi Selezionati</div>
@@ -1489,7 +1476,7 @@
     <div class="filter-chips" id="olfactoryChips">
       <button class="chip active" onclick="filterBy('olfactory','all',this)">Tutti</button>
       <button class="chip" onclick="filterBy('olfactory','woody',this)">🌲 Legnosi</button>
-      <button class="chip" onclick="filterBy('olfactory','floral',this)">🌹 Floreali</button>
+      <button class="chip" onclick="filterBy('olfactory','floral',this)"> Floreali</button>
       <button class="chip" onclick="filterBy('olfactory','citrus',this)">🍊 Agrumati</button>
       <button class="chip" onclick="filterBy('olfactory','oriental',this)">🌶️ Orientali</button>
       <button class="chip" onclick="filterBy('olfactory','fresh',this)">💧 Freschi</button>
@@ -1499,7 +1486,7 @@
     <span class="filter-label">Genere</span>
     <div class="filter-chips" id="genderChips">
       <button class="chip active" onclick="filterBy('gender','all',this)">Tutti</button>
-      <button class="chip" onclick="filterBy('gender','male',this)">👨 Uomo</button>
+      <button class="chip" onclick="filterBy('gender','male',this)"> Uomo</button>
       <button class="chip" onclick="filterBy('gender','female',this)">👩 Donna</button>
       <button class="chip" onclick="filterBy('gender','unisex',this)">Unisex</button>
     </div>
@@ -1558,7 +1545,7 @@
     <div class="filter-section-title">Famiglia Olfattiva</div>
     <div class="filter-chips">
       <button class="chip active" onclick="filterBy('olfactory','all',this); syncFilterChips('olfactory','all')">Tutti</button>
-      <button class="chip" onclick="filterBy('olfactory','woody',this); syncFilterChips('olfactory','woody')">🌲 Legnosi</button>
+      <button class="chip" onclick="filterBy('olfactory','woody',this); syncFilterChips('olfactory','woody')"> Legnosi</button>
       <button class="chip" onclick="filterBy('olfactory','floral',this); syncFilterChips('olfactory','floral')">🌹 Floreali</button>
       <button class="chip" onclick="filterBy('olfactory','citrus',this); syncFilterChips('olfactory','citrus')">🍊 Agrumati</button>
       <button class="chip" onclick="filterBy('olfactory','oriental',this); syncFilterChips('olfactory','oriental')">🌶️ Orientali</button>
@@ -1570,7 +1557,7 @@
     <div class="filter-chips">
       <button class="chip active" onclick="filterBy('gender','all',this); syncFilterChips('gender','all')">Tutti</button>
       <button class="chip" onclick="filterBy('gender','male',this); syncFilterChips('gender','male')">👨 Uomo</button>
-      <button class="chip" onclick="filterBy('gender','female',this); syncFilterChips('gender','female')">👩 Donna</button>
+      <button class="chip" onclick="filterBy('gender','female',this); syncFilterChips('gender','female')"> Donna</button>
       <button class="chip" onclick="filterBy('gender','unisex',this); syncFilterChips('gender','unisex')">Unisex</button>
     </div>
   </div>
@@ -1783,20 +1770,19 @@ const AIRPODS_MODELS = [
   {id:'ap3',name:'AirPods (3ª generazione)',icon:'🎵',desc:'Design ridisegnato con audio spaziale personalizzato.',features:['Audio Spaziale','IPX4','30h batteria','MagSafe']},
   {id:'ap4',name:'AirPods 4',icon:'✨',desc:'Il nuovo standard con chip H2 e audio spaziale avanzato.',features:['Chip H2','Audio Spaziale','USB-C','Design aperto']},
   {id:'ap4-anc',name:'AirPods 4 con ANC',icon:'🔇',desc:'Cancellazione attiva del rumore nel design aperto.',features:['ANC','Chip H2','Audio Adattivo','Trasparenza']},
-  {id:'ap-pro2',name:'AirPods Pro (2ª gen)',icon:'',desc:'ANC, audio adattivo e custodia con altoparlante.',features:['ANC Avanzato','Audio Adattivo','USB-C','IP54']},
+  {id:'ap-pro2',name:'AirPods Pro (2ª gen)',icon:'🎯',desc:'ANC, audio adattivo e custodia con altoparlante.',features:['ANC Avanzato','Audio Adattivo','USB-C','IP54']},
   {id:'ap-max',name:'AirPods Max',icon:'🎧',desc:'Cuffie over-ear con audio Hi-Fi e ANC.',features:['Hi-Fi Audio','ANC','Audio Spaziale','Alluminio']}
 ];
 
 const nicheBrands = ['Xerjoff','Louis Vuitton','Initio','By Kilian','Le Labo','Parfums de Marly','Creed','Tom Ford'];
-const DISCOUNT = 0.15; // 15% di sconto
+const DISCOUNT = 0.15;
 
-// Calcola prezzo scontato
 function getDiscountedPrice(priceStr) {
   const num = parseFloat(priceStr.replace('€', ''));
   return Math.round(num * (1 - DISCOUNT)) + '€';
 }
 
-  // ============ CAROSELLO BEST SELLER ============
+// ============ CAROSELLO BEST SELLER (MANUALE) ============
 function initBestsellerCarousel() {
   const bestSellers = PRODUCTS.filter(p => p.bestSeller);
   const track = document.getElementById('carouselTrack');
@@ -1828,7 +1814,6 @@ function initBestsellerCarousel() {
     `;
   }).join('');
   
-  // Calcola cards visibili
   function getVisibleCards() {
     const w = window.innerWidth;
     if (w <= 480) return 1;
@@ -1838,16 +1823,17 @@ function initBestsellerCarousel() {
   }
   
   let currentIndex = 0;
-  const totalCards = bestSellers.length;
-  let autoPlayInterval;
   
   function updateCarousel() {
     const visible = getVisibleCards();
-    const maxIndex = Math.max(0, totalCards - visible);
+    const maxIndex = Math.max(0, bestSellers.length - visible);
     if (currentIndex > maxIndex) currentIndex = maxIndex;
     
-    const cardWidth = track.children[0]?.offsetWidth || 0;
-    const gap = 20;
+    const card = track.children[0];
+    if (!card) return;
+    
+    const cardWidth = card.offsetWidth;
+    const gap = 16;
     const offset = currentIndex * (cardWidth + gap);
     track.style.transform = `translateX(-${offset}px)`;
     
@@ -1857,7 +1843,7 @@ function initBestsellerCarousel() {
     for (let i = 0; i < totalDots; i++) {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === currentIndex ? ' active' : '');
-      dot.onclick = () => { currentIndex = i; updateCarousel(); resetAutoPlay(); };
+      dot.onclick = () => { currentIndex = i; updateCarousel(); };
       dotsContainer.appendChild(dot);
     }
     
@@ -1867,53 +1853,45 @@ function initBestsellerCarousel() {
   }
   
   prevBtn.onclick = () => {
-    if (currentIndex > 0) { currentIndex--; updateCarousel(); resetAutoPlay(); }
+    if (currentIndex > 0) { currentIndex--; updateCarousel(); }
   };
   
   nextBtn.onclick = () => {
     const visible = getVisibleCards();
-    const maxIndex = Math.max(0, totalCards - visible);
-    if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); resetAutoPlay(); }
+    const maxIndex = Math.max(0, bestSellers.length - visible);
+    if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
   };
   
   // Touch swipe
   let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  let touchEndX = 0;
+  track.addEventListener('touchstart', e => { 
+    touchStartX = e.touches[0].clientX; 
+  }, { passive: true });
+  
+  track.addEventListener('touchmove', e => {
+    touchEndX = e.touches[0].clientX;
+  }, { passive: true });
+  
   track.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
     if (Math.abs(diff) > 50) {
       if (diff > 0) nextBtn.click();
       else prevBtn.click();
     }
   }, { passive: true });
   
-  // Auto-play
-  function startAutoPlay() {
-    autoPlayInterval = setInterval(() => {
-      const visible = getVisibleCards();
-      const maxIndex = Math.max(0, totalCards - visible);
-      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-      updateCarousel();
-    }, 4000);
-  }
-  
-  function resetAutoPlay() {
-    clearInterval(autoPlayInterval);
-    startAutoPlay();
-  }
-  
-  // Pause on hover
-  track.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-  track.addEventListener('mouseleave', startAutoPlay);
-  
   // Resize handler
-  window.addEventListener('resize', updateCarousel);
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateCarousel, 100);
+  });
   
   // Init
-  updateCarousel();
-  startAutoPlay();
+  setTimeout(updateCarousel, 100);
 }
-  
+
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
   updateCounts();
@@ -2166,6 +2144,7 @@ function showAirpodsSection() {
   document.querySelector('.promo-banner').style.display = 'none';
   document.querySelector('.airpods-cta').style.display = 'none';
   document.querySelector('.discount-notice-banner').style.display = 'none';
+  document.querySelector('.bestseller-carousel').style.display = 'none';
   renderAirpods();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (typeof gtag === 'function') gtag('event', 'view_airpods_section');
@@ -2178,6 +2157,7 @@ function hideAirpodsSection() {
   document.querySelector('.promo-banner').style.display = 'block';
   document.querySelector('.airpods-cta').style.display = 'block';
   document.querySelector('.discount-notice-banner').style.display = 'block';
+  document.querySelector('.bestseller-carousel').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2211,11 +2191,11 @@ function sendAirpodsWhatsApp() {
 }
 
 const quizQuestions = [
-  { question: "Per chi è il profumo?", key: "gender", options: [{value:"male",label:"Per Uomo",icon:"👨"},{value:"female",label:"Per Donna",icon:"👩"},{value:"unisex",label:"Unisex",icon:""},{value:"any",label:"Non ho preferenze",icon:"🎯"}] },
-  { question: "Qual è la tua famiglia olfattiva preferita?", key: "olfactory", options: [{value:"fresh",label:"Freschi e Acquatici",icon:"💧"},{value:"floral",label:"Floreali e Romantici",icon:"🌹"},{value:"woody",label:"Legnosi e Intensi",icon:""},{value:"oriental",label:"Orientali e Speziati",icon:"🌶️"},{value:"citrus",label:"Agrumati e Energizzanti",icon:"🍊"}] },
+  { question: "Per chi è il profumo?", key: "gender", options: [{value:"male",label:"Per Uomo",icon:"👨"},{value:"female",label:"Per Donna",icon:"👩"},{value:"unisex",label:"Unisex",icon:"👤"},{value:"any",label:"Non ho preferenze",icon:"🎯"}] },
+  { question: "Qual è la tua famiglia olfattiva preferita?", key: "olfactory", options: [{value:"fresh",label:"Freschi e Acquatici",icon:"💧"},{value:"floral",label:"Floreali e Romantici",icon:"🌹"},{value:"woody",label:"Legnosi e Intensi",icon:"🌲"},{value:"oriental",label:"Orientali e Speziati",icon:"🌶️"},{value:"citrus",label:"Agrumati e Energizzanti",icon:"🍊"}] },
   { question: "Per quale occasione lo cerchi?", key: "occasion", options: [{value:"day",label:"Uso quotidiano / Ufficio",icon:"☀️"},{value:"evening",label:"Serate speciali",icon:"🌙"},{value:"both",label:"Versatile",icon:"💫"}] },
   { question: "Che intensità preferisci?", key: "intensity", options: [{value:"light",label:"Leggero e Delicato",icon:"🌸"},{value:"medium",label:"Equilibrato",icon:"⚖️"},{value:"strong",label:"Intenso e Persistente",icon:"💥"}] },
-  { question: "Per quale stagione?", key: "season", options: [{value:"spring",label:"Primavera",icon:"🌸"},{value:"summer",label:"Estate",icon:"☀️"},{value:"autumn",label:"Autunno",icon:"🍂"},{value:"winter",label:"Inverno",icon:"❄️"},{value:"all",label:"Tutto l'anno",icon:""}] },
+  { question: "Per quale stagione?", key: "season", options: [{value:"spring",label:"Primavera",icon:"🌸"},{value:"summer",label:"Estate",icon:"☀️"},{value:"autumn",label:"Autunno",icon:"🍂"},{value:"winter",label:"Inverno",icon:"❄️"},{value:"all",label:"Tutto l'anno",icon:"🌍"}] },
   { question: "Che tipo di fragranza preferisci?", key: "type", options: [{value:"designer",label:"Grandi Maison",icon:"👔"},{value:"niche",label:"Profumeria di Nicchia",icon:"✨"},{value:"any",label:"Indifferente",icon:"🎯"}] }
 ];
 
@@ -2224,11 +2204,13 @@ function toggleQuiz() {
   const p = document.getElementById('productsSection');
   const f = document.getElementById('filtersBar');
   const d = document.querySelector('.discount-notice-banner');
+  const c = document.querySelector('.bestseller-carousel');
   if (s.style.display === 'none' || s.style.display === '') {
     s.style.display = 'block';
     p.style.display = 'none';
     f.style.display = 'none';
     if (d) d.style.display = 'none';
+    if (c) c.style.display = 'none';
     quizStep = 0; quizAnswers = {};
     renderQuizQuestion();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2237,6 +2219,7 @@ function toggleQuiz() {
     p.style.display = 'block';
     f.style.display = 'flex';
     if (d) d.style.display = 'block';
+    if (c) c.style.display = 'block';
   }
 }
 
@@ -2301,6 +2284,7 @@ function hideQuiz() {
   document.getElementById('productsSection').style.display = 'block';
   document.getElementById('filtersBar').style.display = 'flex';
   document.querySelector('.discount-notice-banner').style.display = 'block';
+  document.querySelector('.bestseller-carousel').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
